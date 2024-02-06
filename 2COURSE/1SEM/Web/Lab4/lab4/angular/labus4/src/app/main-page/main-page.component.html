@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Основная страница</title>
+</head>
+<body>
+<header>
+    <h1>Раевский Григорий</h1>
+    <h2>Группа: P3221, Вариант: 2166</h2>
+    <h3><span id="displayMode"></span></h3>
+    <h3>Привет, {{currentUser}}!</h3>
+</header>
+
+<div class="main-content">
+    <nav id="navigation">
+        <button (click)="logout()" class="footer-button">Выйти</button>
+        <a [routerLink]="['/']" routerLinkActive="active" class="footer-button">Перейти на стартовую страницу</a>
+    </nav>
+    <form (ngSubmit)="onSubmit()">
+        <h3 id="formName">Введите координаты</h3>
+        <label for="xCoord">Координата X (-3...5):</label>
+        <input type="number" id="xCoord" name="x" [(ngModel)]="x" min="-3" max="5">
+      <div *ngIf="!this.utils.validateX(x)" class="error-message">Некорректное значение X</div>
+      <br>
+
+        <label for="yCoord">Координата Y (-5...5):</label>
+        <input type="number" id="yCoord" name="y" [(ngModel)]="y" min="-5" max="5">
+        <div *ngIf="!this.utils.validateY(y)" class="error-message">Некорректное значение Y</div>
+      <br>
+
+        <label for="rValue">Радиус R (1...5):</label>
+        <input type="number" id="rValue" name="r" [(ngModel)]="selectedR" (ngModelChange)="this.utils.validateR(selectedR)" min="1" max="5"  >
+      <div *ngIf="!this.utils.validateR(selectedR)" class="error-message">Некорректное значение R</div>
+        <br>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    <app-graph id="graph" [rValue]="selectedR" (pointAdded)="updateResultsTable($event)"></app-graph>
+
+
+    <table id="resultsTable">
+        <thead>
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+            <th>Попадание</th>
+            <th>Время проверки</th>
+            <th>Время отправки</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

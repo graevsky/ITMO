@@ -1,0 +1,45 @@
+
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'org.lab6'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files("C:\\Users\\graev\\Desktop\\ITMO\\PROG_1SEM_1COURSE\\dependencies\\opencsv-5.7.1.jar")
+    implementation project(':common')
+}
+
+run {
+    standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'org.lab6.client.ClientApp'
+}
+
+sourceSets.main.java.srcDirs =  ['src/main/java']
+compileJava.options.encoding = 'UTF-8'
+
+
+tasks.register('runClient', com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+    group = 'shadow'
+    mainClassName = 'client.ClientApp'
+    archiveFileName = "ClientApp.jar"
+    manifest {
+        //attributes 'Main-Class': 'exmp.ServerApp'
+        attributes 'Main-Class' : 'org.lab6.client.ClientApp'
+    }
+}

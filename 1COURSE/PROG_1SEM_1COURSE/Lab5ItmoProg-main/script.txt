@@ -1,0 +1,3 @@
+info
+execute_script /Users/graevsky/Desktop/ITMO/PROG_2SEM_1COURSE/itmoLabs/Lab5ItmoProg/script.txt
+info

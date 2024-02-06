@@ -1,0 +1,23 @@
+
+
+plugins {
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repository.primefaces.org/" }
+}
+dependencies {
+    providedCompile 'javax:javaee-api:8.0'
+
+
+
+    implementation 'com.auth0:java-jwt:3.18.2'
+    //implementation files('C:\\Users\\graev\\OneDrive\\Рабочий стол\\ITMO\\2COURSE\\Web\\Lab4\\lab4\\task\\eclipselink-2.7.11.jar') // - Win
+    implementation files('/Users/graevsky/Desktop/ITMO/2COURSE/Web/Lab4/lab4/task/eclipselink-2.7.11.jar') // - Mac
+    implementation 'org.postgresql:postgresql:42.2.27'
+
+}
+
+

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/../../../ProgLang/Lab1/assignment-image-rotation" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ProgLang/Lab1/assignment-image-rotation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+>>>>>>> 54b13eaf4111e0e3c3039ea7c7ed339124cdea96
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="jsf" />
+        <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.2" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2XkqekddGT2MjbfSbY6MakCighe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+<<<<<<< HEAD
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/graevsky/Desktop/ITMO/2COURSE/Web/Lab4/lab4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.28755364&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/graevsky/Desktop/ITMO/2COURSE/Web/Lab4/lab4/angular/labus4/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/graevsky/Desktop/ITMO/2COURSE/Web/Lab4/lab4",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.28755364",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "ts.external.directory.path": "C:\\Users\\graev\\OneDrive\\Рабочий стол\\ITMO\\2COURSE\\Web\\Lab4\\lab4\\angular\\labus4\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+>>>>>>> 54b13eaf4111e0e3c3039ea7c7ed339124cdea96
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\task\standalone" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\task\psql_driver" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\src\main\webapp" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\task" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\src\main\webapp" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\task\psql_driver" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\src\main\java\org\example" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab4\lab4\deprecated_java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.lab4 [war]">
+    <configuration name="lab3 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="lab3 [war]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="war" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="lab4 [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="lab4 [war]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="war" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="All in generated-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.lab4 [war]" />
+      <item itemvalue="Gradle.lab3 [build]" />
+      <item itemvalue="Gradle.lab3 [war]" />
+      <item itemvalue="Gradle.lab4 [jar]" />
+      <item itemvalue="HTTP Request.All in generated-requests" />
+      <item itemvalue="HTTP Request.generated-requests | #1" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.lab3 [war]" />
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+        <item itemvalue="Gradle.lab4 [jar]" />
+        <item itemvalue="Gradle.lab3 [build]" />
+        <item itemvalue="HTTP Request.All in generated-requests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
+      <created>1699183524177</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699183524177</updated>
+      <workItem from="1699183525331" duration="5818000" />
+      <workItem from="1699197082794" duration="329000" />
+      <workItem from="1699197602855" duration="303000" />
+      <workItem from="1699201308874" duration="10019000" />
+      <workItem from="1699211770350" duration="21000" />
+      <workItem from="1699212239239" duration="565000" />
+      <workItem from="1699276863752" duration="626000" />
+      <workItem from="1699277730978" duration="426000" />
+      <workItem from="1699353734662" duration="110000" />
+      <workItem from="1699542709618" duration="216000" />
+      <workItem from="1699564270301" duration="122000" />
+      <workItem from="1699568112971" duration="306000" />
+      <workItem from="1699608676849" duration="153000" />
+      <workItem from="1699609217000" duration="5155000" />
+      <workItem from="1699614601124" duration="923000" />
+      <workItem from="1699615539380" duration="4104000" />
+      <workItem from="1699620060313" duration="3150000" />
+      <workItem from="1699781419559" duration="3661000" />
+      <workItem from="1699785205198" duration="3427000" />
+      <workItem from="1700048019649" duration="3623000" />
+      <workItem from="1700070869457" duration="2534000" />
+      <workItem from="1700217335128" duration="2138000" />
+      <workItem from="1700220172259" duration="3210000" />
+      <workItem from="1700226276348" duration="1811000" />
+      <workItem from="1701249445863" duration="25000" />
+      <workItem from="1701249702483" duration="99000" />
+      <workItem from="1701249813317" duration="21384000" />
+      <workItem from="1701703218132" duration="15183000" />
+      <workItem from="1701806854209" duration="3000" />
+      <workItem from="1701858157888" duration="5371000" />
+      <workItem from="1701864828653" duration="2925000" />
+      <workItem from="1701868237569" duration="205000" />
+      <workItem from="1701868808648" duration="19383000" />
+      <workItem from="1702028284312" duration="8976000" />
+      <workItem from="1702117417448" duration="8896000" />
+      <workItem from="1702289206075" duration="2346000" />
+      <workItem from="1702291585176" duration="7899000" />
+      <workItem from="1702313630961" duration="782000" />
+      <workItem from="1702471440476" duration="8044000" />
+      <workItem from="1702499523381" duration="820000" />
+      <workItem from="1702633198912" duration="9516000" />
+      <workItem from="1702715305995" duration="12179000" />
+      <workItem from="1703170411794" duration="412000" />
+      <workItem from="1703171339015" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

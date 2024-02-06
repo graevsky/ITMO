@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+group 'org.lab6'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets.main.java.srcDirs =  ['src/main/java']
+compileJava.options.encoding = 'UTF-8'

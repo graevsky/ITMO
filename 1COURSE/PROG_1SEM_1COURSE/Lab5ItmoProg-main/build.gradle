@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.lab5'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation files("/Users/graevsky/Desktop/Dependencies/opencsv-5.7.1.jar")
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.lab5.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+test {
+    useJUnitPlatform()
+}

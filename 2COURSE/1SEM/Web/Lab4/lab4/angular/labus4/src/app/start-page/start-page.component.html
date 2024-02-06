@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Стартовая страница</title>
+</head>
+<body>
+<header>
+    <h1>Раевский Григорий</h1>
+    <h2>Группа: P3221, Вариант: 2166</h2>
+    <h3><span id="displayMode"></span></h3>
+    <h3 *ngIf="isLoggedIn">Привет, {{currentUser}}!</h3>
+</header>
+
+<div class="login-register-container" *ngIf="!isLoggedIn">
+  <button class="buttons" id="loginButton" (click)="showLoginModal()">Вход</button>
+  <button class="buttons" id="registerButton" (click)="showRegisterModal()">Регистрация</button>
+</div>
+<div class="clock-container" id="clockContainer">
+    <app-clock></app-clock>
+</div>
+<footer > <!-- *ngIf="isLoggedIn"-->
+  <a [routerLink]="['/main-page']" class="footer-button">Перейти на главную страницу</a>
+</footer>
+
+
+<div id="loginModal" class="modal" *ngIf="showLogin">
+    <div class="modal-content">
+        <span class="close" (click)="closeLoginModal()">&times;</span>
+        <form (ngSubmit)="login()">
+            <h2>Вход</h2>
+            <label for="loginUsername">Логин:</label>
+            <input type="text" id="loginUsername" name="loginUsername" [(ngModel)]="loginData.login" required>
+            <label for="loginPassword">Пароль:</label>
+            <input type="password" id="loginPassword" name="loginPassword" [(ngModel)]="loginData.password" required>
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+</div>
+
+<div id="registerModal" class="modal" *ngIf="showRegister">
+    <div class="modal-content">
+        <span class="close" (click)="closeRegisterModal()">&times;</span>
+        <form (ngSubmit)="register()">
+            <h2>Регистрация</h2>
+            <label for="registerUsername">Логин:</label>
+            <input type="text" id="registerUsername" name="registerUsername" [(ngModel)]="registerData.login" required>
+            <label for="registerPassword">Пароль:</label>
+            <input type="password" id="registerPassword" name="registerPassword" [(ngModel)]="registerData.password" required>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

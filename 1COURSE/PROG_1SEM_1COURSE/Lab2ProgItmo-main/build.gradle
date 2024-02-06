@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform('org.junit:junit-bom:5.9.2'))
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
+    implementation(files('C:\\Users\\graev\\IdeaProjects\\lab2_itmo\\PokemonJar\\Pokemon.jar'))
+}
+
+tasks {
+    task fatJar(type: Jar) {
+        dependsOn(['compileJava', 'processResources'])
+        archiveClassifier.set("standalone")
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest {
+            attributes 'Main-Class': application.mainClass
+        }
+        from(configurations.runtimeClasspath.files.collect {
+            if (it.isDirectory()) {
+                it
+            } else {
+                zipTree(it)
+            }
+        } + sourceSets.main.output)
+    }
+
+    build.dependsOn(fatJar)
+
+}
+
+application {
+    mainClass.set('org.example.Main')
+}

@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.lab6'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.2.0'
+    implementation files("C:\\Users\\graev\\Desktop\\ITMO\\PROG_1SEM_1COURSE\\dependencies\\opencsv-5.7.1.jar")
+}
+
+run {
+    standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets.main.java.srcDirs =  ['src/main/java']
+compileJava.options.encoding = 'UTF-8'
+
+tasks.register('runServer', JavaExec) {
+    mainClass.set('org.lab6.ServerApp')
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+tasks.register('runClient', JavaExec) {
+    mainClass.set('org.lab6.client.ClientApp')
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+task serverJar(type: Jar) {
+    archiveBaseName.set('server')
+    from sourceSets.main.output
+    manifest {
+        attributes 'Main-Class': 'org.lab6.ServerApp'
+    }
+}
+
+task clientJar(type: Jar) {
+    archiveBaseName.set('client')
+    from sourceSets.main.output
+    manifest {
+        attributes 'Main-Class': 'org.lab6.client.ClientApp'
+    }
+}
+
+build.dependsOn(serverJar, clientJar)

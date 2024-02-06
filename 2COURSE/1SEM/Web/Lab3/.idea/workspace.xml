@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7290d746-1732-4c99-a9c7-dfb1c4d23b6a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/.idea/dataSources/2c87c7ce-66cf-426d-99c2-30117fee0629.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/.idea/dataSources/3d645d78-40a0-467a-ad54-f9abe54cd8ad.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/.idea/dataSources/8dda3267-322c-427a-9733-86aecdb0f7e1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/graph/graph.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/graph/graph.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/utils/utils.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/angular/labus4/src/app/utils/utils.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/src/main/webapp/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/src/main/webapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/src/main/webapp/main-MMNIMZLN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/src/main/webapp/polyfills-LZBJRJJE.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/src/main/webapp/styles-3YNVV4RD.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab4/lab4/task/deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/lab4/task/deployment.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/lab3">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/lab3">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="lab3" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="lab3" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="lab3" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2YAb6dKs1KXzEP3u2QqX3y4UGEu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/graevsky/Desktop/ITMO/2COURSE/Web/Lab3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="lab3 [war]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/lab3" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="war" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.lab3 [war]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7290d746-1732-4c99-a9c7-dfb1c4d23b6a" name="Changes" comment="" />
+      <created>1699971157323</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699971157323</updated>
+      <workItem from="1699971158582" duration="6945000" />
+      <workItem from="1700208762286" duration="15445000" />
+      <workItem from="1702735230063" duration="576000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

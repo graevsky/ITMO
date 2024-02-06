@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage[english, russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyphenat}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{upgreek}
+\usepackage[a4paper, total={7.5in, 10in}]{geometry}
+\usepackage{tabto}
+\usepackage[T2A]{fontenc}
+\usepackage[koi8-r]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{alltt}
+\usepackage{stmaryrd}
+\usepackage{dsfont}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{tikz}
+\usetikzlibrary{circuits}
+\usepackage{circuitikz}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{comment}
+\usepackage{floatrow}
+\usepackage{caption}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\geometry{top=3.0cm, bottom=3.0cm, left=3.0cm, right=2.5cm}
+
+
+\begin{document}
+
+\input{titul}
+
+\input{task1}
+
+\end{document}

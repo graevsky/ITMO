@@ -1,0 +1,18 @@
+- <span style="color:green">Валидация на клиенте (почему то на wildfly не обновляется war-> перезагрузка поможет?). WildFly падает при указани R в форме(до отправки)</span> `DONE`
+- <span style="color:green">Цвет точки</span> `DONE`
+- <span style="color:green">Интерактивный элемент</span> `DONE`
+- <span style="color:green">Таблица в правильном порядке</span> `DONE`
+- <span style="color:green">Время вычисления</span> `DONE`
+- <span style="color:green">Время операции</span> `DONE`
+- <span style="color:green">База данных</span> `DONE`
+- <span style="color:green">Валидация x,y,r на сервере</span> `DONE`
+- <span style="color:green">Масштаб графика</span> `DONE`
+- <span style="color:green">Правила навигации между страницами приложения должны быть заданы в отдельном конфигурационном файле.</span> `DONE`
+- <span style="color:green">Изменить график, допустимые значения для ввода на сервере и клиенте, если необходимо.</span> `DONE`
+- <span style="color:green">ВОЗМОЖНАЯ ПРОБЛЕМА С transaction-type=JTA - то, что табилца в бд - это results, а не RESULT</span>`DONE`
+- <span style="color:green">Exceptions PointBean</span> `DONE`
+- <span style="color:green">Fix DB connection</span> `DONE`
+- <span style="color:green">Оптимизация бина (разделение на методы и пр)</span> `DONE`
+- <span style="color:green">Протестировать часы на главной странице на совпадение с часовым поясом клиента</span> `DONE`
+- <span style="color:red"> Время в тиках, валидация значений</span>
+- <span style="color:red"> Данные о времени в бд перенести в date вместо string (для даты отправки хранить еще и число)</span>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Основная страница</title>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/styles.css"/>
+    <!--suppress CheckTagEmptyBody -->
+    <script type="text/javascript" src="../../../angular/laba4/src/assets/init.js"></script>
+    <!--suppress CheckTagEmptyBody -->
+    <script type="text/javascript" src="resources/js/validation.js"></script>
+    <!--suppress CheckTagEmptyBody -->
+    <script type="text/javascript" src="../../../angular/laba4/src/assets/drawing.js"></script>
+    <!--suppress CheckTagEmptyBody -->
+    <script type="text/javascript" src="resources/js/canvasClick.js"></script>
+
+</h:head>
+<h:body>
+    <header>
+        <h1>Раевский Григорий</h1>
+        <h2>Группа: P3221, Вариант: 2166</h2>
+    </header>
+    <div class="main-content">
+        <h:form>
+
+            <h3>Введите координаты</h3>
+
+            <h:outputLabel value="Координата X:" for="xCoord"/>
+            <h:selectOneRadio id="xCoord" value="#{bean.x}" styleClass="xRadios">
+                <f:selectItem itemLabel="-3" itemValue="-3"/>
+                <f:selectItem itemLabel="-2" itemValue="-2"/>
+                <f:selectItem itemLabel="-1" itemValue="-1"/>
+                <f:selectItem itemLabel="0" itemValue="0"/>
+                <f:selectItem itemLabel="1" itemValue="1"/>
+                <f:selectItem itemLabel="2" itemValue="2"/>
+                <f:selectItem itemLabel="3" itemValue="3"/>
+                <f:selectItem itemLabel="4" itemValue="4"/>
+            </h:selectOneRadio>
+
+            <h:inputText id="yCoord" styleClass="yInput" value="#{bean.y}"
+                         validatorMessage="Y должен быть числом от -5 до 3"
+                         converter="javax.faces.Double">
+                <f:validateDoubleRange minimum="-5" maximum="3"/>
+            </h:inputText>
+
+
+            <h:outputLabel value="Радиус R:" for="rValue"/>
+            <h:selectOneRadio id="rValue" value="#{bean.r}" styleClass="rRadios">
+                <f:selectItem itemLabel="1" itemValue="1"/>
+                <f:selectItem itemLabel="2" itemValue="2"/>
+                <f:selectItem itemLabel="3" itemValue="3"/>
+                <f:selectItem itemLabel="4" itemValue="4"/>
+                <f:selectItem itemLabel="5" itemValue="5"/>
+                <f:ajax event="change" listener="#{bean.updateGraph}" render="canvasGroup" onevent="updateAfterSubmit"/>
+            </h:selectOneRadio>
+
+            <h:inputHidden id="timezoneOffset" styleClass="timezone-offset" value="#{bean.timezoneOffset}"/>
+
+            <h:commandButton value="Отправить" action="#{bean.checkPoint}" onclick="return validateForm();">
+                <f:ajax execute="@form" render="canvasGroup resultsTable" onevent="updateAfterSubmit"/>
+            </h:commandButton>
+
+            <p:remoteCommand name="sendCanvasPoint" actionListener="#{bean.handleCanvasClick}"
+                             update="canvasGroup resultsTable" oncomplete="updateAfterSubmit(xhr, status, args)">
+                <f:param name="xValue" value="#{bean.x}"/>
+                <f:param name="yValue" value="#{bean.y}"/>
+                <f:param name="rValue" value="#{bean.r}"/>
+            </p:remoteCommand>
+
+
+        </h:form>
+
+        <h:panelGroup id="canvasGroup">
+            <!--suppress CheckTagEmptyBody -->
+            <canvas id="graph" width="600" height="600" onclick="onCanvasClick(event)"></canvas>
+        </h:panelGroup>
+
+        <h:dataTable value="#{bean.result}" var="result" id="resultsTable">
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{result.x}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{result.y}
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{result.r}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Попадание</f:facet>
+                #{result.hit ? 'Да' : 'Нет'}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Время проверки</f:facet>
+                #{result.checkTime}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Время отправки</f:facet>
+                #{result.submitTime}
+            </h:column>
+        </h:dataTable>
+
+        <h:button styleClass="footer-button" value="Вернуться на стартовую страницу" outcome="IDX"/>
+
+    </div>
+
+</h:body>
+</html>

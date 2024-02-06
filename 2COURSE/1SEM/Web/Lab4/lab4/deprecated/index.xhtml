@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
+<h:head>
+    <title>Стартовая страница</title>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+
+    <link rel="stylesheet" type="text/css" href="resources/css/styles.css"/>
+    <!--suppress CheckTagEmptyBody -->
+    <script type="text/javascript" src="../../../angular/laba4/src/assets/clock.js"></script>
+
+</h:head>
+<h:body>
+    <header>
+        <h1>Раевский Григорий</h1>
+        <h2>Группа: P3221, Вариант: 2166</h2>
+    </header>
+    <div class="clock-container" id="clockContainer">
+        <video id="clockVideo" loop="loop" autoplay="autoplay" muted="muted">
+            <source src="https://store.storeimages.cdn-apple.com/1/store.apple.com/shop/rs-covers/1/dist/media/app-covers-apple-outline.mp4"
+                    type="video/mp4"/>
+            Браузер не поддерживает видео заставки.
+        </video>
+        <!--suppress CheckTagEmptyBody -->
+        <div id="clock" class="main-clock" style="display: none;"></div>
+    </div>
+
+    <!-- https://store.storeimages.cdn-apple.com/1/store.apple.com/shop/rs-covers/1/dist/media/app-covers-apple-outline.mp4 -->
+    <footer>
+        <h:button styleClass="footer-button" value="Перейти на главную страницу" outcome="MAIN"/>
+    </footer>
+</h:body>
+</html>

@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    //implementation 'javax.servlet:javax.servlet-api:4.0.1'
+    //providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'helios/src/main/java'
+        }
+        resources {
+            srcDir 'helios/src/main/resources'
+        }
+    }
+}
+
+war {
+    webAppDirName = 'helios/src/main/webapp'
+}
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava {
+    options.fork = true
+    options.forkOptions.executable = 'E:\\prog\\jdk8\\openlogic-openjdk-8u382-b05-windows-64\\bin\\javac.exe'
+    //options.forkOptions.executable = '/Users/graevsky/Desktop/ITMO/2COURSE/Trash/jdk8/macos/openlogic-openjdk-8u392-b08-mac-x64/jdk1.8.0_392.jdk/Contents/Home/bin/javac'
+}
+
+
+

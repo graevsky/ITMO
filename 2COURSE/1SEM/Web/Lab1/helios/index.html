@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/globalVariables.js" defer></script>
+    <script src="js/init.js" defer></script>
+    <script src="js/validation.js" defer></script>
+    <script src="js/drawing.js" defer></script>
+    <script src="js/ajax.js" defer></script>
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>Лабораторная работа 1</h1>
+        <p>Раевский Григорий, P3221, Вар. 3125</p>
+    </header>
+
+    <section>
+        <form id="data_form" action="check_point.php" method="GET">
+            <table>
+                <tr>
+                    <td>
+                        <label for="x_select">Выберите X:</label>
+                    </td>
+                    <td>
+                        <select id="x_select" name="x">
+                            <option value="-2">-2</option>
+                            <option value="-1.5">-1.5</option>
+                            <option value="-1">-1</option>
+                            <option value="-0.5">-0.5</option>
+                            <option value="0">0</option>
+                            <option value="0.5">0.5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="y_input">Введите Y (-3 до 3):</label>
+                    </td>
+                    <td>
+                        <input type="text" id="y_input" name="y" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="r_input">Введите R (1 до 4):</label>
+                    </td>
+                    <td>
+                        <input type="text" id="r_input" name="r" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Проверить">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <section>
+        <canvas id="graph" width="400" height="400" ></canvas>
+    </section>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Результат</th>
+                <th>Текущее время</th>
+                <th>Время вычисления</th>
+            </tr>
+            </thead>
+            <tbody id="results_table">
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="31426fc6-17dd-4685-8263-9f856095dce4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/ProgLang/Lab1/assignment-image-rotation" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/ProgLang/Lab1/assignment-image-rotation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/dataSources/3d645d78-40a0-467a-ad54-f9abe54cd8ad.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/dataSources/3d645d78-40a0-467a-ad54-f9abe54cd8ad.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/dataSources/3d645d78-40a0-467a-ad54-f9abe54cd8ad/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/dataSources/3d645d78-40a0-467a-ad54-f9abe54cd8ad/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/PointBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/PointBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/TokenUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/TokenUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/users/AuthenticationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../2COURSE/Web/Lab4/lab4/src/main/java/org/example/users/AuthenticationResource.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.2" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2PKmvWxXyg56dPfeFewgV9zE9no" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "android.gradle.sync.needed": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/graev/OneDrive/Рабочий стол/ITMO/1COURSE/PROG_1SEM_1COURSE/Lab7ItmoProg-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31426fc6-17dd-4685-8263-9f856095dce4" name="Changes" comment="" />
+      <created>1683214379856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683214379856</updated>
+      <workItem from="1683214381528" duration="1636000" />
+      <workItem from="1685820547549" duration="16000" />
+      <workItem from="1701706809755" duration="21000" />
+      <workItem from="1702291929328" duration="389000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/lab6/Server.java</url>
+          <line>15</line>
+          <properties class="org.lab6.Server" method="run">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/lab6/App.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

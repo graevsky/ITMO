@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'Lab6ItmoProgTry2'
+include 'client'
+include 'server'
+include 'common'
