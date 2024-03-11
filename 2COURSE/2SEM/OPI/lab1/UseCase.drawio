@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-03-10T21:54:10.998Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="gDjiQt362qANT45y8WMK" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-11T13:20:37.933Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="w5dbUuugABh27Bcswd6Q" version="23.1.5" type="device">
   <diagram name="Страница — 1" id="yE-DlBpV-i3pffNnuML0">
     <mxGraphModel dx="2266" dy="2909" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="0" shadow="0">
       <root>
@@ -117,6 +117,17 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="240" y="965" />
+              <mxPoint x="240" y="875" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="md2Il7Z6jWMmQpFjNUSd-1" value="Блокировка пользователя" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="660" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="md2Il7Z6jWMmQpFjNUSd-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;" edge="1" parent="1" source="md2Il7Z6jWMmQpFjNUSd-1" target="5RYa4Lqnm4UkyfWWSym_-62">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="695" />
               <mxPoint x="240" y="875" />
             </Array>
           </mxGeometry>
