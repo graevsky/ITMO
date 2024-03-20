@@ -1,0 +1,79 @@
+<mxfile host="Electron" modified="2024-03-20T17:45:01.044Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="86Hw05xHlX65ViEKl5f4" version="23.1.5" type="device">
+  <diagram name="Страница — 1" id="CEwVI0bWghD14qGQZyEO">
+    <mxGraphModel dx="613" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yc20dwUEEVGf1kONF2tM-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-1" target="yc20dwUEEVGf1kONF2tM-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-1" value="Получение уведомления от серверов Apple и загрузка медиа" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="190" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-2" target="yc20dwUEEVGf1kONF2tM-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-2" value="Разшифровка содержимого в iMessage и передача в парсер" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="190" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-3" target="yc20dwUEEVGf1kONF2tM-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-3" value="Передача полученных файлов на проверку в BlastDoor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="190" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-4" target="yc20dwUEEVGf1kONF2tM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-4" value="Различные проверки содержимого, создание объекта Message" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="360" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-8" value="Да" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-5" target="yc20dwUEEVGf1kONF2tM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-16" value="Нет" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-5" target="yc20dwUEEVGf1kONF2tM-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-5" value="Сообщение содержит медиа файлы" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="383.75" y="341.25" width="152.5" height="147.5" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-6" target="yc20dwUEEVGf1kONF2tM-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-6" value="Загрузка медиа с серверов Apple, расшифровка и временное сохранение" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="360" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-7" target="yc20dwUEEVGf1kONF2tM-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-7" value="Передача полученных данных на проверку в BlastDoor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="530" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-11" target="yc20dwUEEVGf1kONF2tM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-11" value="Расшифровка данных и создание превью" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="700" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-12" target="yc20dwUEEVGf1kONF2tM-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-12" value="Сохранение сообщение и уведомление пользователя" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="700" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-13" value="Отправка системного уведомления о получении" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="700" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-22" value="Да" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-15" target="yc20dwUEEVGf1kONF2tM-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-23" value="Нет" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yc20dwUEEVGf1kONF2tM-15" target="yc20dwUEEVGf1kONF2tM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yc20dwUEEVGf1kONF2tM-15" value="Содержит сериализованные данные (URL с превью)" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="383.75" y="511.25" width="152.5" height="147.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
