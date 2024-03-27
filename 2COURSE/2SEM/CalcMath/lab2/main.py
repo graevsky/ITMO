@@ -46,13 +46,15 @@ class Solution:
                 sum += L[i][j] * y[j]
             y[i] = (matrix[i][-1]-sum) /L[i][i]
 
+        #print(y)
+
         x = [0 for _ in range(n)]
         for i in range(n-1,-1,-1):
             sum = 0
             for j in range(i+1,n):
                 sum += L[j][i] *x[j]
             x[i] = (y[i]-sum)/L[i][i]
-
+        #print(x)
         result = x+y
         return result
 
