@@ -9,6 +9,7 @@ def func_derivative(x):
 i = 1
 def chord(a, b, e):
     x = a - (func_derivative(a)/(func_derivative(a)-func_derivative(b)))*(a-b)
+    print("X ", x, " A ", a, " B \n")
 
     while(func_derivative(x) > e):
         print("Pre iteration ", i)
