@@ -6,20 +6,23 @@ def f(x):
 
 
 def solution(x1, del_x, e):
-    i = 1
+    i = 0
+    calculate = True
     while True:
         i += 1
-        x2 = x1 + del_x
+        if(calculate):
+            x2 = x1 + del_x
+
         f1 = f(x1)
         f2 = f(x2)
 
-        if f1 > f2:
-            x3 = x1 + 2 * del_x
-        else:
-            x3 = x1 - del_x
+        if(calculate):
+            if f1 > f2:
+                x3 = x1 + 2 * del_x
+            else:
+                x3 = x1 - del_x
 
         f3 = f(x3)
-
 
         f_min = min(f1, f2, f3)
         if f_min == f1:
@@ -45,16 +48,23 @@ def solution(x1, del_x, e):
             # print("Iter amount: ",i)
             return round(x_over, 5)
         if min(x1, x3) < x_over < max(x1, x3):
-            x1 = min(x_over,x_min)
+            x2 = min(x_over,x_min)
+            all_x = [x1,x2,x3,x_over]
+            all_x.sort
+
+            x1 = all_x[all_x.index(x2)-1]
+            x3 = all_x[all_x.index(x2)+1]
+            calculate = False
         else:
             x1 = x_over
+            calculate = True
 
 
 # f(x) = (1 / 3) * pow(x, 3) - 5 * x + x * np.log(x)
 
 inp_x = 1.5
-inp_dx = 0.001
-inp_e = 0.00001
+inp_dx = 0.01
+inp_e = 0.0001
 
 # print(
 #    "For f(x) = (1 / 3) * pow(x, 3) - 5 * x + x * np.log(x) enter starting x, delta x, epsilon:"
