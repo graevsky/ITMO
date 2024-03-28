@@ -45,10 +45,7 @@ def solution(x1, del_x, e):
             # print("Iter amount: ",i)
             return round(x_over, 5)
         if min(x1, x3) < x_over < max(x1, x3):
-            if x_over < x_min:
-                x1 = x_over
-            else:
-                x1 = x_min
+            x1 = min(x_over,x_min)
         else:
             x1 = x_over
 
