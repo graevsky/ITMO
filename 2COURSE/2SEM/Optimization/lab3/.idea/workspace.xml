@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa544cb4-89a1-4787-b842-ebe1026ca2a1" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Algos/codeforces/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/cache-v2-116fef904ff28c74dcd5.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-79d17d536c46494953bb.json" beforeDir="false" />
@@ -20,6 +21,11 @@
       <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/codeforces/codeforce.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Algos/codeforces/codeforces/codeforce.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab2/chord_3_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/chord_3_method.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../lab2/goldenCut_2_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/goldenCut_2_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/lab3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lab3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+>>>>>>> 56d35e2416ccd37bb1cd392a31c245999c50936b
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -38,6 +44,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+>>>>>>> 56d35e2416ccd37bb1cd392a31c245999c50936b
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -52,10 +64,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+<<<<<<< HEAD
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+=======
+    "last_opened_file_path": "/Users/graevsky/Desktop/ITMO/2COURSE/2SEM/Optimization/lab3",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
+>>>>>>> 56d35e2416ccd37bb1cd392a31c245999c50936b
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -68,7 +85,11 @@
       <option name="presentableId" value="Default" />
       <updated>1711052189322</updated>
       <workItem from="1711052191055" duration="69000" />
+<<<<<<< HEAD
       <workItem from="1711631292011" duration="1657000" />
+=======
+      <workItem from="1711457239317" duration="844000" />
+>>>>>>> 56d35e2416ccd37bb1cd392a31c245999c50936b
     </task>
     <servers />
   </component>
@@ -76,6 +97,10 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/lab3$main.coverage" NAME="main Coverage Results" MODIFIED="1711633211743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+    <SUITE FILE_PATH="coverage/lab3$main.coverage" NAME="main Coverage Results" MODIFIED="1711457376651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> 56d35e2416ccd37bb1cd392a31c245999c50936b
   </component>
 </project>
