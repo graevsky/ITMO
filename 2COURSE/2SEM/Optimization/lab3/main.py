@@ -10,13 +10,13 @@ def solution(x1, del_x, e):
     calculate = True
     while True:
         i += 1
-        if(calculate):
+        if (calculate):
             x2 = x1 + del_x
 
         f1 = f(x1)
         f2 = f(x2)
 
-        if(calculate):
+        if (calculate):
             if f1 > f2:
                 x3 = x1 + 2 * del_x
             else:
@@ -47,13 +47,17 @@ def solution(x1, del_x, e):
         if abs((f_min - f_over) / f_over) < e and abs((x_min - x_over) / x_over) < e:
             # print("Iter amount: ",i)
             return round(x_over, 5)
-        if min(x1, x3) < x_over < max(x1, x3):
-            x2 = min(x_over,x_min)
-            all_x = [x1,x2,x3,x_over]
-            all_x.sort
 
-            x1 = all_x[all_x.index(x2)-1]
-            x3 = all_x[all_x.index(x2)+1]
+        if min(x1, x3) < x_over < max(x1, x3):
+
+            fun_x = [(f1, x1), (f2, x2), (f3, x3), (f_over, x_over)]
+            minimal_f, x2 = min(fun_x, key=lambda x: x[0])
+
+            all_x = [x[1] for x in fun_x]
+            all_x.sort()
+
+            x1 = all_x[all_x.index(x2) - 1]
+            x3 = all_x[all_x.index(x2) + 1]
             calculate = False
         else:
             x1 = x_over
@@ -70,13 +74,12 @@ inp_e = 0.0001
 #    "For f(x) = (1 / 3) * pow(x, 3) - 5 * x + x * np.log(x) enter starting x, delta x, epsilon:"
 # )
 
-#inp_x = input()
-#inp_dx = input()
-#inp_e = input()
-
+# inp_x = input()
+# inp_dx = input()
+# inp_e = input()
 
 
 res_x = solution(inp_x, inp_dx, inp_e)
 
 print("Min x: ", res_x, " and min f(x): ", round(f(res_x), 5))
-#Min x:  1.8411  and min f(x):  -6.00153
+# Min x:  1.8411  and min f(x):  -6.00153
