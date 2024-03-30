@@ -75,7 +75,7 @@ def get_determinant(matrix):
 
     if not all(len(row) == m_len for row in matrix):
         print("Матрица не квадратная")
-        return
+        return None
     if m_len == 1:
         return matrix[0][0]
     elif m_len == 2:
@@ -96,7 +96,7 @@ def get_minor(matrix, i, j):
 def matrix_inverse(matrix):
     determinant = get_determinant(matrix)
     if determinant == 0:
-        #print("Определитель равен нулю => получить обратную матрицу невозможно")
+        print("Определитель равен нулю => получить обратную матрицу невозможно")
         return None
 
     m_len = len(matrix)
