@@ -5,32 +5,36 @@
     <path id="test.classpath">
         <pathelement path="${build.dir}"/>
         <pathelement path="${build.dir}/test"/>
-        <pathelement path="${lib.dir}/junit-4.13.2.jar"/>
-        <pathelement path="${lib.dir}/hamcrest-core-1.3.jar"/>
+        <pathelement path="${lib.dir}/${junit.jar}"/>
+        <pathelement path="${lib.dir}/${hamcrest.jar}"/>
     </path>
 
     <target name="init">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dist.dir}"/>
-        <mkdir dir="${build.dir}/test/results"/>
+        <mkdir dir="${test.results.dir}"/>
     </target>
 
     <target name="compile" depends="init">
         <mkdir dir="${build.dir}"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
             <classpath>
-                <pathelement path="${lib.dir}/javax.faces-api-2.2.jar"/>
-                <pathelement path="${lib.dir}/primefaces-10.0.0-RC2.jar"/>
-                <pathelement path="${lib.dir}/javaee-api-8.0.jar"/>
-                <pathelement path="${lib.dir}/eclipselink-2.7.11.jar"/>
-                <pathelement path="${lib.dir}/postgresql-42.2.27.jar"/>
+                <pathelement path="${lib.dir}/${javax.faces-api.jar}"/>
+                <pathelement path="${lib.dir}/${primefaces.jar}"/>
+                <pathelement path="${lib.dir}/${javaee-api.jar}"/>
+                <pathelement path="${lib.dir}/${eclipselink.jar}"/>
+                <pathelement path="${lib.dir}/${postgresql.jar}"/>
             </classpath>
         </javac>
     </target>
 
     <target name="build" depends="compile">
         <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
+        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="${webapp.dir}/WEB-INF/MANIFEST.MF">
+            <fileset dir="${webapp.dir}" includes="${file.pattern.xhtml}"/>
+            <fileset dir="${webapp.dir}" includes="${file.pattern.js}"/>
+            <fileset dir="${webapp.dir}" includes="${file.pattern.css}"/>
+            <fileset dir="${webapp.dir}" includes="${file.pattern.xml}"/>
         </jar>
     </target>
 
@@ -40,15 +44,14 @@
     </target>
 
     <target name="xml">
-        <echo>Validating XML files...</echo>
         <xmlvalidate failonerror="true" lenient="true">
-            <fileset dir="${basedir}/src" includes="**/*.xml"/>
+            <fileset dir="${basedir}/src" includes="${file.pattern.xml}"/>
         </xmlvalidate>
     </target>
 
     <target name="compile-tests" depends="compile">
         <mkdir dir="${build.dir}/test"/>
-        <javac srcdir="src/test/java" destdir="${build.dir}/test" includeantruntime="false">
+        <javac srcdir="${test.src.dir}" destdir="${build.dir}/test" includeantruntime="false">
             <classpath refid="test.classpath"/>
         </javac>
     </target>
@@ -57,7 +60,7 @@
         <junit printsummary="yes" haltonfailure="yes">
             <classpath refid="test.classpath"/>
             <formatter type="xml"/>
-            <batchtest fork="yes" todir="${build.dir}/test/results">
+            <batchtest fork="yes" todir="${test.results.dir}">
                 <fileset dir="${build.dir}/test" includes="**/*Test.class"/>
             </batchtest>
         </junit>
@@ -65,38 +68,22 @@
 
     <target name="report" depends="test">
         <exec executable="git" dir=".">
-            <arg value="add"/>
-            <arg value="-f"/>
-            <arg value="${build.dir}/test/results/"/>
+            <arg value="${git.add.command}"/>
+            <arg value="${git.add.command.options}"/>
+            <arg value="${test.results.dir}/"/>
         </exec>
         <exec executable="git" dir=".">
-            <arg value="commit"/>
-            <arg value="-m"/>
-            <arg value="Added JUnit test reports"/>
+            <arg value="${git.commit.command}"/>
+            <arg value="${git.commit.command.options}"/>
+            <arg value="${git.commit.message}"/>
         </exec>
     </target>
 
     <target name="xml-to-html" depends="test">
-        <mkdir dir="${build.dir}/test/html"/>
-        <xslt basedir="${build.dir}/test/results" destdir="${build.dir}/test/html" style="src/test/resources/junit-report.xsl" extension=".html">
-            <fileset dir="${build.dir}/test/results" includes="**/*.xml"/>
+        <mkdir dir="${test.html.dir}"/>
+        <xslt basedir="${test.results.dir}" destdir="${test.html.dir}" style="src/test/resources/junit-report.xsl" extension=".html">
+            <fileset dir="${test.results.dir}" includes="**/*.xml"/>
             <mapper type="glob" from="*.xml" to="*.html"/>
         </xslt>
     </target>
-
-
-    <target name="build_web" depends="compile">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
-            <fileset dir="src/main/webapp" includes="**/*.xhtml"/>
-            <fileset dir="src/main/webapp" includes="**/*.js"/>
-            <fileset dir="src/main/webapp" includes="**/*.css"/>
-            <fileset dir="src/main/webapp" includes="**/*.xml"/>
-
-        </jar>
-    </target>
-
-
-
-
 </project>
