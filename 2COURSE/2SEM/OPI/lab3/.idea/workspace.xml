@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/opi-task/task.md" beforeDir="false" afterPath="$PROJECT_DIR$/task/opi-task/task.md" afterDir="false" />
-    </list>
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,7 +190,7 @@
       <workItem from="1712499501224" duration="657000" />
       <workItem from="1712502951612" duration="11000" />
       <workItem from="1712511774774" duration="3272000" />
-      <workItem from="1712515353059" duration="653000" />
+      <workItem from="1712515353059" duration="973000" />
     </task>
     <servers />
   </component>
