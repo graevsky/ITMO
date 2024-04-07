@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="JSFLab" default="build" basedir=".">
+<project name="JSFLab" default="report" basedir=".">
     <property file="ant.properties"/>
 
     <path id="test.classpath">
@@ -9,10 +9,10 @@
         <pathelement path="${lib.dir}/hamcrest-core-1.3.jar"/>
     </path>
 
-
     <target name="init">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${build.dir}/test/results"/>
     </target>
 
     <target name="compile" depends="init">
@@ -28,14 +28,11 @@
         </javac>
     </target>
 
-
-
     <target name="build" depends="compile">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/JSFLab-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
         </jar>
     </target>
-
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -49,8 +46,6 @@
         </xmlvalidate>
     </target>
 
-
-
     <target name="compile-tests" depends="compile">
         <mkdir dir="${build.dir}/test"/>
         <javac srcdir="src/test/java" destdir="${build.dir}/test" includeantruntime="false">
@@ -59,14 +54,26 @@
     </target>
 
     <target name="test" depends="compile-tests">
-        <mkdir dir="${build.dir}/test"/>
         <junit printsummary="yes" haltonfailure="yes">
             <classpath refid="test.classpath"/>
-            <formatter type="brief" usefile="false"/>
+            <formatter type="xml"/>
             <batchtest fork="yes" todir="${build.dir}/test/results">
                 <fileset dir="${build.dir}/test" includes="**/*Test.class"/>
             </batchtest>
         </junit>
+    </target>
+
+    <target name="report" depends="test">
+        <exec executable="git" dir=".">
+            <arg value="add"/>
+            <arg value="-f"/>
+            <arg value="${build.dir}/test/results/"/>
+        </exec>
+        <exec executable="git" dir=".">
+            <arg value="commit"/>
+            <arg value="-m"/>
+            <arg value="Added JUnit test reports"/>
+        </exec>
     </target>
 
 </project>
