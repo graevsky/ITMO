@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="JSFLab" default="report" basedir=".">
+<project name="OPI" default="report" basedir=".">
     <property file="ant.properties"/>
 
     <path id="test.classpath">
@@ -30,7 +30,7 @@
 
     <target name="build" depends="compile">
         <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/JSFLab-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
+        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
         </jar>
     </target>
 
@@ -75,5 +75,28 @@
             <arg value="Added JUnit test reports"/>
         </exec>
     </target>
+
+    <target name="xml-to-html" depends="test">
+        <mkdir dir="${build.dir}/test/html"/>
+        <xslt basedir="${build.dir}/test/results" destdir="${build.dir}/test/html" style="src/test/resources/junit-report.xsl" extension=".html">
+            <fileset dir="${build.dir}/test/results" includes="**/*.xml"/>
+            <mapper type="glob" from="*.xml" to="*.html"/>
+        </xslt>
+    </target>
+
+
+    <target name="build_web" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
+            <fileset dir="src/main/webapp" includes="**/*.xhtml"/>
+            <fileset dir="src/main/webapp" includes="**/*.js"/>
+            <fileset dir="src/main/webapp" includes="**/*.css"/>
+            <fileset dir="src/main/webapp" includes="**/*.xml"/>
+
+        </jar>
+    </target>
+
+
+
 
 </project>

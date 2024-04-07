@@ -13,8 +13,9 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCheckHitFalse() {
+    public void testCheckHitFalse() throws InterruptedException {
         Utils util = new Utils(4, 4, 3);
+        Thread.sleep(5000);
         Assert.assertFalse(util.checkHit());
     }
 
