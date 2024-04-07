@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/lab3/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/lab3/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/lab3/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../1SEM/Web/Lab3/lab3/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/main.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/main.xhtml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,34 +70,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/OPI/lab3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.28755364",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/1SEM/Web/Lab3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.28755364&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\task" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\2SEM\OPI\lab3\task\web-task" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\resources\META-INF" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp\old" />
@@ -186,7 +197,8 @@
       <workItem from="1701868239393" duration="138000" />
       <workItem from="1701868811073" duration="2423000" />
       <workItem from="1702633532725" duration="3270000" />
-      <workItem from="1712499501224" duration="14000" />
+      <workItem from="1712499501224" duration="657000" />
+      <workItem from="1712502951612" duration="11000" />
     </task>
     <servers />
   </component>

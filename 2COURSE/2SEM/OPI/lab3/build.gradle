@@ -2,7 +2,10 @@
 plugins {
     id 'war'
 }
+ apply plugin: 'java'
 
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 repositories {
     mavenCentral()
     maven { url "https://repository.primefaces.org/" }
@@ -10,10 +13,10 @@ repositories {
 
 
 dependencies {
-    implementation 'javax.faces:javax.faces-api:2.2'
+    implementation 'javax.faces:javax.faces-api:2.2'// d
     implementation 'org.primefaces:primefaces:10.0.0'
     providedCompile 'javax:javaee-api:8.0'
-    implementation files('C:\\Users\\graev\\OneDrive\\Рабочий стол\\ITMO\\2COURSE\\Web\\Lab3\\lab3\\task\\eclipselink-2.7.11.jar')
+    implementation files('E:\\prog\\misc\\eclipselink-2.7.11.jar')
     implementation 'org.postgresql:postgresql:42.2.27'
 }
 

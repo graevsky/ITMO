@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JSFLab" default="build" basedir=".">
+    <property file="ant.properties"/>
+
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath>
+                <pathelement path="${lib.dir}/javax.faces-api-2.2.jar"/>
+                <pathelement path="${lib.dir}/primefaces-10.0.0-RC2.jar"/>
+                <pathelement path="${lib.dir}/javaee-api-8.0.jar"/>
+                <pathelement path="${lib.dir}/eclipselink-2.7.11.jar"/>
+                <pathelement path="${lib.dir}/postgresql-42.2.27.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+
+
+    <target name="build" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/JSFLab-${version}.jar" basedir="${build.dir}" manifest="src/main/webapp/WEB-INF/MANIFEST.MF">
+        </jar>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="xml">
+        <echo>Validating XML files...</echo>
+        <xmlvalidate failonerror="true" lenient="true">
+            <fileset dir="${basedir}/src" includes="**/*.xml"/>
+        </xmlvalidate>
+    </target>
+
+
+</project>
