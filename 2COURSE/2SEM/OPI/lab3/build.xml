@@ -50,15 +50,15 @@
     </target>
 
 
-    <!--
+
     <target name="compile-tests" depends="compile">
         <mkdir dir="${build.dir}/test"/>
         <javac srcdir="src/test/java" destdir="${build.dir}/test" includeantruntime="false">
             <classpath refid="test.classpath"/>
         </javac>
     </target>
--->
-    <target name="test" depends="compile">
+
+    <target name="test" depends="compile-tests">
         <mkdir dir="${build.dir}/test"/>
         <junit printsummary="yes" haltonfailure="yes">
             <classpath refid="test.classpath"/>
