@@ -1,0 +1,30 @@
+
+plugins {
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repository.primefaces.org/" }
+}
+
+
+dependencies {
+    implementation 'javax.faces:javax.faces-api:2.2'
+    implementation 'org.primefaces:primefaces:10.0.0'
+    providedCompile 'javax:javaee-api:8.0'
+    implementation files('C:\\Users\\graev\\OneDrive\\Рабочий стол\\ITMO\\2COURSE\\Web\\Lab3\\lab3\\task\\eclipselink-2.7.11.jar')
+    implementation 'org.postgresql:postgresql:42.2.27'
+}
+
+apply plugin: 'eclipse-wtp'
+
+eclipse {
+    wtp {
+        component {
+            contextPath = 'JSFLab'
+        }
+    }
+}
+
+

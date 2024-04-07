@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Class" />
+        <option value="jsf" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.2" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2XkqekddGT2MjbfSbY6MakCighe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/OPI/lab3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.28755364",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\task" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\resources\META-INF" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp\old" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.lab3 [war]">
+    <configuration name="lab3 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="lab3 [war]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="war" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.lab3 [war]" />
+        <item itemvalue="Gradle.lab3 [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
+      <created>1699183524177</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699183524177</updated>
+      <workItem from="1699183525331" duration="5818000" />
+      <workItem from="1699197082794" duration="329000" />
+      <workItem from="1699197602855" duration="303000" />
+      <workItem from="1699201308874" duration="10019000" />
+      <workItem from="1699211770350" duration="21000" />
+      <workItem from="1699212239239" duration="565000" />
+      <workItem from="1699276863752" duration="626000" />
+      <workItem from="1699277730978" duration="426000" />
+      <workItem from="1699353734662" duration="110000" />
+      <workItem from="1699542709618" duration="216000" />
+      <workItem from="1699564270301" duration="122000" />
+      <workItem from="1699568112971" duration="306000" />
+      <workItem from="1699608676849" duration="153000" />
+      <workItem from="1699609217000" duration="5155000" />
+      <workItem from="1699614601124" duration="923000" />
+      <workItem from="1699615539380" duration="4104000" />
+      <workItem from="1699620060313" duration="3150000" />
+      <workItem from="1699781419559" duration="3661000" />
+      <workItem from="1699785205198" duration="3427000" />
+      <workItem from="1700048019649" duration="3623000" />
+      <workItem from="1700070869457" duration="2534000" />
+      <workItem from="1700217335128" duration="2138000" />
+      <workItem from="1700220172259" duration="3210000" />
+      <workItem from="1700226276348" duration="1811000" />
+      <workItem from="1701249445863" duration="121000" />
+      <workItem from="1701718854830" duration="7000" />
+      <workItem from="1701806858693" duration="273000" />
+      <workItem from="1701857161329" duration="668000" />
+      <workItem from="1701860245142" duration="1817000" />
+      <workItem from="1701864826206" duration="638000" />
+      <workItem from="1701868239393" duration="138000" />
+      <workItem from="1701868811073" duration="2423000" />
+      <workItem from="1702633532725" duration="3270000" />
+      <workItem from="1712499501224" duration="14000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
