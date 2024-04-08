@@ -2,11 +2,11 @@
 <project name="OPI" default="report" basedir=".">
     <property file="ant.properties"/>
 
-    <path id="test.classpath">
+    <path id="project.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
         <pathelement path="${build.dir}"/>
-        <pathelement path="${build.dir}/test"/>
-        <pathelement path="${lib.dir}/${junit.jar}"/>
-        <pathelement path="${lib.dir}/${hamcrest.jar}"/>
     </path>
 
     <target name="init">
@@ -16,26 +16,26 @@
     </target>
 
     <target name="compile" depends="init">
-        <mkdir dir="${build.dir}"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
-            <classpath>
-                <pathelement path="${lib.dir}/${javax.faces-api.jar}"/>
-                <pathelement path="${lib.dir}/${primefaces.jar}"/>
-                <pathelement path="${lib.dir}/${javaee-api.jar}"/>
-                <pathelement path="${lib.dir}/${eclipselink.jar}"/>
-                <pathelement path="${lib.dir}/${postgresql.jar}"/>
-            </classpath>
+            <classpath refid="project.classpath"/>
         </javac>
     </target>
 
     <target name="build" depends="compile">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/OPI3-${version}.jar" basedir="${build.dir}" manifest="${webapp.dir}/WEB-INF/MANIFEST.MF">
-            <fileset dir="${webapp.dir}" includes="${file.pattern.xhtml}"/>
-            <fileset dir="${webapp.dir}" includes="${file.pattern.js}"/>
-            <fileset dir="${webapp.dir}" includes="${file.pattern.css}"/>
-            <fileset dir="${webapp.dir}" includes="${file.pattern.xml}"/>
-        </jar>
+        <war destfile="${dist.dir}/OPI3-${version}.war" webxml="${webapp.dir}/WEB-INF/web.xml">
+            <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
+            <lib dir="${lib.dir}">
+                <exclude name="${war.excludes}"/>
+            </lib>
+            <classes dir="${build.dir}"/>
+            <webinf dir="${webapp.dir}/WEB-INF">
+                <include name="${file.pattern.xml"/>
+                <include name="${file.pattern.xhtml"/>
+                <include name="${file.pattern.js"/>
+                <include name="${file.pattern.css}"/>
+            </webinf>
+            <fileset dir="src/main/resources" includes="${file.pattern.persistence}"/>
+        </war>
     </target>
 
     <target name="clean">
@@ -50,15 +50,20 @@
     </target>
 
     <target name="compile-tests" depends="compile">
-        <mkdir dir="${build.dir}/test"/>
         <javac srcdir="${test.src.dir}" destdir="${build.dir}/test" includeantruntime="false">
-            <classpath refid="test.classpath"/>
+            <classpath>
+                <path refid="project.classpath"/>
+                <pathelement path="${build.dir}"/>
+            </classpath>
         </javac>
     </target>
 
     <target name="test" depends="compile-tests">
         <junit printsummary="yes" haltonfailure="yes">
-            <classpath refid="test.classpath"/>
+            <classpath>
+                <path refid="project.classpath"/>
+                <pathelement path="${build.dir}/test"/>
+            </classpath>
             <formatter type="xml"/>
             <batchtest fork="yes" todir="${test.results.dir}">
                 <fileset dir="${build.dir}/test" includes="**/*Test.class"/>
@@ -81,8 +86,9 @@
 
     <target name="xml-to-html" depends="test">
         <mkdir dir="${test.html.dir}"/>
-        <xslt basedir="${test.results.dir}" destdir="${test.html.dir}" style="src/test/resources/junit-report.xsl" extension=".html">
-            <fileset dir="${test.results.dir}" includes="**/*.xml"/>
+        <xslt basedir="${test.results.dir}" destdir="${test.html.dir}" style="src/test/resources/junit-report.xsl"
+              extension=".html">
+            <fileset dir="${test.results.dir}" includes="${file.pattern.xml}"/>
             <mapper type="glob" from="*.xml" to="*.html"/>
         </xslt>
     </target>
