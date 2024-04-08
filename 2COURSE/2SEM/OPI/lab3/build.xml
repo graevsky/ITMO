@@ -29,13 +29,19 @@
             </lib>
             <classes dir="${build.dir}"/>
             <webinf dir="${webapp.dir}/WEB-INF">
-                <include name="${file.pattern.xml"/>
-                <include name="${file.pattern.xhtml"/>
-                <include name="${file.pattern.js"/>
+                <include name="${file.pattern.xml}"/>
+                <include name="${file.pattern.xhtml}"/>
+                <include name="${file.pattern.js}"/>
                 <include name="${file.pattern.css}"/>
             </webinf>
             <fileset dir="src/main/resources" includes="${file.pattern.persistence}"/>
         </war>
+        <javac srcdir="${test.src.dir}" destdir="${build.dir}/test" includeantruntime="false">
+            <classpath>
+                <path refid="project.classpath"/>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+        </javac>
     </target>
 
     <target name="clean">
@@ -58,7 +64,7 @@
         </javac>
     </target>
 
-    <target name="test" depends="compile-tests">
+    <target name="test" depends="build">
         <junit printsummary="yes" haltonfailure="yes">
             <classpath>
                 <path refid="project.classpath"/>
