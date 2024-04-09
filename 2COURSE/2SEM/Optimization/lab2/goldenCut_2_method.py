@@ -39,12 +39,7 @@ def golden_ratio(a, b, e):
             x1 = round(x1, 5)
             x2 = round(x2, 5)
 
-        print("Post ", i, " iter result")
-        print("X1: ", x1, " X2 ", x2, " Y1 ", y1, " Y2 ", y2)
-        print("Delta A B ", round(abs(a-b),5))
 
-        print("A ",a," B ", b)
-        print("\n\n\n")
 
         i += 1
 
