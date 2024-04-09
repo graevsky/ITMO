@@ -65,6 +65,10 @@
     </target>
 
     <target name="test" depends="build">
+        <tstamp>
+            <format property="current.timestamp" pattern="yyyy-MM-dd HH:mm:ss"/>
+        </tstamp>
+
         <junit printsummary="yes" haltonfailure="yes">
             <classpath>
                 <path refid="project.classpath"/>
@@ -75,7 +79,23 @@
                 <fileset dir="${build.dir}/test" includes="**/*Test.class"/>
             </batchtest>
         </junit>
+
+
+        <!-- extra task -->
+        <xslt in="${test.results.dir}/TEST-org.example.UtilsTest.xml"
+              out="${test.results.dir}/TEST-1.xml"
+              style="src/test/resources/junit_task.xsl">
+            <param name="user.uname" expression="${user.uname}"/>
+            <param name="user.surname" expression="${user.surname}"/>
+            <param name="os.name" expression="${os.name}"/>
+            <param name="os.arch" expression="${os.arch}"/>
+            <param name="os.version" expression="${os.version}"/>
+            <param name="tstamp" expression="${current.timestamp}"/>
+        </xslt>
     </target>
+
+
+
 
     <target name="report" depends="test">
         <exec executable="git" dir=".">
@@ -89,6 +109,10 @@
             <arg value="${git.commit.message}"/>
         </exec>
     </target>
+
+
+
+
 
     <target name="xml-to-html" depends="test">
         <mkdir dir="${test.html.dir}"/>
