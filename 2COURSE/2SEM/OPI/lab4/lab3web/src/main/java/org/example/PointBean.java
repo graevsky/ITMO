@@ -1,11 +1,18 @@
 package org.example;
 
 
+import org.example.MBean.classes.ClickInterval;
+import org.example.MBean.classes.DotsHit;
+import org.example.MBean.DotsHitListener;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.management.*;
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.lang.management.ManagementFactory;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -28,10 +35,55 @@ public class PointBean {
     private double r;
     private int timezoneOffset;
 
+    private DotsHit dotsHit;
+    private ClickInterval clickInterval;
+
 
 
     private static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("lab3");
 
+    @PostConstruct
+    public void init(){
+        registerMBeans();
+        addNotificationListener();
+    }
+
+    private void registerMBeans(){
+        try {
+            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+
+
+            ObjectName dotsHitName = new ObjectName("org.example.MBean.classes:name=dotsHit");
+            dotsHit = new DotsHit();
+            try {
+                mBeanServer.registerMBean(dotsHit, dotsHitName);
+            }catch (MBeanRegistrationException | InstanceAlreadyExistsException | NotCompliantMBeanException e){
+                System.err.println("Error registering bean " + e.getMessage());
+            }
+
+            ObjectName clickIntervalName = new ObjectName("org.example.MBean.classes:name=clickInterval");
+            clickInterval = new ClickInterval();
+            try {
+                mBeanServer.registerMBean(clickInterval,clickIntervalName);
+            }catch (MBeanRegistrationException | InstanceAlreadyExistsException | NotCompliantMBeanException e){
+                System.err.println("Error registering bean " + e.getMessage());
+            }
+        }catch (Exception e){
+            System.err.println("Error creating MBean server " + e.getMessage());
+        }
+    }
+
+    private void addNotificationListener() {
+        try {
+            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+            ObjectName dotsHitName = new ObjectName("org.example.MBean.classes:name=dotsHit");
+            NotificationListener listener = new DotsHitListener();
+            NotificationFilter filter = new NotificationFilterSupport();
+            mBeanServer.addNotificationListener(dotsHitName, listener, filter, null);
+        } catch (Exception e) {
+            System.err.println("Error adding notification listener: " + e.getMessage());
+        }
+    }
 
 
 
@@ -83,6 +135,7 @@ public class PointBean {
             long startTime = System.nanoTime();
             Utils service = new Utils(x,y,r);
             boolean hit = service.checkHit();
+            dotsHit.addPoint(hit);
             long endTime = System.nanoTime();
 
             long duration = endTime - startTime;
@@ -141,6 +194,10 @@ public class PointBean {
         r = Double.parseDouble(params.get("rValue"));
         timezoneOffset = Integer.parseInt(params.get("timezoneOffset"));
 
+        clickInterval.recordClick();
+
         checkPoint();
     }
+
+
 }

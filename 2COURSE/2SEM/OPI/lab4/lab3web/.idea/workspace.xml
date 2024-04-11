@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../1COURSE/PROG_1SEM_1COURSE/Lab6ItmoProg-main/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../1COURSE/PROG_1SEM_1COURSE/Lab6ItmoProg-main/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ProgLang/Lab1/assignment-image-rotation" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ProgLang/Lab1/assignment-image-rotation" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/api.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/api.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/graph/graph.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/graph/graph.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/main-page/main-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/start-page/start-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/app/start-page/start-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/angular/labus4/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/src/main/webapp/jquery-3.3.1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/task/deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/task/deployment.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Lab4/lab4/task/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Lab4/lab4/task/db.md" afterDir="false" />
-    </list>
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,13 +37,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="Class" />
         <option value="jsf" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -79,34 +61,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/graev/OneDrive/Рабочий стол/web-development-cheats-master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.28755364",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/graev/Downloads/visualvm_218.zip&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.28755364&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\task" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\2SEM\OPI\lab4\lab3web\task\opi_task" />
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\2SEM\OPI\lab4\lab3web\task\web_task" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\resources\META-INF" />
       <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\2COURSE\Web\Lab3\lab3\src\main\webapp\old" />
@@ -205,6 +190,8 @@
       <workItem from="1701868239393" duration="138000" />
       <workItem from="1701868811073" duration="2423000" />
       <workItem from="1702633532725" duration="3270000" />
+      <workItem from="1712852497969" duration="8607000" />
+      <workItem from="1712862473873" duration="1002000" />
     </task>
     <servers />
   </component>

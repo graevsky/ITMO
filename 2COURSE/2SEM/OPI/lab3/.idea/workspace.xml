@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ant.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ant.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test/results/TEST-org.example.UtilsTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/.idea/dataSources/2c87c7ce-66cf-426d-99c2-30117fee0629.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/.idea/dataSources/2c87c7ce-66cf-426d-99c2-30117fee0629.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/src/main/webapp/main.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/src/main/webapp/main.xhtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/graevsky/Desktop/ITMO/2COURSE/2SEM/OPI/lab3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/OPI/lab4/lab3web&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -200,6 +201,8 @@
       <workItem from="1712515353059" duration="1331000" />
       <workItem from="1712580482425" duration="6372000" />
       <workItem from="1712592049906" duration="4812000" />
+      <workItem from="1712852462919" duration="34000" />
+      <workItem from="1712852526848" duration="37000" />
     </task>
     <servers />
   </component>
