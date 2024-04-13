@@ -4,8 +4,7 @@ import math
 class Result:
     error_message = ""
     has_discontinuity = False
-    eps = 1e-7 # изначально не было определено в готовой части кода блока Code edit, при добавлении корректно работает 4 пример работы из отчета
-
+    eps = 1e-7
     def first_function(x: float):
         return 1 / x
 
