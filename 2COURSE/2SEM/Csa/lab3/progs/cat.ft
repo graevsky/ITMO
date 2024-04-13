@@ -1,0 +1,8 @@
+: indent-input            \ Программа cat
+   cr                     \ Новая строка
+   pad 256 accept         \ Считывание в буфер pad (256 symbols)
+   pad swap type          \ Вывод строки
+   cr                     \ Новая строка
+;
+
+indent-input
