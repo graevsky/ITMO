@@ -1,0 +1,15 @@
+[
+    {"index": 0, "opcode": "CR"},
+    {"index": 1, "opcode": "PRINT_STRING", "arg": "Hello, what is your name?"},
+    {"index": 2, "opcode": "CR"},
+    {"index": 3, "opcode": "LOAD_ADDR", "arg": "0x0100"},
+    {"index": 4, "opcode": "ACCEPT", "arg": 256},
+    {"index": 5, "opcode": "DUP"},
+    {"index": 6, "opcode": "LOAD_ADDR", "arg": "0x0100"},
+    {"index": 7, "opcode": "SWAP"},
+    {"index": 8, "opcode": "CR"},
+    {"index": 9, "opcode": "PRINT_STRING", "arg": "Hello, "},
+    {"index": 10, "opcode": "TYPE"},
+    {"index": 11, "opcode": "PRINT_STRING", "arg": "!"},
+    {"index": 12, "opcode": "CR"}
+]
