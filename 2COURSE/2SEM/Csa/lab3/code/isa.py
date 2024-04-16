@@ -5,13 +5,13 @@ from enum import Enum
 
 class Opcode(str, Enum):
     """Операции"""
-    CR = "cr"
-    LOAD_ADDR = "load_addr"
-    ACCEPT = "accept"
-    SWAP = "swap"
-    TYPE = "type"
-    DUP = "dup"
-    PRINT_STRING = "print_string"
+    CR = "CR"
+    LOAD_ADDR = "LOAD_ADDR"
+    ACCEPT = "ACCEPT"
+    SWAP = "SWAP"
+    TYPE = "TYPE"
+    DUP = "DUP"
+    PRINT_STRING = "PRINT_STRING"
 
     def __str__(self):
         return str(self.value)

@@ -1,0 +1,22 @@
+<mxfile host="Electron" modified="2024-04-16T17:08:01.244Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="jeYlbVW8kQJCd1qPLFNK" version="23.1.5" type="device">
+  <diagram name="Страница — 1" id="wP5YuJ6qS_haN1ASp6le">
+    <mxGraphModel dx="889" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Y5vmbJ8QWRPklpZZ9SDh-1" value="Запуск" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="110" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Y5vmbJ8QWRPklpZZ9SDh-2" value="Ввод диапазона [a;b]" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="990" y="240" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y5vmbJ8QWRPklpZZ9SDh-3" value="Выбор функции для решения ОДУ" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="340" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y5vmbJ8QWRPklpZZ9SDh-4" value="Выбор значения \( y_{a} \)" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="990" y="430" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
