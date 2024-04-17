@@ -70,11 +70,7 @@ class DataPath:
         """ Сохраняет значение из аккумулятора в память """
         self.memory[address] = self.acc
 
-    def accept_input(self, size):
-        """ Эмулирует ввод данных пользователем """
-        input_data = input()[:size]  # Получаем данные от пользователя, ограниченные размером
-        for char in input_data:
-            self.push_to_stack(ord(char))  # Кладём каждый символ в стек как целое число
+
 
     def signal_output(self):
         """ Выводит все данные из стека до его опустошения """
@@ -111,6 +107,8 @@ class ControlUnit:
     def execute_instruction(self, instruction):
         opcode = instruction.get('opcode')
         arg = instruction.get('arg')
+
+        #print("Current instruction " + str(instruction))
 
         if opcode == Opcode.CR.value:
             self.data_path.push_to_stack(ord('\n'))
@@ -162,7 +160,7 @@ class ControlUnit:
             instr = self.fetch_instruction()
             self.execute_instruction(instr)
 def simulation(program, input_data):
-    data_path = DataPath(256)
+    data_path = DataPath(1024)
     data_path.set_input_buffer(input_data)
     control_unit = ControlUnit(program, data_path)
 
