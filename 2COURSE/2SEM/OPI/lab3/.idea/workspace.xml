@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Csa/lab3/code/isa.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Csa/lab3/code/isa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Csa/lab3/code/translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Csa/lab3/code/translator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/lab3web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/lab3web/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,6 +197,7 @@
       <workItem from="1712852462919" duration="34000" />
       <workItem from="1712852526848" duration="37000" />
       <workItem from="1713197635390" duration="38000" />
+      <workItem from="1713358846688" duration="20000" />
     </task>
     <servers />
   </component>
