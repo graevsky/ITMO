@@ -63,5 +63,10 @@
         "index": 12,
         "opcode": "CR",
         "arg": null
+    },
+    {
+        "index": 13,
+        "opcode": "HALT",
+        "arg": null
     }
 ]

@@ -12,6 +12,7 @@ class Opcode(str, Enum):
     TYPE = "TYPE"
     DUP = "DUP"
     PRINT_STRING = "PRINT_STRING"
+    HALT = "HALT"
 
     def __str__(self):
         return str(self.value)

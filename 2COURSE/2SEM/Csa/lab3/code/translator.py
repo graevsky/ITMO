@@ -21,26 +21,29 @@ def translate(text):
 
     for line in lines:
         line = line.split("\\")[0].strip()  # Отсекаем комментарии
-        if (
-                not line or line.startswith(":") or line.startswith(";")
-        ):  # Пропуск пустых строк и начальной команды, а также конца программы
+        if not line or line.startswith(":") or line.startswith(";"):  # Пропуск спец. строк
             continue
 
         commands = line.split()
-        i = 0  # Индекс для перебора команд в строке
+        i = 0
         while i < len(commands):
             command = commands[i]
             opcode = None
             args = []
 
-            if command == "cr":
+            if command == '."':  # Начало строки вывода
+                end_of_string = len(commands)
+                for j in range(i + 1, len(commands)):
+                    if commands[j] == '."':
+                        end_of_string = j
+                        break
+                args = [" ".join(commands[i + 1: end_of_string])]
+                opcode = Opcode.PRINT_STRING
+                i = end_of_string  # Перемещаем индекс за последний обработанный элемент
+            elif command == "cr":
                 opcode = Opcode.CR
             elif command == "pad":
-                if (
-                        i + 2 < len(commands)
-                        and commands[i + 1].isdigit()
-                        and commands[i + 2] == "accept"
-                ):
+                if i + 2 < len(commands) and commands[i + 1].isdigit() and commands[i + 2] == "accept":
                     opcode = Opcode.ACCEPT
                     args = [int(commands[i + 1])]
                     code.append(
@@ -51,7 +54,7 @@ def translate(text):
                         }
                     )
                     index += 1
-                    i += 2  # Пропускаем следующие два элемента (число и 'accept')
+                    i += 2  # Пропускаем число и 'accept'
                 elif i + 1 < len(commands) and commands[i + 1] == "swap":
                     opcode = Opcode.SWAP
                     code.append(
@@ -65,15 +68,6 @@ def translate(text):
                     i += 1  # Пропускаем 'swap'
             elif command == "type":
                 opcode = Opcode.TYPE
-            elif command == '."':
-                end_of_string = len(commands)
-                for j in range(i + 1, len(commands)):
-                    if commands[j] in ["cr", "pad", "type", "dup", "LOAD_ADDR", ";"]:
-                        end_of_string = j
-                        break
-                args = [" ".join(commands[i + 1: end_of_string])]
-                opcode = Opcode.PRINT_STRING
-                i = end_of_string  # Перемещаем индекс за последний обработанный элемент
             elif command == "dup":
                 opcode = Opcode.DUP
             elif command == "LOAD_ADDR":
@@ -93,7 +87,9 @@ def translate(text):
                 index += 1
             i += 1
 
+    code.append({"index": index, "opcode": Opcode.HALT.value, "arg": None})
     return code
+
 
 
 def main(source, target):

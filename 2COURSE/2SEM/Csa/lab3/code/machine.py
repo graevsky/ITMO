@@ -9,7 +9,26 @@ class DataPath:
         self.memory = [0] * memory_size
         self.stack = []
         self.acc = 0  # Аккумулятор
-        self.sp = 0   # Указатель стека, начинается с верхней части стека
+        self.sp = 0   # Указатель стека
+        self.input_buffer = ''  # Буфер для хранения входных данных
+        self.input_pointer = 0  # Указатель на текущую позицию чтения в буфере
+
+    def accept_input(self, size):
+        """ Эмулирует ввод данных из буфера """
+        if self.input_pointer < len(self.input_buffer):
+            input_data = self.input_buffer[self.input_pointer:self.input_pointer + size]
+            self.input_pointer += size
+        else:
+            input_data = ''
+
+        for char in input_data:
+            self.push_to_stack(ord(char))  # Кладём каждый символ в стек как целое число
+
+    def set_input_buffer(self, data):
+        """ Загружает входные данные в буфер """
+        self.input_buffer = data
+        self.input_pointer = 0
+
 
     def push_to_stack(self, value):
         """ Помещает значение в стек """
@@ -143,22 +162,19 @@ class ControlUnit:
             instr = self.fetch_instruction()
             self.execute_instruction(instr)
 def simulation(program, input_data):
-    # Размер памяти произвольный, здесь в качестве примера 256 ячеек
     data_path = DataPath(256)
+    data_path.set_input_buffer(input_data)
     control_unit = ControlUnit(program, data_path)
 
-    # Подготовка входных данных
-    for char in input_data:
-        data_path.memory.append(ord(char))  # Предполагаем, что входные данные загружаются в конец памяти
-
     # Запуск выполнения программы
-    try:
-        control_unit.run()
-    except Exception as e:
-        print("Simulation error:", e)
+    # try:
+    control_unit.run()
+    #except Exception as e:
+    #    print("Simulation error:", e)
 
     # Вывод результатов
     print("Output data:", ''.join(chr(x) for x in data_path.memory if x != 0))  # Простой вывод ненулевых значений памяти
+
 
 import sys
 
