@@ -37,7 +37,7 @@ def translate(text):
                     if commands[j] == '."':
                         end_of_string = j
                         break
-                args = [" ".join(commands[i + 1: end_of_string])]
+                args = [" ".join(commands[i + 1: end_of_string]).replace("\"", "")]
                 opcode = Opcode.PRINT_STRING
                 i = end_of_string  # Перемещаем индекс за последний обработанный элемент
             elif command == "cr":
@@ -91,7 +91,6 @@ def translate(text):
     return code
 
 
-
 def main(source, target):
     with open(source, "r", encoding="utf-8") as f:
         source_text = f.read()
@@ -104,6 +103,7 @@ def main(source, target):
         "Instructions:",
         len(machine_code),
     )
+
 
 
 if __name__ == "__main__":

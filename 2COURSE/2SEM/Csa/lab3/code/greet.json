@@ -7,7 +7,7 @@
     {
         "index": 1,
         "opcode": "PRINT_STRING",
-        "arg": "Hello, what is your name?\""
+        "arg": "Hello, what is your name?"
     },
     {
         "index": 2,
@@ -47,7 +47,7 @@
     {
         "index": 9,
         "opcode": "PRINT_STRING",
-        "arg": "Hello, \""
+        "arg": "Hello, "
     },
     {
         "index": 10,
@@ -57,7 +57,7 @@
     {
         "index": 11,
         "opcode": "PRINT_STRING",
-        "arg": "!\""
+        "arg": "!"
     },
     {
         "index": 12,
