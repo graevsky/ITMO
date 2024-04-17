@@ -6,13 +6,13 @@ import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
 public class DotsHit extends NotificationBroadcasterSupport implements DotsHitMBean {
-    private int totalPoints = 0;
+    private int totalDots = 0;
     private int totalHits = 0;
     private long counter = 0;
 
     @Override
-    public int getTotalPoints(){
-        return totalPoints;
+    public int getTotalDots(){
+        return totalDots;
     }
 
     @Override
@@ -22,18 +22,18 @@ public class DotsHit extends NotificationBroadcasterSupport implements DotsHitMB
 
     @Override
     public void resetCounters(){
-        totalPoints = 0;
+        totalDots = 0;
         totalHits = 0;
     }
 
 
 
     public void addPoint(boolean isHit) {
-        totalPoints++;
+        totalDots++;
         if (isHit) {
             totalHits++;
         }
-        if (totalPoints % 5 == 0) {
+        if (totalDots % 5 == 0) {
             Notification notification = new Notification(
                     "org.example.points.notification", this, counter++,
                     System.currentTimeMillis(), "Total points reached multiple of 5.");

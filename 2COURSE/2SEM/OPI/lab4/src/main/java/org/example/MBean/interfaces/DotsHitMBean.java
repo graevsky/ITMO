@@ -4,7 +4,7 @@ import javax.management.MXBean;
 
 @MXBean
 public interface DotsHitMBean {
-    int getTotalPoints();
+    int getTotalDots();
     int getTotalHits();
     void resetCounters();
 
