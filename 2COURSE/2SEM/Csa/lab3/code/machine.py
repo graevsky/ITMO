@@ -70,15 +70,11 @@ class DataPath:
         """ Сохраняет значение из аккумулятора в память """
         self.memory[address] = self.acc
 
-
-
     def signal_output(self):
         """ Выводит все данные из стека до его опустошения """
-        output_string = ''
         while self.stack:
             char = chr(self.pop_from_stack())
-            output_string = char + output_string  # Приписываем символы в начало строки
-        print(output_string, end='')
+            print(char, end='')
 
     def swap_stack(self):
         """ Меняет местами два верхних значения стека """
@@ -111,11 +107,7 @@ class ControlUnit:
         #print("Current instruction " + str(instruction))
 
         if opcode == Opcode.CR.value:
-            self.data_path.push_to_stack(ord('\n'))
-            self.data_path.signal_output()
-
-
-
+            print()
         elif opcode == Opcode.LOAD_ADDR.value:
             # Убедимся, что адрес корректно интерпретируется
             if isinstance(arg, str):
@@ -123,24 +115,17 @@ class ControlUnit:
             else:
                 address = int(str(arg), 16)  # Преобразуем arg в строку перед конвертацией
             self.data_path.load_to_acc(address)
-
-
         elif opcode == Opcode.ACCEPT.value:
-
             self.data_path.accept_input(int(arg))
-
         elif opcode == Opcode.SWAP.value:
             self.data_path.swap_stack()
 
         elif opcode == Opcode.TYPE.value:
+            #print("Typing")
             self.data_path.signal_output()
 
         elif opcode == Opcode.PRINT_STRING.value:
-
-            for char in arg:
-                self.data_path.push_to_stack(ord(char))
-            self.data_path.signal_output()
-
+            print(arg, end='')  # Прямой вывод строки
         elif opcode == Opcode.DUP.value:
             if self.data_path.sp > 0:
                 value = self.data_path.stack[-1]
