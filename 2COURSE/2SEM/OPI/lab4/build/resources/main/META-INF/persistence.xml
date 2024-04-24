@@ -10,8 +10,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
         <class>org.example.Result</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/lab3"/>
-            <property name="eclipselink.jdbc.user" value="postgres"/>
-            <property name="eclipselink.jdbc.password" value="1234"/>
+            <property name="eclipselink.jdbc.user" value="graevsky"/>
+            <!--<property name="eclipselink.jdbc.password" value="1234"/>-->
             <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="eclipselink.ddl-generation" value="none"/>
         </properties>
