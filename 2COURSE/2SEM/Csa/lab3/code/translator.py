@@ -3,7 +3,7 @@
 import sys
 from isa import Opcode, write_code
 
-PAD_ADDRESS = "0x0100"  # Пример адреса для PAD
+PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 
 
 def parse_line(line):
@@ -20,8 +20,10 @@ def translate(text):
     index = 0
 
     for line in lines:
-        line = line.split("\\")[0].strip()  # Отсекаем комментарии
-        if not line or line.startswith(":") or line.startswith(";"):  # Пропуск спец. строк
+        line = line.split("\\")[0].strip()  # Удаление комментов
+        if (
+            not line or line.startswith(":") or line.startswith(";")
+        ):  # Пропуск спец. строк форта
             continue
 
         commands = line.split()
@@ -37,13 +39,17 @@ def translate(text):
                     if commands[j] == '."':
                         end_of_string = j
                         break
-                args = [" ".join(commands[i + 1: end_of_string]).replace("\"", "")]
+                args = [" ".join(commands[i + 1 : end_of_string]).replace('"', "")]
                 opcode = Opcode.PRINT_STRING
-                i = end_of_string  # Перемещаем индекс за последний обработанный элемент
+                i = end_of_string  # Индекс за последний элемент
             elif command == "cr":
                 opcode = Opcode.CR
             elif command == "pad":
-                if i + 2 < len(commands) and commands[i + 1].isdigit() and commands[i + 2] == "accept":
+                if (
+                    i + 2 < len(commands)
+                    and commands[i + 1].isdigit()
+                    and commands[i + 2] == "accept"
+                ):
                     opcode = Opcode.ACCEPT
                     args = [int(commands[i + 1])]
                     code.append(
@@ -54,7 +60,7 @@ def translate(text):
                         }
                     )
                     index += 1
-                    i += 2  # Пропускаем число и 'accept'
+                    i += 2
                 elif i + 1 < len(commands) and commands[i + 1] == "swap":
                     opcode = Opcode.SWAP
                     code.append(
@@ -65,7 +71,7 @@ def translate(text):
                         }
                     )
                     index += 1
-                    i += 1  # Пропускаем 'swap'
+                    i += 1
             elif command == "type":
                 opcode = Opcode.TYPE
             elif command == "dup":
@@ -73,8 +79,13 @@ def translate(text):
             elif command == "LOAD_ADDR":
                 if i + 1 < len(commands):
                     opcode = Opcode.LOAD_ADDR
-                    args = [commands[i + 1]]
-                    i += 1  # Пропускаем следующий элемент
+                    address = (
+                        int(commands[i + 1], 16)
+                        if "x" in commands[i + 1]
+                        else int(commands[i + 1])
+                    )  # Сложно как то?
+                    args = [address]
+                    i += 1
 
             if opcode:
                 code.append(
@@ -103,7 +114,6 @@ def main(source, target):
         "Instructions:",
         len(machine_code),
     )
-
 
 
 if __name__ == "__main__":

@@ -1,83 +1,75 @@
-from isa import Opcode,read_code
-
-
-
+from isa import Opcode, read_code
 
 
 class DataPath:
-    def __init__(self, memory_size):
-        self.memory = [0] * memory_size
+    def __init__(self, memory):
+        self.memory = memory  # Общая память
         self.stack = []
         self.acc = 0  # Аккумулятор
-        self.sp = 0   # Указатель стека
-        self.input_buffer = ''  # Буфер для хранения входных данных
-        self.input_pointer = 0  # Указатель на текущую позицию чтения в буфере
+        self.sp = 0  # Указатель стека
+        self.input_buffer = ""  # Буфер для входных данных
+        self.input_pointer = 0
 
     def accept_input(self, size):
-        """ Эмулирует ввод данных из буфера """
-        if self.input_pointer < len(self.input_buffer):
-            input_data = self.input_buffer[self.input_pointer:self.input_pointer + size]
-            self.input_pointer += size
-        else:
-            input_data = ''
-
+        """Эмулирует ввод данных из буфера"""
+        end_pos = min(self.input_pointer + size, len(self.input_buffer))
+        input_data = self.input_buffer[self.input_pointer : end_pos]
+        self.input_pointer = end_pos
         for char in input_data:
-            self.push_to_stack(ord(char))  # Кладём каждый символ в стек как целое число
+            self.push_to_stack(ord(char))
 
     def set_input_buffer(self, data):
-        """ Загружает входные данные в буфер """
+        """Загружает входные данные в буфер"""
         self.input_buffer = data
         self.input_pointer = 0
 
-
     def push_to_stack(self, value):
-        """ Помещает значение в стек """
+        """Помещает значение в стек"""
         self.stack.append(value)
         self.sp += 1
 
     def pop_from_stack(self):
-        """ Возвращает значение из стека """
+        """Возвращает значение из стека"""
         if self.sp > 0:
             self.sp -= 1
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
     def perform_arithmetic(self, op_type):
-        """ Выполнение арифметических операций над двумя верхними значениями стека """
+        """Выполнение арифметических операций над двумя верхними значениями стека"""
         if self.sp < 2:
             raise Exception("Insufficient values in stack")
         b = self.pop_from_stack()
         a = self.pop_from_stack()
 
-        if op_type == 'ADD':
+        if op_type == "ADD":
             result = a + b
-        elif op_type == 'SUB':
+        elif op_type == "SUB":
             result = a - b
-        elif op_type == 'MUL':
+        elif op_type == "MUL":
             result = a * b
-        elif op_type == 'DIV':
+        elif op_type == "DIV":
             result = a // b  # Деление нацело для простоты
 
         self.push_to_stack(result)
         self.acc = result  # Обновление аккумулятора последним результатом
 
     def load_to_acc(self, address):
-        """ Загружает значение из памяти в аккумулятор """
-        #address = int(address, 16)  # Преобразование шестнадцатеричной строки в целое число
+        """Загружает значение из памяти в аккумулятор"""
         self.acc = self.memory[address]
 
     def store_from_acc(self, address):
-        """ Сохраняет значение из аккумулятора в память """
+        """Сохраняет значение из аккумулятора в память"""
         self.memory[address] = self.acc
 
     def signal_output(self):
-        """ Выводит все данные из стека до его опустошения """
+        """Выводит все данные из стека до его опустошения"""
         while self.stack:
             char = chr(self.pop_from_stack())
-            print(char, end='')
+            print(char, end="")
 
     def swap_stack(self):
-        """ Меняет местами два верхних значения стека """
+        """Меняет местами два верхних значения стека"""
         if len(self.stack) < 2:
             raise Exception("Not enough data in stack to perform swap")
         a = self.pop_from_stack()
@@ -87,95 +79,75 @@ class DataPath:
 
 
 class ControlUnit:
-    def __init__(self, program, data_path):
-        self.program = program  # Память программы, список инструкций
+    def __init__(self, memory):
+        self.memory = memory  # Общая память для данных и программы
         self.pc = 0  # Счётчик программ
-        self.data_path = data_path  # Ссылка на DataPath для доступа к данным и выполнения операций
-        self.halted = False  # Флаг остановки процессора
+        self.halted = False
+        self.data_path = DataPath(memory)  # Общая память
 
     def fetch_instruction(self):
-        """ Загружает инструкцию из памяти программ по адресу PC """
-        if self.pc < len(self.program):
-            return self.program[self.pc]
+        if self.pc < len(self.memory):
+            return self.memory[self.pc]
         else:
             raise IndexError("Program counter out of bounds")
 
     def execute_instruction(self, instruction):
-        opcode = instruction.get('opcode')
-        arg = instruction.get('arg')
-
-        #print("Current instruction " + str(instruction))
+        opcode = instruction.get("opcode")
+        arg = instruction.get("arg")
 
         if opcode == Opcode.CR.value:
             print()
         elif opcode == Opcode.LOAD_ADDR.value:
-            # Убедимся, что адрес корректно интерпретируется
-            if isinstance(arg, str):
-                address = int(arg, 16)
-            else:
-                address = int(str(arg), 16)  # Преобразуем arg в строку перед конвертацией
+            address = int(arg, 16) if isinstance(arg, str) else int(arg)
             self.data_path.load_to_acc(address)
         elif opcode == Opcode.ACCEPT.value:
             self.data_path.accept_input(int(arg))
         elif opcode == Opcode.SWAP.value:
             self.data_path.swap_stack()
-
         elif opcode == Opcode.TYPE.value:
-            #print("Typing")
             self.data_path.signal_output()
-
         elif opcode == Opcode.PRINT_STRING.value:
-            print(arg, end='')  # Прямой вывод строки
+            print(arg, end="")
         elif opcode == Opcode.DUP.value:
             if self.data_path.sp > 0:
                 value = self.data_path.stack[-1]
                 self.data_path.push_to_stack(value)
-
         elif opcode == Opcode.HALT.value:
             self.halted = True
-
         else:
             raise ValueError(f"Unknown opcode: {opcode}")
 
         self.pc += 1
 
     def run(self):
-        """ Запускает выполнение программы до остановки """
         while not self.halted:
             instr = self.fetch_instruction()
             self.execute_instruction(instr)
+
+
 def simulation(program, input_data):
-    data_path = DataPath(1024)
-    data_path.set_input_buffer(input_data)
-    control_unit = ControlUnit(program, data_path)
+    memory = [0] * 1024  # Создание общей памяти
+    for i, instruction in enumerate(program):
+        memory[i] = instruction  # Убедимся, что instruction - это словарь, а не `int`
 
-    # Запуск выполнения программы
-    # try:
-    control_unit.run()
-    #except Exception as e:
-    #    print("Simulation error:", e)
+    control_unit = ControlUnit(memory)
+    control_unit.data_path.set_input_buffer(input_data)
+    try:
+        control_unit.run()
+    except Exception as e:
+        print("Simulation error:", e)
 
-    # Вывод результатов
-    print("Output data:", ''.join(chr(x) for x in data_path.memory if x != 0))  # Простой вывод ненулевых значений памяти
-
-
-import sys
 
 def main(code_file, input_file):
-    # Читаем машинный код
     program = read_code(code_file)
-
-    # Читаем входные данные
-    with open(input_file, 'r', encoding='utf-8') as file:
+    with open(input_file, "r", encoding="utf-8") as file:
         input_data = file.read()
-
-    # Запускаем симуляцию
     simulation(program, input_data)
 
-if __name__ == "__main__":
-    #if len(sys.argv) != 3:
-    #    print("Usage: python machine.py <machine_code_file> <input_file>")
-    #else:
-        main("greet.json","input.txt")
-        #main(sys.argv[1], sys.argv[2])
 
+if __name__ == "__main__":
+    # if len(sys.argv) != 3:
+    #    print("Usage: python machine.py <machine_code_file> <input_file>")
+    # else:
+    main("cat.json", "input.txt")
+    # main(sys.argv[1], sys.argv[2])
