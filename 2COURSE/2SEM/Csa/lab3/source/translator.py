@@ -179,11 +179,11 @@ if __name__ == "__main__":
     # assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
     # _, source_file, target_file = sys.argv
     # main(source_file, target_file)
-    # main("../progs/basic_cycle/cycle.forth", "machine_code/cycle.json")
-    # main("../progs/cat/cat.forth", "machine_code/cat.json")
-    # main("../progs/greet/greet.forth", "machine_code/greet.json")
-    # main("../progs/basic_if/if.forth", "machine_code/if.json")
-    # main("../progs/basic_mod/mod.forth", "machine_code/mod.json")
-    # main("../progs/basic_mod/mod2.forth", "machine_code/mod2.json")
+    main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
+    main("../progs/cat/cat.forth", "machine_code/cat.json")
+    main("../progs/greet/greet.forth", "machine_code/greet.json")
+    main("../progs/basic_progs/if.forth", "machine_code/if.json")
+    main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
+    main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
     main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
 

@@ -4,7 +4,7 @@
         "opcode": "LOOP_START",
         "arg": [
             1,
-            100,
+            99,
             1
         ]
     },
