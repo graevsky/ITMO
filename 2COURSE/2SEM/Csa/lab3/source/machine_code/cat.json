@@ -5,8 +5,13 @@
         "arg": null
     },
     {
-        "index": 2,
+        "index": 1,
         "opcode": "LOAD_ADDR",
+        "arg": "0x0100"
+    },
+    {
+        "index": 2,
+        "opcode": "ACCEPT",
         "arg": 256
     },
     {

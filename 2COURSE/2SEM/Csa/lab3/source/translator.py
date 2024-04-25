@@ -70,6 +70,24 @@ def translate(text):
                     {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
                 )
                 index += 1
+            elif command == "<":
+                args.append(int(commands[0]))
+                opcode = Opcode.LESS_THAN
+                i += 2
+            elif command == ">":
+                args.append(int(commands[0]))
+                opcode = Opcode.GREATER_THAN
+                i += 2
+            elif command == "==":
+                args.append(int(commands[0]))
+                opcode = Opcode.EQUALS
+                i += 2
+            elif command == "if":
+                opcode = Opcode.IF
+                i += 1
+            elif command == "then":
+                opcode = Opcode.THEN
+                i += 1
             elif command == '."':
                 end_of_string = len(commands)
                 for j in range(i + 1, len(commands)):
@@ -148,6 +166,7 @@ if __name__ == "__main__":
     # assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
     # _, source_file, target_file = sys.argv
     # main(source_file, target_file)
-    main("../progs/basic_cycle/cycle.forth", "machine_code/cycle.json")
-    main("../progs/cat/cat.forth", "machine_code/cat.json")
-    main("../progs/greet/greet.forth", "machine_code/greet.json")
+    # main("../progs/basic_cycle/cycle.forth", "machine_code/cycle.json")
+    # main("../progs/cat/cat.forth", "machine_code/cat.json")
+    # main("../progs/greet/greet.forth", "machine_code/greet.json")
+    main("../progs/basic_if/if.forth", "machine_code/if.json")

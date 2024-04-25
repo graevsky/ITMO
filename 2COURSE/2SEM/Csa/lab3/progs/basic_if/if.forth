@@ -1,7 +1,7 @@
 : less5
   100 1 do
     i
-    5 <
+    20 <
     if
         ." less than 5"
         cr

@@ -86,6 +86,17 @@ class DataPath:
         else:
             raise Exception("Attempt to print from an empty stack")
 
+    def compare_and_push(self, value, comparison_type):
+        if not self.stack:
+            raise Exception("Stack underflow")
+        top = self.pop_from_stack()
+        if comparison_type == "LESS_THAN":
+            self.push_to_stack(1 if top < value else 0)
+        elif comparison_type == "GREATER_THAN":
+            self.push_to_stack(1 if top > value else 0)
+        elif comparison_type == "EQUALS":
+            self.push_to_stack(1 if top == value else 0)
+
 
 class ControlUnit:
     def __init__(self, memory):
@@ -104,7 +115,24 @@ class ControlUnit:
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
 
-        if opcode == Opcode.LOOP_START.value:
+        if opcode == Opcode.LESS_THAN.value:
+            self.data_path.compare_and_push(arg, "LESS_THAN")
+        elif opcode == Opcode.GREATER_THAN.value:
+            self.data_path.compare_and_push(arg, "GREATER_THAN")
+        elif opcode == Opcode.EQUALS.value:
+            self.data_path.compare_and_push(arg, "EQUALS")
+        elif opcode == Opcode.IF.value:
+            # Проверка условия и пропуск инструкций до THEN, если условие ложно
+            if not self.data_path.pop_from_stack():
+                # Пропустить все до THEN
+                self.pc += 1  # Следующая инструкция до окончания if
+                while self.memory[self.pc].get("opcode") != Opcode.THEN.value:
+                    self.pc += 1
+                return  # Завершение текущей инструкции после перехода
+        elif opcode == Opcode.THEN.value:
+            # Заглушка
+            pass
+        elif opcode == Opcode.LOOP_START.value:
             initial, max_value, step = arg
             self.data_path.start_loop(initial, max_value, step)
         elif opcode == Opcode.LOOP_END.value:
@@ -175,5 +203,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/cat.json.json", "machine_code/input.txt")
+    main("machine_code/if.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])
