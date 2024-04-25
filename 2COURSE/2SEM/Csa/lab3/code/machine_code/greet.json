@@ -7,7 +7,7 @@
     {
         "index": 1,
         "opcode": "PRINT_STRING",
-        "arg": "Hi!\""
+        "arg": "Hello, what is your name?"
     },
     {
         "index": 2,
@@ -16,32 +16,42 @@
     },
     {
         "index": 3,
-        "opcode": "PRINT_STRING",
-        "arg": "My name is\""
+        "opcode": "LOAD_ADDR",
+        "arg": "0x0100"
     },
     {
         "index": 4,
-        "opcode": "CR",
-        "arg": null
+        "opcode": "ACCEPT",
+        "arg": 256
     },
     {
         "index": 5,
-        "opcode": "PRINT_STRING",
-        "arg": "My name is\""
-    },
-    {
-        "index": 6,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 7,
+        "index": 6,
         "opcode": "PRINT_STRING",
-        "arg": "Slim Shady\""
+        "arg": "Hello, "
+    },
+    {
+        "index": 7,
+        "opcode": "TYPE",
+        "arg": null
     },
     {
         "index": 8,
+        "opcode": "PRINT_STRING",
+        "arg": "!"
+    },
+    {
+        "index": 9,
         "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 10,
+        "opcode": "HALT",
         "arg": null
     }
 ]

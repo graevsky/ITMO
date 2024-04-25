@@ -13,6 +13,10 @@ class Opcode(str, Enum):
     TYPE = "TYPE"
     DUP = "DUP"
     PRINT_STRING = "PRINT_STRING"
+    LOOP_START = "LOOP_START"  # Устанавливает начальное значение и максимум для цикла
+    LOOP_END = "LOOP_END"  # Окончание цикла, проверка и возможный переход
+    PUSH = "PUSH"  # Помещение значения в стек
+    PRINT_TOP = "PRINT_TOP"  # Вывод верхнего элемент
     HALT = "HALT"
 
     def __str__(self):

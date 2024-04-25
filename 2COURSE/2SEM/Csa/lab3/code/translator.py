@@ -14,16 +14,14 @@ def parse_line(line):
 
 
 def translate(text):
-    """Трансляция текста программы в машинный код."""
     code = []
     lines = text.strip().split("\n")
     index = 0
+    loop_stack = []
 
-    for line in lines:
+    for line_number, line in enumerate(lines):
         line = line.split("\\")[0].strip()  # Удаление комментов
-        if (
-            not line or line.startswith(":") or line.startswith(";")
-        ):  # Пропуск спец. строк форта
+        if not line or line.startswith(":") or line.startswith(";"):
             continue
 
         commands = line.split()
@@ -33,7 +31,34 @@ def translate(text):
             opcode = None
             args = []
 
-            if command == '."':  # Начало строки вывода
+            if command == "do":
+
+
+                initial_value = int(commands[1])  # Начальное значение
+                max_value = int(commands[0])  # Максимальное значение
+                step = 1  # Шаг цикла всегда равен 1
+
+                start_index = len(code)
+                loop_stack.append(start_index)
+                code.append({"index": index, "opcode": Opcode.LOOP_START.value, "arg": [initial_value, max_value, step]})
+                index += 1
+                i += 2  # Перемещаем индекс за прочитанные параметры
+
+            elif command == "loop":
+                if not loop_stack:
+                    raise ValueError("Mismatched 'loop' without 'do'")
+                start_index = loop_stack.pop()
+                code.append({"index": index, "opcode": Opcode.LOOP_END.value, "arg": start_index})
+                index += 1
+            elif command == "i":
+                args.append("i")
+                opcode = Opcode.PUSH
+                #code.append({"index": index, "opcode": Opcode.PUSH.value, "arg": "i"})
+                index += 1
+            elif command == ".":
+                code.append({"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None})
+                index += 1
+            elif command == '."':  # Начало строки вывода
                 end_of_string = len(commands)
                 for j in range(i + 1, len(commands)):
                     if commands[j] == '."':
@@ -61,17 +86,6 @@ def translate(text):
                     )
                     index += 1
                     i += 2
-                elif i + 1 < len(commands) and commands[i + 1] == "swap":
-                    opcode = Opcode.SWAP
-                    code.append(
-                        {
-                            "index": index,
-                            "opcode": Opcode.LOAD_ADDR.value,
-                            "arg": PAD_ADDRESS,
-                        }
-                    )
-                    index += 1
-                    i += 1
             elif command == "type":
                 opcode = Opcode.TYPE
             elif command == "dup":

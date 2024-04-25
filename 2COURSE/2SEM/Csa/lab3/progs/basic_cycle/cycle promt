@@ -1,0 +1,464 @@
+Смотри. Я делаю модель стекового процессора с фон неймановской архитектурой памяти на питоне. Я так же реализовал транслятор, который перегоняет форт подобный язык в машкод, который уже и обратабывает модель процессора.
+Вот ИСА файл
+import json
+from collections import namedtuple
+from enum import Enum
+
+
+class Opcode(str, Enum):
+    """Операции"""
+
+    CR = "CR"
+    LOAD_ADDR = "LOAD_ADDR"
+    ACCEPT = "ACCEPT"
+    SWAP = "SWAP"
+    TYPE = "TYPE"
+    DUP = "DUP"
+    PRINT_STRING = "PRINT_STRING"
+    HALT = "HALT"
+
+    def __str__(self):
+        return str(self.value)
+
+
+"""Связб с исходным кодом"""
+
+
+class Term(namedtuple("Term", "line pos symbol")):
+    pass
+
+
+# машкод в файл
+def write_code(filename, code):
+    with open(filename, "w", encoding="utf-8") as file:
+        json.dump(code, file, indent=4)
+
+
+# чтение машкода из файла
+def read_code(filename):
+    with open(filename, "r", encoding="utf-8") as file:
+        code = json.load(file)
+    for instruction in code:
+        instruction["opcode"] = Opcode(instruction["opcode"])
+    return code
+
+
+А вот модель процессора.
+from isa import Opcode, read_code
+
+
+class DataPath:
+    def __init__(self, memory):
+        self.memory = memory  # Общая память
+        self.stack = []
+        self.acc = 0  # Аккумулятор
+        self.sp = 0  # Указатель стека
+        self.input_buffer = ""  # Буфер для входных данных
+        self.input_pointer = 0
+
+    def mod(self):
+        if self.sp < 2:
+            raise Exception("Insufficient values in stack")
+        divisor = self.pop_from_stack()
+        dividend = self.pop_from_stack()
+        if divisor == 0:
+            raise ZeroDivisionError("Modulo by zero")
+        self.push_to_stack(dividend % divisor)
+
+    def eq(self, value):
+        if self.sp == 0:
+            raise Exception("Stack is empty")
+        self.acc = 1 if self.pop_from_stack() == value else 0
+        self.push_to_stack(self.acc)
+
+    def or_(self):
+        if self.sp < 2:
+            raise Exception("Insufficient values in stack")
+        a = self.pop_from_stack()
+        b = self.pop_from_stack()
+        self.push_to_stack(1 if a or b else 0)
+
+    def accept_input(self, size):
+        """Эмулирует ввод данных из буфера"""
+        end_pos = min(self.input_pointer + size, len(self.input_buffer))
+        input_data = self.input_buffer[self.input_pointer:end_pos]
+        self.input_pointer = end_pos
+        for char in input_data:
+            self.push_to_stack(ord(char))
+
+    def set_input_buffer(self, data):
+        """Загружает входные данные в буфер"""
+        self.input_buffer = data
+        self.input_pointer = 0
+
+    def push_to_stack(self, value):
+        """Помещает значение в стек"""
+        self.stack.append(value)
+        self.sp += 1
+
+    def pop_from_stack(self):
+        """Возвращает значение из стека"""
+        if self.sp > 0:
+            self.sp -= 1
+            return self.stack.pop()
+        raise IndexError("Stack underflow")
+
+    def perform_arithmetic(self, op_type):
+        """Выполнение арифметических операций над двумя верхними значениями стека"""
+        if self.sp < 2:
+            raise Exception("Insufficient values in stack")
+        b = self.pop_from_stack()
+        a = self.pop_from_stack()
+
+        if op_type == "ADD":
+            result = a + b
+        elif op_type == "SUB":
+            result = a - b
+        elif op_type == "MUL":
+            result = a * b
+        elif op_type == "DIV":
+            result = a // b  # Деление нацело для простоты
+
+        self.push_to_stack(result)
+        self.acc = result  # Обновление аккумулятора последним результатом
+
+    def load_to_acc(self, address):
+        """Загружает значение из памяти в аккумулятор"""
+        self.acc = self.memory[address]
+
+    def store_from_acc(self, address):
+        """Сохраняет значение из аккумулятора в память"""
+        self.memory[address] = self.acc
+
+    def signal_output(self):
+        """Выводит все данные из стека до его опустошения"""
+        output = ''.join(chr(self.stack.pop()) for _ in range(len(self.stack)))
+        print(output[::-1], end='')  # Вывод в правильном порядке
+
+    def swap_stack(self):
+        """Меняет местами два верхних значения стека"""
+        if len(self.stack) >= 2:
+            self.stack[-1], self.stack[-2] = self.stack[-2], self.stack[-1]
+        else:
+            raise Exception("Not enough data in stack to perform swap")
+
+
+class ControlUnit:
+    def __init__(self, memory):
+        self.memory = memory  # Общая память для данных и программы
+        self.pc = 0  # Счётчик программ
+        self.halted = False
+        self.data_path = DataPath(memory)  # Общая память
+
+    def fetch_instruction(self):
+        if self.pc < len(self.memory):
+            return self.memory[self.pc]
+        else:
+            raise IndexError("Program counter out of bounds")
+
+    def execute_instruction(self, instruction):
+        opcode = instruction.get("opcode")
+        arg = instruction.get("arg")
+
+        if opcode == Opcode.CR.value:
+            print()
+        elif opcode == Opcode.LOAD_ADDR.value:
+            address = int(arg, 16) if isinstance(arg, str) else int(arg)
+            self.data_path.load_to_acc(address)
+        elif opcode == Opcode.ACCEPT.value:
+            self.data_path.accept_input(int(arg))
+        elif opcode == Opcode.SWAP.value:
+            self.data_path.swap_stack()
+        elif opcode == Opcode.TYPE.value:
+            self.data_path.signal_output()
+        elif opcode == Opcode.PRINT_STRING.value:
+            print(arg, end="")
+        elif opcode == Opcode.DUP.value:
+            if self.data_path.sp > 0:
+                value = self.data_path.stack[-1]
+                self.data_path.push_to_stack(value)
+        elif opcode == Opcode.HALT.value:
+            self.halted = True
+        else:
+            raise ValueError(f"Unknown opcode: {opcode}")
+
+        self.pc += 1
+
+    def run(self):
+        while not self.halted:
+            instr = self.fetch_instruction()
+            self.execute_instruction(instr)
+
+
+def simulation(program, input_data):
+    memory = [0] * 1024  # Создание общей памяти
+    for i, instruction in enumerate(program):
+        memory[i] = instruction  # Убедимся, что instruction - это словарь, а не `int`
+
+    control_unit = ControlUnit(memory)
+    control_unit.data_path.set_input_buffer(input_data)
+    try:
+        control_unit.run()
+    except Exception as e:
+        print("Simulation error:", e)
+
+
+def main(code_file, input_file):
+    program = read_code(code_file)
+    with open(input_file, "r", encoding="utf-8") as file:
+        input_data = file.read()
+    simulation(program, input_data)
+
+
+if __name__ == "__main__":
+    # if len(sys.argv) != 3:
+    #    print("Usage: python machine.py <machine_code_file> <input_file>")
+    # else:
+    main("prob1.json", "input.txt")
+    # main(sys.argv[1], sys.argv[2])
+
+А вот транслятор
+#!/usr/bin/python3
+
+import sys
+from isa import Opcode, write_code
+
+PAD_ADDRESS = "0x0100"  # адрес для буфера IO
+
+
+def parse_line(line):
+    parts = line.strip().split()
+    command = parts[0]
+    args = parts[1:] if len(parts) > 1 else []
+    return command, args
+
+
+def translate(text):
+    """Трансляция текста программы в машинный код."""
+    code = []
+    lines = text.strip().split("\n")
+    index = 0
+
+    for line in lines:
+        line = line.split("\\")[0].strip()  # Удаление комментов
+        if (
+            not line or line.startswith(":") or line.startswith(";")
+        ):  # Пропуск спец. строк форта
+            continue
+
+        commands = line.split()
+        i = 0
+        while i < len(commands):
+            command = commands[i]
+            opcode = None
+            args = []
+
+            if command == '."':  # Начало строки вывода
+                end_of_string = len(commands)
+                for j in range(i + 1, len(commands)):
+                    if commands[j] == '."':
+                        end_of_string = j
+                        break
+                args = [" ".join(commands[i + 1 : end_of_string]).replace('"', "")]
+                opcode = Opcode.PRINT_STRING
+                i = end_of_string  # Индекс за последний элемент
+            elif command == "cr":
+                opcode = Opcode.CR
+            elif command == "pad":
+                if (
+                    i + 2 < len(commands)
+                    and commands[i + 1].isdigit()
+                    and commands[i + 2] == "accept"
+                ):
+                    opcode = Opcode.ACCEPT
+                    args = [int(commands[i + 1])]
+                    code.append(
+                        {
+                            "index": index,
+                            "opcode": Opcode.LOAD_ADDR.value,
+                            "arg": PAD_ADDRESS,
+                        }
+                    )
+                    index += 1
+                    i += 2
+            elif command == "type":
+                opcode = Opcode.TYPE
+            elif command == "dup":
+                opcode = Opcode.DUP
+            elif command == "LOAD_ADDR":
+                if i + 1 < len(commands):
+                    opcode = Opcode.LOAD_ADDR
+                    address = (
+                        int(commands[i + 1], 16)
+                        if "x" in commands[i + 1]
+                        else int(commands[i + 1])
+                    )  # Сложно как то?
+                    args = [address]
+                    i += 1
+
+            if opcode:
+                code.append(
+                    {
+                        "index": index,
+                        "opcode": opcode.value,
+                        "arg": args[0] if args else None,
+                    }
+                )
+                index += 1
+            i += 1
+
+    code.append({"index": index, "opcode": Opcode.HALT.value, "arg": None})
+    return code
+
+
+def main(source, target):
+    with open(source, "r", encoding="utf-8") as f:
+        source_text = f.read()
+
+    machine_code = translate(source_text)
+    write_code(target, machine_code)
+    print(
+        "Source lines:",
+        len(source_text.split("\n")),
+        "Instructions:",
+        len(machine_code),
+    )
+
+
+if __name__ == "__main__":
+    assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
+    _, source_file, target_file = sys.argv
+    main(source_file, target_file)
+
+
+
+У меня уже сделано 2 программы:
+1. cat - читает пользовательский ввод (в данном случае файл) и выводит его
+Вот она
+: cat                     \\ Программа cat
+   cr                     \\ Новая строка
+   pad 256 accept         \\ Считывание в буфер pad (256 symbols)
+   pad swap type          \\ Вывод строки, нужен ли свап или просто тайп
+   cr                     \\ Новая строка
+;
+
+cat
+А вот машинный код который генерируется транслятором
+[
+    {
+        "index": 0,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 1,
+        "opcode": "LOAD_ADDR",
+        "arg": "0x0100"
+    },
+    {
+        "index": 2,
+        "opcode": "ACCEPT",
+        "arg": 256
+    },
+    {
+        "index": 3,
+        "opcode": "TYPE",
+        "arg": null
+    },
+    {
+        "index": 4,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 5,
+        "opcode": "HALT",
+        "arg": null
+    }
+]
+2. Вторая программа - greet - она приветсвует пользователя, читает имени и здоровается по имени
+Вот ее код
+: greet                           \\ Программа приветсвия
+  cr
+  ." Hello, what is your name?"
+  cr
+  pad 256 accept
+  pad swap
+  cr
+  ." Hello, "
+  type
+  ." !"
+  cr
+;
+
+greet
+А вот сгенерированный машкод
+[
+    {
+        "index": 0,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 1,
+        "opcode": "PRINT_STRING",
+        "arg": "Hello, what is your name?"
+    },
+    {
+        "index": 2,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 3,
+        "opcode": "LOAD_ADDR",
+        "arg": "0x0100"
+    },
+    {
+        "index": 4,
+        "opcode": "ACCEPT",
+        "arg": 256
+    },
+    {
+        "index": 5,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 6,
+        "opcode": "PRINT_STRING",
+        "arg": "Hello, "
+    },
+    {
+        "index": 7,
+        "opcode": "TYPE",
+        "arg": null
+    },
+    {
+        "index": 8,
+        "opcode": "PRINT_STRING",
+        "arg": "!"
+    },
+    {
+        "index": 9,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 10,
+        "opcode": "HALT",
+        "arg": null
+    }
+]
+
+Сейчас я хочу реализовать работу с циклами. Я уже написал простую программку для отработки работы с циклами. Вот она cycle.forth:
+: cycle // обозначение функции-переменной
+    10 1 do // цикл от 1 до 10 с шагом 1 (стандартный цикл форта, в форте есть особенность, что I - зарезервированное обозначение итерируемого элемента в цикле)
+        i . // добавление итерируемого элемента в стек и по сути тут же его вывод
+        cr // пренос строки
+    loop ; // окончание текущей итерации цикла. После этого происходит возрват к do, в нем происходит проверка i < 10 и если она истинна, то происходит переход к новой итерации
+
+cycle // вызов функции
+
+
+От тебя я хочу следующее: я хочу чтобы ты придумал, какой код нужно добавить в isa, translator, machine, чтобы код корректно переводился в машинный и потом корректно обрабатывался машиной. По сути нужно реализовать работу с циклом, операции с i (добавление в стек и другие по необходимости), вывод самого верхнего элемента из стека (имей ввиду, что в трансляторе есть похожая команда ." но на самом деле она имеет соверешнно другой смысл - вывод строки, заданной в программе, а не из вершины стека). Из ограничений - помни, что процессор стековый а архитектура фон неймановская. Выбор переменных, опкодов, инструкций и так далее оставляю тебе. Главно пришли понятный и корректный код полностью.
