@@ -71,9 +71,15 @@ def translate(text):
                 )
                 index += 1
             elif command == "mod":
-                args.append(int(commands[1]))
+                args.append(int(commands[0]))
                 opcode = Opcode.MOD
                 i += 2
+            elif command == "and":
+                opcode = Opcode.AND
+                i += 1
+            elif command == "or":
+                opcode = Opcode.OR
+                i += 1
             elif command == "<":
                 args.append(int(commands[0]))
                 opcode = Opcode.LESS_THAN
@@ -174,4 +180,5 @@ if __name__ == "__main__":
     # main("../progs/cat/cat.forth", "machine_code/cat.json")
     # main("../progs/greet/greet.forth", "machine_code/greet.json")
     # main("../progs/basic_if/if.forth", "machine_code/if.json")
-    main("../progs/basic_mod/mod.forth", "machine_code/mod.json")
+    # main("../progs/basic_mod/mod.forth", "machine_code/mod.json")
+    main("../progs/basic_mod/mod2.forth", "machine_code/mod2.json")

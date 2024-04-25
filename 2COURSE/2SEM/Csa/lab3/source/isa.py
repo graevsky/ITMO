@@ -23,6 +23,8 @@ class Opcode(str, Enum):
     IF = "IF"  # Условие
     THEN = "THEN"  # Окончание условия
     MOD = "MOD"  # Деление по модулю
+    AND = "AND"  # И
+    OR = "OR"  # Или
     HALT = "HALT"  # Остановка
 
     def __str__(self):

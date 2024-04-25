@@ -105,6 +105,20 @@ class DataPath:
             raise Exception("Division by zero")
         self.push_to_stack(dividend % divisor)
 
+    def logical_and(self):
+        if self.sp < 2:
+            raise Exception("Stack underflow")
+        a = self.pop_from_stack()
+        b = self.pop_from_stack()
+        self.push_to_stack(1 if a and b else 0)
+
+    def logical_or(self):
+        if self.sp < 2:
+            raise Exception("Stack underflow")
+        a = self.pop_from_stack()
+        b = self.pop_from_stack()
+        self.push_to_stack(1 if a or b else 0)
+
 
 class ControlUnit:
     def __init__(self, memory):
@@ -131,6 +145,10 @@ class ControlUnit:
             self.data_path.compare_and_push(arg, "EQUALS")
         elif opcode == Opcode.MOD.value:
             self.data_path.mod(arg)
+        elif opcode == Opcode.AND.value:
+            self.data_path.logical_and()
+        elif opcode == Opcode.OR.value:
+            self.data_path.logical_or()
         elif opcode == Opcode.IF.value:
             # Проверка условия и пропуск инструкций до THEN, если условие ложно
             if not self.data_path.pop_from_stack():
@@ -213,5 +231,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/mod.json", "machine_code/input.txt")
+    main("machine_code/mod2.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])
