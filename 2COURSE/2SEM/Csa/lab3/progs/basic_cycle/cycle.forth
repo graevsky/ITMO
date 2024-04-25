@@ -3,5 +3,3 @@
         i .
         cr
     loop ;
-
-cycle

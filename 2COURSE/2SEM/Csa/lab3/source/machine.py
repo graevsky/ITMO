@@ -18,7 +18,7 @@ class DataPath:
     def accept_input(self, size):
         """Эмулирует ввод данных из буфера"""
         end_pos = min(self.input_pointer + size, len(self.input_buffer))
-        input_data = self.input_buffer[self.input_pointer:end_pos]
+        input_data = self.input_buffer[self.input_pointer: end_pos]
         self.input_pointer = end_pos
         for char in input_data:
             self.push_to_stack(ord(char))
@@ -40,25 +40,6 @@ class DataPath:
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
-    def perform_arithmetic(self, op_type):
-        """Выполнение арифметических операций над двумя верхними значениями стека"""
-        if self.sp < 2:
-            raise Exception("Insufficient values in stack")
-        b = self.pop_from_stack()
-        a = self.pop_from_stack()
-
-        if op_type == "ADD":
-            result = a + b
-        elif op_type == "SUB":
-            result = a - b
-        elif op_type == "MUL":
-            result = a * b
-        elif op_type == "DIV":
-            result = a // b  # Деление нацело для простоты
-
-        self.push_to_stack(result)
-        self.acc = result  # Обновление аккумулятора последним результатом
-
     def load_to_acc(self, address):
         """Загружает значение из памяти в аккумулятор"""
         self.acc = self.memory[address]
@@ -69,8 +50,8 @@ class DataPath:
 
     def signal_output(self):
         """Выводит все данные из стека до его опустошения"""
-        output = ''.join(chr(self.stack.pop()) for _ in range(len(self.stack)))
-        print(output[::-1], end='')  # Вывод в правильном порядке
+        output = "".join(chr(self.stack.pop()) for _ in range(len(self.stack)))
+        print(output[::-1], end="")  # Вывод в правильном порядке
 
     def swap_stack(self):
         """Меняет местами два верхних значения стека"""
@@ -80,19 +61,19 @@ class DataPath:
             raise Exception("Not enough data in stack to perform swap")
 
     def start_loop(self, initial, max_value, step):
-        if self.loop_step is None:  # Установка только при первом вызове
+        if self.loop_step is None:
             self.loop_counter = initial
             self.loop_max = max_value
             self.loop_step = step
-            self.loop_index = self.sp  # Сохраняем индекс начала цикла в стеке
+            self.loop_index = self.sp
 
     def end_loop(self, start_index):
         self.loop_counter += self.loop_step
         if self.loop_counter <= self.loop_max:
-            return start_index  # Возвращаемся к началу цикла
+            return start_index
         else:
             self.loop_counter = self.loop_index
-            return None  # Завершаем цикл
+            return None
 
     # Добавление и получение значения i
     def push_i(self):
@@ -101,6 +82,7 @@ class DataPath:
     def print_top(self):
         if self.stack:
             print(self.stack[-1])
+            self.stack.pop()
         else:
             raise Exception("Attempt to print from an empty stack")
 
@@ -123,19 +105,20 @@ class ControlUnit:
         arg = instruction.get("arg")
 
         if opcode == Opcode.LOOP_START.value:
-            # Парсинг аргументов цикла
             initial, max_value, step = arg
             self.data_path.start_loop(initial, max_value, step)
         elif opcode == Opcode.LOOP_END.value:
-            # Определяем, нужно ли продолжить цикл
             new_index = self.data_path.end_loop(arg)
             if new_index is not None:
-                self.pc = new_index # Установите pc на начальный индекс цикла
+                self.pc = new_index
             else:
                 self.pc += 1
             return
-        elif opcode == Opcode.PUSH.value and arg == "i":
-            self.data_path.push_i()
+        elif opcode == Opcode.PUSH.value:
+            if arg == "i":
+                self.data_path.push_i()
+            else:
+                self.data_path.push_to_stack(arg)
         elif opcode == Opcode.PRINT_TOP.value:
             self.data_path.print_top()
         elif opcode == Opcode.CR.value:
@@ -171,14 +154,14 @@ class ControlUnit:
 def simulation(program, input_data):
     memory = [0] * 1024  # Создание общей памяти
     for i, instruction in enumerate(program):
-        memory[i] = instruction  # Убедимся, что instruction - это словарь, а не `int`
+        memory[i] = instruction  # Запись инструкций
 
     control_unit = ControlUnit(memory)
     control_unit.data_path.set_input_buffer(input_data)
-    #try:
+    # try:
     control_unit.run()
-    #except Exception as e:
-    #    print("Simulation error:", e)
+    # except Exception as e:
+    #     print("Simulation error:", e)
 
 
 def main(code_file, input_file):
@@ -192,5 +175,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/cycle.json", "machine_code/input.txt")
+    main("machine_code/cat.json.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])

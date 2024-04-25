@@ -1,6 +1,3 @@
-#!/usr/bin/python3
-
-import sys
 from isa import Opcode, write_code
 
 PAD_ADDRESS = "0x0100"  # адрес для буфера IO
@@ -20,8 +17,10 @@ def translate(text):
     loop_stack = []
 
     for line_number, line in enumerate(lines):
-        line = line.split("\\")[0].strip()  # Удаление комментов
-        if not line or line.startswith(":") or line.startswith(";"):
+        line = line.split("\\")[0].strip()
+        if (
+                not line or line.startswith(":") or line.startswith(";")
+        ):  # убрать в будущем, чтобы поддерживались переменные-функции
             continue
 
         commands = line.split()
@@ -30,53 +29,67 @@ def translate(text):
             command = commands[i]
             opcode = None
             args = []
-
-            if command == "do":
-
-
+            if command.isdigit():
+                if len(commands) == 1:  # Проверка, что в строке только это число
+                    args.append(int(command))
+                    opcode = Opcode.PUSH
+                    i += 1
+                else:
+                    i += 1
+                    continue
+            elif command == "do":
                 initial_value = int(commands[1])  # Начальное значение
                 max_value = int(commands[0])  # Максимальное значение
                 step = 1  # Шаг цикла всегда равен 1
 
                 start_index = len(code)
                 loop_stack.append(start_index)
-                code.append({"index": index, "opcode": Opcode.LOOP_START.value, "arg": [initial_value, max_value, step]})
+                code.append(
+                    {
+                        "index": index,
+                        "opcode": Opcode.LOOP_START.value,
+                        "arg": [initial_value, max_value, step],
+                    }
+                )  # убрать
                 index += 1
-                i += 2  # Перемещаем индекс за прочитанные параметры
-
+                i += 2
             elif command == "loop":
                 if not loop_stack:
                     raise ValueError("Mismatched 'loop' without 'do'")
+
                 start_index = loop_stack.pop()
-                code.append({"index": index, "opcode": Opcode.LOOP_END.value, "arg": start_index})
+                args.append(start_index)
+                opcode = Opcode.LOOP_END
                 index += 1
             elif command == "i":
                 args.append("i")
                 opcode = Opcode.PUSH
-                #code.append({"index": index, "opcode": Opcode.PUSH.value, "arg": "i"})
                 index += 1
             elif command == ".":
-                code.append({"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None})
+                code.append(
+                    {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
+                )
                 index += 1
-            elif command == '."':  # Начало строки вывода
+            elif command == '."':
                 end_of_string = len(commands)
                 for j in range(i + 1, len(commands)):
                     if commands[j] == '."':
                         end_of_string = j
                         break
-                args = [" ".join(commands[i + 1 : end_of_string]).replace('"', "")]
+                args = [" ".join(commands[i + 1: end_of_string]).replace('"', "")]
                 opcode = Opcode.PRINT_STRING
                 i = end_of_string  # Индекс за последний элемент
             elif command == "cr":
                 opcode = Opcode.CR
             elif command == "pad":
                 if (
-                    i + 2 < len(commands)
-                    and commands[i + 1].isdigit()
-                    and commands[i + 2] == "accept"
+                        i + 2 < len(commands)
+                        and commands[i + 1].isdigit()
+                        and commands[i + 2] == "accept"
                 ):
                     opcode = Opcode.ACCEPT
                     args = [int(commands[i + 1])]
+
                     code.append(
                         {
                             "index": index,
@@ -84,6 +97,7 @@ def translate(text):
                             "arg": PAD_ADDRESS,
                         }
                     )
+
                     index += 1
                     i += 2
             elif command == "type":
@@ -131,6 +145,9 @@ def main(source, target):
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
-    _, source_file, target_file = sys.argv
-    main(source_file, target_file)
+    # assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
+    # _, source_file, target_file = sys.argv
+    # main(source_file, target_file)
+    main("../progs/basic_cycle/cycle.forth", "machine_code/cycle.json")
+    main("../progs/cat/cat.forth", "machine_code/cat.json")
+    main("../progs/greet/greet.forth", "machine_code/greet.json")
