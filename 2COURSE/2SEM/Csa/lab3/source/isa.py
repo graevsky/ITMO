@@ -25,6 +25,7 @@ class Opcode(str, Enum):
     MOD = "MOD"  # Деление по модулю
     AND = "AND"  # И
     OR = "OR"  # Или
+    ADD = "ADD"
     HALT = "HALT"  # Остановка
 
     def __str__(self):

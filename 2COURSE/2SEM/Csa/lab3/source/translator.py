@@ -39,7 +39,7 @@ def translate(text):
                     continue
             elif command == "do":
                 initial_value = int(commands[1])  # Начальное значение
-                max_value = int(commands[0])  # Максимальное значение
+                max_value = int(commands[0]) - 1  # Максимальное значение
                 step = 1  # Шаг цикла всегда равен 1
 
                 start_index = len(code)
@@ -109,6 +109,9 @@ def translate(text):
                 i = end_of_string  # Индекс за последний элемент
             elif command == "cr":
                 opcode = Opcode.CR
+            elif command == "+":
+                opcode = Opcode.ADD
+                i += 1
             elif command == "pad":
                 if (
                         i + 2 < len(commands)
@@ -181,4 +184,6 @@ if __name__ == "__main__":
     # main("../progs/greet/greet.forth", "machine_code/greet.json")
     # main("../progs/basic_if/if.forth", "machine_code/if.json")
     # main("../progs/basic_mod/mod.forth", "machine_code/mod.json")
-    main("../progs/basic_mod/mod2.forth", "machine_code/mod2.json")
+    # main("../progs/basic_mod/mod2.forth", "machine_code/mod2.json")
+    main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
+

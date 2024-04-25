@@ -118,6 +118,12 @@ class DataPath:
         a = self.pop_from_stack()
         b = self.pop_from_stack()
         self.push_to_stack(1 if a or b else 0)
+    def add(self):
+        if self.sp < 2:
+            raise Exception("Stack underflow")
+        a = self.pop_from_stack()
+        b = self.pop_from_stack()
+        self.push_to_stack(a + b)
 
 
 class ControlUnit:
@@ -137,7 +143,9 @@ class ControlUnit:
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
 
-        if opcode == Opcode.LESS_THAN.value:
+        if opcode == Opcode.ADD.value:
+            self.data_path.add()
+        elif opcode == Opcode.LESS_THAN.value:
             self.data_path.compare_and_push(arg, "LESS_THAN")
         elif opcode == Opcode.GREATER_THAN.value:
             self.data_path.compare_and_push(arg, "GREATER_THAN")
@@ -231,5 +239,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/mod2.json", "machine_code/input.txt")
+    main("machine_code/prob1.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])
