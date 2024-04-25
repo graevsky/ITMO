@@ -17,11 +17,12 @@ class Opcode(str, Enum):
     LOOP_END = "LOOP_END"  # Окончание цикла
     PUSH = "PUSH"  # Добавить значение в стек
     PRINT_TOP = "PRINT_TOP"  # Вывод верхнего элемент
-    LESS_THAN = "LESS_THAN"
-    GREATER_THAN = "GREATER_THAN"
-    EQUALS = "EQUALS"
-    IF = "IF"
-    THEN = "THEN"
+    LESS_THAN = "LESS_THAN"  # Меньше
+    GREATER_THAN = "GREATER_THAN"  # Больше
+    EQUALS = "EQUALS"  # Равно
+    IF = "IF"  # Условие
+    THEN = "THEN"  # Окончание условия
+    MOD = "MOD"  # Деление по модулю
     HALT = "HALT"  # Остановка
 
     def __str__(self):

@@ -70,6 +70,10 @@ def translate(text):
                     {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
                 )
                 index += 1
+            elif command == "mod":
+                args.append(int(commands[1]))
+                opcode = Opcode.MOD
+                i += 2
             elif command == "<":
                 args.append(int(commands[0]))
                 opcode = Opcode.LESS_THAN
@@ -169,4 +173,5 @@ if __name__ == "__main__":
     # main("../progs/basic_cycle/cycle.forth", "machine_code/cycle.json")
     # main("../progs/cat/cat.forth", "machine_code/cat.json")
     # main("../progs/greet/greet.forth", "machine_code/greet.json")
-    main("../progs/basic_if/if.forth", "machine_code/if.json")
+    # main("../progs/basic_if/if.forth", "machine_code/if.json")
+    main("../progs/basic_mod/mod.forth", "machine_code/mod.json")

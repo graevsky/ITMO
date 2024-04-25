@@ -97,6 +97,14 @@ class DataPath:
         elif comparison_type == "EQUALS":
             self.push_to_stack(1 if top == value else 0)
 
+    def mod(self, divisor):
+        if self.sp == 0:
+            raise Exception("Stack underflow")
+        dividend = self.pop_from_stack()
+        if divisor == 0:
+            raise Exception("Division by zero")
+        self.push_to_stack(dividend % divisor)
+
 
 class ControlUnit:
     def __init__(self, memory):
@@ -121,6 +129,8 @@ class ControlUnit:
             self.data_path.compare_and_push(arg, "GREATER_THAN")
         elif opcode == Opcode.EQUALS.value:
             self.data_path.compare_and_push(arg, "EQUALS")
+        elif opcode == Opcode.MOD.value:
+            self.data_path.mod(arg)
         elif opcode == Opcode.IF.value:
             # Проверка условия и пропуск инструкций до THEN, если условие ложно
             if not self.data_path.pop_from_stack():
@@ -203,5 +213,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/if.json", "machine_code/input.txt")
+    main("machine_code/mod.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])
