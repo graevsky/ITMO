@@ -1,112 +1,276 @@
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-const int MOD = 1000000001;
-map<long long, int> comp; // Для сжатия координат
-map<long long, int> counter; // Для отслеживания количества каждого элемента
-vector<long long> raw_nums; // Числа для маппинга без применения функции f
-vector<long long> nums; // Вектор для хранения уникальных чисел после применения f
-vector<pair<char, pair<long long, long long>>> queries; // Для хранения запросов
-long long lastSum = 0;
 
-// Функция f
-long long f(long long x) {
-  return (x + lastSum) % MOD;
-}
-
-// Дерево Фенвика
-class FenwickTree {
-private:
-  vector<long long> tree;
-  int size;
-
+class Node {
 public:
-  FenwickTree(int n) : size(n), tree(n + 1, 0) {}
+  int val;
+  Node *parent;
+  Node *l;
+  Node *r;
+  long long sum;
 
-  void update(int idx, long long val) {
-    while (idx <= size) {
-      tree[idx] += val;
-      idx += idx & (-idx);
+  Node(int value)
+      : val(value), parent(nullptr), l(nullptr), r(nullptr), sum(value) {}
+
+  void setL(Node *node) {
+    l = node;
+    //
+    if (node) {
+      node->parent = this;
     }
   }
 
-  long long sum(int idx) {
-    long long result = 0;
-    while (idx > 0) {
-      result += tree[idx];
-      idx -= idx & (-idx);
+  void setR(Node *node) {
+    r = node;
+    //
+    if (node) {
+      node->parent = this;
     }
-    return result;
-  }
-
-  long long rangeSum(int l, int r) {
-    return sum(r) - sum(l - 1);
   }
 };
 
-int main() {
-  int n;
-  cin >> n;
+class Tree {
+private:
+  Node *treeRoot;
 
-  for (int i = 0; i < n; ++i) {
-    char type;
-    cin >> type;
-    if (type == '+' || type == '-' || type == '?') {
-      long long x;
-      cin >> x;
-      queries.push_back({type, {x, 0}});
-      raw_nums.push_back(x);
-    } else if (type == 's') {
-      long long l, r;
-      cin >> l >> r;
-      queries.push_back({type, {l, r}});
-      raw_nums.push_back(l);
-      raw_nums.push_back(r);
+public:
+  Tree() : treeRoot(nullptr) {}
+
+  void setRoot(Node *node) {
+    treeRoot = node;
+    //
+    if (node) {
+      node->parent = nullptr;
     }
   }
 
-  for (auto& num : raw_nums) {
-    nums.push_back(f(num));
-  }
+  void moveLeft(Node *node) {
+    Node *parent = node->parent;
+    Node *pParent = parent ? parent->parent : nullptr;
 
-  sort(nums.begin(), nums.end());
-  nums.erase(unique(nums.begin(), nums.end()), nums.end());
-  for (int i = 0; i < nums.size(); ++i) {
-    comp[nums[i]] = i + 1;
-  }
+    node->sum += parent->val + (parent->r ? parent->r->sum : 0);
+    parent->sum -= node->val + (node->l ? node->l->sum : 0);
 
-  FenwickTree ft(nums.size());
+    parent->setL(node->r);
+    node->setR(parent);
 
-  for (auto &q : queries) {
-    char type = q.first;
-    long long x = q.second.first, y = q.second.second;
-
-    if (type == 's') {
-      x = f(q.second.first);
-      y = f(q.second.second);
+    if (!pParent) {
+      setRoot(node);
     } else {
-      x = f(x);
-    }
-
-    if (type == '+') {
-      if (counter[x]++ == 0) {
-        ft.update(comp[x], 1);
+      if (pParent->l == parent) {
+        pParent->setL(node);
+      } else {
+        pParent->setR(node);
       }
-    } else if (type == '-') {
-      if (--counter[x] == 0) {
-        ft.update(comp[x], -1);
-      }
-    } else if (type == '?') {
-      cout << (counter[x] > 0 ? "Found\n" : "Not found\n");
-    } else if (type == 's') {
-      lastSum = ft.rangeSum(comp[x], comp[y]);
-      cout << lastSum << endl;
     }
   }
 
+  void moveRight(Node *node) {
+    Node *parent = node->parent;
+    Node *pParent = parent ? parent->parent : nullptr;
+
+    node->sum += parent->val + (parent->l ? parent->l->sum : 0);
+    parent->sum -= node->val + (node->r ? node->r->sum : 0);
+
+    parent->setR(node->l);
+    node->setL(parent);
+
+    if (!pParent) {
+      setRoot(node);
+    } else {
+      if (pParent->l == parent) {
+        pParent->setL(node);
+      } else {
+        pParent->setR(node);
+      }
+    }
+  }
+
+  void action(Node *node) {
+    while (node->parent) {
+      Node *parent = node->parent;
+      Node *pParent = parent->parent;
+      if (!pParent) {
+        if (parent->l == node)
+          moveLeft(node);
+        else
+          moveRight(node);
+      } else {
+        if (pParent->l == parent) {
+          if (parent->l == node) {
+            moveLeft(parent);
+            moveLeft(node);
+          } else {
+            moveRight(node);
+            moveLeft(node);
+          }
+        } else {
+          if (parent->r == node) {
+            moveRight(parent);
+            moveRight(node);
+          } else {
+            moveLeft(node);
+            moveRight(node);
+          }
+        }
+      }
+    }
+  }
+
+  Node *get_max(Node *node) {
+    while (node->r)
+      node = node->r;
+    return node;
+  }
+
+  void add(int value) {
+    if (!treeRoot) {
+      setRoot(new Node(value));
+      return;
+    }
+    Node *current = treeRoot, *max_node = nullptr;
+    while (current) {
+      if (current->val == value)
+        return;
+      if (current->val > value) {
+        current = current->l;
+      } else {
+        max_node = current;
+        current = current->r;
+      }
+    }
+    Node *new_node = new Node(value);
+    if (!max_node) {
+      new_node->setR(treeRoot);
+      new_node->sum += treeRoot->sum;
+      setRoot(new_node);
+      return;
+    }
+
+    action(max_node);
+    new_node->sum += treeRoot->sum;
+    Node *r_child = treeRoot->r;
+    if (r_child)
+      treeRoot->sum -= r_child->sum;
+    treeRoot->r = nullptr;
+
+    new_node->setL(treeRoot);
+    new_node->setR(r_child);
+
+    setRoot(new_node);
+  }
+
+  void remove(int value) {
+    Node *cur = find(value);
+    if (!cur)
+      return;
+
+    action(cur);
+    if (!cur->l) {
+      setRoot(cur->r);
+    } else {
+      Node *max_left = get_max(cur->l);
+      action(max_left);
+      max_left->sum -= cur->val;
+      max_left->setR(cur->r);
+      setRoot(max_left);
+    }
+  }
+
+  Node *find(int value) {
+    Node *cur = treeRoot, *prev = nullptr;
+    while (cur) {
+      prev = cur;
+      if (cur->val == value) {
+        action(cur);
+        return cur;
+      }
+      if (cur->val > value)
+        cur = cur->l;
+      else
+        cur = cur->r;
+    }
+    if (prev)
+      action(prev);
+    return nullptr;
+  }
+
+  long long sum(int left_value, int right_value) {
+    if (!treeRoot)
+      return 0;
+    Node *min_node = nullptr, *max_node = nullptr;
+    long long s = 0;
+    Node *cur = treeRoot;
+
+    while (cur) {
+      if (cur->val >= left_value) {
+        min_node = cur;
+        cur = cur->l;
+      } else {
+        cur = cur->r;
+      }
+    }
+
+    cur = treeRoot;
+    while (cur) {
+      if (cur->val <= right_value) {
+        max_node = cur;
+        cur = cur->r;
+      } else {
+        cur = cur->l;
+      }
+    }
+
+    if (!min_node || !max_node)
+      return 0;
+    action(min_node);
+    s += min_node->val;
+    if (min_node->r)
+      s += min_node->r->sum;
+
+    action(max_node);
+    if (max_node->r)
+      s -= max_node->r->sum;
+
+    return s;
+  }
+};
+
+int modFun(int x, int sum) { return (x + sum) % 1000000001; }
+
+int main() {
+  int n, x;
+  cin >> n;
+  Tree tree;
+  long long last_sum = 0;
+  string inp;
+  for (int i = 0; i < n; i++) {
+    cin >> inp;
+    if (inp == "+") {
+      cin >> x;
+      tree.add(modFun(x,last_sum));
+    } else if (inp == "-") {
+      cin >> x;
+      tree.remove(modFun(x,last_sum));
+    } else if (inp == "?") {
+      cin >> x;
+      Node *node = tree.find(modFun(x,last_sum));
+      cout << (node ? "Found" : "Not found") << endl;
+    } else if (inp == "s") {
+      int l, r;
+      cin >> l >> r;
+      l = modFun(l,last_sum);
+      r = modFun(r,last_sum);
+      if (l > r)
+        swap(l, r);
+      last_sum = tree.sum(l, r);
+      cout << last_sum << endl;
+    }
+  }
   return 0;
 }
