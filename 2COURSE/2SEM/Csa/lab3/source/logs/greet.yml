@@ -1,0 +1,55 @@
+in_source: |-
+  : greet                           \\ Hello by name program
+    cr
+    ." Hello, what is your name?
+    cr
+    pad 256 accept
+    cr
+    ." Hello,
+    type
+    ." !
+    cr
+  ;
+
+  greet
+in_stdin: |-
+  pelmeni
+out_code: |-
+  {'index': 0, 'opcode': 'CR', 'arg': None}
+  {'index': 1, 'opcode': 'PUSH', 'arg': [768, 25, 'Hello, what is your name?']}
+  {'index': 2, 'opcode': 'PSTR', 'arg': 768}
+  {'index': 3, 'opcode': 'CR', 'arg': None}
+  {'index': 4, 'opcode': 'LOAD_ADDR', 'arg': 256}
+  {'index': 5, 'opcode': 'ACCEPT', 'arg': 256}
+  {'index': 6, 'opcode': 'CR', 'arg': None}
+  {'index': 7, 'opcode': 'PUSH', 'arg': [794, 6, 'Hello,']}
+  {'index': 8, 'opcode': 'PSTR', 'arg': 794}
+  {'index': 9, 'opcode': 'TYPE', 'arg': None}
+  {'index': 10, 'opcode': 'PUSH', 'arg': [801, 1, '!']}
+  {'index': 11, 'opcode': 'PSTR', 'arg': 801}
+  {'index': 12, 'opcode': 'CR', 'arg': None}
+  {'index': 13, 'opcode': 'HALT', 'arg': None}
+out_stdout: |-
+  Source instr: 14
+  ============================================================
+
+  Hello, what is your name?
+
+  Hello,pelmeni!
+
+  Instr counter: 14, Ticks: 14
+out_log: |
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=0: {'index': 0, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=1: {'index': 1, 'opcode': 'PUSH', 'arg': [768, 25, 'Hello, what is your name?']}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=2: {'index': 2, 'opcode': 'PSTR', 'arg': 768}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=3: {'index': 3, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=4: {'index': 4, 'opcode': 'LOAD_ADDR', 'arg': 256}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=5: {'index': 5, 'opcode': 'ACCEPT', 'arg': 256}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=6: {'index': 6, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=7: {'index': 7, 'opcode': 'PUSH', 'arg': [794, 6, 'Hello,']}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=8: {'index': 8, 'opcode': 'PSTR', 'arg': 794}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=9: {'index': 9, 'opcode': 'TYPE', 'arg': None}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=10: {'index': 10, 'opcode': 'PUSH', 'arg': [801, 1, '!']}
+  2024-04-27 20:15:56,398 - DEBUG - Executing instruction at PC=11: {'index': 11, 'opcode': 'PSTR', 'arg': 801}
+  2024-04-27 20:15:56,399 - DEBUG - Executing instruction at PC=12: {'index': 12, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:56,399 - DEBUG - Executing instruction at PC=13: {'index': 13, 'opcode': 'HALT', 'arg': None}

@@ -1,4 +1,5 @@
 from isa import Opcode, write_code, IOAddresses
+import sys
 
 PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 
@@ -160,31 +161,17 @@ def translate(text):
     return code
 
 
-def main(source, target):
-    with open(source, "r", encoding="utf-8") as f:
-        source_text = f.read()
-
+def main(source_file):
+    with open(source_file, 'r', encoding='utf-8') as file:
+        source_text = file.read()
     machine_code = translate(source_text)
-    write_code(target, machine_code)
-    print(
-        "Source lines:",
-        len(source_text.split("\n")),
-        "Instructions:",
-        len(machine_code),
-    )
-
+    output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
+    write_code(output_file, machine_code)
+    print(f"Machine code has been written to {output_file}")
 
 if __name__ == "__main__":
-    # assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
-    # _, source_file, target_file = sys.argv
-    # main(source_file, target_file)
-    # main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
-    # main("../progs/cat/cat.forth", "machine_code/cat.json")
-    main("../progs/greet/greet.forth", "machine_code/greet.json")
-    # main("../progs/basic_progs/if.forth", "machine_code/if.json")
-    # main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
-    # main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
-    # main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
-    # main("../progs/hello_world/hello.forth", "machine_code/hello.json")
-
-
+    if len(sys.argv) != 2:
+        print("Usage: python translator.py <source_file>")
+    else:
+        _, source_file = sys.argv
+        main(source_file)

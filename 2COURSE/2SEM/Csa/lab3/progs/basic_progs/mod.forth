@@ -4,7 +4,7 @@
     10 mod
     0 ==
     if
-      ." mod5"
+      ." mod5
       cr
     then
   loop ;

@@ -1,4 +1,9 @@
 from isa import Opcode, read_code, IOAddresses
+import logging, sys
+from io import StringIO
+
+log_stream = StringIO()
+logging.basicConfig(stream=log_stream, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 class DataPath:
@@ -158,6 +163,8 @@ class ControlUnit:
         self.pc = 0  # Счётчик программ
         self.halted = False
         self.data_path = DataPath(memory)  # Общая память
+        self.instr_counter = 0  # Счетчик выполненных инструкций
+        self.tick_counter = 0  # Счетчик тиков (модельного времени)
 
     def fetch_instruction(self):
         if self.pc < len(self.memory) and self.memory[self.pc] is not None:
@@ -171,6 +178,8 @@ class ControlUnit:
     def execute_instruction(self, instruction):
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
+        logging.debug(f'Executing instruction at PC={self.pc}: {instruction}')
+        self.instr_counter += 1  # Увеличиваем счетчик инструкций при каждом выполнении
 
         if opcode == Opcode.PSTR:
             self.data_path.print_pstr(arg)
@@ -244,31 +253,34 @@ class ControlUnit:
         while not self.halted:
             instr = self.fetch_instruction()
             self.execute_instruction(instr)
+            self.tick_counter += 1
 
 
 def simulation(program, input_data):
-    memory = [0] * 1024  # Создание общей памяти
+    memory = [0] * 1024
     for i, instruction in enumerate(program):
-        memory[i] = instruction  # Запись инструкций
+        memory[i] = instruction
 
     control_unit = ControlUnit(memory)
     control_unit.data_path.set_input_buffer(input_data)
-    # try:
     control_unit.run()
-    # except Exception as e:
-    #     print("Simulation error:", e)
+
+    logs = log_stream.getvalue()  # Сбор логов, не закрывайте поток здесь
+    return control_unit.instr_counter, control_unit.tick_counter, logs
+
 
 
 def main(code_file, input_file):
     program = read_code(code_file)
     with open(input_file, "r", encoding="utf-8") as file:
         input_data = file.read()
-    simulation(program, input_data)
 
+    instr_count, ticks = simulation(program, input_data)
+    print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
 
 if __name__ == "__main__":
-    # if len(sys.argv) != 3:
-    #    print("Usage: python machine.py <machine_code_file> <input_file>")
-    # else:
-    main("machine_code/greet.json", "machine_code/input.txt")
-    # main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) != 3:
+        print("Usage: python machine.py <machine_code_file> <input_file>")
+    else:
+        _, code_file, input_file = sys.argv
+        main(code_file, input_file)

@@ -3,7 +3,7 @@
     i
     20 <
     if
-        ." less than 20"
+        ." less than 20
         cr
     then
   loop ;

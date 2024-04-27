@@ -1,0 +1,32 @@
+in_source: |-
+  : cat                     \\ cat program
+     cr                     \\ New line
+     pad 256 accept         \\ Pad buffer read
+     type                   \\ Print
+     cr                     \\ New line
+  ;
+
+  cat
+in_stdin: |-
+  pelmeni
+out_code: |-
+  {'index': 0, 'opcode': 'CR', 'arg': None}
+  {'index': 1, 'opcode': 'LOAD_ADDR', 'arg': 256}
+  {'index': 2, 'opcode': 'ACCEPT', 'arg': 256}
+  {'index': 3, 'opcode': 'TYPE', 'arg': None}
+  {'index': 4, 'opcode': 'CR', 'arg': None}
+  {'index': 5, 'opcode': 'HALT', 'arg': None}
+out_stdout: |-
+  Source instr: 6
+  ============================================================
+
+  pelmeni
+
+  Instr counter: 6, Ticks: 6
+out_log: |
+  2024-04-27 20:15:45,408 - DEBUG - Executing instruction at PC=0: {'index': 0, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:45,408 - DEBUG - Executing instruction at PC=1: {'index': 1, 'opcode': 'LOAD_ADDR', 'arg': 256}
+  2024-04-27 20:15:45,409 - DEBUG - Executing instruction at PC=2: {'index': 2, 'opcode': 'ACCEPT', 'arg': 256}
+  2024-04-27 20:15:45,409 - DEBUG - Executing instruction at PC=3: {'index': 3, 'opcode': 'TYPE', 'arg': None}
+  2024-04-27 20:15:45,409 - DEBUG - Executing instruction at PC=4: {'index': 4, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:15:45,409 - DEBUG - Executing instruction at PC=5: {'index': 5, 'opcode': 'HALT', 'arg': None}

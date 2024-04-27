@@ -1,0 +1,28 @@
+in_source: |-
+  : hello
+    cr
+    ." Hello world!
+    cr
+  ;
+  hello
+in_stdin: |-
+  pelmeni
+out_code: |-
+  {'index': 0, 'opcode': 'CR', 'arg': None}
+  {'index': 1, 'opcode': 'PUSH', 'arg': [768, 12, 'Hello world!']}
+  {'index': 2, 'opcode': 'PSTR', 'arg': 768}
+  {'index': 3, 'opcode': 'CR', 'arg': None}
+  {'index': 4, 'opcode': 'HALT', 'arg': None}
+out_stdout: |-
+  Source instr: 5
+  ============================================================
+
+  Hello world!
+
+  Instr counter: 5, Ticks: 5
+out_log: |
+  2024-04-27 20:16:28,661 - DEBUG - Executing instruction at PC=0: {'index': 0, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:16:28,661 - DEBUG - Executing instruction at PC=1: {'index': 1, 'opcode': 'PUSH', 'arg': [768, 12, 'Hello world!']}
+  2024-04-27 20:16:28,661 - DEBUG - Executing instruction at PC=2: {'index': 2, 'opcode': 'PSTR', 'arg': 768}
+  2024-04-27 20:16:28,661 - DEBUG - Executing instruction at PC=3: {'index': 3, 'opcode': 'CR', 'arg': None}
+  2024-04-27 20:16:28,661 - DEBUG - Executing instruction at PC=4: {'index': 4, 'opcode': 'HALT', 'arg': None}
