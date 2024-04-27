@@ -1,6 +1,5 @@
 : Euler1
     0
-    swap
     1000 1 do
         i
         3 mod

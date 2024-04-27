@@ -53,12 +53,15 @@ class DataPath:
         output = "".join(chr(self.stack.pop()) for _ in range(len(self.stack)))
         print(output[::-1], end="")  # Вывод в правильном порядке
 
+
+    """
     def swap_stack(self):
-        """Меняет местами два верхних значения стека"""
+        
         if len(self.stack) >= 2:
             self.stack[-1], self.stack[-2] = self.stack[-2], self.stack[-1]
         else:
             raise Exception("Not enough data in stack to perform swap")
+    """
 
     def start_loop(self, initial, max_value, step):
         if self.loop_step is None:
@@ -192,8 +195,8 @@ class ControlUnit:
             self.data_path.load_to_acc(address)
         elif opcode == Opcode.ACCEPT.value:
             self.data_path.accept_input(int(arg))
-        elif opcode == Opcode.SWAP.value:
-            self.data_path.swap_stack()
+        #elif opcode == Opcode.SWAP.value:
+        #    self.data_path.swap_stack()
         elif opcode == Opcode.TYPE.value:
             self.data_path.signal_output()
         elif opcode == Opcode.PRINT_STRING.value:
