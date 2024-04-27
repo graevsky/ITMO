@@ -1,0 +1,22 @@
+[
+    {
+        "index": 0,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 1,
+        "opcode": "PRINT_STRING",
+        "arg": "Hello world!"
+    },
+    {
+        "index": 2,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 3,
+        "opcode": "HALT",
+        "arg": null
+    }
+]

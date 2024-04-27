@@ -255,5 +255,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/cat.json", "machine_code/input.txt")
+    main("machine_code/hello.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])
