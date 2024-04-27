@@ -11,7 +11,6 @@ class DataPath:
         self.loop_step = None
         self.memory = memory  # Общая память
         self.stack = []
-        self.acc = 0  # Аккумулятор
         self.sp = 0  # Указатель стека
         self.input_buffer = []  # Буфер для входных данных
         self.input_pointer = 0
@@ -59,12 +58,6 @@ class DataPath:
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
-    def load_to_acc(self, address):
-        self.acc = self.read_io(address)
-
-    def store_from_acc(self, address):
-        self.write_io(address, self.acc)
-
     def signal_output(self):
         """Выводит все данные из памяти начиная с адреса INPUT_BUFFER до первого нулевого символа."""
         start_address = IOAddresses.INPUT_BUFFER
@@ -82,14 +75,7 @@ class DataPath:
         for i in range(length):
             self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[address + 1 + i])
 
-    """
-    def swap_stack(self):
-        
-        if len(self.stack) >= 2:
-            self.stack[-1], self.stack[-2] = self.stack[-2], self.stack[-1]
-        else:
-            raise Exception("Not enough data in stack to perform swap")
-    """
+
 
     def start_loop(self, initial, max_value, step):
         if self.loop_step is None:
@@ -231,7 +217,7 @@ class ControlUnit:
             print()
         elif opcode == Opcode.LOAD_ADDR.value:
             address = int(arg, 16) if isinstance(arg, str) else int(arg)
-            self.data_path.load_to_acc(address)
+            self.data_path.read_io(address)
         elif opcode == Opcode.ACCEPT.value:
             self.data_path.accept_input(arg)
         elif opcode == Opcode.TYPE.value:
