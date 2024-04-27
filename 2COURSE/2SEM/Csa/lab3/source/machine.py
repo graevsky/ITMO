@@ -275,7 +275,7 @@ def main(code_file, input_file):
     with open(input_file, "r", encoding="utf-8") as file:
         input_data = file.read()
 
-    instr_count, ticks = simulation(program, input_data)
+    instr_count, ticks, logs = simulation(program, input_data)
     print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
 
 if __name__ == "__main__":
