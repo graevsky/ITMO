@@ -6,16 +6,25 @@
     },
     {
         "index": 1,
-        "opcode": "PRINT_STRING",
-        "arg": "Hello world!"
+        "opcode": "PUSH",
+        "arg": [
+            768,
+            12,
+            "Hello world!"
+        ]
     },
     {
         "index": 2,
+        "opcode": "PSTR",
+        "arg": 768
+    },
+    {
+        "index": 3,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 3,
+        "index": 4,
         "opcode": "HALT",
         "arg": null
     }

@@ -16,14 +16,12 @@ class DataPath:
         self.loop_max = 0  # Максимальное значение цикла
 
     def read_io(self, address):
-        # Пример чтения данных из буфера ввода
         if address == IOAddresses.INPUT_BUFFER:
             return self.input_buffer[:IOAddresses.INPUT_BUFFER_SIZE]
         return self.memory[address]
 
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
-            # Преобразуем число в символ и выводим
             print(chr(value), end='')
         else:
             self.memory[address] = value
@@ -68,6 +66,16 @@ class DataPath:
         while self.memory[start_address] != 0:
             self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[start_address])
             start_address += 1
+
+    def store_string_in_memory(self, address, length, string_data):
+        """ Сохранение строки в память начиная с указанного адреса. """
+        self.memory[address] = length  # Сохраняем длину строки в первой ячейке
+        for i in range(length):
+            self.memory[address + 1 + i] = ord(string_data[i])
+    def print_pstr(self, address):
+        length = self.memory[address]
+        for i in range(length):
+            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[address + 1 + i])
 
     """
     def swap_stack(self):
@@ -157,11 +165,16 @@ class ControlUnit:
         else:
             raise IndexError("Program counter out of bounds")
 
+
+
+
     def execute_instruction(self, instruction):
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
 
-        if opcode == Opcode.ADD.value:
+        if opcode == Opcode.PSTR:
+            self.data_path.print_pstr(arg)
+        elif opcode == Opcode.ADD.value:
             self.data_path.add()
         elif opcode == Opcode.LESS_THAN.value:
             self.data_path.compare_and_push(arg, "LESS_THAN")
@@ -197,7 +210,9 @@ class ControlUnit:
                 self.pc += 1
             return
         elif opcode == Opcode.PUSH.value:
-            if arg == "i":
+            if type(arg) == list:
+                self.data_path.store_string_in_memory(arg[0],arg[1],arg[2])
+            elif arg == "i":
                 self.data_path.push_i()
             else:
                 self.data_path.push_to_stack(arg)
@@ -255,5 +270,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/hello.json", "machine_code/input.txt")
+    main("machine_code/greet.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])

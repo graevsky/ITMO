@@ -6,46 +6,78 @@
     },
     {
         "index": 1,
-        "opcode": "PRINT_STRING",
-        "arg": "Hello, what is your name?"
+        "opcode": "PUSH",
+        "arg": [
+            768,
+            26,
+            "Hello, what is your name?\""
+        ]
     },
     {
         "index": 2,
+        "opcode": "PSTR",
+        "arg": 768
+    },
+    {
+        "index": 3,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 3,
+        "index": 4,
         "opcode": "LOAD_ADDR",
         "arg": 256
     },
     {
-        "index": 4,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
         "index": 5,
-        "opcode": "PRINT_STRING",
-        "arg": "Hello, "
+        "opcode": "ACCEPT",
+        "arg": 256
     },
     {
         "index": 6,
-        "opcode": "TYPE",
+        "opcode": "CR",
         "arg": null
     },
     {
         "index": 7,
-        "opcode": "PRINT_STRING",
-        "arg": "!"
+        "opcode": "PUSH",
+        "arg": [
+            795,
+            8,
+            "Hello, \""
+        ]
     },
     {
         "index": 8,
+        "opcode": "PSTR",
+        "arg": 795
+    },
+    {
+        "index": 9,
+        "opcode": "TYPE",
+        "arg": null
+    },
+    {
+        "index": 10,
+        "opcode": "PUSH",
+        "arg": [
+            804,
+            2,
+            "!\""
+        ]
+    },
+    {
+        "index": 11,
+        "opcode": "PSTR",
+        "arg": 804
+    },
+    {
+        "index": 12,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 9,
+        "index": 13,
         "opcode": "HALT",
         "arg": null
     }

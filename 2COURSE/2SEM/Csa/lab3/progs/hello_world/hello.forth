@@ -1,6 +1,6 @@
 : hello
   cr
-  ." Hello world!"
+  ." Hello world!
   cr
 ;
 hello

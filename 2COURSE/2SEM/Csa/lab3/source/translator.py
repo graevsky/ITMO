@@ -15,6 +15,8 @@ def translate(text):
     lines = text.strip().split("\n")
     index = 0
     loop_stack = []
+    string_storage_address = IOAddresses.STRING_STORAGE
+
 
     for line_number, line in enumerate(lines):
         line = line.split("\\")[0].strip()
@@ -98,15 +100,17 @@ def translate(text):
             elif command == "then":
                 opcode = Opcode.THEN
                 i += 1
-            elif command == '."':
-                end_of_string = len(commands)
-                for j in range(i + 1, len(commands)):
-                    if commands[j] == '."':
-                        end_of_string = j
-                        break
-                args = [" ".join(commands[i + 1: end_of_string]).replace('"', "")]
-                opcode = Opcode.PRINT_STRING
-                i = end_of_string  # Индекс за последний элемент
+            elif command.startswith('."'):  # Обработка строк с префиксом длины
+                string = command[2:] + " ".join(commands[i + 1:])
+                length = len(string)
+                # Записываем длину и строку в память
+                code.append({"index": index, "opcode": Opcode.PUSH.value, "arg": [string_storage_address, length, string]})
+                index += 1
+                code.append({"index": index, "opcode": Opcode.PSTR.value, "arg": string_storage_address})
+                index += 1
+                # Обновляем адрес хранения следующей строки
+                string_storage_address += length + 1
+                i += len(commands) - i
             elif command == "cr":
                 opcode = Opcode.CR
             elif command == "+":
@@ -176,11 +180,11 @@ if __name__ == "__main__":
     # main(source_file, target_file)
     # main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
     # main("../progs/cat/cat.forth", "machine_code/cat.json")
-    # main("../progs/greet/greet.forth", "machine_code/greet.json")
+    main("../progs/greet/greet.forth", "machine_code/greet.json")
     # main("../progs/basic_progs/if.forth", "machine_code/if.json")
     # main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
     # main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
     # main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
-    main("../progs/hello_world/hello.forth", "machine_code/hello.json")
+    # main("../progs/hello_world/hello.forth", "machine_code/hello.json")
 
 

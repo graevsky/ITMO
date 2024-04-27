@@ -26,6 +26,7 @@ class Opcode(str, Enum):
     AND = "AND"  # И
     OR = "OR"  # Или
     ADD = "ADD"
+    PSTR = "PSTR"  # Вывести длину-префиксную строку
     HALT = "HALT"  # Остановка
 
     def __str__(self):
@@ -43,6 +44,8 @@ class IOAddresses:
     INPUT_BUFFER = 0x0100
     INPUT_BUFFER_SIZE = 256  # размер буфера ввода
     OUTPUT_ADDRESS = 0x0200  # начало области для вывода данных
+    STRING_STORAGE = 0x0300  # Новый адрес для хранения строк
+
 
 """Машкод в файл"""
 
