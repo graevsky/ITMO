@@ -1,9 +1,14 @@
 from isa import Opcode, read_code, IOAddresses
-import logging, sys
+import logging
+import sys
 from io import StringIO
 
 log_stream = StringIO()
-logging.basicConfig(stream=log_stream, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    stream=log_stream,
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 
 class DataPath:
@@ -21,19 +26,19 @@ class DataPath:
 
     def read_io(self, address):
         if address == IOAddresses.INPUT_BUFFER:
-            return self.input_buffer[:IOAddresses.INPUT_BUFFER_SIZE]
+            return self.input_buffer[: IOAddresses.INPUT_BUFFER_SIZE]
         return self.memory[address]
 
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
-            print(chr(value), end='')
+            print(chr(value), end="")
         else:
             self.memory[address] = value
 
     def accept_input(self, size):
         """Имитирует загрузку данных из буфера в стек или другие структуры данных."""
         end_pos = min(self.input_pointer + size, len(self.input_buffer))
-        input_data = self.input_buffer[self.input_pointer:end_pos]
+        input_data = self.input_buffer[self.input_pointer: end_pos]
         self.input_pointer = end_pos
         for char in input_data:
             self.push_to_stack(ord(char))
@@ -62,20 +67,21 @@ class DataPath:
         """Выводит все данные из памяти начиная с адреса INPUT_BUFFER до первого нулевого символа."""
         start_address = IOAddresses.INPUT_BUFFER
         while self.memory[start_address] != 0:
-            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[start_address])
+            self.write_io(IOAddresses.OUTPUT_ADDRESS,
+                          self.memory[start_address])
             start_address += 1
 
     def store_string_in_memory(self, address, length, string_data):
-        """ Сохранение строки в память начиная с указанного адреса. """
+        """Сохранение строки в память начиная с указанного адреса."""
         self.memory[address] = length  # Сохраняем длину строки в первой ячейке
         for i in range(length):
             self.memory[address + 1 + i] = ord(string_data[i])
+
     def print_pstr(self, address):
         length = self.memory[address]
         for i in range(length):
-            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[address + 1 + i])
-
-
+            self.write_io(IOAddresses.OUTPUT_ADDRESS,
+                          self.memory[address + 1 + i])
 
     def start_loop(self, initial, max_value, step):
         if self.loop_step is None:
@@ -135,6 +141,7 @@ class DataPath:
         a = self.pop_from_stack()
         b = self.pop_from_stack()
         self.push_to_stack(1 if a or b else 0)
+
     def add(self):
         if self.sp < 2:
             raise Exception("Stack underflow")
@@ -158,14 +165,11 @@ class ControlUnit:
         else:
             raise IndexError("Program counter out of bounds")
 
-
-
-
     def execute_instruction(self, instruction):
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
-        logging.debug(f'Executing instruction at PC={self.pc}: {instruction}')
-        self.instr_counter += 1  # Увеличиваем счетчик инструкций при каждом выполнении
+        logging.debug(f"Executing instruction at PC={self.pc}: {instruction}")
+        self.instr_counter += 1
 
         if opcode == Opcode.PSTR:
             self.data_path.print_pstr(arg)
@@ -206,7 +210,7 @@ class ControlUnit:
             return
         elif opcode == Opcode.PUSH.value:
             if type(arg) == list:
-                self.data_path.store_string_in_memory(arg[0],arg[1],arg[2])
+                self.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
             elif arg == "i":
                 self.data_path.push_i()
             else:
@@ -255,7 +259,6 @@ def simulation(program, input_data):
     return control_unit.instr_counter, control_unit.tick_counter, logs
 
 
-
 def main(code_file, input_file):
     program = read_code(code_file)
     with open(input_file, "r", encoding="utf-8") as file:
@@ -263,6 +266,7 @@ def main(code_file, input_file):
 
     instr_count, ticks, logs = simulation(program, input_data)
     print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

@@ -18,11 +18,10 @@ def translate(text):
     loop_stack = []
     string_storage_address = IOAddresses.STRING_STORAGE
 
-
     for line_number, line in enumerate(lines):
         line = line.split("\\")[0].strip()
         if (
-                not line or line.startswith(":") or line.startswith(";")
+            not line or line.startswith(":") or line.startswith(";")
         ):  # убрать в будущем, чтобы поддерживались переменные-функции
             continue
 
@@ -105,9 +104,21 @@ def translate(text):
                 string = command[2:] + " ".join(commands[i + 1:])
                 length = len(string)
                 # Записываем длину и строку в память
-                code.append({"index": index, "opcode": Opcode.PUSH.value, "arg": [string_storage_address, length, string]})
+                code.append(
+                    {
+                        "index": index,
+                        "opcode": Opcode.PUSH.value,
+                        "arg": [string_storage_address, length, string],
+                    }
+                )
                 index += 1
-                code.append({"index": index, "opcode": Opcode.PSTR.value, "arg": string_storage_address})
+                code.append(
+                    {
+                        "index": index,
+                        "opcode": Opcode.PSTR.value,
+                        "arg": string_storage_address,
+                    }
+                )
                 index += 1
                 # Обновляем адрес хранения следующей строки
                 string_storage_address += length + 1
@@ -118,20 +129,36 @@ def translate(text):
                 opcode = Opcode.ADD
                 i += 1
             elif command == "pad":
-                if i + 2 < len(commands) and commands[i + 1].isdigit() and commands[i + 2] == "accept":
+                if (
+                    i + 2 < len(commands)
+                    and commands[i + 1].isdigit()
+                    and commands[i + 2] == "accept"
+                ):
                     args = [int(commands[i + 1])]
                     opcode = Opcode.ACCEPT
-                    code.append({"index": index, "opcode": Opcode.LOAD_ADDR.value, "arg": IOAddresses.INPUT_BUFFER})
+                    code.append(
+                        {
+                            "index": index,
+                            "opcode": Opcode.LOAD_ADDR.value,
+                            "arg": IOAddresses.INPUT_BUFFER,
+                        }
+                    )
                     index += 1
                     i += 3
             elif command == "type":
                 opcode = Opcode.TYPE
-                i+=1
+                i += 1
             elif command == "dup":
                 opcode = Opcode.DUP
             elif command == "LOAD_ADDR":
                 if i + 1 < len(commands):
-                    args = [int(commands[i + 1], 16) if 'x' in commands[i + 1] else int(commands[i + 1])]
+                    args = [
+                        (
+                            int(commands[i + 1], 16)
+                            if "x" in commands[i + 1]
+                            else int(commands[i + 1])
+                        )
+                    ]
                     opcode = Opcode.LOAD_ADDR
                     i += 2
             """
@@ -162,12 +189,13 @@ def translate(text):
 
 
 def main(source_file):
-    with open(source_file, 'r', encoding='utf-8') as file:
+    with open(source_file, "r", encoding="utf-8") as file:
         source_text = file.read()
     machine_code = translate(source_text)
     output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
     write_code(output_file, machine_code)
     print(f"Machine code has been written to {output_file}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
