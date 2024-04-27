@@ -1,4 +1,4 @@
-from isa import Opcode, read_code
+from isa import Opcode, read_code, IOAddresses
 
 
 class DataPath:
@@ -8,25 +8,41 @@ class DataPath:
         self.stack = []
         self.acc = 0  # Аккумулятор
         self.sp = 0  # Указатель стека
-        self.input_buffer = ""  # Буфер для входных данных
+        self.input_buffer = []  # Буфер для входных данных
         self.input_pointer = 0
         """"""
         self.loop_index = 0  # Индекс начала цикла
         self.loop_counter = 0  # Счетчик цикла
         self.loop_max = 0  # Максимальное значение цикла
 
+    def read_io(self, address):
+        # Пример чтения данных из буфера ввода
+        if address == IOAddresses.INPUT_BUFFER:
+            return self.input_buffer[:IOAddresses.INPUT_BUFFER_SIZE]
+        return self.memory[address]
+
+    def write_io(self, address, value):
+        if address == IOAddresses.OUTPUT_ADDRESS:
+            # Преобразуем число в символ и выводим
+            print(chr(value), end='')
+        else:
+            self.memory[address] = value
+
     def accept_input(self, size):
-        """Эмулирует ввод данных из буфера"""
+        """Имитирует загрузку данных из буфера в стек или другие структуры данных."""
         end_pos = min(self.input_pointer + size, len(self.input_buffer))
-        input_data = self.input_buffer[self.input_pointer: end_pos]
+        input_data = self.input_buffer[self.input_pointer:end_pos]
         self.input_pointer = end_pos
         for char in input_data:
             self.push_to_stack(ord(char))
 
     def set_input_buffer(self, data):
-        """Загружает входные данные в буфер"""
+        """Загружает входные данные в буфер и память."""
         self.input_buffer = data
         self.input_pointer = 0
+        for i, char in enumerate(data):
+            if i < IOAddresses.INPUT_BUFFER_SIZE:
+                self.memory[IOAddresses.INPUT_BUFFER + i] = ord(char)
 
     def push_to_stack(self, value):
         """Помещает значение в стек"""
@@ -41,18 +57,17 @@ class DataPath:
         raise IndexError("Stack underflow")
 
     def load_to_acc(self, address):
-        """Загружает значение из памяти в аккумулятор"""
-        self.acc = self.memory[address]
+        self.acc = self.read_io(address)
 
     def store_from_acc(self, address):
-        """Сохраняет значение из аккумулятора в память"""
-        self.memory[address] = self.acc
+        self.write_io(address, self.acc)
 
     def signal_output(self):
-        """Выводит все данные из стека до его опустошения"""
-        output = "".join(chr(self.stack.pop()) for _ in range(len(self.stack)))
-        print(output[::-1], end="")  # Вывод в правильном порядке
-
+        """Выводит все данные из памяти начиная с адреса INPUT_BUFFER до первого нулевого символа."""
+        start_address = IOAddresses.INPUT_BUFFER
+        while self.memory[start_address] != 0:
+            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.memory[start_address])
+            start_address += 1
 
     """
     def swap_stack(self):
@@ -194,9 +209,7 @@ class ControlUnit:
             address = int(arg, 16) if isinstance(arg, str) else int(arg)
             self.data_path.load_to_acc(address)
         elif opcode == Opcode.ACCEPT.value:
-            self.data_path.accept_input(int(arg))
-        #elif opcode == Opcode.SWAP.value:
-        #    self.data_path.swap_stack()
+            self.data_path.accept_input(arg)
         elif opcode == Opcode.TYPE.value:
             self.data_path.signal_output()
         elif opcode == Opcode.PRINT_STRING.value:
@@ -242,5 +255,5 @@ if __name__ == "__main__":
     # if len(sys.argv) != 3:
     #    print("Usage: python machine.py <machine_code_file> <input_file>")
     # else:
-    main("machine_code/prob1.json", "machine_code/input.txt")
+    main("machine_code/greet.json", "machine_code/input.txt")
     # main(sys.argv[1], sys.argv[2])

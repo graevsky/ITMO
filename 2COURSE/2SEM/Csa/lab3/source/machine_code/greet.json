@@ -17,40 +17,35 @@
     {
         "index": 3,
         "opcode": "LOAD_ADDR",
-        "arg": "0x0100"
-    },
-    {
-        "index": 4,
-        "opcode": "ACCEPT",
         "arg": 256
     },
     {
-        "index": 5,
+        "index": 4,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 6,
+        "index": 5,
         "opcode": "PRINT_STRING",
         "arg": "Hello, "
     },
     {
-        "index": 7,
+        "index": 6,
         "opcode": "TYPE",
         "arg": null
     },
     {
-        "index": 8,
+        "index": 7,
         "opcode": "PRINT_STRING",
         "arg": "!"
     },
     {
-        "index": 9,
+        "index": 8,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 10,
+        "index": 9,
         "opcode": "HALT",
         "arg": null
     }

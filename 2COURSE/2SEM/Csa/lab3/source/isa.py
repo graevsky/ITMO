@@ -39,6 +39,11 @@ class Term(namedtuple("Term", "line pos symbol")):
     pass
 
 
+class IOAddresses:
+    INPUT_BUFFER = 0x0100
+    INPUT_BUFFER_SIZE = 256  # размер буфера ввода
+    OUTPUT_ADDRESS = 0x0200  # начало области для вывода данных
+
 """Машкод в файл"""
 
 

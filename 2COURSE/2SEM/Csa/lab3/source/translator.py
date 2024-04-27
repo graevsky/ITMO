@@ -1,4 +1,4 @@
-from isa import Opcode, write_code
+from isa import Opcode, write_code, IOAddresses
 
 PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 
@@ -113,24 +113,9 @@ def translate(text):
                 opcode = Opcode.ADD
                 i += 1
             elif command == "pad":
-                if (
-                        i + 2 < len(commands)
-                        and commands[i + 1].isdigit()
-                        and commands[i + 2] == "accept"
-                ):
-                    opcode = Opcode.ACCEPT
-                    args = [int(commands[i + 1])]
-
-                    code.append(
-                        {
-                            "index": index,
-                            "opcode": Opcode.LOAD_ADDR.value,
-                            "arg": PAD_ADDRESS,
-                        }
-                    )
-
-                    index += 1
-                    i += 2
+                args = [IOAddresses.INPUT_BUFFER, int(commands[i + 1])]
+                opcode = Opcode.LOAD_ADDR
+                i += 2
             elif command == "type":
                 opcode = Opcode.TYPE
             elif command == "dup":
@@ -179,11 +164,11 @@ if __name__ == "__main__":
     # assert len(sys.argv) == 3, "Usage: translator.py <source file> <target file>"
     # _, source_file, target_file = sys.argv
     # main(source_file, target_file)
-    main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
-    main("../progs/cat/cat.forth", "machine_code/cat.json")
+    # main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
+    # main("../progs/cat/cat.forth", "machine_code/cat.json")
     main("../progs/greet/greet.forth", "machine_code/greet.json")
-    main("../progs/basic_progs/if.forth", "machine_code/if.json")
-    main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
-    main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
-    main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
+    # main("../progs/basic_progs/if.forth", "machine_code/if.json")
+    # main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
+    # main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
+    # main("../progs/prob1/prob1.forth", "machine_code/prob1.json")
 
