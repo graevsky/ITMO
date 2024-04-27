@@ -1,5 +1,5 @@
 1. pstr???
-2. memory mapped io??
+2. memory mapped io. Вроде сделано, проверить
 3. von neuman?
 4. Переписать код на нормальный
 5. golden тесты написать, лог

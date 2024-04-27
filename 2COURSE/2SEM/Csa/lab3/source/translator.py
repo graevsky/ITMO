@@ -113,13 +113,23 @@ def translate(text):
                 opcode = Opcode.ADD
                 i += 1
             elif command == "pad":
-                args = [IOAddresses.INPUT_BUFFER, int(commands[i + 1])]
-                opcode = Opcode.LOAD_ADDR
-                i += 2
+                if i + 2 < len(commands) and commands[i + 1].isdigit() and commands[i + 2] == "accept":
+                    args = [int(commands[i + 1])]
+                    opcode = Opcode.ACCEPT
+                    code.append({"index": index, "opcode": Opcode.LOAD_ADDR.value, "arg": IOAddresses.INPUT_BUFFER})
+                    index += 1
+                    i += 3
             elif command == "type":
                 opcode = Opcode.TYPE
+                i+=1
             elif command == "dup":
                 opcode = Opcode.DUP
+            elif command == "LOAD_ADDR":
+                if i + 1 < len(commands):
+                    args = [int(commands[i + 1], 16) if 'x' in commands[i + 1] else int(commands[i + 1])]
+                    opcode = Opcode.LOAD_ADDR
+                    i += 2
+            """
             elif command == "LOAD_ADDR":
                 if i + 1 < len(commands):
                     opcode = Opcode.LOAD_ADDR
@@ -130,7 +140,7 @@ def translate(text):
                     )  # Сложно как то?
                     args = [address]
                     i += 1
-
+            """
             if opcode:
                 code.append(
                     {
@@ -165,8 +175,8 @@ if __name__ == "__main__":
     # _, source_file, target_file = sys.argv
     # main(source_file, target_file)
     # main("../progs/basic_progs/cycle.forth", "machine_code/cycle.json")
-    # main("../progs/cat/cat.forth", "machine_code/cat.json")
-    main("../progs/greet/greet.forth", "machine_code/greet.json")
+    main("../progs/cat/cat.forth", "machine_code/cat.json")
+    # main("../progs/greet/greet.forth", "machine_code/greet.json")
     # main("../progs/basic_progs/if.forth", "machine_code/if.json")
     # main("../progs/basic_progs/mod.forth", "machine_code/mod.json")
     # main("../progs/basic_progs/mod2.forth", "machine_code/mod2.json")
