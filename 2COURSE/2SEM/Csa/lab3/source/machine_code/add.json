@@ -1,0 +1,27 @@
+[
+    {
+        "index": 0,
+        "opcode": "PUSH",
+        "arg": 100
+    },
+    {
+        "index": 1,
+        "opcode": "PUSH",
+        "arg": 2
+    },
+    {
+        "index": 2,
+        "opcode": "ADD",
+        "arg": null
+    },
+    {
+        "index": 3,
+        "opcode": "PRINT_TOP",
+        "arg": null
+    },
+    {
+        "index": 4,
+        "opcode": "HALT",
+        "arg": null
+    }
+]

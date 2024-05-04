@@ -2,6 +2,7 @@ from isa import Opcode, read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
+from alu import ALU
 
 log_stream = StringIO()
 logging.basicConfig(
@@ -23,6 +24,8 @@ class DataPath:
         self.loop_index = 0  # Индекс начала цикла
         self.loop_counter = 0  # Счетчик цикла
         self.loop_max = 0  # Максимальное значение цикла
+
+        self.alu = ALU()
 
     def read_io(self, address):
         if address == IOAddresses.INPUT_BUFFER:
@@ -109,45 +112,13 @@ class DataPath:
         else:
             raise Exception("Attempt to print from an empty stack")
 
-    def compare_and_push(self, value, comparison_type):
-        if not self.stack:
-            raise Exception("Stack underflow")
-        top = self.pop_from_stack()
-        if comparison_type == "LESS_THAN":
-            self.push_to_stack(1 if top < value else 0)
-        elif comparison_type == "GREATER_THAN":
-            self.push_to_stack(1 if top > value else 0)
-        elif comparison_type == "EQUALS":
-            self.push_to_stack(1 if top == value else 0)
-
-    def mod(self, divisor):
-        if self.sp == 0:
-            raise Exception("Stack underflow")
-        dividend = self.pop_from_stack()
-        if divisor == 0:
-            raise Exception("Division by zero")
-        self.push_to_stack(dividend % divisor)
-
-    def logical_and(self):
-        if self.sp < 2:
-            raise Exception("Stack underflow")
+    def perform_operation(self, opcode, arg=None):
         a = self.pop_from_stack()
-        b = self.pop_from_stack()
-        self.push_to_stack(1 if a and b else 0)
-
-    def logical_or(self):
-        if self.sp < 2:
-            raise Exception("Stack underflow")
-        a = self.pop_from_stack()
-        b = self.pop_from_stack()
-        self.push_to_stack(1 if a or b else 0)
-
-    def add(self):
-        if self.sp < 2:
-            raise Exception("Stack underflow")
-        a = self.pop_from_stack()
-        b = self.pop_from_stack()
-        self.push_to_stack(a + b)
+        b = arg
+        if arg is None:
+            b = self.pop_from_stack()
+        result = self.alu.execute(opcode, a, b)
+        self.push_to_stack(result)
 
 
 class ControlUnit:
@@ -173,20 +144,22 @@ class ControlUnit:
 
         if opcode == Opcode.PSTR:
             self.data_path.print_pstr(arg)
+
         elif opcode == Opcode.ADD.value:
-            self.data_path.add()
+            self.data_path.perform_operation(opcode, arg)
         elif opcode == Opcode.LESS_THAN.value:
-            self.data_path.compare_and_push(arg, "LESS_THAN")
+            self.data_path.perform_operation(opcode, arg)
         elif opcode == Opcode.GREATER_THAN.value:
-            self.data_path.compare_and_push(arg, "GREATER_THAN")
+            self.data_path.perform_operation(opcode, arg)
         elif opcode == Opcode.EQUALS.value:
-            self.data_path.compare_and_push(arg, "EQUALS")
+            self.data_path.perform_operation(opcode, arg)
         elif opcode == Opcode.MOD.value:
-            self.data_path.mod(arg)
+            self.data_path.perform_operation(opcode, arg)
         elif opcode == Opcode.AND.value:
-            self.data_path.logical_and()
+            self.data_path.perform_operation(opcode)
         elif opcode == Opcode.OR.value:
-            self.data_path.logical_or()
+            self.data_path.perform_operation(opcode)
+
         elif opcode == Opcode.IF.value:
             # Проверка условия и пропуск инструкций до THEN, если условие ложно
             if not self.data_path.pop_from_stack():
@@ -198,6 +171,7 @@ class ControlUnit:
         elif opcode == Opcode.THEN.value:
             # Заглушка
             pass
+
         elif opcode == Opcode.LOOP_START.value:
             initial, max_value, step = arg
             self.data_path.start_loop(initial, max_value, step)
@@ -208,6 +182,7 @@ class ControlUnit:
             else:
                 self.pc += 1
             return
+
         elif opcode == Opcode.PUSH.value:
             if type(arg) == list:
                 self.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
@@ -222,6 +197,7 @@ class ControlUnit:
         elif opcode == Opcode.LOAD_ADDR.value:
             address = int(arg, 16) if isinstance(arg, str) else int(arg)
             self.data_path.read_io(address)
+
         elif opcode == Opcode.ACCEPT.value:
             self.data_path.accept_input(arg)
         elif opcode == Opcode.TYPE.value:
@@ -273,4 +249,6 @@ if __name__ == "__main__":
         print("Usage: python machine.py <machine_code_file> <input_file>")
     else:
         _, code_file, input_file = sys.argv
-        main(code_file, input_file)
+        # main(code_file, input_file)
+
+    main("./machine_code/add.json", "./machine_code/input.txt")
