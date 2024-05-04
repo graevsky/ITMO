@@ -65,3 +65,18 @@ class ALU:
     def update_flags(self, result):
         self.flags['Z'] = 1 if result == 0 else 0
         self.flags['N'] = 1 if result < 0 else 0
+
+
+class Multiplexer:
+    def __init__(self, data_path):
+        self.data_path = data_path
+
+    def select_sources(self, opcode, arg=None):
+        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR, Opcode.LESS_THAN, Opcode.GREATER_THAN,
+                      Opcode.EQUALS}:
+            a = self.data_path.pop_from_stack()
+            b = self.data_path.pop_from_stack() if arg is None else arg
+        else:
+            a = self.data_path.pop_from_stack()
+            b = None
+        return a, b

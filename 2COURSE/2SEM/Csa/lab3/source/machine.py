@@ -2,7 +2,7 @@ from isa import Opcode, read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
-from alu import ALU
+from alu import ALU, Multiplexer
 
 log_stream = StringIO()
 logging.basicConfig(
@@ -26,6 +26,7 @@ class DataPath:
         self.loop_max = 0  # Максимальное значение цикла
 
         self.alu = ALU()
+        self.mux = Multiplexer(self)
 
     def read_io(self, address):
         if address == IOAddresses.INPUT_BUFFER:
@@ -113,10 +114,7 @@ class DataPath:
             raise Exception("Attempt to print from an empty stack")
 
     def perform_operation(self, opcode, arg=None):
-        a = self.pop_from_stack()
-        b = arg
-        if arg is None:
-            b = self.pop_from_stack()
+        a, b = self.mux.select_sources(opcode, arg)
         result = self.alu.execute(opcode, a, b)
         self.push_to_stack(result)
 
