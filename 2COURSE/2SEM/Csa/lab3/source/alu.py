@@ -4,16 +4,18 @@ from isa import Opcode
 class ALU:
     def __init__(self):
         self.flags = {
-            'Z': 0,  # Zero flag
-            'C': 0,  # Carry flag
-            'V': 0,  # Overflow flag
-            'N': 0  # Negative flag
+            'Z': Latch(),  # Zero flag
+            'C': Latch(),  # Carry flag
+            'V': Latch(),  # Overflow flag
+            'N': Latch()  # Negative flag
         }
 
     def execute(self, opcode, a, b=None):
         result = 0
+        carry = 0
+        overflow = 0
         if opcode == Opcode.ADD:
-            result, self.flags['C'], self.flags['V'] = self.add(a, b)
+            result, carry, overflow = self.add(a, b)
         elif opcode == Opcode.AND:
             result = self.and_op(a, b)
         elif opcode == Opcode.OR:
@@ -27,19 +29,13 @@ class ALU:
         elif opcode == Opcode.EQUALS:
             result = self.equals(a, b)
 
-        self.update_flags(result)
+        self.update_flags(result, carry, overflow)
         return result
 
     def add(self, a, b):
         r = a + b
         carry = 1 if r > 0xFFFFFFFF else 0
         overflow = 1 if (a > 0 and b > 0 and r < 0) or (a < 0 and b < 0 and r > 0) else 0
-        return r & 0xFFFFFFFF, carry, overflow
-
-    def sub(self, a, b):
-        r = a - b
-        carry = 1 if r < 0 else 0
-        overflow = 1 if (a > 0 and b < 0 and r < 0) or (a < 0 and b > 0 and r > 0) else 0
         return r & 0xFFFFFFFF, carry, overflow
 
     def and_op(self, a, b):
@@ -62,21 +58,39 @@ class ALU:
     def equals(self, a, b):
         return 1 if a == b else 0
 
-    def update_flags(self, result):
-        self.flags['Z'] = 1 if result == 0 else 0
-        self.flags['N'] = 1 if result < 0 else 0
+    def update_flags(self, result, carry=0, overflow=0):
+        self.flags['Z'].set_data(1 if result == 0 else 0)
+        self.flags['N'].set_data(1 if result < 0 else 0)
+        self.flags['C'].set_data(carry)
+        self.flags['V'].set_data(overflow)
 
 
 class Multiplexer:
-    def __init__(self, data_path):
+    def __init__(self, data_path, latch):
         self.data_path = data_path
+        self.comparison_latch = latch  # Защелка для хранения аргумента сравнения
 
-    def select_sources(self, opcode, arg=None):
-        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR, Opcode.LESS_THAN, Opcode.GREATER_THAN,
-                      Opcode.EQUALS}:
+    def select_sources(self, opcode):
+        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR}:
+            b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
-            b = self.data_path.pop_from_stack() if arg is None else arg
+            return a, b
         else:
             a = self.data_path.pop_from_stack()
-            b = None
-        return a, b
+            b = self.comparison_latch.get_data()  # Получаем аргумент из защелки для сравнения
+            return a, b
+
+
+
+class Latch:
+    def __init__(self):
+        self.data = None
+
+    def set_data(self, value):
+        self.data = value
+
+    def get_data(self):
+        return self.data
+
+    def clear(self):
+        self.data = None

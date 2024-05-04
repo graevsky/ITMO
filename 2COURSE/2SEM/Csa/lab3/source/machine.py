@@ -2,7 +2,7 @@ from isa import Opcode, read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
-from alu import ALU, Multiplexer
+from alu import ALU, Multiplexer, Latch
 
 log_stream = StringIO()
 logging.basicConfig(
@@ -26,7 +26,9 @@ class DataPath:
         self.loop_max = 0  # Максимальное значение цикла
 
         self.alu = ALU()
-        self.mux = Multiplexer(self)
+        self.latch = Latch()
+        self.comp_latch = Latch()
+        self.mux = Multiplexer(self, self.comp_latch)
 
     def read_io(self, address):
         if address == IOAddresses.INPUT_BUFFER:
@@ -57,7 +59,8 @@ class DataPath:
 
     def push_to_stack(self, value):
         """Помещает значение в стек"""
-        self.stack.append(value)
+        self.latch.set_data(value)  # Значение сначала помещается в защелку
+        self.stack.append(self.latch.get_data())
         self.sp += 1
 
     def pop_from_stack(self):
@@ -113,8 +116,8 @@ class DataPath:
         else:
             raise Exception("Attempt to print from an empty stack")
 
-    def perform_operation(self, opcode, arg=None):
-        a, b = self.mux.select_sources(opcode, arg)
+    def perform_operation(self, opcode):
+        a, b = self.mux.select_sources(opcode)
         result = self.alu.execute(opcode, a, b)
         self.push_to_stack(result)
 
@@ -127,14 +130,16 @@ class ControlUnit:
         self.data_path = DataPath(memory)  # Общая память
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
+        self.instr_latch = Latch()
 
     def fetch_instruction(self):
         if self.pc < len(self.memory) and self.memory[self.pc] is not None:
-            return self.memory[self.pc]
+            self.instr_latch.set_data(self.memory[self.pc])
         else:
             raise IndexError("Program counter out of bounds")
 
-    def execute_instruction(self, instruction):
+    def execute_instruction(self):
+        instruction = self.instr_latch.get_data()
         opcode = instruction.get("opcode")
         arg = instruction.get("arg")
         logging.debug(f"Executing instruction at PC={self.pc}: {instruction}")
@@ -144,15 +149,20 @@ class ControlUnit:
             self.data_path.print_pstr(arg)
 
         elif opcode == Opcode.ADD.value:
-            self.data_path.perform_operation(opcode, arg)
+            self.data_path.perform_operation(opcode)
+
         elif opcode == Opcode.LESS_THAN.value:
-            self.data_path.perform_operation(opcode, arg)
+            self.data_path.comp_latch.set_data(arg)
+            self.data_path.perform_operation(opcode)
         elif opcode == Opcode.GREATER_THAN.value:
-            self.data_path.perform_operation(opcode, arg)
+            self.data_path.comp_latch.set_data(arg)
+            self.data_path.perform_operation(opcode)
         elif opcode == Opcode.EQUALS.value:
-            self.data_path.perform_operation(opcode, arg)
+            self.data_path.comp_latch.set_data(arg)
+            self.data_path.perform_operation(opcode)
+
         elif opcode == Opcode.MOD.value:
-            self.data_path.perform_operation(opcode, arg)
+            self.data_path.perform_operation(opcode)
         elif opcode == Opcode.AND.value:
             self.data_path.perform_operation(opcode)
         elif opcode == Opcode.OR.value:
@@ -215,8 +225,8 @@ class ControlUnit:
 
     def run(self):
         while not self.halted:
-            instr = self.fetch_instruction()
-            self.execute_instruction(instr)
+            self.fetch_instruction()
+            self.execute_instruction()
             self.tick_counter += 1
 
 
