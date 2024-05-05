@@ -2,7 +2,7 @@ from isa import Opcode, read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
-from alu import ALU, Multiplexer, Latch
+from util import ALU, Multiplexer, Latch
 
 log_stream = StringIO()
 logging.basicConfig(
