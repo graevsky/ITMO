@@ -15,7 +15,7 @@
     },
     {
         "index": 3,
-        "opcode": "EQUALS",
+        "opcode": "LESS_THAN",
         "arg": 20
     },
     {

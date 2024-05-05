@@ -3,6 +3,7 @@ import logging
 import sys
 from io import StringIO
 from util import ALU, Multiplexer, Latch
+from instruction_decoder import InstructionDecoder
 
 log_stream = StringIO()
 logging.basicConfig(
@@ -131,7 +132,6 @@ class DataPath:
 class ControlUnit:
     def __init__(self, memory):
         self.memory = memory  # Общая память для данных и программы
-        # self.pc = 0
         self.pc = Latch()  # Счётчик программ
         self.pc.set_data(0)
         self.halted = False
@@ -139,6 +139,7 @@ class ControlUnit:
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = Latch()
+        self.decoder = InstructionDecoder(self)  # Интеграция декодера
 
     def fetch_instruction(self):
         if self.pc.get_data() < len(self.memory) and self.memory[self.pc.get_data()] is not None:
@@ -148,88 +149,8 @@ class ControlUnit:
 
     def execute_instruction(self):
         instruction = self.instr_latch.get_data()
-        opcode = instruction.get("opcode")
-        arg = instruction.get("arg")
         logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
-        self.instr_counter += 1
-
-        if opcode == Opcode.PSTR:
-            self.data_path.print_pstr(arg)
-
-        elif opcode == Opcode.ADD.value:
-            self.data_path.perform_operation(opcode)
-
-        elif opcode == Opcode.LESS_THAN.value:
-            self.data_path.comp_latch.set_data(arg)
-            self.data_path.perform_operation(opcode)
-        elif opcode == Opcode.GREATER_THAN.value:
-            self.data_path.comp_latch.set_data(arg)
-            self.data_path.perform_operation(opcode)
-        elif opcode == Opcode.EQUALS.value:
-            self.data_path.comp_latch.set_data(arg)
-            self.data_path.perform_operation(opcode)
-
-        elif opcode == Opcode.MOD.value:
-            self.data_path.comp_latch.set_data(arg)
-            self.data_path.perform_operation(opcode)
-        elif opcode == Opcode.AND.value:
-            self.data_path.perform_operation(opcode)
-        elif opcode == Opcode.OR.value:
-            self.data_path.perform_operation(opcode)
-
-        elif opcode == Opcode.IF.value:
-            # Проверка условия и пропуск инструкций до THEN, если условие ложно
-            if not self.data_path.pop_from_stack():
-                # Пропустить все до THEN
-                self.pc.set_data(self.pc.get_data() + 1)  # Следующая инструкция до окончания if
-                while self.memory[self.pc.get_data()].get("opcode") != Opcode.THEN.value:
-                    self.pc.set_data(self.pc.get_data() + 1)
-                return  # Завершение текущей инструкции после перехода
-        elif opcode == Opcode.THEN.value:
-            # Заглушка
-            pass
-
-        elif opcode == Opcode.LOOP_START.value:
-            initial, max_value, step = arg
-            self.data_path.start_loop(initial, max_value, step)
-        elif opcode == Opcode.LOOP_END.value:
-            new_index = self.data_path.end_loop(arg)
-            if new_index is not None:
-                self.pc.set_data(new_index)
-            else:
-                self.pc.set_data(self.pc.get_data() + 1)
-            return
-
-        elif opcode == Opcode.PUSH.value:
-            if type(arg) == list:
-                self.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
-            elif arg == "i":
-                self.data_path.push_i()
-            else:
-                self.data_path.push_to_stack(arg)
-        elif opcode == Opcode.PRINT_TOP.value:
-            self.data_path.print_top()
-        elif opcode == Opcode.CR.value:
-            print()
-        elif opcode == Opcode.LOAD_ADDR.value:
-            address = int(arg, 16) if isinstance(arg, str) else int(arg)
-            self.data_path.read_io(address)
-
-        elif opcode == Opcode.ACCEPT.value:
-            self.data_path.accept_input(arg)
-        elif opcode == Opcode.TYPE.value:
-            self.data_path.signal_output()
-        elif opcode == Opcode.PRINT_STRING.value:
-            print(arg, end="")
-        elif opcode == Opcode.DUP.value:
-            if self.data_path.sp.get_data() > 0:
-                value = self.data_path.stack[-1]
-                self.data_path.push_to_stack(value)
-        elif opcode == Opcode.HALT.value:
-            self.halted = True
-        else:
-            raise ValueError(f"Unknown opcode: {opcode}")
-
+        self.decoder.decode(instruction)  # Использование декодера для выполнения инструкции
         self.pc.set_data(self.pc.get_data() + 1)
 
     def run(self):
@@ -268,4 +189,4 @@ if __name__ == "__main__":
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
 
-    main("./machine_code/prob1.json", "./machine_code/input.txt")
+    main("./machine_code/if.json", "./machine_code/input.txt")
