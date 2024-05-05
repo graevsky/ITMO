@@ -71,7 +71,7 @@ class Multiplexer:
         self.comparison_latch = latch  # Защелка для хранения аргумента сравнения
 
     def select_sources(self, opcode):
-        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR}:
+        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR}:
             b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
             return a, b
