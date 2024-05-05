@@ -70,15 +70,30 @@ class Multiplexer:
         self.data_path = data_path
         self.comparison_latch = latch  # Защелка для хранения аргумента сравнения
 
-    def select_sources(self, opcode):
-        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR}:
+    def select_sources(self, selector, *args):
+        if selector == "ALU":
+            # Выбор данных для ALU
+            return self.select_for_alu(*args)
+        elif selector == "IO":
+            # Выбор адреса для операций ввода/вывода
+            return self.select_for_io(*args)
+        else:
+            raise ValueError("Unknown selector")
+
+    def select_for_alu(self, opcode):
+        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR}:
             b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
             return a, b
         else:
             a = self.data_path.pop_from_stack()
-            b = self.comparison_latch.get_data()  # Получаем аргумент из защелки для сравнения
+            b = self.data_path.comp_latch.get_data()
             return a, b
+
+    def select_for_io(self, opcode, address=None):
+        if address:
+            return self.data_path.memory[address]
+        return None
 
 
 

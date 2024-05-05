@@ -37,11 +37,6 @@ class DataPath:
         self.comp_latch = Latch()
         self.mux = Multiplexer(self, self.comp_latch)
 
-    def read_io(self, address):
-        if address == IOAddresses.INPUT_BUFFER:
-            return self.input_buffer[: IOAddresses.INPUT_BUFFER_SIZE]
-        return self.memory[address]
-
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
             print(chr(value), end="")
@@ -124,7 +119,7 @@ class DataPath:
             raise Exception("Attempt to print from an empty stack")
 
     def perform_operation(self, opcode):
-        a, b = self.mux.select_sources(opcode)
+        a, b = self.mux.select_sources("ALU", opcode)
         result = self.alu.execute(opcode, a, b)
         self.push_to_stack(result)
 
@@ -189,4 +184,4 @@ if __name__ == "__main__":
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
 
-    main("./machine_code/if.json", "./machine_code/input.txt")
+    main("./machine_code/greet.json", "./machine_code/input.txt")

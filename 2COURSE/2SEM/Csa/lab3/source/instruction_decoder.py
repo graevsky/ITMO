@@ -73,10 +73,6 @@ class InstructionDecoder:
     def execute_cr(self, instruction):
         print()
 
-    def execute_load_addr(self, instruction):
-        address = int(instruction.get("arg"), 16) if isinstance(instruction.get("arg"), str) else int(
-            instruction.get("arg"))
-        self.control_unit.data_path.read_io(address)
 
     def execute_accept(self, instruction):
         self.control_unit.data_path.accept_input(instruction.get("arg"))
