@@ -53,7 +53,7 @@ public class PointBean {
             MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 
 
-            ObjectName dotsHitName = new ObjectName("org.example.MBean.classes:name=dotsHit");
+            ObjectName dotsHitN     ame = new ObjectName("org.example.MBean.classes:name=dotsHit");
             dotsHit = new DotsHit();
             try {
                 mBeanServer.registerMBean(dotsHit, dotsHitName);
