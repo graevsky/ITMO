@@ -1,4 +1,4 @@
-from isa import Opcode, read_code, IOAddresses
+from isa import read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
