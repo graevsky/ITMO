@@ -9,8 +9,9 @@ class Opcode(str, Enum):
     CR = "CR"  # Перевод строки
     ACCEPT = "ACCEPT"  # Принять элементы из пользовательского ввода
     SWAP = "SWAP"  # Заменить верхний и предыдущий элементы в стеке
-    TYPE = "TYPE"  # Вывести текст
+    TYPE = "TYPE"  # Вывести пользовательский ввод
     DUP = "DUP"  # Продублировать верхний элемент стека
+    SAVE_STRING = "SAVE_STRING"
     PRINT_STRING = "PRINT_STRING"  # Вывести строку из кода
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла

@@ -39,7 +39,7 @@ class DataPath:
         self.comp_latch = Latch()
         self.mux = Multiplexer(self)
 
-
+        self.push_latch = Latch()
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
             print(chr(value), end="")
@@ -187,4 +187,4 @@ if __name__ == "__main__":
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
 
-    main("./machine_code/mod.json", "./machine_code/input.txt")
+    main("./machine_code/greet.json", "./machine_code/input.txt")

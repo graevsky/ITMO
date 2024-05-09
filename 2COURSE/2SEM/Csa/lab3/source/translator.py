@@ -107,7 +107,7 @@ def translate(text):
                 code.append(
                     {
                         "index": index,
-                        "opcode": Opcode.PUSH.value,
+                        "opcode": Opcode.SAVE_STRING.value,
                         "arg": [string_storage_address, length, string],
                     }
                 )

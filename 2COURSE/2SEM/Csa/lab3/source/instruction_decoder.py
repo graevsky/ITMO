@@ -1,4 +1,6 @@
 from isa import Opcode
+
+
 class InstructionDecoder:
     def __init__(self, control_unit):
         self.control_unit = control_unit
@@ -56,13 +58,14 @@ class InstructionDecoder:
             self.control_unit.pc.set_data(new_index)
         else:
             return
-            # self.control_unit.pc.set_data(current_pc + 1)
+
+    def execute_save_string(self, instruction):
+        arg = instruction.get("arg")
+        self.control_unit.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
 
     def execute_push(self, instruction):
         arg = instruction.get("arg")
-        if isinstance(arg, list):
-            self.control_unit.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
-        elif arg == "i":
+        if arg == "i":
             self.control_unit.data_path.push_i()
         else:
             self.control_unit.data_path.push_to_stack(arg)
@@ -72,7 +75,6 @@ class InstructionDecoder:
 
     def execute_cr(self, instruction):
         print()
-
 
     def execute_accept(self, instruction):
         self.control_unit.data_path.accept_input(instruction.get("arg"))

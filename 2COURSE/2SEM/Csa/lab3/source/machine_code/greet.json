@@ -6,7 +6,7 @@
     },
     {
         "index": 1,
-        "opcode": "PUSH",
+        "opcode": "SAVE_STRING",
         "arg": [
             768,
             25,
@@ -35,7 +35,7 @@
     },
     {
         "index": 6,
-        "opcode": "PUSH",
+        "opcode": "SAVE_STRING",
         "arg": [
             794,
             6,
@@ -54,7 +54,7 @@
     },
     {
         "index": 9,
-        "opcode": "PUSH",
+        "opcode": "SAVE_STRING",
         "arg": [
             801,
             1,
