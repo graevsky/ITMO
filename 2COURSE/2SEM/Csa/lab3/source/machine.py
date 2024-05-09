@@ -165,7 +165,6 @@ def simulation(program, input_data):
         memory[i] = instruction
 
     control_unit = ControlUnit(memory,input_data)
-    #control_unit.data_path.set_input_buffer(input_data)
     control_unit.run()
 
     logs = log_stream.getvalue()  # Сбор логов, не закрывайте поток здесь
