@@ -2,7 +2,9 @@ from isa import Opcode, read_code, IOAddresses
 import logging
 import sys
 from io import StringIO
-from util import ALU, Multiplexer, Latch
+from ALU import ALU
+from MUX import Multiplexer
+from Latch import Latch
 from instruction_decoder import InstructionDecoder
 
 log_stream = StringIO()
@@ -18,28 +20,32 @@ class DataPath:
         self.loop_step = None
         self.memory = memory  # Общая память
         self.stack = []
-        self.sp = Latch()
+        self.sp = Latch() # Указатель стека
         self.sp.set_data(0)  # Указатель стека
         self.input_buffer = []  # Буфер для входных данных
-        self.ip = Latch()
-        """"""
+        self.ip = Latch() # Указатель input buffer
+
+        """loop control"""
         self.loop_index = Latch()
         self.loop_counter = Latch()
         self.loop_max = Latch()
-
         self.loop_index.set_data(0)
         self.loop_counter.set_data(0)
         self.loop_max.set_data(0)
 
+        """ALU"""
         self.alu_latch = Latch()
         self.alu = ALU(self)
 
-        self.latch = Latch()
+        self.latch = Latch() # ???
+
+        """MUX"""
         self.comp_latch = Latch()
         self.mux = Multiplexer(self)
 
         self.push_latch = Latch()
 
+        """input data"""
         self.data = inp_data
 
     def write_io(self, address, value):
@@ -104,7 +110,7 @@ class DataPath:
             self.loop_counter.set_data(self.loop_index.get_data())
             return None
 
-    # Добавление и получение значения i
+    # Добавление значения i
     def push_i(self):
         self.push_to_stack(self.loop_counter.get_data())
 

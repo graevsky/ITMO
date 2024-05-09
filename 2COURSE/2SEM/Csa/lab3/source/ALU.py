@@ -1,4 +1,5 @@
-from isa import Opcode, IOAddresses
+from isa import Opcode
+from Latch import Latch
 
 
 class ALU:
@@ -66,40 +67,3 @@ class ALU:
         self.flags['V'].set_data(overflow)
 
 
-class Multiplexer:
-    def __init__(self, data_path):
-        self.data_path = data_path
-
-    def select_sources(self, selector, *args):
-        if selector == "ALU":
-            return self.select_for_alu(*args)
-        elif selector == "PUSH_COUNTER":
-            return self.select_for_io(*args)
-        else:
-            raise ValueError("Unknown selector")
-
-    def select_for_alu(self, opcode):
-        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR}:
-            b = self.data_path.pop_from_stack()
-            a = self.data_path.pop_from_stack()
-            return a, b
-        else:
-            a = self.data_path.pop_from_stack()
-            b = self.data_path.comp_latch.get_data()
-            return a, b
-
-
-
-
-class Latch:
-    def __init__(self):
-        self.data = None
-
-    def set_data(self, value):
-        self.data = value
-
-    def get_data(self):
-        return self.data
-
-    def clear(self):
-        self.data = None
