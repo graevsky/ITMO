@@ -17,7 +17,6 @@ logging.basicConfig(
 
 class DataPath:
     def __init__(self, memory, inp_data):
-        self.loop_step = None
         self.memory = memory  # Общая память
         self.stack = []
         self.sp = Latch()  # Указатель стека
@@ -27,12 +26,8 @@ class DataPath:
         self.return_stack = []  # Вспомогательный стек для управления циклами
 
         """loop control"""
-        self.loop_index = Latch()
         self.loop_counter = Latch()
-        self.loop_max = Latch()
-        self.loop_index.set_data(0)
         self.loop_counter.set_data(0)
-        self.loop_max.set_data(0)
 
         """ALU"""
         self.alu_latch = Latch()
@@ -187,5 +182,9 @@ if __name__ == "__main__":
     else:
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
-
+    print("mod2")
+    main("./machine_code/mod2.json", "./machine_code/input.txt")
+    print("cycle")
     main("./machine_code/cycle.json", "./machine_code/input.txt")
+    print("prob1")
+    main("./machine_code/prob1.json", "./machine_code/input.txt")
