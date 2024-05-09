@@ -1,4 +1,4 @@
-from isa import Opcode
+from isa import Opcode, IOAddresses
 
 
 class ALU:
@@ -68,14 +68,12 @@ class ALU:
 class Multiplexer:
     def __init__(self, data_path, latch):
         self.data_path = data_path
-        self.comparison_latch = latch  # Защелка для хранения аргумента сравнения
+        self.comparison_latch = latch
 
     def select_sources(self, selector, *args):
         if selector == "ALU":
-            # Выбор данных для ALU
             return self.select_for_alu(*args)
         elif selector == "IO":
-            # Выбор адреса для операций ввода/вывода
             return self.select_for_io(*args)
         else:
             raise ValueError("Unknown selector")
@@ -94,7 +92,6 @@ class Multiplexer:
         if address:
             return self.data_path.memory[address]
         return None
-
 
 
 class Latch:

@@ -136,43 +136,12 @@ def translate(text):
                 ):
                     args = [int(commands[i + 1])]
                     opcode = Opcode.ACCEPT
-                    # code.append(
-                    #     {
-                    #         "index": index,
-                    #         "opcode": Opcode.LOAD_ADDR.value,
-                    #         "arg": IOAddresses.INPUT_BUFFER,
-                    #     }
-                    # )
-                    # index += 1
                     i += 3
             elif command == "type":
                 opcode = Opcode.TYPE
                 i += 1
             elif command == "dup":
                 opcode = Opcode.DUP
-            """
-            elif command == "LOAD_ADDR":
-                if i + 1 < len(commands):
-                    args = [
-                        (
-                            int(commands[i + 1], 16)
-                            if "x" in commands[i + 1]
-                            else int(commands[i + 1])
-                        )
-                    ]
-                    opcode = Opcode.LOAD_ADDR
-                    i += 2
-            elif command == "LOAD_ADDR":
-                if i + 1 < len(commands):
-                    opcode = Opcode.LOAD_ADDR
-                    address = (
-                        int(commands[i + 1], 16)
-                        if "x" in commands[i + 1]
-                        else int(commands[i + 1])
-                    )  # Сложно как то?
-                    args = [address]
-                    i += 1
-            """
             if opcode:
                 code.append(
                     {
