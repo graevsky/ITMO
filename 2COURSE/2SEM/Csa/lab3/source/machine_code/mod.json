@@ -30,26 +30,35 @@
     },
     {
         "index": 6,
-        "opcode": "PRINT_STRING",
-        "arg": "mod5"
+        "opcode": "SAVE_STRING",
+        "arg": [
+            768,
+            4,
+            "mod5"
+        ]
     },
     {
         "index": 7,
+        "opcode": "PSTR",
+        "arg": 768
+    },
+    {
+        "index": 8,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 8,
+        "index": 9,
         "opcode": "THEN",
         "arg": null
     },
     {
-        "index": 10,
+        "index": 11,
         "opcode": "LOOP_END",
         "arg": 0
     },
     {
-        "index": 11,
+        "index": 12,
         "opcode": "HALT",
         "arg": null
     }

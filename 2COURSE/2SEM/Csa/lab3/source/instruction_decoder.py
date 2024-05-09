@@ -77,13 +77,10 @@ class InstructionDecoder:
         print()
 
     def execute_accept(self, instruction):
-        self.control_unit.data_path.accept_input(instruction.get("arg"))
+        self.control_unit.data_path.accept_input()
 
     def execute_type(self, instruction):
-        self.control_unit.data_path.signal_output()
-
-    def execute_print_string(self, instruction):
-        print(instruction.get("arg"), end="")
+        self.control_unit.data_path.write_output()
 
     def execute_dup(self, instruction):
         if self.control_unit.data_path.sp.get_data() > 0:

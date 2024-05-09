@@ -12,7 +12,6 @@ class Opcode(str, Enum):
     TYPE = "TYPE"  # Вывести пользовательский ввод
     DUP = "DUP"  # Продублировать верхний элемент стека
     SAVE_STRING = "SAVE_STRING"
-    PRINT_STRING = "PRINT_STRING"  # Вывести строку из кода
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла
     PUSH = "PUSH"  # Добавить значение в стек

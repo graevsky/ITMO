@@ -73,7 +73,7 @@ class Multiplexer:
     def select_sources(self, selector, *args):
         if selector == "ALU":
             return self.select_for_alu(*args)
-        elif selector == "IO":
+        elif selector == "PUSH_COUNTER":
             return self.select_for_io(*args)
         else:
             raise ValueError("Unknown selector")
@@ -88,10 +88,7 @@ class Multiplexer:
             b = self.data_path.comp_latch.get_data()
             return a, b
 
-    def select_for_io(self, opcode, address=None):
-        if address:
-            return self.data_path.memory[address]
-        return None
+
 
 
 class Latch:

@@ -14,7 +14,7 @@ logging.basicConfig(
 
 
 class DataPath:
-    def __init__(self, memory):
+    def __init__(self, memory, inp_data):
         self.loop_step = None
         self.memory = memory  # Общая память
         self.stack = []
@@ -22,7 +22,6 @@ class DataPath:
         self.sp.set_data(0)  # Указатель стека
         self.input_buffer = []  # Буфер для входных данных
         self.ip = Latch()
-        self.ip.set_data(0)
         """"""
         self.loop_index = Latch()
         self.loop_counter = Latch()
@@ -40,25 +39,20 @@ class DataPath:
         self.mux = Multiplexer(self)
 
         self.push_latch = Latch()
+
+        self.data = inp_data
+
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
             print(chr(value), end="")
         else:
             self.memory[address] = value
 
-    def accept_input(self, size):
-        """Имитирует загрузку данных из буфера в стек или другие структуры данных."""
-        end_pos = min(self.ip.get_data() + size, len(self.input_buffer))
-        input_data = self.input_buffer[self.ip.get_data(): end_pos]
-        self.ip.set_data(end_pos)
-        for char in input_data:
-            self.push_to_stack(ord(char))
-
-    def set_input_buffer(self, data):
+    def accept_input(self):
         """Загружает входные данные в буфер и память."""
-        self.input_buffer = data
-        self.ip.set_data(0)
-        for i, char in enumerate(data):
+        self.input_buffer = self.data
+        self.ip.set_data(len(self.data))
+        for i, char in enumerate(self.data):
             if i < IOAddresses.INPUT_BUFFER_SIZE:
                 self.memory[IOAddresses.INPUT_BUFFER + i] = ord(char)
 
@@ -75,7 +69,7 @@ class DataPath:
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
-    def signal_output(self):
+    def write_output(self):
         """Выводит все данные из памяти начиная с адреса INPUT_BUFFER до первого нулевого символа."""
         start_address = IOAddresses.INPUT_BUFFER
         while self.memory[start_address] != 0:
@@ -128,16 +122,17 @@ class DataPath:
 
 
 class ControlUnit:
-    def __init__(self, memory):
+    def __init__(self, memory,input_data):
         self.memory = memory  # Общая память для данных и программы
         self.pc = Latch()  # Счётчик программ
         self.pc.set_data(0)
         self.halted = False
-        self.data_path = DataPath(memory)  # Общая память
+        self.data_path = DataPath(memory, input_data)  # Общая память
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = Latch()
         self.decoder = InstructionDecoder(self)  # Интеграция декодера
+
 
     def fetch_instruction(self):
         if self.pc.get_data() < len(self.memory) and self.memory[self.pc.get_data()] is not None:
@@ -163,8 +158,8 @@ def simulation(program, input_data):
     for i, instruction in enumerate(program):
         memory[i] = instruction
 
-    control_unit = ControlUnit(memory)
-    control_unit.data_path.set_input_buffer(input_data)
+    control_unit = ControlUnit(memory,input_data)
+    #control_unit.data_path.set_input_buffer(input_data)
     control_unit.run()
 
     logs = log_stream.getvalue()  # Сбор логов, не закрывайте поток здесь
@@ -187,4 +182,4 @@ if __name__ == "__main__":
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
 
-    main("./machine_code/greet.json", "./machine_code/input.txt")
+    main("./machine_code/prob1.json", "./machine_code/input.txt")
