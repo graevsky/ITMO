@@ -2,7 +2,8 @@ from isa import Opcode, IOAddresses
 
 
 class ALU:
-    def __init__(self):
+    def __init__(self, data_path):
+        self.data_path = data_path
         self.flags = {
             'Z': Latch(),  # Zero flag
             'C': Latch(),  # Carry flag
@@ -30,7 +31,7 @@ class ALU:
             result = self.equals(a, b)
 
         self.update_flags(result, carry, overflow)
-        return result
+        self.data_path.alu_latch.set_data(result)
 
     def add(self, a, b):
         r = a + b
@@ -66,9 +67,8 @@ class ALU:
 
 
 class Multiplexer:
-    def __init__(self, data_path, latch):
+    def __init__(self, data_path):
         self.data_path = data_path
-        self.comparison_latch = latch
 
     def select_sources(self, selector, *args):
         if selector == "ALU":
@@ -79,7 +79,7 @@ class Multiplexer:
             raise ValueError("Unknown selector")
 
     def select_for_alu(self, opcode):
-        if opcode in {Opcode.ADD, Opcode.MOD, Opcode.AND, Opcode.OR}:
+        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR}:
             b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
             return a, b

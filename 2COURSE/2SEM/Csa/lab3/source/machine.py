@@ -32,10 +32,13 @@ class DataPath:
         self.loop_counter.set_data(0)
         self.loop_max.set_data(0)
 
-        self.alu = ALU()
+        self.alu_latch = Latch()
+        self.alu = ALU(self)
+
         self.latch = Latch()
         self.comp_latch = Latch()
-        self.mux = Multiplexer(self, self.comp_latch)
+        self.mux = Multiplexer(self)
+
 
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
@@ -120,8 +123,8 @@ class DataPath:
 
     def perform_operation(self, opcode):
         a, b = self.mux.select_sources("ALU", opcode)
-        result = self.alu.execute(opcode, a, b)
-        self.push_to_stack(result)
+        self.alu.execute(opcode, a, b)
+        self.push_to_stack(self.alu_latch.get_data())
 
 
 class ControlUnit:
@@ -184,4 +187,4 @@ if __name__ == "__main__":
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
 
-    main("./machine_code/greet.json", "./machine_code/input.txt")
+    main("./machine_code/mod.json", "./machine_code/input.txt")
