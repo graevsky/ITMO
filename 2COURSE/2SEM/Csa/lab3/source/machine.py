@@ -26,7 +26,6 @@ class DataPath:
         self.ip = Latch()  # Указатель input buffer
         self.return_stack = []  # Вспомогательный стек для управления циклами
 
-
         """loop control"""
         self.loop_index = Latch()
         self.loop_counter = Latch()
@@ -107,13 +106,13 @@ class DataPath:
     def end_loop(self):
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
-        loop_context = self.return_stack.pop()  # извлекаем контекст для изменения
+        loop_context = self.return_stack.pop()
         sp, initial, max_value, step = loop_context
-        initial += step  # обновляем начальное значение
+        initial += step
         if initial <= max_value:
-            self.return_stack.append((sp, initial, max_value, step))  # сохраняем обновленный контекст обратно в стек
-            self.loop_counter.set_data(initial)  # обновляем счетчик цикла
-            return True  # Продолжить цикл
+            self.return_stack.append((sp, initial, max_value, step))
+            self.loop_counter.set_data(initial)
+            return True  #
         else:
             return False  # Завершить цикл
 

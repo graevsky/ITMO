@@ -55,9 +55,7 @@ class InstructionDecoder:
     def execute_loop_end(self, instruction):
         continue_loop = self.control_unit.data_path.end_loop()
         if continue_loop:
-            # Возвращение к началу цикла
             self.control_unit.pc.set_data(instruction.get("arg"))
-        # Если цикл завершен, продолжаем дальше
 
     def execute_save_string(self, instruction):
         arg = instruction.get("arg")
