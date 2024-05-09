@@ -65,10 +65,12 @@ class InstructionDecoder:
 
     def execute_push(self, instruction):
         arg = instruction.get("arg")
-        if arg == "i":
-            self.control_unit.data_path.push_i()
+        if isinstance(arg, int):
+            self.control_unit.data_path.push_to_stack("direct_value", arg)
+        elif arg == "i":
+            self.control_unit.data_path.push_to_stack("loop_counter")
         else:
-            self.control_unit.data_path.push_to_stack(arg)
+            raise ValueError("Unsupported argument for PUSH operation")
 
     def execute_print_top(self, instruction):
         self.control_unit.data_path.print_top()
@@ -83,9 +85,7 @@ class InstructionDecoder:
         self.control_unit.data_path.write_output()
 
     def execute_dup(self, instruction):
-        if self.control_unit.data_path.sp.get_data() > 0:
-            value = self.control_unit.data_path.stack[-1]
-            self.control_unit.data_path.push_to_stack(value)
+        self.control_unit.data_path.push_to_stack("duplicate_top")
 
     def execute_halt(self, instruction):
         self.control_unit.halted = True

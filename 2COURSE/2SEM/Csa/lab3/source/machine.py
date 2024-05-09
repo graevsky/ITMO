@@ -20,10 +20,10 @@ class DataPath:
         self.loop_step = None
         self.memory = memory  # Общая память
         self.stack = []
-        self.sp = Latch() # Указатель стека
+        self.sp = Latch()  # Указатель стека
         self.sp.set_data(0)  # Указатель стека
         self.input_buffer = []  # Буфер для входных данных
-        self.ip = Latch() # Указатель input buffer
+        self.ip = Latch()  # Указатель input buffer
 
         """loop control"""
         self.loop_index = Latch()
@@ -37,7 +37,7 @@ class DataPath:
         self.alu_latch = Latch()
         self.alu = ALU(self)
 
-        self.latch = Latch() # ???
+        self.latch = Latch()  # ???
 
         """MUX"""
         self.comp_latch = Latch()
@@ -62,9 +62,13 @@ class DataPath:
             if i < IOAddresses.INPUT_BUFFER_SIZE:
                 self.memory[IOAddresses.INPUT_BUFFER + i] = ord(char)
 
-    def push_to_stack(self, value):
-        """Помещает значение в стек"""
-        self.latch.set_data(value)  # Значение сначала помещается в защелку
+    def push_to_stack(self, source_type, value=None):
+        """Помещает значение в стек, выбранное мультиплексором"""
+        if source_type == "direct_value":
+            self.latch.set_data(value)
+        else:
+            result = self.mux.select_for_stack(source_type)
+            self.latch.set_data(result)
         self.stack.append(self.latch.get_data())
         self.sp.set_data(self.sp.get_data() + 1)
 
@@ -110,10 +114,6 @@ class DataPath:
             self.loop_counter.set_data(self.loop_index.get_data())
             return None
 
-    # Добавление значения i
-    def push_i(self):
-        self.push_to_stack(self.loop_counter.get_data())
-
     def print_top(self):
         if self.stack:
             print(self.stack[-1])
@@ -124,11 +124,11 @@ class DataPath:
     def perform_operation(self, opcode):
         a, b = self.mux.select_sources("ALU", opcode)
         self.alu.execute(opcode, a, b)
-        self.push_to_stack(self.alu_latch.get_data())
+        self.push_to_stack("alu_result")
 
 
 class ControlUnit:
-    def __init__(self, memory,input_data):
+    def __init__(self, memory, input_data):
         self.memory = memory  # Общая память для данных и программы
         self.pc = Latch()  # Счётчик программ
         self.pc.set_data(0)
@@ -138,7 +138,6 @@ class ControlUnit:
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = Latch()
         self.decoder = InstructionDecoder(self)  # Декодер
-
 
     def fetch_instruction(self):
         if self.pc.get_data() < len(self.memory) and self.memory[self.pc.get_data()] is not None:
@@ -164,7 +163,7 @@ def simulation(program, input_data):
     for i, instruction in enumerate(program):
         memory[i] = instruction
 
-    control_unit = ControlUnit(memory,input_data)
+    control_unit = ControlUnit(memory, input_data)
     control_unit.run()
 
     logs = log_stream.getvalue()  # Сбор логов, не закрывайте поток здесь
