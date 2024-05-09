@@ -24,6 +24,8 @@ class DataPath:
         self.sp.set_data(0)  # Указатель стека
         self.input_buffer = []  # Буфер для входных данных
         self.ip = Latch()  # Указатель input buffer
+        self.return_stack = []  # Вспомогательный стек для управления циклами
+
 
         """loop control"""
         self.loop_index = Latch()
@@ -100,19 +102,20 @@ class DataPath:
                           self.memory[address + 1 + i])
 
     def start_loop(self, initial, max_value, step):
-        if self.loop_step is None:
-            self.loop_counter.set_data(initial)
-            self.loop_max.set_data(max_value)
-            self.loop_step = step
-            self.loop_index.set_data(self.sp.get_data())
+        self.return_stack.append((self.sp.get_data(), initial, max_value, step))
 
-    def end_loop(self, start_index):
-        self.loop_counter.set_data(self.loop_counter.get_data() + self.loop_step)
-        if self.loop_counter.get_data() <= self.loop_max.get_data():
-            return start_index
+    def end_loop(self):
+        if len(self.return_stack) == 0:
+            raise Exception("No loop context in return stack")
+        loop_context = self.return_stack.pop()  # извлекаем контекст для изменения
+        sp, initial, max_value, step = loop_context
+        initial += step  # обновляем начальное значение
+        if initial <= max_value:
+            self.return_stack.append((sp, initial, max_value, step))  # сохраняем обновленный контекст обратно в стек
+            self.loop_counter.set_data(initial)  # обновляем счетчик цикла
+            return True  # Продолжить цикл
         else:
-            self.loop_counter.set_data(self.loop_index.get_data())
-            return None
+            return False  # Завершить цикл
 
     def print_top(self):
         if self.stack:
