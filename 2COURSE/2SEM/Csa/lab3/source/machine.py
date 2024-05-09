@@ -137,7 +137,7 @@ class ControlUnit:
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = Latch()
-        self.decoder = InstructionDecoder(self)  # Интеграция декодера
+        self.decoder = InstructionDecoder(self)  # Декодера
 
 
     def fetch_instruction(self):
