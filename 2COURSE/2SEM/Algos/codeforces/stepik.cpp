@@ -1,276 +1,242 @@
-#include <algorithm>
-#include <iostream>
-#include <map>
-#include <vector>
+class Node:
+def __init__(self, val: int, parent, left, right):
+    self.val = val
+    self.parent = parent
+    self.left = left
+    self.right = right
+    self.sum = val
 
-using namespace std;
+def set_child(self, node, sel):
+    if sel == "left":
+        self.left = node
+        if node:
+            node.parent = self
+    else:
+        self.right = node
+        if node:
+            node.parent = self
 
 
-class Node {
-public:
-  int val;
-  Node *parent;
-  Node *l;
-  Node *r;
-  long long sum;
+class Tree:
+def __init__(self):
+    self.root = None
 
-  Node(int value)
-      : val(value), parent(nullptr), l(nullptr), r(nullptr), sum(value) {}
+def set_root(self, node):
+    self.root = node
+    if node:
+        node.parent = None
 
-  void setL(Node *node) {
-    l = node;
-    //
-    if (node) {
-      node->parent = this;
-    }
-  }
+def move_left(self, node: Node):
+    parent = node.parent
+    pParent = parent.parent if parent else None
 
-  void setR(Node *node) {
-    r = node;
-    //
-    if (node) {
-      node->parent = this;
-    }
-  }
-};
+    node.sum += parent.val
+    if parent.right:
+        node.sum += parent.right.sum
 
-class Tree {
-private:
-  Node *treeRoot;
+    parent.sum -= node.val
+    if node.left:
+        parent.sum -= node.left.sum
 
-public:
-  Tree() : treeRoot(nullptr) {}
+    parent.set_child(node.right, "left")
+    node.set_child(parent, "right")
 
-  void setRoot(Node *node) {
-    treeRoot = node;
-    //
-    if (node) {
-      node->parent = nullptr;
-    }
-  }
+    if pParent is None:
+        self.set_root(node)
+        return
 
-  void moveLeft(Node *node) {
-    Node *parent = node->parent;
-    Node *pParent = parent ? parent->parent : nullptr;
+    if pParent.left == parent:
+        pParent.set_child(node, "left")
+    else:
+        pParent.set_child(node, "right")
 
-    node->sum += parent->val + (parent->r ? parent->r->sum : 0);
-    parent->sum -= node->val + (node->l ? node->l->sum : 0);
+def move_right(self, node: Node):
+    parent = node.parent
+    pParent = parent.parent if parent else None
 
-    parent->setL(node->r);
-    node->setR(parent);
+    node.sum += parent.val
+    if parent.left:
+        node.sum += parent.left.sum
 
-    if (!pParent) {
-      setRoot(node);
-    } else {
-      if (pParent->l == parent) {
-        pParent->setL(node);
-      } else {
-        pParent->setR(node);
-      }
-    }
-  }
+    parent.sum -= node.val
+    if node.right:
+        parent.sum -= node.right.sum
 
-  void moveRight(Node *node) {
-    Node *parent = node->parent;
-    Node *pParent = parent ? parent->parent : nullptr;
+    parent.set_child(node.left, "right")
+    node.set_child(parent, "left")
 
-    node->sum += parent->val + (parent->l ? parent->l->sum : 0);
-    parent->sum -= node->val + (node->r ? node->r->sum : 0);
+    if pParent is None:
+        self.set_root(node)
+        return
 
-    parent->setR(node->l);
-    node->setL(parent);
+    if pParent.left == parent:
+        pParent.set_child(node, "left")
+    else:
+        pParent.set_child(node, "right")
 
-    if (!pParent) {
-      setRoot(node);
-    } else {
-      if (pParent->l == parent) {
-        pParent->setL(node);
-      } else {
-        pParent->setR(node);
-      }
-    }
-  }
+def splay(self, node: Node):
+    while True:
+        parent = node.parent
+        pParent = parent.parent if parent else None
 
-  void action(Node *node) {
-    while (node->parent) {
-      Node *parent = node->parent;
-      Node *pParent = parent->parent;
-      if (!pParent) {
-        if (parent->l == node)
-          moveLeft(node);
-        else
-          moveRight(node);
-      } else {
-        if (pParent->l == parent) {
-          if (parent->l == node) {
-            moveLeft(parent);
-            moveLeft(node);
-          } else {
-            moveRight(node);
-            moveLeft(node);
-          }
-        } else {
-          if (parent->r == node) {
-            moveRight(parent);
-            moveRight(node);
-          } else {
-            moveLeft(node);
-            moveRight(node);
-          }
-        }
-      }
-    }
-  }
+        if parent is None:
+            return
 
-  Node *get_max(Node *node) {
-    while (node->r)
-      node = node->r;
-    return node;
-  }
+        if pParent is None:
+            if parent.left == node:
+                self.move_left(node)
+            else:
+                self.move_right(node)
+        else:
+            if pParent.left == parent and parent.left == node:
+                self.move_left(parent)
+                self.move_left(node)
+            elif pParent.right == parent and parent.right == node:
+                self.move_right(parent)
+                self.move_right(node)
+            elif pParent.left == parent and parent.right == node:
+                self.move_right(node)
+                self.move_left(node)
+            elif pParent.right == parent and parent.left == node:
+                self.move_left(node)
+                self.move_right(node)
 
-  void add(int value) {
-    if (!treeRoot) {
-      setRoot(new Node(value));
-      return;
-    }
-    Node *current = treeRoot, *max_node = nullptr;
-    while (current) {
-      if (current->val == value)
-        return;
-      if (current->val > value) {
-        current = current->l;
-      } else {
-        max_node = current;
-        current = current->r;
-      }
-    }
-    Node *new_node = new Node(value);
-    if (!max_node) {
-      new_node->setR(treeRoot);
-      new_node->sum += treeRoot->sum;
-      setRoot(new_node);
-      return;
-    }
+def add_value(self, val):
+    if self.root is None:
+        self.set_root(Node(val, None, None, None))
+        return
+    max_node = None
+    current = self.root
+    while current:
+        if current.val == val:
+            return
+        if current.val > val:
+            current = current.left
+        else:
+            max_node = current
+            current = current.right
+    new_node = Node(val, None, None, None)
+    if max_node is None:
+        new_node.set_child(self.root, "right")
+        new_node.sum += self.root.sum
+        self.set_root(new_node)
+        return
 
-    action(max_node);
-    new_node->sum += treeRoot->sum;
-    Node *r_child = treeRoot->r;
-    if (r_child)
-      treeRoot->sum -= r_child->sum;
-    treeRoot->r = nullptr;
+    self.splay(max_node)
+    new_node.sum += self.root.sum
+    right_child = self.root.right
+    max_node.right = None
+    if right_child:
+        self.root.sum -= right_child.sum
 
-    new_node->setL(treeRoot);
-    new_node->setR(r_child);
+    new_node.set_child(self.root, "left")
+    new_node.set_child(right_child, "right")
 
-    setRoot(new_node);
-  }
+    self.set_root(new_node)
 
-  void remove(int value) {
-    Node *cur = find(value);
-    if (!cur)
-      return;
+def remove_value(self, val):
+    current = self.find_value(val)
+    if not current:
+        return
+    self.splay(current)
+    if current.left is None:
+        tr.set_root(current.right)
+        return
 
-    action(cur);
-    if (!cur->l) {
-      setRoot(cur->r);
-    } else {
-      Node *max_left = get_max(cur->l);
-      action(max_left);
-      max_left->sum -= cur->val;
-      max_left->setR(cur->r);
-      setRoot(max_left);
-    }
-  }
+    max_fo_find = current.left
+    while max_fo_find.right:
+        max_fo_find = max_fo_find.right
+    max_left = max_fo_find
 
-  Node *find(int value) {
-    Node *cur = treeRoot, *prev = nullptr;
-    while (cur) {
-      prev = cur;
-      if (cur->val == value) {
-        action(cur);
-        return cur;
-      }
-      if (cur->val > value)
-        cur = cur->l;
-      else
-        cur = cur->r;
-    }
-    if (prev)
-      action(prev);
-    return nullptr;
-  }
+    self.splay(max_left)
+    max_left.sum -= current.val
+    max_left.set_child(current.right, "right")
+    tr.set_root(max_left)
 
-  long long sum(int left_value, int right_value) {
-    if (!treeRoot)
-      return 0;
-    Node *min_node = nullptr, *max_node = nullptr;
-    long long s = 0;
-    Node *cur = treeRoot;
+def find_value(self, val):
+    if self.root is None:
+        return None
+    previous = None
+    current = self.root
+    while current:
+        previous = current
+        if current.val == val:
+            return current
+        elif current.val > val:
+            current = current.left
+        else:
+            current = current.right
+    self.splay(previous)
+    return None
 
-    while (cur) {
-      if (cur->val >= left_value) {
-        min_node = cur;
-        cur = cur->l;
-      } else {
-        cur = cur->r;
-      }
-    }
+def sum(self, left_val, right_val):
+    if self.root is None:
+        return 0
+    min_node = None
+    max_node = None
+    res_sum = 0
 
-    cur = treeRoot;
-    while (cur) {
-      if (cur->val <= right_value) {
-        max_node = cur;
-        cur = cur->r;
-      } else {
-        cur = cur->l;
-      }
-    }
+    current = self.root
+    while current:
+        if current.val >= left_val:
+            min_node = current
+            current = current.left
+        else:
+            current = current.right
 
-    if (!min_node || !max_node)
-      return 0;
-    action(min_node);
-    s += min_node->val;
-    if (min_node->r)
-      s += min_node->r->sum;
+    current = self.root
+    while current:
+        if current.val <= right_val:
+            max_node = current
+            current = current.right
+        else:
+            current = current.left
 
-    action(max_node);
-    if (max_node->r)
-      s -= max_node->r->sum;
+    if min_node is None or max_node is None:
+        return 0
+    self.splay(min_node)
+    res_sum += min_node.val
+    if min_node.right:
+        res_sum += min_node.right.sum
 
-    return s;
-  }
-};
+    self.splay(max_node)
+    if max_node.right:
+        res_sum -= max_node.right.sum
 
-int modFun(int x, int sum) { return (x + sum) % 1000000001; }
+    return res_sum
 
-int main() {
-  int n, x;
-  cin >> n;
-  Tree tree;
-  long long last_sum = 0;
-  string inp;
-  for (int i = 0; i < n; i++) {
-    cin >> inp;
-    if (inp == "+") {
-      cin >> x;
-      tree.add(modFun(x,last_sum));
-    } else if (inp == "-") {
-      cin >> x;
-      tree.remove(modFun(x,last_sum));
-    } else if (inp == "?") {
-      cin >> x;
-      Node *node = tree.find(modFun(x,last_sum));
-      cout << (node ? "Found" : "Not found") << endl;
-    } else if (inp == "s") {
-      int l, r;
-      cin >> l >> r;
-      l = modFun(l,last_sum);
-      r = modFun(r,last_sum);
-      if (l > r)
-        swap(l, r);
-      last_sum = tree.sum(l, r);
-      cout << last_sum << endl;
-    }
-  }
-  return 0;
-}
+
+def modFun(x, last_sum):
+return (x + last_sum) % 1_000_000_001
+
+
+n = input()
+tr = Tree()
+res = 0
+for i in range(int(n)):
+operation = input().split()
+
+if operation[0] == "+":
+    num_to_add = int(operation[1])
+    tr.add_value(modFun(num_to_add, res))
+elif operation[0] == "-":
+    num_to_add = int(operation[1])
+    tr.remove_value(modFun(num_to_add, res))
+elif operation[0] == "?":
+    num_to_add = int(operation[1])
+    node = tr.find_value(modFun(num_to_add, res))
+    if node:
+        print("Found")
+    else:
+        print("Not found")
+elif operation[0] == "s":
+    left = int(operation[1])
+    right = int(operation[2])
+
+    left = modFun(left, res)
+    right = modFun(right, res)
+
+    if left > right:
+        left, right = right, left
+    res = tr.sum(left, right)
+    print(res)
