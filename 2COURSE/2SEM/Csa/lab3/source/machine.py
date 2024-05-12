@@ -1,3 +1,5 @@
+import os
+
 from isa import read_code, IOAddresses
 import logging
 import sys
@@ -33,7 +35,7 @@ class DataPath:
         self.alu_latch = Latch()
         self.alu = ALU(self)
 
-        self.latch = Latch()  # ???
+        self.latch = Latch()  # Кто ты воин
 
         """MUX"""
         self.comp_latch = Latch()
@@ -49,6 +51,7 @@ class DataPath:
         self.jump_latch.set_data(0)
 
     def write_io(self, address, value):
+        """Вывод IO"""
         if address == IOAddresses.OUTPUT_ADDRESS:
             print(chr(value), end="")
         else:
@@ -89,20 +92,23 @@ class DataPath:
 
     def store_string_in_memory(self, address, length, string_data):
         """Сохранение строки в память начиная с указанного адреса."""
-        self.memory[address] = length  # Сохраняем длину строки в первой ячейке
+        self.memory[address] = length
         for i in range(length):
             self.memory[address + 1 + i] = ord(string_data[i])
 
     def print_pstr(self, address):
+        """Вывод lenght-prefixed строки из памяти"""
         length = self.memory[address]
         for i in range(length):
             self.write_io(IOAddresses.OUTPUT_ADDRESS,
                           self.memory[address + 1 + i])
 
     def start_loop(self, initial, max_value, step):
+        """Запуск цикла через return stack"""
         self.return_stack.append((self.sp.get_data(), initial, max_value, step))
 
     def end_loop(self):
+        """Проверка условия и остановка цикла"""
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
         loop_context = self.return_stack.pop()
@@ -111,18 +117,19 @@ class DataPath:
         if initial <= max_value:
             self.return_stack.append((sp, initial, max_value, step))
             self.loop_counter.set_data(initial)
-            return True  #
+            return True
         else:
             return False  # Завершить цикл
 
     def print_top(self):
+        """Вывести верхний элемент стека"""
         if self.stack:
-            print(self.stack[-1])
-            self.stack.pop()
+            print(self.pop_from_stack())
         else:
             raise Exception("Attempt to print from an empty stack")
 
     def perform_operation(self, opcode):
+        """Выполнение операций через ALU"""
         a, b = self.mux.select_sources("ALU", opcode)
         self.alu.execute(opcode, a, b)
         self.push_to_stack("alu_result")
@@ -148,17 +155,11 @@ class ControlUnit:
 
     def execute_instruction(self):
         instruction = self.instr_latch.get_data()
-        #print(instruction)
         logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
-        self.decoder.decode(instruction)  # Использование декодера для выполнения инструкции
-        # print("Executing")
-        # print(instruction)
-        # print("PC is ")
-        # print(self.pc.get_data())
+        self.decoder.decode(instruction)
         if self.data_path.jump_latch.get_data() == 0:
             self.pc.set_data(self.pc.get_data() + 1)
         self.data_path.jump_latch.set_data(0)
-
 
     def run(self):
         while not self.halted:
@@ -175,8 +176,16 @@ def simulation(program, input_data):
     control_unit = ControlUnit(memory, input_data)
     control_unit.run()
 
-    logs = log_stream.getvalue()  # Сбор логов, не закрывайте поток здесь
+    logs = log_stream.getvalue()
     return control_unit.instr_counter, control_unit.tick_counter, logs
+
+
+def run_all_programs(directory, input_file):
+    for file in os.listdir(directory):
+        if file.endswith('.json'):
+            code_file = os.path.join(directory, file)
+            print(f"Processing {code_file}")
+            main(code_file, input_file)
 
 
 def main(code_file, input_file):
@@ -188,9 +197,12 @@ def main(code_file, input_file):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         print("Usage: python machine.py <machine_code_file> <input_file>")
+    elif sys.argv[1] == '-a':
+        input_file = sys.argv[2]
+        machine_code_dir = './source/machine_code'
+        run_all_programs(machine_code_dir, input_file)
     else:
         _, code_file, input_file = sys.argv
-        # main(code_file, input_file)
-    main("./machine_code/mod.json", "inp/input.txt")
+        main(code_file, input_file)

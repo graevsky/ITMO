@@ -56,20 +56,25 @@ def translate(text):
                         "arg": [initial_value, max_value, step],
                     }
                 )
+                index += 1
                 i += 3
             elif command == "loop":
                 if not loop_stack:
                     raise ValueError("Mismatched 'loop' without 'do'")
 
                 start_index = loop_stack.pop()
-                args.append(start_index)
-                opcode = Opcode.LOOP_END
-                # index += 1
+                code.append(
+                    {
+                        "index": index,
+                        "opcode": Opcode.LOOP_END.value,
+                        "arg": start_index
+                    }
+                )
+                index += 1
                 i += 1
             elif command == "i":
                 args.append("i")
                 opcode = Opcode.PUSH
-                index += 1
             elif command == ".":
                 code.append(
                     {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
@@ -81,10 +86,8 @@ def translate(text):
                 i += 2
             elif command == "and":
                 opcode = Opcode.AND
-                i += 1
             elif command == "or":
                 opcode = Opcode.OR
-                i += 1
             elif command == "<":
                 args.append(int(commands[0]))
                 opcode = Opcode.LESS_THAN
@@ -130,11 +133,11 @@ def translate(text):
                 index += 1
                 string_storage_address += length + 1
                 i += len(commands) - i
+
             elif command == "cr":
                 opcode = Opcode.CR
             elif command == "+":
                 opcode = Opcode.ADD
-                i += 1
             elif command == "pad":
                 if (
                         i + 2 < len(commands)
@@ -146,7 +149,6 @@ def translate(text):
                     i += 3
             elif command == "type":
                 opcode = Opcode.TYPE
-                i += 1
             elif command == "dup":
                 opcode = Opcode.DUP
             if opcode:

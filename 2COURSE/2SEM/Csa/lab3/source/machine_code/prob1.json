@@ -29,52 +29,52 @@
         "arg": 0
     },
     {
-        "index": 6,
+        "index": 5,
         "opcode": "PUSH",
         "arg": "i"
     },
     {
-        "index": 7,
+        "index": 6,
         "opcode": "MOD",
         "arg": 5
     },
     {
-        "index": 8,
+        "index": 7,
         "opcode": "EQUALS",
         "arg": 0
     },
     {
-        "index": 9,
+        "index": 8,
         "opcode": "OR",
         "arg": null
     },
     {
-        "index": 10,
+        "index": 9,
         "opcode": "JZ",
-        "arg": null
+        "arg": 12
     },
     {
-        "index": 12,
+        "index": 10,
         "opcode": "PUSH",
-        "arg": 14
+        "arg": "i"
     },
     {
-        "index": 13,
+        "index": 11,
         "opcode": "ADD",
         "arg": null
     },
     {
-        "index": 14,
+        "index": 12,
         "opcode": "LOOP_END",
         "arg": 1
     },
     {
-        "index": 15,
+        "index": 13,
         "opcode": "PRINT_TOP",
         "arg": null
     },
     {
-        "index": 16,
+        "index": 14,
         "opcode": "HALT",
         "arg": null
     }

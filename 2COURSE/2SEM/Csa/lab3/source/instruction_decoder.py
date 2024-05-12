@@ -57,7 +57,7 @@ class InstructionDecoder:
         self.control_unit.pc.set_data(target)
 
     def execute_jz(self, instruction):
-        condition = self.control_unit.data_path.stack[-1]
+        condition = self.control_unit.data_path.pop_from_stack()
         if condition == 0:
             target = instruction.get("arg")
             self.control_unit.pc.set_data(target)
