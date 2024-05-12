@@ -194,8 +194,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Translate FORTH code to machine code.")
     parser.add_argument('source_file', nargs='?', help="The FORTH source file to translate.")
     parser.add_argument('-a', '--all', action='store_true', help="Process all FORTH files in the specified directory.")
-    parser.add_argument('-i', '--input_folder', default='./progs', help="Directory containing FORTH files.")
-    parser.add_argument('-o', '--output_folder', default='./source/machine_code',
+    parser.add_argument('-i', '--input_folder', action='store_true', default='./progs',
+                        help="Directory containing FORTH files.")
+    parser.add_argument('-o', '--output_folder', action='store_true', default='./source/machine_code',
                         help="Directory to store the output JSON files.")
     return parser.parse_args()
 
