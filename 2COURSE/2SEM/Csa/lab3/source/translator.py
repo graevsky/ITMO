@@ -1,3 +1,4 @@
+import argparse
 import os
 
 from isa import Opcode, write_code, IOAddresses
@@ -186,7 +187,26 @@ def main(source_file):
     print(f"Machine code has been written to {output_file}")
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Code translator (.forth => machine code) for forth stack processor.")
+    parser.add_argument("-a", "--all", action="store_true",
+                        help="Translates all .forth programs from progs folder and its subfolders and store result ("
+                             ".json machine code) in ./source/machine_code folder.")
+    parser.add_argument("source_file",type=str,nargs='?', default=None, help="Path to .forth program.")
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
+    args = parse_args()
+    if args.all:
+        input_folder = './progs'
+        output_folder = './source/machine_code'
+        process_dir(input_folder,output_folder)
+    elif args.source_file:
+        main(args.source_file)
+    else:
+        print("Invalid usage. Run 'python translator.py -h for help.")
+    """
     if len(sys.argv) < 2:
         print("Usage: python translator.py <source_file>")
     elif sys.argv[1] == '-a':
@@ -196,3 +216,4 @@ if __name__ == "__main__":
     else:
         _, source_file = sys.argv
         main(source_file)
+    """

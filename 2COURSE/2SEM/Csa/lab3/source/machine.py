@@ -1,3 +1,4 @@
+import argparse
 import os
 
 from isa import read_code, IOAddresses
@@ -106,6 +107,7 @@ class DataPath:
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
         self.return_stack.append((self.sp.get_data(), initial, max_value, step))
+        self.loop_counter.set_data(initial)
 
     def end_loop(self):
         """Проверка условия и остановка цикла"""
@@ -196,13 +198,22 @@ def main(code_file, input_file):
     print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run FORTH machine code simulations.")
+    parser.add_argument("-a", "--all", action="store_true", help="Process all JSON files in the machine code directory.")
+    parser.add_argument("input_file", type=str, nargs='?', default=None, help="Path to the input file for the machine.")
+    parser.add_argument("machine_code_file", type=str, nargs='?', help="Path to a specific machine code file to run.")
+    return parser.parse_args()
+
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python machine.py <machine_code_file> <input_file>")
-    elif sys.argv[1] == '-a':
-        input_file = sys.argv[2]
-        machine_code_dir = './source/machine_code'
-        run_all_programs(machine_code_dir, input_file)
+    args = parse_args()
+    if args.all:
+        if args.input_file is None:
+            print("Please specify an input file.")
+        else:
+            machine_code_dir = './source/machine_code'
+            run_all_programs(machine_code_dir, args.input_file)
+    elif args.machine_code_file and args.input_file:
+        main(args.machine_code_file, args.input_file)
     else:
-        _, code_file, input_file = sys.argv
-        main(code_file, input_file)
+        print("Invalid usage. Run 'python machine.py -h' for help.")
