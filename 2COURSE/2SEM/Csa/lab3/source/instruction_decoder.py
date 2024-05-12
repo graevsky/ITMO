@@ -14,7 +14,7 @@ class InstructionDecoder:
     def execute_pstr(self, instruction):
         self.control_unit.data_path.print_pstr(instruction.get("arg"))
 
-    def execute_add(self, instruction):
+    def execute_add(self):
         self.control_unit.data_path.perform_operation(Opcode.ADD)
 
     def execute_less_than(self, instruction):
@@ -33,10 +33,10 @@ class InstructionDecoder:
         self.control_unit.data_path.comp_latch.set_data(instruction.get("arg"))
         self.control_unit.data_path.perform_operation(Opcode.MOD)
 
-    def execute_and(self, instruction):
+    def execute_and(self):
         self.control_unit.data_path.perform_operation(Opcode.AND)
 
-    def execute_or(self, instruction):
+    def execute_or(self):
         self.control_unit.data_path.perform_operation(Opcode.OR)
 
     def execute_loop_start(self, instruction):
@@ -72,22 +72,23 @@ class InstructionDecoder:
         else:
             raise ValueError("Unsupported argument for PUSH operation")
 
-    def execute_print_top(self, instruction):
+    def execute_print_top(self):
         self.control_unit.data_path.print_top()
 
-    def execute_cr(self, instruction):
+    @staticmethod
+    def execute_cr():
         print()
 
-    def execute_accept(self, instruction):
+    def execute_accept(self):
         self.control_unit.data_path.accept_input()
 
-    def execute_type(self, instruction):
+    def execute_type(self):
         self.control_unit.data_path.write_output()
 
-    def execute_dup(self, instruction):
+    def execute_dup(self):
         self.control_unit.data_path.push_to_stack("duplicate_top")
 
-    def execute_halt(self, instruction):
+    def execute_halt(self):
         self.control_unit.halted = True
 
     def unknown_instruction(self, instruction):

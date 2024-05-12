@@ -43,8 +43,8 @@ class Term(namedtuple("Term", "line pos symbol")):
 
 class IOAddresses:
     INPUT_BUFFER = 0x0100
-    INPUT_BUFFER_SIZE = 256  # размер буфера ввода
-    OUTPUT_ADDRESS = 0x0200  # начало области для вывода данных
+    INPUT_BUFFER_SIZE = 256  # Размер буфера ввода
+    OUTPUT_ADDRESS = 0x0200  # Начало области для вывода данных
     STRING_STORAGE = 0x0300  # Новый адрес для хранения строк
 
 

@@ -3,7 +3,6 @@ import os
 
 from isa import read_code, IOAddresses
 import logging
-import sys
 from io import StringIO
 from ALU import ALU
 from MUX import Multiplexer
@@ -187,6 +186,7 @@ def run_all_programs(directory, input_file):
         if file.endswith('.json'):
             code_file = os.path.join(directory, file)
             print(f"Processing {code_file}")
+            print()
             main(code_file, input_file)
 
 
@@ -200,10 +200,12 @@ def main(code_file, input_file):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run FORTH machine code simulations.")
-    parser.add_argument("-a", "--all", action="store_true", help="Process all JSON files in the machine code directory.")
+    parser.add_argument("-a", "--all", action="store_true",
+                        help="Process all JSON files in the machine code directory.")
     parser.add_argument("input_file", type=str, nargs='?', default=None, help="Path to the input file for the machine.")
     parser.add_argument("machine_code_file", type=str, nargs='?', help="Path to a specific machine code file to run.")
     return parser.parse_args()
+
 
 if __name__ == "__main__":
     args = parse_args()

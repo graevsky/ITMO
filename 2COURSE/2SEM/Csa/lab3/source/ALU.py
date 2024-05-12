@@ -34,30 +34,37 @@ class ALU:
         self.update_flags(result, carry, overflow)
         self.data_path.alu_latch.set_data(result)
 
-    def add(self, a, b):
+    @staticmethod
+    def add(a, b):
         r = a + b
         carry = 1 if r > 0xFFFFFFFF else 0
-        overflow = 1 if (a > 0 and b > 0 and r < 0) or (a < 0 and b < 0 and r > 0) else 0
+        overflow = 1 if (a > 0 > r and b > 0) or (a < 0 < r and b < 0) else 0
         return r & 0xFFFFFFFF, carry, overflow
 
-    def and_op(self, a, b):
+    @staticmethod
+    def and_op(a, b):
         return a & b
 
-    def or_op(self, a, b):
+    @staticmethod
+    def or_op(a, b):
         return a | b
 
-    def mod(self, a, b):
+    @staticmethod
+    def mod(a, b):
         if b == 0:
             raise Exception("Division by zero")
         return a % b
 
-    def less_than(self, a, b):
+    @staticmethod
+    def less_than(a, b):
         return 1 if a < b else 0
 
-    def greater_than(self, a, b):
+    @staticmethod
+    def greater_than(a, b):
         return 1 if a > b else 0
 
-    def equals(self, a, b):
+    @staticmethod
+    def equals(a, b):
         return 1 if a == b else 0
 
     def update_flags(self, result, carry=0, overflow=0):
@@ -65,5 +72,3 @@ class ALU:
         self.flags['N'].set_data(1 if result < 0 else 0)
         self.flags['C'].set_data(carry)
         self.flags['V'].set_data(overflow)
-
-

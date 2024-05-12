@@ -2,7 +2,6 @@ import argparse
 import os
 
 from isa import Opcode, write_code, IOAddresses
-import sys
 
 PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 
@@ -10,8 +9,8 @@ PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 def parse_line(line):
     parts = line.strip().split()
     command = parts[0]
-    args = parts[1:] if len(parts) > 1 else []
-    return command, args
+    arguments = parts[1:] if len(parts) > 1 else []
+    return command, arguments
 
 
 def translate(text):
@@ -34,10 +33,10 @@ def translate(text):
         while i < len(commands):
             command = commands[i]
             opcode = None
-            args = []
+            arguments = []
             if command.isdigit():
                 if len(commands) == 1:
-                    args.append(int(command))
+                    arguments.append(int(command))
                     opcode = Opcode.PUSH
                     i += 1
                 else:
@@ -74,7 +73,7 @@ def translate(text):
                 index += 1
                 i += 1
             elif command == "i":
-                args.append("i")
+                arguments.append("i")
                 opcode = Opcode.PUSH
             elif command == ".":
                 code.append(
@@ -82,7 +81,7 @@ def translate(text):
                 )
                 index += 1
             elif command == "mod":
-                args.append(int(commands[0]))
+                arguments.append(int(commands[0]))
                 opcode = Opcode.MOD
                 i += 2
             elif command == "and":
@@ -90,15 +89,15 @@ def translate(text):
             elif command == "or":
                 opcode = Opcode.OR
             elif command == "<":
-                args.append(int(commands[0]))
+                arguments.append(int(commands[0]))
                 opcode = Opcode.LESS_THAN
                 i += 2
             elif command == ">":
-                args.append(int(commands[0]))
+                arguments.append(int(commands[0]))
                 opcode = Opcode.GREATER_THAN
                 i += 2
             elif command == "==":
-                args.append(int(commands[0]))
+                arguments.append(int(commands[0]))
                 opcode = Opcode.EQUALS
                 i += 2
             elif command == "if":
@@ -145,7 +144,7 @@ def translate(text):
                         and commands[i + 1].isdigit()
                         and commands[i + 2] == "accept"
                 ):
-                    args = [int(commands[i + 1])]
+                    arguments = [int(commands[i + 1])]
                     opcode = Opcode.ACCEPT
                     i += 3
             elif command == "type":
@@ -157,7 +156,7 @@ def translate(text):
                     {
                         "index": index,
                         "opcode": opcode.value,
-                        "arg": args[0] if args else None,
+                        "arg": arguments[0] if arguments else None,
                     }
                 )
                 index += 1
@@ -178,42 +177,29 @@ def process_dir(directory, output_folder):
                 print(f"Machine code has been written to {output_file}")
 
 
-def main(source_file):
-    with open(source_file, "r", encoding="utf-8") as file:
-        source_text = file.read()
-    machine_code = translate(source_text)
-    output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
-    write_code(output_file, machine_code)
-    print(f"Machine code has been written to {output_file}")
+def main(arguments):
+    if arguments.all:
+        process_dir(arguments.input_folder, arguments.output_folder)
+    else:
+        source_file = arguments.source_file
+        with open(source_file, "r", encoding="utf-8") as file:
+            source_text = file.read()
+        machine_code = translate(source_text)
+        output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
+        write_code(output_file, machine_code)
+        print(f"Machine code has been written to {output_file}")
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Code translator (.forth => machine code) for forth stack processor.")
-    parser.add_argument("-a", "--all", action="store_true",
-                        help="Translates all .forth programs from progs folder and its subfolders and store result ("
-                             ".json machine code) in ./source/machine_code folder.")
-    parser.add_argument("source_file",type=str,nargs='?', default=None, help="Path to .forth program.")
+    parser = argparse.ArgumentParser(description="Translate FORTH code to machine code.")
+    parser.add_argument('source_file', nargs='?', help="The FORTH source file to translate.")
+    parser.add_argument('-a', '--all', action='store_true', help="Process all FORTH files in the specified directory.")
+    parser.add_argument('-i', '--input_folder', default='./progs', help="Directory containing FORTH files.")
+    parser.add_argument('-o', '--output_folder', default='./source/machine_code',
+                        help="Directory to store the output JSON files.")
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    if args.all:
-        input_folder = './progs'
-        output_folder = './source/machine_code'
-        process_dir(input_folder,output_folder)
-    elif args.source_file:
-        main(args.source_file)
-    else:
-        print("Invalid usage. Run 'python translator.py -h for help.")
-    """
-    if len(sys.argv) < 2:
-        print("Usage: python translator.py <source_file>")
-    elif sys.argv[1] == '-a':
-        input_folder = './progs'
-        output_folder = './source/machine_code'
-        process_dir(input_folder, output_folder)
-    else:
-        _, source_file = sys.argv
-        main(source_file)
-    """
+    main(args)
