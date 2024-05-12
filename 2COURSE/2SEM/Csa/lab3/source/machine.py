@@ -44,6 +44,10 @@ class DataPath:
         """input data"""
         self.data = inp_data
 
+        """Jump latch"""
+        self.jump_latch = Latch()
+        self.jump_latch.set_data(0)
+
     def write_io(self, address, value):
         if address == IOAddresses.OUTPUT_ADDRESS:
             print(chr(value), end="")
@@ -144,9 +148,17 @@ class ControlUnit:
 
     def execute_instruction(self):
         instruction = self.instr_latch.get_data()
+        #print(instruction)
         logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
         self.decoder.decode(instruction)  # Использование декодера для выполнения инструкции
-        self.pc.set_data(self.pc.get_data() + 1)
+        # print("Executing")
+        # print(instruction)
+        # print("PC is ")
+        # print(self.pc.get_data())
+        if self.data_path.jump_latch.get_data() == 0:
+            self.pc.set_data(self.pc.get_data() + 1)
+        self.data_path.jump_latch.set_data(0)
+
 
     def run(self):
         while not self.halted:
@@ -171,7 +183,6 @@ def main(code_file, input_file):
     program = read_code(code_file)
     with open(input_file, "r", encoding="utf-8") as file:
         input_data = file.read()
-
     instr_count, ticks, logs = simulation(program, input_data)
     print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
 
@@ -182,9 +193,4 @@ if __name__ == "__main__":
     else:
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
-    print("mod2")
-    main("./machine_code/mod2.json", "./machine_code/input.txt")
-    print("cycle")
-    main("./machine_code/cycle.json", "./machine_code/input.txt")
-    print("prob1")
-    main("./machine_code/prob1.json", "./machine_code/input.txt")
+    main("./machine_code/mod.json", "./machine_code/input.txt")

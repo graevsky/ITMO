@@ -16,12 +16,13 @@ def translate(text):
     lines = text.strip().split("\n")
     index = 0
     loop_stack = []
+    if_stack = []
     string_storage_address = IOAddresses.STRING_STORAGE
 
     for line_number, line in enumerate(lines):
         line = line.split("\\")[0].strip()
         if (
-            not line or line.startswith(":") or line.startswith(";")
+                not line or line.startswith(":") or line.startswith(";")
         ):  # убрать в будущем, чтобы поддерживались переменные-функции
             continue
 
@@ -32,7 +33,7 @@ def translate(text):
             opcode = None
             args = []
             if command.isdigit():
-                if len(commands) == 1:  # Проверка, что в строке только это число
+                if len(commands) == 1:
                     args.append(int(command))
                     opcode = Opcode.PUSH
                     i += 1
@@ -40,8 +41,8 @@ def translate(text):
                     i += 1
                     continue
             elif command == "do":
-                initial_value = int(commands[1])  # Начальное значение
-                max_value = int(commands[0]) - 1  # Максимальное значение
+                initial_value = int(commands[1])
+                max_value = int(commands[0]) - 1
                 step = 1  # Шаг цикла всегда равен 1
 
                 start_index = len(code)
@@ -52,9 +53,8 @@ def translate(text):
                         "opcode": Opcode.LOOP_START.value,
                         "arg": [initial_value, max_value, step],
                     }
-                )  # убрать
-                index += 1
-                i += 2
+                )
+                i += 3
             elif command == "loop":
                 if not loop_stack:
                     raise ValueError("Mismatched 'loop' without 'do'")
@@ -62,7 +62,8 @@ def translate(text):
                 start_index = loop_stack.pop()
                 args.append(start_index)
                 opcode = Opcode.LOOP_END
-                index += 1
+                # index += 1
+                i += 1
             elif command == "i":
                 args.append("i")
                 opcode = Opcode.PUSH
@@ -95,15 +96,20 @@ def translate(text):
                 opcode = Opcode.EQUALS
                 i += 2
             elif command == "if":
-                opcode = Opcode.IF
+                if_stack.append(index)
+                code.append(
+                    {"index": index, "opcode": Opcode.JZ.value, "arg": None})
+                index += 1
                 i += 1
+                continue
             elif command == "then":
-                opcode = Opcode.THEN
+                if_index = if_stack.pop()
+                code[if_index]['arg'] = index
                 i += 1
-            elif command.startswith('."'):  # Обработка строк с префиксом длины
+                continue
+            elif command.startswith('."'):
                 string = command[2:] + " ".join(commands[i + 1:])
                 length = len(string)
-                # Записываем длину и строку в память
                 code.append(
                     {
                         "index": index,
@@ -120,7 +126,6 @@ def translate(text):
                     }
                 )
                 index += 1
-                # Обновляем адрес хранения следующей строки
                 string_storage_address += length + 1
                 i += len(commands) - i
             elif command == "cr":
@@ -130,9 +135,9 @@ def translate(text):
                 i += 1
             elif command == "pad":
                 if (
-                    i + 2 < len(commands)
-                    and commands[i + 1].isdigit()
-                    and commands[i + 2] == "accept"
+                        i + 2 < len(commands)
+                        and commands[i + 1].isdigit()
+                        and commands[i + 2] == "accept"
                 ):
                     args = [int(commands[i + 1])]
                     opcode = Opcode.ACCEPT

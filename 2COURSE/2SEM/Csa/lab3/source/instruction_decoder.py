@@ -39,15 +39,6 @@ class InstructionDecoder:
     def execute_or(self, instruction):
         self.control_unit.data_path.perform_operation(Opcode.OR)
 
-    def execute_if(self, instruction):
-        if not self.control_unit.data_path.pop_from_stack():
-            self.control_unit.pc.set_data(self.control_unit.pc.get_data() + 1)
-            while self.control_unit.memory[self.control_unit.pc.get_data()].get("opcode") != Opcode.THEN.value:
-                self.control_unit.pc.set_data(self.control_unit.pc.get_data() + 1)
-
-    def execute_then(self, instruction):
-        pass
-
     def execute_loop_start(self, instruction):
         initial, max_value, step = instruction.get("arg")
         self.control_unit.data_path.start_loop(initial, max_value, step)
@@ -60,6 +51,17 @@ class InstructionDecoder:
     def execute_save_string(self, instruction):
         arg = instruction.get("arg")
         self.control_unit.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
+
+    def execute_jump(self, instruction):
+        target = instruction.get("arg")
+        self.control_unit.pc.set_data(target)
+
+    def execute_jz(self, instruction):
+        condition = self.control_unit.data_path.stack[-1]
+        if condition == 0:
+            target = instruction.get("arg")
+            self.control_unit.pc.set_data(target)
+            self.control_unit.data_path.jump_latch.set_data(1)
 
     def execute_push(self, instruction):
         arg = instruction.get("arg")

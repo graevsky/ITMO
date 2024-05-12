@@ -11,6 +11,8 @@ class Opcode(str, Enum):
     SWAP = "SWAP"  # Заменить верхний и предыдущий элементы в стеке
     TYPE = "TYPE"  # Вывести пользовательский ввод
     DUP = "DUP"  # Продублировать верхний элемент стека
+    JUMP = "JUMP"  # Безусловный переход
+    JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
     SAVE_STRING = "SAVE_STRING"
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла

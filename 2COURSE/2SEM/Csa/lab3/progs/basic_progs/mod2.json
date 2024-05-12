@@ -24,36 +24,52 @@
         "arg": 0
     },
     {
-        "index": 4,
-        "opcode": "JZ",
-        "arg": 7
-    },
-    {
         "index": 5,
-        "opcode": "SAVE_STRING",
-        "arg": [
-            768,
-            6,
-            "mod 10"
-        ]
+        "opcode": "PUSH",
+        "arg": "i"
     },
     {
         "index": 6,
+        "opcode": "MOD",
+        "arg": 3
+    },
+    {
+        "index": 7,
+        "opcode": "EQUALS",
+        "arg": 0
+    },
+    {
+        "index": 8,
+        "opcode": "AND",
+        "arg": null
+    },
+    {
+        "index": 9,
+        "opcode": "JZ",
+        "arg": null
+    },
+    {
+        "index": 10,
+        "opcode": "SAVE_STRING",
+        "arg": 13
+    },
+    {
+        "index": 11,
         "opcode": "PSTR",
         "arg": 768
     },
     {
-        "index": 7,
+        "index": 12,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 8,
+        "index": 13,
         "opcode": "LOOP_END",
         "arg": 0
     },
     {
-        "index": 9,
+        "index": 14,
         "opcode": "HALT",
         "arg": null
     }
