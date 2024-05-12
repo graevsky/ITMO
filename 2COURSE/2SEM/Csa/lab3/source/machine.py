@@ -193,4 +193,4 @@ if __name__ == "__main__":
     else:
         _, code_file, input_file = sys.argv
         # main(code_file, input_file)
-    main("./machine_code/mod2.json", "inp/input.txt")
+    main("./machine_code/mod.json", "inp/input.txt")
