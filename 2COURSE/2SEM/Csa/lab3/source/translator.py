@@ -1,3 +1,5 @@
+import os
+
 from isa import Opcode, write_code, IOAddresses
 import sys
 
@@ -162,6 +164,17 @@ def translate(text):
     return code
 
 
+def process_dir(directory, output_folder):
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.forth'):
+                source_path = os.path.join(root, file)
+                machine_code = translate(open(source_path, "r", encoding="utf-8").read())
+                output_file = os.path.join(output_folder, file.replace('.forth', '.json'))
+                write_code(output_file, machine_code)
+                print(f"Machine code has been written to {output_file}")
+
+
 def main(source_file):
     with open(source_file, "r", encoding="utf-8") as file:
         source_text = file.read()
@@ -172,8 +185,12 @@ def main(source_file):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print("Usage: python translator.py <source_file>")
+    elif sys.argv[1] == '-a':
+        input_folder = './progs'
+        output_folder = './source/machine_code'
+        process_dir(input_folder, output_folder)
     else:
         _, source_file = sys.argv
         main(source_file)

@@ -9,76 +9,67 @@
         ]
     },
     {
-        "index": 2,
+        "index": 1,
         "opcode": "PUSH",
         "arg": "i"
     },
     {
-        "index": 3,
+        "index": 2,
         "opcode": "MOD",
         "arg": 10
     },
     {
-        "index": 4,
+        "index": 3,
         "opcode": "EQUALS",
         "arg": 0
     },
     {
-        "index": 6,
+        "index": 5,
         "opcode": "PUSH",
         "arg": "i"
     },
     {
-        "index": 7,
+        "index": 6,
         "opcode": "MOD",
         "arg": 3
     },
     {
-        "index": 8,
+        "index": 7,
         "opcode": "EQUALS",
         "arg": 0
     },
     {
-        "index": 9,
+        "index": 8,
         "opcode": "AND",
         "arg": null
     },
     {
-        "index": 10,
-        "opcode": "IF",
+        "index": 9,
+        "opcode": "JZ",
         "arg": null
     },
     {
-        "index": 11,
+        "index": 10,
         "opcode": "SAVE_STRING",
-        "arg": [
-            768,
-            12,
-            "mod 3 and 10"
-        ]
+        "arg": 13
     },
     {
-        "index": 12,
+        "index": 11,
         "opcode": "PSTR",
         "arg": 768
     },
     {
-        "index": 13,
+        "index": 12,
         "opcode": "CR",
         "arg": null
     },
     {
-        "index": 14,
-        "opcode": "THEN",
-        "arg": null
-    },
-    {
-        "index": 16,
+        "index": 13,
         "opcode": "LOOP_END",
         "arg": 0
     },
     {
-        "index": 17,
+        "index": 14,
         "opcode": "HALT",
         "arg": null
     }
