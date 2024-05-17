@@ -4,33 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/DotsHitListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/DotsHitListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/classes/ClickInterval.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/classes/ClickInterval.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/classes/DotsHit.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/classes/DotsHit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/interfaces/ClickIntervalMBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/interfaces/ClickIntervalMBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/interfaces/DotsHitMBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/MBean/interfaces/DotsHitMBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/PointBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/PointBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/classes/java/main/org/example/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/libs/lab3.war" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/libs/lab3.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/resources/main/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/resources/main/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,6 +199,7 @@
       <workItem from="1713197635390" duration="38000" />
       <workItem from="1713358846688" duration="20000" />
       <workItem from="1713856113401" duration="605000" />
+      <workItem from="1713860817174" duration="566000" />
     </task>
     <servers />
   </component>
