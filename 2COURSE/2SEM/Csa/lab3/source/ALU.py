@@ -85,4 +85,3 @@ class ALU:
         self.flags['N'].set_data(1 if result < 0 else 0)
         self.flags['C'].set_data(carry)
         self.flags['V'].set_data(overflow)
-        print(f"Flags - Z: {self.flags['Z'].get_data()} C: {self.flags['C'].get_data()} V: {self.flags['V'].get_data()} N: {self.flags['N'].get_data()}")
