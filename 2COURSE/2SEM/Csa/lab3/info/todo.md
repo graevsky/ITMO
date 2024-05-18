@@ -20,7 +20,7 @@
 !!! данные программы являются частью кода инструкций, а не данных (к примеру: строка hello хранится как 5 инструкций
 записи константы в регистр);
 
-План: 4 (done), 7 (done+jz), 11 (done), 9 (done?), 8 (done), 6 (done), 5, 3, 12, 2, 1, 10
+План: 4 (done), 7 (done+jz), 11 (done), 9 (done?), 8 (done), 6 (done), 5 (done), 3, 12, 2, 1, 10
 ## Вариант - forth | stack | neum | mc -> hw | instr | struct | stream | mem | pstr | prob1 | cache
 
 
