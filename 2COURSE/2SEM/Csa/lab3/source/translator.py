@@ -51,6 +51,7 @@ def expand_procedures(commands, procedures):
             expanded_program.append(command)
     return expanded_program
 
+
 def preprocess_commands(commands):
     preprocessed = []
     i = 0
@@ -76,6 +77,22 @@ def preprocess_commands(commands):
         i += 1
     return preprocessed
 
+
+command_to_opcode = {
+    ".": Opcode.PRINT_TOP,
+    "mod": Opcode.MOD,
+    "and": Opcode.AND,
+    "or": Opcode.OR,
+    "<": Opcode.LESS_THAN,
+    ">": Opcode.GREATER_THAN,
+    "==": Opcode.EQUALS,
+    "cr": Opcode.CR,
+    "+": Opcode.ADD,
+    "type": Opcode.TYPE,
+    "dup": Opcode.DUP,
+}
+
+
 def second_pass(commands):
     code = []
     index = 0
@@ -96,7 +113,7 @@ def second_pass(commands):
             parts = command.split()
             if len(parts) != 3 or parts[2] != "do":
                 raise ValueError("Invalid 'do' loop syntax")
-            max_value = int(parts[0])-1
+            max_value = int(parts[0]) - 1
             initial_value = int(parts[1])
             step = 1  # Шаг цикла всегда равен 1
 
@@ -127,20 +144,6 @@ def second_pass(commands):
             index += 1
             i += 1
             continue
-        elif command == ".":
-            opcode = Opcode.PRINT_TOP
-        elif command == "mod":
-            opcode = Opcode.MOD
-        elif command == "and":
-            opcode = Opcode.AND
-        elif command == "or":
-            opcode = Opcode.OR
-        elif command == "<":
-            opcode = Opcode.LESS_THAN
-        elif command == ">":
-            opcode = Opcode.GREATER_THAN
-        elif command == "==":
-            opcode = Opcode.EQUALS
         elif command == "if":
             if_stack.append(index)
             code.append(
@@ -171,20 +174,14 @@ def second_pass(commands):
             )
             string_storage_address += length + 1
             index += 1
-        elif command == "cr":
-            opcode = Opcode.CR
-        elif command == "+":
-            opcode = Opcode.ADD
+        elif command in command_to_opcode:
+            opcode = command_to_opcode[command]
         elif command == "pad":
             if i + 2 >= len(commands) or not commands[i + 1].isdigit() or commands[i + 2] != "accept":
                 raise ValueError("Invalid 'pad' syntax")
             arguments.append(int(commands[i + 1]))
             opcode = Opcode.ACCEPT
             i += 2
-        elif command == "type":
-            opcode = Opcode.TYPE
-        elif command == "dup":
-            opcode = Opcode.DUP
 
         if opcode:
             code.append(
@@ -206,15 +203,14 @@ def second_pass(commands):
 def translate(text):
     lines = text.strip().split("\n")
 
-    # Первый проход: находим процедуры и сохраняем их в словарь
     procedures, main_program = first_pass(lines)
 
-    # Второй проход: разворачиваем процедуры и создаем окончательный список инструкций
     expanded_program = expand_procedures(main_program, procedures)
     preprocessed_commands = preprocess_commands(expanded_program)
     code = second_pass(preprocessed_commands)
 
     return code
+
 
 def process_dir(directory, output_folder):
     for root, dirs, files in os.walk(directory):

@@ -14,8 +14,6 @@ class Opcode(str, Enum):
     JUMP = "JUMP"  # Безусловный переход
     JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
     JNZ = 'JNZ'  # Условный переход, если на вершине стека не ноль
-    CALL = 'CALL'  # Вызов процедур
-    RETURN = 'RETURN'  # Возврат из процедуры
     SAVE_STRING = "SAVE_STRING"
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла
@@ -24,8 +22,6 @@ class Opcode(str, Enum):
     LESS_THAN = "LESS_THAN"  # Меньше
     GREATER_THAN = "GREATER_THAN"  # Больше
     EQUALS = "EQUALS"  # Равно
-    IF = "IF"  # Условие
-    THEN = "THEN"  # Окончание условия
     MOD = "MOD"  # Деление по модулю
     AND = "AND"  # И
     OR = "OR"  # Или

@@ -138,7 +138,7 @@ class DataPath:
 
     def call_procedure(self, current_pc, address):
         """Вызов процедуры"""
-        self.call_stack.append(current_pc+1)
+        self.call_stack.append(current_pc + 1)
         return address
 
     def return_from_procedure(self):
@@ -179,7 +179,6 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             self.tick_counter += 1
-
 
 
 def simulation(program, input_data):

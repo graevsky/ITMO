@@ -34,9 +34,3 @@ class Multiplexer:
             b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
             return a, b
-        """
-        else:
-            a = self.data_path.pop_from_stack()
-            b = self.data_path.comp_latch.get_data()
-            return a, b
-        """

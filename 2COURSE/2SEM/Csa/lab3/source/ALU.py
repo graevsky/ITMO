@@ -2,6 +2,7 @@
 from isa import Opcode
 from Latch import Latch
 
+
 class ALU:
     def __init__(self, data_path):
         self.data_path = data_path
@@ -9,7 +10,7 @@ class ALU:
             'Z': Latch(),  # Zero flag
             'C': Latch(),  # Carry flag
             'V': Latch(),  # Overflow flag
-            'N': Latch()   # Negative flag
+            'N': Latch()  # Negative flag
         }
 
     def execute(self, opcode, a, b=None):

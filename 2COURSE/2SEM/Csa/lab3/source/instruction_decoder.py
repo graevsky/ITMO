@@ -6,7 +6,7 @@ class InstructionDecoder:
         self.control_unit = control_unit
 
     def decode(self, instruction):
-        #print(instruction)
+        # print(instruction)
         opcode = instruction.get("opcode")
         method_name = f"execute_{opcode.lower()}"
         method = getattr(self, method_name, self.unknown_instruction)
@@ -15,7 +15,7 @@ class InstructionDecoder:
     def execute_pstr(self, instruction):
         self.control_unit.data_path.print_pstr(instruction.get("arg"))
 
-    def execute_add(self,instruction):
+    def execute_add(self, instruction):
         self.control_unit.data_path.perform_operation(Opcode.ADD)
 
     def execute_less_than(self, instruction):
