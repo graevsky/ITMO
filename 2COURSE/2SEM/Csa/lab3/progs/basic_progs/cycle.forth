@@ -3,4 +3,6 @@
     .
     10 1 do
         i .
-    loop ;
+    loop
+;
+cycle

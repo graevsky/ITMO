@@ -2,25 +2,35 @@
     {
         "index": 0,
         "opcode": "PUSH",
-        "arg": 100
+        "arg": 3
     },
     {
         "index": 1,
         "opcode": "PUSH",
-        "arg": 2
+        "arg": 100
     },
     {
         "index": 2,
+        "opcode": "PUSH",
+        "arg": 2
+    },
+    {
+        "index": 3,
         "opcode": "ADD",
         "arg": null
     },
     {
-        "index": 3,
+        "index": 4,
+        "opcode": "ADD",
+        "arg": null
+    },
+    {
+        "index": 5,
         "opcode": "PRINT_TOP",
         "arg": null
     },
     {
-        "index": 4,
+        "index": 6,
         "opcode": "HALT",
         "arg": null
     }

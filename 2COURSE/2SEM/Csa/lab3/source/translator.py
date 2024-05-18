@@ -13,188 +13,196 @@ def parse_line(line):
     return command, arguments
 
 
-def translate(text):
-    code = []
+def first_pass(lines):
     procedures = {}
-    lines = text.strip().split("\n")
-    index = 0
-    loop_stack = []
-    if_stack = []
-    string_storage_address = IOAddresses.STRING_STORAGE
+    main_program = []
+    current_proc = None
 
-    main_program_index = None
-
-    for line_number, line in enumerate(lines):
-        line = line.split("\\")[0].strip()
-        """
-        if (
-                not line or line.startswith(":") or line.startswith(";")
-        ):  # убрать в будущем, чтобы поддерживались переменные-функции
-            continue
-        """
+    for line in lines:
+        line = line.split("\\")[0].strip()  # Убираем комментарии и пробелы
         if not line:
             continue
         commands = line.split()
         i = 0
         while i < len(commands):
             command = commands[i]
-            opcode = None
-            arguments = []
             if command == ':':
-                current_proc = commands[i+1]
-                procedures[current_proc] = index
+                current_proc = commands[i + 1]
+                procedures[current_proc] = []
                 i += 2
-                continue
             elif command == ';':
-                code.append({"index": index, "opcode": Opcode.RETURN.value, "arg": None})
-                index += 1
                 current_proc = None
                 i += 1
-                continue
-            elif command in procedures:
-                code.append({"index": index, "opcode": Opcode.CALL.value, "arg": procedures[command]})
-                index += 1
+            elif current_proc:
+                procedures[current_proc].append(commands[i])
                 i += 1
-                continue
-            elif command.isdigit():  # ???
-                if len(commands) == 1:
-                    arguments.append(int(command))
-                    opcode = Opcode.PUSH
-                    i += 1
-                else:
-                    i += 1
-                    continue
-            elif command == "do":
-                initial_value = int(commands[1])
-                max_value = int(commands[0]) - 1
-                step = 1  # Шаг цикла всегда равен 1
+            else:
+                main_program.append(commands[i])
+                i += 1
 
-                start_index = len(code)
-                loop_stack.append(start_index)
-                code.append(
-                    {
-                        "index": index,
-                        "opcode": Opcode.LOOP_START.value,
-                        "arg": [initial_value, max_value, step],
-                    }
-                )
-                index += 1
-                i += 3
-            elif command == "loop":
-                if not loop_stack:
-                    raise ValueError("Mismatched 'loop' without 'do'")
+    return procedures, main_program
 
-                start_index = loop_stack.pop()
-                code.append(
-                    {
-                        "index": index,
-                        "opcode": Opcode.LOOP_END.value,
-                        "arg": start_index
-                    }
-                )
-                index += 1
-                i += 1
-            elif command == "i":
-                arguments.append("i")
-                opcode = Opcode.PUSH
-            elif command == ".":
-                code.append(
-                    {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
-                )
-                index += 1
-            elif command == "mod":
-                arguments.append(int(commands[0]))
-                opcode = Opcode.MOD
-                i += 2
-            elif command == "and":
-                opcode = Opcode.AND
-            elif command == "or":
-                opcode = Opcode.OR
-            elif command == "<":
-                arguments.append(int(commands[0]))
-                opcode = Opcode.LESS_THAN
-                i += 2
-            elif command == ">":
-                arguments.append(int(commands[0]))
-                opcode = Opcode.GREATER_THAN
-                i += 2
-            elif command == "==":
-                arguments.append(int(commands[0]))
-                opcode = Opcode.EQUALS
-                i += 2
-            elif command == "if":
-                if_stack.append(index)
-                code.append(
-                    {"index": index, "opcode": Opcode.JZ.value, "arg": None})
-                index += 1
-                i += 1
-                continue
-            elif command == "then":
-                if_index = if_stack.pop()
-                code[if_index]['arg'] = index
-                i += 1
-                continue
-            elif command == "else":
-                pass  # TODO
-            elif command.startswith('."'):
-                string = command[2:] + " ".join(commands[i + 1:])
-                length = len(string)
-                code.append(
-                    {
-                        "index": index,
-                        "opcode": Opcode.SAVE_STRING.value,
-                        "arg": [string_storage_address, length, string],
-                    }
-                )
-                index += 1
-                code.append(
-                    {
-                        "index": index,
-                        "opcode": Opcode.PSTR.value,
-                        "arg": string_storage_address,
-                    }
-                )
-                index += 1
-                string_storage_address += length + 1
-                i += len(commands) - i
 
-            elif command == "cr":
-                opcode = Opcode.CR
-            elif command == "+":
-                opcode = Opcode.ADD
-            elif command == "pad":
-                if (
-                        i + 2 < len(commands)
-                        and commands[i + 1].isdigit()
-                        and commands[i + 2] == "accept"
-                ):
-                    arguments = [int(commands[i + 1])]
-                    opcode = Opcode.ACCEPT
-                    i += 3
-            elif command == "type":
-                opcode = Opcode.TYPE
-            elif command == "dup":
-                opcode = Opcode.DUP
-            if opcode:
-                code.append(
-                    {
-                        "index": index,
-                        "opcode": opcode.value,
-                        "arg": arguments[0] if arguments else None,
-                    }
-                )
-                index += 1
+def expand_procedures(commands, procedures):
+    expanded_program = []
+    for command in commands:
+        if command in procedures:
+            expanded_program.extend(expand_procedures(procedures[command], procedures))
+        else:
+            expanded_program.append(command)
+    return expanded_program
+
+
+def second_pass(commands):
+    code = []
+    index = 0
+    loop_stack = []
+    if_stack = []
+    string_storage_address = IOAddresses.STRING_STORAGE
+
+    i = 0
+    while i < len(commands):
+        command = commands[i]
+        opcode = None
+        arguments = []
+        if command.isdigit():
+            arguments.append(int(command))
+            opcode = Opcode.PUSH
+        elif command == "do":
+            print(commands)
+            print(commands[i+1])
+            initial_value = int(commands[i + 1])
+            max_value = int(commands[i + 2]) - 1
+            step = 1  # Шаг цикла всегда равен 1
+
+            start_index = len(code)
+            loop_stack.append(start_index)
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_START.value,
+                    "arg": [initial_value, max_value, step],
+                }
+            )
+            index += 1
+            i += 3
+            continue
+        elif command == "loop":
+            if not loop_stack:
+                raise ValueError("Mismatched 'loop' without 'do'")
+
+            start_index = loop_stack.pop()
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_END.value,
+                    "arg": start_index
+                }
+            )
+            index += 1
             i += 1
+            continue
+        elif command == "i":
+            arguments.append("i")
+            opcode = Opcode.PUSH
+        elif command == ".":
+            code.append(
+                {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
+            )
+            index += 1
+        elif command == "mod":
+            arguments.append(int(commands[i + 1]))
+            opcode = Opcode.MOD
+            i += 2
+        elif command == "and":
+            opcode = Opcode.AND
+        elif command == "or":
+            opcode = Opcode.OR
+        elif command == "<":
+            arguments.append(int(commands[i + 1]))
+            opcode = Opcode.LESS_THAN
+            i += 2
+        elif command == ">":
+            arguments.append(int(commands[i + 1]))
+            opcode = Opcode.GREATER_THAN
+            i += 2
+        elif command == "==":
+            arguments.append(int(commands[i + 1]))
+            opcode = Opcode.EQUALS
+            i += 2
+        elif command == "if":
+            if_stack.append(index)
+            code.append(
+                {"index": index, "opcode": Opcode.JZ.value, "arg": None})
+            index += 1
+        elif command == "then":
+            if_index = if_stack.pop()
+            code[if_index]['arg'] = index
+        elif command.startswith('."'):
+            string = command[2:]
+            length = len(string)
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.SAVE_STRING.value,
+                    "arg": [string_storage_address, length, string],
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PSTR.value,
+                    "arg": string_storage_address,
+                }
+            )
+            string_storage_address += length + 1
+        elif command == "cr":
+            opcode = Opcode.CR
+        elif command == "+":
+            opcode = Opcode.ADD
+        elif command == "pad":
+            if (
+                    i + 2 < len(commands)
+                    and commands[i + 1].isdigit()
+                    and commands[i + 2] == "accept"
+            ):
+                arguments = [int(commands[i + 1])]
+                opcode = Opcode.ACCEPT
+                i += 3
+        elif command == "type":
+            opcode = Opcode.TYPE
+        elif command == "dup":
+            opcode = Opcode.DUP
 
-    main_program_index = index  # ??
-    code.insert(0, {"index": -1, "opcode": Opcode.JUMP.value, "arg": main_program_index})
+        if opcode:
+            code.append(
+                {
+                    "index": index,
+                    "opcode": opcode.value,
+                    "arg": arguments[0] if arguments else None,
+                }
+            )
+            index += 1
+        i += 1
+
     code.append({"index": index, "opcode": Opcode.HALT.value, "arg": None})
     for i, instr in enumerate(code):
         instr["index"] = i
-
-
     return code
 
+
+def translate(text):
+    lines = text.strip().split("\n")
+
+    # Первый проход: находим процедуры и сохраняем их в словарь
+    procedures, main_program = first_pass(lines)
+
+    # Второй проход: разворачиваем процедуры и создаем окончательный список инструкций
+    expanded_program = expand_procedures(main_program, procedures)
+    code = second_pass(expanded_program)
+
+    return code
 
 def process_dir(directory, output_folder):
     for root, dirs, files in os.walk(directory):
