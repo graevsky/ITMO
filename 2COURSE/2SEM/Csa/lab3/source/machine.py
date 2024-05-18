@@ -231,5 +231,3 @@ if __name__ == "__main__":
         main(args.machine_code_file, args.input_file)
     else:
         print("Invalid usage. Run 'python machine.py -h' for help.")
-
-#main("../progs/cat/cat.json","inp/input.txt")

@@ -89,8 +89,8 @@ def second_pass(commands):
         opcode = None
         arguments = []
 
-        if command.isdigit():
-            arguments.append(int(command))
+        if command.isdigit() or command == "i":
+            arguments.append(int(command) if command.isdigit() else "i")
             opcode = Opcode.PUSH
         elif " do" in command:
             parts = command.split()
@@ -104,7 +104,7 @@ def second_pass(commands):
             code.append(
                 {
                     "index": index,
-                    "opcode": Opcode.LOOP_START.value,
+                    "opcode": Opcode.LOOP_START,
                     "arg": [initial_value, max_value, step],
                 }
             )
@@ -120,16 +120,13 @@ def second_pass(commands):
             code.append(
                 {
                     "index": index,
-                    "opcode": Opcode.LOOP_END.value,
+                    "opcode": Opcode.LOOP_END,
                     "arg": loop_start_index
                 }
             )
             index += 1
             i += 1
             continue
-        elif command == "i":
-            opcode = Opcode.PUSH
-            arguments.append("i")
         elif command == ".":
             opcode = Opcode.PRINT_TOP
         elif command == "mod":
@@ -147,7 +144,7 @@ def second_pass(commands):
         elif command == "if":
             if_stack.append(index)
             code.append(
-                {"index": index, "opcode": Opcode.JZ.value, "arg": None})
+                {"index": index, "opcode": Opcode.JZ, "arg": None})
             index += 1
         elif command == "then":
             if not if_stack:
@@ -160,7 +157,7 @@ def second_pass(commands):
             code.append(
                 {
                     "index": index,
-                    "opcode": Opcode.SAVE_STRING.value,
+                    "opcode": Opcode.SAVE_STRING,
                     "arg": [string_storage_address, length, string],
                 }
             )
@@ -168,7 +165,7 @@ def second_pass(commands):
             code.append(
                 {
                     "index": index,
-                    "opcode": Opcode.PSTR.value,
+                    "opcode": Opcode.PSTR,
                     "arg": string_storage_address,
                 }
             )
@@ -200,7 +197,7 @@ def second_pass(commands):
             index += 1
         i += 1
 
-    code.append({"index": index, "opcode": Opcode.HALT.value, "arg": None})
+    code.append({"index": index, "opcode": Opcode.HALT, "arg": None})
     for i, instr in enumerate(code):
         instr["index"] = i
     return code
