@@ -108,7 +108,7 @@ class DataPath:
         self.return_stack.append((self.sp.get_data(), initial, max_value, step))
         self.loop_counter.set_data(initial)
 
-    def end_loop(self):
+    def end_loop(self):  # По сути здесь где-то есть MUX
         """Проверка условия и остановка цикла"""
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
@@ -158,7 +158,7 @@ class ControlUnit:
         instruction = self.instr_latch.get_data()
         logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
         self.decoder.decode(instruction)
-        if self.data_path.jump_latch.get_data() == 0:
+        if self.data_path.jump_latch.get_data() == 0:  # По сути MUX
             self.pc.set_data(self.pc.get_data() + 1)
         self.data_path.jump_latch.set_data(0)
 
