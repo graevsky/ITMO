@@ -15,4 +15,6 @@
 записи константы в регистр);
 
 План: 4 (done), 7 (done+jz), 11 (done), 9, 8, 6, 5, 3, 2, 1, 10
+## Вариант - forth | stack | neum | mc -> hw | instr | struct | stream | mem | pstr | prob1 | cache
+
 
