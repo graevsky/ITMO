@@ -1,0 +1,45 @@
+[
+    {
+        "index": 0,
+        "opcode": "SAVE_STRING",
+        "arg": [
+            768,
+            7,
+            " hello!"
+        ]
+    },
+    {
+        "index": 1,
+        "opcode": "PSTR",
+        "arg": 768
+    },
+    {
+        "index": 2,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 3,
+        "opcode": "SAVE_STRING",
+        "arg": [
+            776,
+            18,
+            " my name is Anton!"
+        ]
+    },
+    {
+        "index": 4,
+        "opcode": "PSTR",
+        "arg": 776
+    },
+    {
+        "index": 5,
+        "opcode": "CR",
+        "arg": null
+    },
+    {
+        "index": 6,
+        "opcode": "HALT",
+        "arg": null
+    }
+]

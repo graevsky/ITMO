@@ -20,61 +20,81 @@
     },
     {
         "index": 3,
-        "opcode": "MOD",
+        "opcode": "PUSH",
         "arg": 3
     },
     {
         "index": 4,
-        "opcode": "EQUALS",
-        "arg": 0
+        "opcode": "MOD",
+        "arg": null
     },
     {
         "index": 5,
         "opcode": "PUSH",
-        "arg": "i"
-    },
-    {
-        "index": 6,
-        "opcode": "MOD",
-        "arg": 5
-    },
-    {
-        "index": 7,
-        "opcode": "EQUALS",
         "arg": 0
     },
     {
-        "index": 8,
-        "opcode": "OR",
+        "index": 6,
+        "opcode": "EQUALS",
         "arg": null
     },
     {
-        "index": 9,
-        "opcode": "JZ",
-        "arg": 12
-    },
-    {
-        "index": 10,
+        "index": 7,
         "opcode": "PUSH",
         "arg": "i"
     },
     {
+        "index": 8,
+        "opcode": "PUSH",
+        "arg": 5
+    },
+    {
+        "index": 9,
+        "opcode": "MOD",
+        "arg": null
+    },
+    {
+        "index": 10,
+        "opcode": "PUSH",
+        "arg": 0
+    },
+    {
         "index": 11,
-        "opcode": "ADD",
+        "opcode": "EQUALS",
         "arg": null
     },
     {
         "index": 12,
+        "opcode": "OR",
+        "arg": null
+    },
+    {
+        "index": 13,
+        "opcode": "JZ",
+        "arg": 16
+    },
+    {
+        "index": 14,
+        "opcode": "PUSH",
+        "arg": "i"
+    },
+    {
+        "index": 15,
+        "opcode": "ADD",
+        "arg": null
+    },
+    {
+        "index": 16,
         "opcode": "LOOP_END",
         "arg": 1
     },
     {
-        "index": 13,
+        "index": 17,
         "opcode": "PRINT_TOP",
         "arg": null
     },
     {
-        "index": 14,
+        "index": 18,
         "opcode": "HALT",
         "arg": null
     }

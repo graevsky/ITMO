@@ -9,8 +9,8 @@
         "opcode": "SAVE_STRING",
         "arg": [
             768,
-            25,
-            "Hello, what is your name?"
+            26,
+            " Hello, what is your name?"
         ]
     },
     {
@@ -37,15 +37,15 @@
         "index": 6,
         "opcode": "SAVE_STRING",
         "arg": [
-            794,
-            6,
-            "Hello,"
+            795,
+            7,
+            " Hello,"
         ]
     },
     {
         "index": 7,
         "opcode": "PSTR",
-        "arg": 794
+        "arg": 795
     },
     {
         "index": 8,
@@ -56,15 +56,15 @@
         "index": 9,
         "opcode": "SAVE_STRING",
         "arg": [
-            801,
-            1,
-            "!"
+            803,
+            2,
+            " !"
         ]
     },
     {
         "index": 10,
         "opcode": "PSTR",
-        "arg": 801
+        "arg": 803
     },
     {
         "index": 11,

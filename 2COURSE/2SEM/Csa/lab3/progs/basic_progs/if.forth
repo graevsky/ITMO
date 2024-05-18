@@ -1,11 +1,11 @@
-: less5
+: less20
   100 1 do
     i
     20 <
     if
-        ." less than 20
+        ." less than 20"
         cr
     then
   loop ;
 
-less5
+less20

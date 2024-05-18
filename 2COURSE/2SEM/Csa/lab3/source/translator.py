@@ -39,7 +39,6 @@ def first_pass(lines):
             else:
                 main_program.append(commands[i])
                 i += 1
-
     return procedures, main_program
 
 
@@ -52,6 +51,30 @@ def expand_procedures(commands, procedures):
             expanded_program.append(command)
     return expanded_program
 
+def preprocess_commands(commands):
+    preprocessed = []
+    i = 0
+    while i < len(commands):
+        command = commands[i]
+        if command == "do":
+            if i < 2:
+                raise ValueError("Invalid 'do' loop syntax")
+            preprocessed.pop()  # Remove the command before 'do'
+            preprocessed.pop()  # Remove the command before that too
+            preprocessed.append(f"{commands[i - 2]} {commands[i - 1]} do")
+        elif command.startswith('."'):
+            string_literal = command[2:]
+            while i + 1 < len(commands) and not commands[i + 1].endswith('"'):
+                string_literal += ' ' + commands[i + 1]
+                i += 1
+            if i + 1 < len(commands) and commands[i + 1].endswith('"'):
+                string_literal += ' ' + commands[i + 1][:-1]  # Remove the trailing "
+                i += 1
+            preprocessed.append(f'." {string_literal}"')
+        else:
+            preprocessed.append(command)
+        i += 1
+    return preprocessed
 
 def second_pass(commands):
     code = []
@@ -65,18 +88,19 @@ def second_pass(commands):
         command = commands[i]
         opcode = None
         arguments = []
+
         if command.isdigit():
             arguments.append(int(command))
             opcode = Opcode.PUSH
-        elif command == "do":
-            print(commands)
-            print(commands[i+1])
-            initial_value = int(commands[i + 1])
-            max_value = int(commands[i + 2]) - 1
+        elif " do" in command:
+            parts = command.split()
+            if len(parts) != 3 or parts[2] != "do":
+                raise ValueError("Invalid 'do' loop syntax")
+            max_value = int(parts[0])-1
+            initial_value = int(parts[1])
             step = 1  # Шаг цикла всегда равен 1
 
-            start_index = len(code)
-            loop_stack.append(start_index)
+            loop_start_index = index
             code.append(
                 {
                     "index": index,
@@ -84,62 +108,54 @@ def second_pass(commands):
                     "arg": [initial_value, max_value, step],
                 }
             )
+            loop_stack.append(loop_start_index)
             index += 1
-            i += 3
+            i += 1
             continue
         elif command == "loop":
             if not loop_stack:
                 raise ValueError("Mismatched 'loop' without 'do'")
 
-            start_index = loop_stack.pop()
+            loop_start_index = loop_stack.pop()
             code.append(
                 {
                     "index": index,
                     "opcode": Opcode.LOOP_END.value,
-                    "arg": start_index
+                    "arg": loop_start_index
                 }
             )
             index += 1
             i += 1
             continue
         elif command == "i":
-            arguments.append("i")
             opcode = Opcode.PUSH
+            arguments.append("i")
         elif command == ".":
-            code.append(
-                {"index": index, "opcode": Opcode.PRINT_TOP.value, "arg": None}
-            )
-            index += 1
+            opcode = Opcode.PRINT_TOP
         elif command == "mod":
-            arguments.append(int(commands[i + 1]))
             opcode = Opcode.MOD
-            i += 2
         elif command == "and":
             opcode = Opcode.AND
         elif command == "or":
             opcode = Opcode.OR
         elif command == "<":
-            arguments.append(int(commands[i + 1]))
             opcode = Opcode.LESS_THAN
-            i += 2
         elif command == ">":
-            arguments.append(int(commands[i + 1]))
             opcode = Opcode.GREATER_THAN
-            i += 2
         elif command == "==":
-            arguments.append(int(commands[i + 1]))
             opcode = Opcode.EQUALS
-            i += 2
         elif command == "if":
             if_stack.append(index)
             code.append(
                 {"index": index, "opcode": Opcode.JZ.value, "arg": None})
             index += 1
         elif command == "then":
+            if not if_stack:
+                raise ValueError("Mismatched 'then' without 'if'")
             if_index = if_stack.pop()
             code[if_index]['arg'] = index
         elif command.startswith('."'):
-            string = command[2:]
+            string = command[3:-1]
             length = len(string)
             code.append(
                 {
@@ -157,19 +173,17 @@ def second_pass(commands):
                 }
             )
             string_storage_address += length + 1
+            index += 1
         elif command == "cr":
             opcode = Opcode.CR
         elif command == "+":
             opcode = Opcode.ADD
         elif command == "pad":
-            if (
-                    i + 2 < len(commands)
-                    and commands[i + 1].isdigit()
-                    and commands[i + 2] == "accept"
-            ):
-                arguments = [int(commands[i + 1])]
-                opcode = Opcode.ACCEPT
-                i += 3
+            if i + 2 >= len(commands) or not commands[i + 1].isdigit() or commands[i + 2] != "accept":
+                raise ValueError("Invalid 'pad' syntax")
+            arguments.append(int(commands[i + 1]))
+            opcode = Opcode.ACCEPT
+            i += 2
         elif command == "type":
             opcode = Opcode.TYPE
         elif command == "dup":
@@ -200,7 +214,8 @@ def translate(text):
 
     # Второй проход: разворачиваем процедуры и создаем окончательный список инструкций
     expanded_program = expand_procedures(main_program, procedures)
-    code = second_pass(expanded_program)
+    preprocessed_commands = preprocess_commands(expanded_program)
+    code = second_pass(preprocessed_commands)
 
     return code
 

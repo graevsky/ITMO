@@ -29,11 +29,14 @@ class Multiplexer:
             raise ValueError("Invalid source type for stack operation")
 
     def select_for_alu(self, opcode):
-        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR}:
+        if opcode in {Opcode.ADD, Opcode.AND, Opcode.OR, Opcode.LESS_THAN, Opcode.GREATER_THAN, Opcode.EQUALS,
+                      Opcode.MOD}:
             b = self.data_path.pop_from_stack()
             a = self.data_path.pop_from_stack()
             return a, b
+        """
         else:
             a = self.data_path.pop_from_stack()
             b = self.data_path.comp_latch.get_data()
             return a, b
+        """

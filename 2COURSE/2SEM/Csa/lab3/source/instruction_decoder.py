@@ -19,19 +19,15 @@ class InstructionDecoder:
         self.control_unit.data_path.perform_operation(Opcode.ADD)
 
     def execute_less_than(self, instruction):
-        self.control_unit.data_path.comp_latch.set_data(instruction.get("arg"))
         self.control_unit.data_path.perform_operation(Opcode.LESS_THAN)
 
     def execute_greater_than(self, instruction):
-        self.control_unit.data_path.comp_latch.set_data(instruction.get("arg"))
         self.control_unit.data_path.perform_operation(Opcode.GREATER_THAN)
 
     def execute_equals(self, instruction):
-        self.control_unit.data_path.comp_latch.set_data(instruction.get("arg"))
         self.control_unit.data_path.perform_operation(Opcode.EQUALS)
 
     def execute_mod(self, instruction):
-        self.control_unit.data_path.comp_latch.set_data(instruction.get("arg"))
         self.control_unit.data_path.perform_operation(Opcode.MOD)
 
     def execute_and(self, instruction):
@@ -84,8 +80,7 @@ class InstructionDecoder:
     def execute_print_top(self, instruction):
         self.control_unit.data_path.print_top()
 
-    @staticmethod
-    def execute_cr():
+    def execute_cr(self, instruction):
         print()
 
     def execute_accept(self, instruction):

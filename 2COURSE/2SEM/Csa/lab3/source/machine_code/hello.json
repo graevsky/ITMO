@@ -9,8 +9,8 @@
         "opcode": "SAVE_STRING",
         "arg": [
             768,
-            12,
-            "Hello world!"
+            13,
+            " Hello world!"
         ]
     },
     {
