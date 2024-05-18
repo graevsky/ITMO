@@ -26,6 +26,7 @@ class DataPath:
         self.input_buffer = []  # Буфер для входных данных
         self.ip = Latch()  # Указатель input buffer
         self.return_stack = []  # Вспомогательный стек для управления циклами
+        self.call_stack = []  # Стек возвратов для процедур
 
         """loop control"""
         self.loop_counter = Latch()
@@ -135,6 +136,17 @@ class DataPath:
         self.alu.execute(opcode, a, b)
         self.push_to_stack("alu_result")
 
+    def call_procedure(self, current_pc, address):
+        """Вызов процедуры"""
+        self.call_stack.append(current_pc+1)
+        return address
+
+    def return_from_procedure(self):
+        """Возврат из процедуры"""
+        if len(self.call_stack) == 0:
+            raise Exception("Return stack underflow")
+        return self.call_stack.pop()
+
 
 class ControlUnit:
     def __init__(self, memory, input_data):
@@ -173,7 +185,6 @@ def simulation(program, input_data):
     memory = [0] * 1024
     for i, instruction in enumerate(program):
         memory[i] = instruction
-
     control_unit = ControlUnit(memory, input_data)
     control_unit.run()
 

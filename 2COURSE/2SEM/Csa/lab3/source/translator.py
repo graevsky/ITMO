@@ -15,26 +15,48 @@ def parse_line(line):
 
 def translate(text):
     code = []
+    procedures = {}
     lines = text.strip().split("\n")
     index = 0
     loop_stack = []
     if_stack = []
     string_storage_address = IOAddresses.STRING_STORAGE
 
+    main_program_index = None
+
     for line_number, line in enumerate(lines):
         line = line.split("\\")[0].strip()
+        """
         if (
                 not line or line.startswith(":") or line.startswith(";")
         ):  # убрать в будущем, чтобы поддерживались переменные-функции
             continue
-
+        """
+        if not line:
+            continue
         commands = line.split()
         i = 0
         while i < len(commands):
             command = commands[i]
             opcode = None
             arguments = []
-            if command.isdigit():
+            if command == ':':
+                current_proc = commands[i+1]
+                procedures[current_proc] = index
+                i += 2
+                continue
+            elif command == ';':
+                code.append({"index": index, "opcode": Opcode.RETURN.value, "arg": None})
+                index += 1
+                current_proc = None
+                i += 1
+                continue
+            elif command in procedures:
+                code.append({"index": index, "opcode": Opcode.CALL.value, "arg": procedures[command]})
+                index += 1
+                i += 1
+                continue
+            elif command.isdigit():  # ???
                 if len(commands) == 1:
                     arguments.append(int(command))
                     opcode = Opcode.PUSH
@@ -164,7 +186,13 @@ def translate(text):
                 index += 1
             i += 1
 
+    main_program_index = index  # ??
+    code.insert(0, {"index": -1, "opcode": Opcode.JUMP.value, "arg": main_program_index})
     code.append({"index": index, "opcode": Opcode.HALT.value, "arg": None})
+    for i, instr in enumerate(code):
+        instr["index"] = i
+
+
     return code
 
 

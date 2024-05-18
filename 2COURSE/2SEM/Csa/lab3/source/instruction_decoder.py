@@ -6,6 +6,7 @@ class InstructionDecoder:
         self.control_unit = control_unit
 
     def decode(self, instruction):
+        #print(instruction)
         opcode = instruction.get("opcode")
         method_name = f"execute_{opcode.lower()}"
         method = getattr(self, method_name, self.unknown_instruction)
@@ -55,6 +56,7 @@ class InstructionDecoder:
     def execute_jump(self, instruction):
         target = instruction.get("arg")
         self.control_unit.pc.set_data(target)
+        self.control_unit.data_path.jump_latch.set_data(1)
 
     def execute_jz(self, instruction):
         condition = self.control_unit.data_path.pop_from_stack()
@@ -94,6 +96,17 @@ class InstructionDecoder:
 
     def execute_dup(self, instruction):
         self.control_unit.data_path.push_to_stack("duplicate_top")
+
+    def execute_call(self, instruction):
+        target = instruction.get("arg")
+        current_pc = self.control_unit.pc.get_data()
+        new_pc = self.control_unit.data_path.call_procedure(current_pc, target)
+        self.control_unit.pc.set_data(new_pc)
+
+    def execute_return(self, instruction):
+        return_pc = self.control_unit.data_path.return_from_procedure()
+        self.control_unit.pc.set_data(return_pc)
+        self.control_unit.data_path.jump_latch.set_data(1)
 
     def execute_halt(self, instruction):
         self.control_unit.halted = True
