@@ -112,6 +112,8 @@ def translate(text):
                 code[if_index]['arg'] = index
                 i += 1
                 continue
+            elif command == "else":
+                pass  # TODO
             elif command.startswith('."'):
                 string = command[2:] + " ".join(commands[i + 1:])
                 length = len(string)

@@ -63,6 +63,13 @@ class InstructionDecoder:
             self.control_unit.pc.set_data(target)
             self.control_unit.data_path.jump_latch.set_data(1)
 
+    def execute_jnz(self, instruction):
+        condition = self.control_unit.data_path.pop_from_stack()
+        if condition != 0:
+            target = instruction.get("arg")
+            self.control_unit.pc.set_data(target)
+            self.control_unit.data_path.jump_latch.set_data(1)
+
     def execute_push(self, instruction):
         arg = instruction.get("arg")
         if isinstance(arg, int):

@@ -13,6 +13,7 @@ class Opcode(str, Enum):
     DUP = "DUP"  # Продублировать верхний элемент стека
     JUMP = "JUMP"  # Безусловный переход
     JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
+    JNZ = 'JNZ'  # Условный переход, если на вершине стека не ноль
     SAVE_STRING = "SAVE_STRING"
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла
