@@ -54,6 +54,9 @@ def expand_procedures(commands, procedures):
 
 def preprocess_commands(commands):
     preprocessed = []
+    strings = {}
+    string_address = IOAddresses.STRING_STORAGE
+
     i = 0
     while i < len(commands):
         command = commands[i]
@@ -71,11 +74,16 @@ def preprocess_commands(commands):
             if i + 1 < len(commands) and commands[i + 1].endswith('"'):
                 string_literal += ' ' + commands[i + 1][:-1]  # Remove the trailing "
                 i += 1
-            preprocessed.append(f'." {string_literal}"')
+
+            string_length = len(string_literal)
+            strings[string_address] = [string_length] + [ord(char) for char in string_literal]
+            preprocessed.append(f'SAVE_STRING {string_address} {string_length} "{string_literal}"')
+            preprocessed.append(f'PSTR {string_address}')
+            string_address += string_length + 1
         else:
             preprocessed.append(command)
         i += 1
-    return preprocessed
+    return preprocessed, strings
 
 
 command_to_opcode = {
@@ -154,26 +162,14 @@ def second_pass(commands):
                 raise ValueError("Mismatched 'then' without 'if'")
             if_index = if_stack.pop()
             code[if_index]['arg'] = index
-        elif command.startswith('."'):
-            string = command[3:-1]
-            length = len(string)
-            code.append(
-                {
-                    "index": index,
-                    "opcode": Opcode.SAVE_STRING,
-                    "arg": [string_storage_address, length, string],
-                }
-            )
-            index += 1
-            code.append(
-                {
-                    "index": index,
-                    "opcode": Opcode.PSTR,
-                    "arg": string_storage_address,
-                }
-            )
-            string_storage_address += length + 1
-            index += 1
+        elif command.startswith('SAVE_STRING'):
+            address = int(command.split()[1])
+            opcode = Opcode.SAVE_STRING
+            arguments.append(address)
+        elif command.startswith('PSTR'):
+            address = int(command.split()[1])
+            opcode = Opcode.PSTR
+            arguments.append(address)
         elif command in command_to_opcode:
             opcode = command_to_opcode[command]
         elif command == "pad":
@@ -206,10 +202,10 @@ def translate(text):
     procedures, main_program = first_pass(lines)
 
     expanded_program = expand_procedures(main_program, procedures)
-    preprocessed_commands = preprocess_commands(expanded_program)
+    preprocessed_commands, strings = preprocess_commands(expanded_program)
     code = second_pass(preprocessed_commands)
 
-    return code
+    return {"data": strings, "program": code}
 
 
 def process_dir(directory, output_folder):

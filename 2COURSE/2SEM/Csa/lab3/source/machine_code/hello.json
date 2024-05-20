@@ -1,11 +1,6 @@
 [
     {
         "index": 0,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 1,
         "opcode": "SAVE_STRING",
         "arg": [
             768,
@@ -14,17 +9,12 @@
         ]
     },
     {
-        "index": 2,
+        "index": 1,
         "opcode": "PSTR",
         "arg": 768
     },
     {
-        "index": 3,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 4,
+        "index": 2,
         "opcode": "HALT",
         "arg": null
     }
