@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from isa import Opcode, write_code, IOAddresses
+from isa import Opcode, write_code
 
 PAD_ADDRESS = "0x0100"  # адрес для буфера IO
 
@@ -55,7 +55,7 @@ def expand_procedures(commands, procedures):
 def preprocess_commands(commands):
     preprocessed = []
     strings = {}
-    string_address = IOAddresses.STRING_STORAGE
+    string_address = 0
 
     i = 0
     while i < len(commands):
@@ -106,7 +106,6 @@ def second_pass(commands):
     index = 0
     loop_stack = []
     if_stack = []
-    string_storage_address = IOAddresses.STRING_STORAGE
 
     i = 0
     while i < len(commands):
