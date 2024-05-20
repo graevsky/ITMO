@@ -53,10 +53,8 @@ class DataPath:
 
     def write_io(self, address, value):
         """Вывод IO"""
-        if address == IOAddresses.OUTPUT_ADDRESS:
-            print(chr(value), end="")
-        else:
-            self.memory[address] = value
+        print(chr(value), end="")
+        self.memory[address] = value
 
     def accept_input(self):
         """Загружает входные данные в буфер и память."""
