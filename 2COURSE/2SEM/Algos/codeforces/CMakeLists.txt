@@ -4,8 +4,6 @@ project(Algos)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Algos
-        #codeforces/6_task/D.cpp
-        #codeforces/codeforce.cpp
-        stepik.cpp
+        codeforces/7_task/B.cpp
         #test.cpp
 )

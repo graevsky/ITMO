@@ -49,11 +49,11 @@ cmake_ninja_workdir = C$:/Users/graev/OneDrive/Рабочий$ стол/ITMO/2COURSE/2SEM/A
 
 build cmake_object_order_depends_target_Algos: phony || CMakeFiles/Algos.dir
 
-build CMakeFiles/Algos.dir/stepik.cpp.obj: CXX_COMPILER__Algos_unscanned_Debug C$:/Users/graev/OneDrive/Рабочий$ стол/ITMO/2COURSE/2SEM/Algos/codeforces/stepik.cpp || cmake_object_order_depends_target_Algos
-  DEP_FILE = CMakeFiles\Algos.dir\stepik.cpp.obj.d
+build CMakeFiles/Algos.dir/codeforces/7_task/B.cpp.obj: CXX_COMPILER__Algos_unscanned_Debug C$:/Users/graev/OneDrive/Рабочий$ стол/ITMO/2COURSE/2SEM/Algos/codeforces/codeforces/7_task/B.cpp || cmake_object_order_depends_target_Algos
+  DEP_FILE = CMakeFiles\Algos.dir\codeforces\7_task\B.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Algos.dir
-  OBJECT_FILE_DIR = CMakeFiles\Algos.dir
+  OBJECT_FILE_DIR = CMakeFiles\Algos.dir\codeforces\7_task
 
 
 # =============================================================================
@@ -63,7 +63,7 @@ build CMakeFiles/Algos.dir/stepik.cpp.obj: CXX_COMPILER__Algos_unscanned_Debug C
 #############################################
 # Link the executable Algos.exe
 
-build Algos.exe: CXX_EXECUTABLE_LINKER__Algos_Debug CMakeFiles/Algos.dir/stepik.cpp.obj
+build Algos.exe: CXX_EXECUTABLE_LINKER__Algos_Debug CMakeFiles/Algos.dir/codeforces/7_task/B.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Algos.dir
