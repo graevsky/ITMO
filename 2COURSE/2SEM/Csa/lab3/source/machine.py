@@ -47,11 +47,13 @@ class DataPath:
         self.jump_latch = Latch()
         self.jump_latch.set_data(0)
 
+    # Сделать из этого oe (не только вывод io, но еще и запись в память).
     def write_io(self, address, value):
         """Вывод IO"""
         print(chr(value), end="")
         self.memory[address] = value
 
+    # Убрать dup отсюда (в instruction_decoder), разбить на ряд более простых функций. Здесь оставить только простой push.
     def push_to_stack(self, source_type=None, value=None, duplicate_top=False):
         """Помещает значение в стек, выбранное мультиплексором"""
         if duplicate_top and self.stack:
@@ -72,6 +74,7 @@ class DataPath:
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
+    # Сделать что то с loop control
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
         self.return_stack.append((self.sp.get_data(), initial, max_value, step))
@@ -91,6 +94,7 @@ class DataPath:
         else:
             return False  # Завершить цикл
 
+    # Переделать в instruction_decoder, как pop+oe
     def print_top(self):
         """Вывести верхний элемент стека"""
         if self.stack:
@@ -98,12 +102,14 @@ class DataPath:
         else:
             raise Exception("Attempt to print from an empty stack")
 
+    # Убрать\перенести в instruction_decoder (как набор простых операций).
     def perform_operation(self, opcode):
         """Выполнение операций через ALU"""
         a, b = self.mux.select_sources("ALU", opcode)
         self.alu.execute(opcode, a, b)
         self.push_to_stack("alu_result")
 
+    # Переделать на we, совместить с записью в стек\память.
     def handle_input(self):
         start_address = IOAddresses.INPUT_BUFFER
         self.push_to_stack("direct_value", start_address)
@@ -117,6 +123,7 @@ class DataPath:
             new_addr = self.pop_from_stack() + 1
             self.push_to_stack("direct_value", new_addr)
 
+    # Разбить на набор более простых функций в instruction_decoder.
     def handle_type(self):
         start_address = IOAddresses.INPUT_BUFFER
         self.push_to_stack("direct_value", start_address)
@@ -131,6 +138,7 @@ class DataPath:
             new_addr = self.pop_from_stack() + 1
             self.push_to_stack("direct_value", new_addr)
 
+    # Разбить на набор более простых функций в instruction_decoder.
     def print_pstr(self, start_address):
         """Вывод длину-префиксной строки из памяти через стек"""
         start_address = start_address + IOAddresses.STRING_STORAGE
