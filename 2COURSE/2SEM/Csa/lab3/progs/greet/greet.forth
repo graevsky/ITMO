@@ -2,7 +2,7 @@
   cr
   ." Hello, what is your name?"
   cr
-  pad 256 accept
+  input
   cr
   ." Hello,"
   type

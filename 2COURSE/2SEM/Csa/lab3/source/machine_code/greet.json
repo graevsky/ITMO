@@ -63,8 +63,8 @@
         },
         {
             "index": 3,
-            "opcode": "PUSH",
-            "arg": 256
+            "opcode": "INPUT",
+            "arg": null
         },
         {
             "index": 4,
