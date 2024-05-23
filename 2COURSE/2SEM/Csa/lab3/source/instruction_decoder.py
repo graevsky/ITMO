@@ -45,7 +45,6 @@ class InstructionDecoder:
         if continue_loop:
             self.control_unit.pc.set_data(instruction.get("arg"))
 
-
     def execute_jump(self, instruction):
         target = instruction.get("arg")
         self.control_unit.pc.set_data(target)
@@ -88,17 +87,6 @@ class InstructionDecoder:
 
     def execute_input(self, instruction):
         self.control_unit.data_path.handle_input()
-
-    def execute_call(self, instruction):
-        target = instruction.get("arg")
-        current_pc = self.control_unit.pc.get_data()
-        new_pc = self.control_unit.data_path.call_procedure(current_pc, target)
-        self.control_unit.pc.set_data(new_pc)
-
-    def execute_return(self, instruction):
-        return_pc = self.control_unit.data_path.return_from_procedure()
-        self.control_unit.pc.set_data(return_pc)
-        self.control_unit.data_path.jump_latch.set_data(1)
 
     def execute_halt(self, instruction):
         self.control_unit.halted = True
