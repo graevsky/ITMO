@@ -17,7 +17,7 @@ def first_pass(lines):
     current_proc = None
 
     for line in lines:
-        line = line.split("\\")[0].strip()  # Убираем комментарии и пробелы
+        line = line.split("\\")[0].strip()
         if not line:
             continue
         commands = line.split()
@@ -61,8 +61,8 @@ def preprocess_commands(commands):
         if command == "do":
             if i < 2:
                 raise ValueError("Invalid 'do' loop syntax")
-            preprocessed.pop()  # Remove the command before 'do'
-            preprocessed.pop()  # Remove the command before that too
+            preprocessed.pop()
+            preprocessed.pop()
             preprocessed.append(f"{commands[i - 2]} {commands[i - 1]} do")
         elif command.startswith('."'):
             string_literal = command[2:]
@@ -70,7 +70,7 @@ def preprocess_commands(commands):
                 string_literal += ' ' + commands[i + 1]
                 i += 1
             if i + 1 < len(commands) and commands[i + 1].endswith('"'):
-                string_literal += ' ' + commands[i + 1][:-1]  # Remove the trailing "
+                string_literal += ' ' + commands[i + 1][:-1]
                 i += 1
 
             string_length = len(string_literal)

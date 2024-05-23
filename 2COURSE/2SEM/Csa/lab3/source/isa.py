@@ -24,7 +24,7 @@ class Opcode(str, Enum):
     OR = "OR"  # Или
     ADD = "ADD"
     PSTR = "PSTR"  # Вывести длину-префиксную строку
-    INPUT = "INPUT"  # Новый опкод для чтения ввода
+    INPUT = "INPUT"  # Чтение ввода
     HALT = "HALT"  # Остановка
 
     def __str__(self):
