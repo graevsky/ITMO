@@ -1,45 +1,62 @@
-[
-    {
-        "index": 0,
-        "opcode": "SAVE_STRING",
-        "arg": [
-            768,
+{
+    "data": {
+        "0": [
             7,
-            " hello!"
-        ]
-    },
-    {
-        "index": 1,
-        "opcode": "PSTR",
-        "arg": 768
-    },
-    {
-        "index": 2,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 3,
-        "opcode": "SAVE_STRING",
-        "arg": [
-            776,
+            32,
+            104,
+            101,
+            108,
+            108,
+            111,
+            33
+        ],
+        "8": [
             18,
-            " my name is Anton!"
+            32,
+            109,
+            121,
+            32,
+            110,
+            97,
+            109,
+            101,
+            32,
+            105,
+            115,
+            32,
+            65,
+            110,
+            116,
+            111,
+            110,
+            33
         ]
     },
-    {
-        "index": 4,
-        "opcode": "PSTR",
-        "arg": 776
-    },
-    {
-        "index": 5,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 6,
-        "opcode": "HALT",
-        "arg": null
-    }
-]
+    "program": [
+        {
+            "index": 0,
+            "opcode": "PSTR",
+            "arg": 0
+        },
+        {
+            "index": 1,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 2,
+            "opcode": "PSTR",
+            "arg": 8
+        },
+        {
+            "index": 3,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 4,
+            "opcode": "HALT",
+            "arg": null
+        }
+    ]
+}

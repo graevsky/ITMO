@@ -1,27 +1,30 @@
-[
-    {
-        "index": 0,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 1,
-        "opcode": "INPUT",
-        "arg": null
-    },
-    {
-        "index": 2,
-        "opcode": "TYPE",
-        "arg": null
-    },
-    {
-        "index": 3,
-        "opcode": "CR",
-        "arg": null
-    },
-    {
-        "index": 4,
-        "opcode": "HALT",
-        "arg": null
-    }
-]
+{
+    "data": {},
+    "program": [
+        {
+            "index": 0,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 1,
+            "opcode": "INPUT",
+            "arg": null
+        },
+        {
+            "index": 2,
+            "opcode": "TYPE",
+            "arg": null
+        },
+        {
+            "index": 3,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 4,
+            "opcode": "HALT",
+            "arg": null
+        }
+    ]
+}

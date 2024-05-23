@@ -3,8 +3,6 @@ import os
 
 from isa import Opcode, write_code
 
-PAD_ADDRESS = "0x0100"  # адрес для буфера IO
-
 
 def parse_line(line):
     parts = line.strip().split()
@@ -77,7 +75,6 @@ def preprocess_commands(commands):
 
             string_length = len(string_literal)
             strings[string_address] = [string_length] + [ord(char) for char in string_literal]
-            preprocessed.append(f'SAVE_STRING {string_address} {string_length} "{string_literal}"')
             preprocessed.append(f'PSTR {string_address}')
             string_address += string_length + 1
         else:
@@ -98,6 +95,7 @@ command_to_opcode = {
     "+": Opcode.ADD,
     "type": Opcode.TYPE,
     "dup": Opcode.DUP,
+    "input": Opcode.INPUT,
 }
 
 
@@ -161,22 +159,12 @@ def second_pass(commands):
                 raise ValueError("Mismatched 'then' without 'if'")
             if_index = if_stack.pop()
             code[if_index]['arg'] = index
-        elif command.startswith('SAVE_STRING'):
-            address = int(command.split()[1])
-            opcode = Opcode.SAVE_STRING
-            arguments.append(address)
         elif command.startswith('PSTR'):
             address = int(command.split()[1])
             opcode = Opcode.PSTR
             arguments.append(address)
         elif command in command_to_opcode:
             opcode = command_to_opcode[command]
-        elif command == "pad":
-            if i + 2 >= len(commands) or not commands[i + 1].isdigit() or commands[i + 2] != "accept":
-                raise ValueError("Invalid 'pad' syntax")
-            arguments.append(int(commands[i + 1]))
-            opcode = Opcode.ACCEPT
-            i += 2
 
         if opcode:
             code.append(

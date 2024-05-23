@@ -1,31 +1,34 @@
-[
-    {
-        "index": 0,
-        "opcode": "LOOP_START",
-        "arg": [
-            0,
-            9,
-            1
-        ]
-    },
-    {
-        "index": 1,
-        "opcode": "PUSH",
-        "arg": "i"
-    },
-    {
-        "index": 2,
-        "opcode": "PRINT_TOP",
-        "arg": null
-    },
-    {
-        "index": 3,
-        "opcode": "LOOP_END",
-        "arg": 0
-    },
-    {
-        "index": 4,
-        "opcode": "HALT",
-        "arg": null
-    }
-]
+{
+    "data": {},
+    "program": [
+        {
+            "index": 0,
+            "opcode": "LOOP_START",
+            "arg": [
+                0,
+                9,
+                1
+            ]
+        },
+        {
+            "index": 1,
+            "opcode": "PUSH",
+            "arg": "i"
+        },
+        {
+            "index": 2,
+            "opcode": "PRINT_TOP",
+            "arg": null
+        },
+        {
+            "index": 3,
+            "opcode": "LOOP_END",
+            "arg": 0
+        },
+        {
+            "index": 4,
+            "opcode": "HALT",
+            "arg": null
+        }
+    ]
+}

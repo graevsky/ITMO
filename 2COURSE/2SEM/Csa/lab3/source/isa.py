@@ -5,16 +5,13 @@ from enum import Enum
 
 class Opcode(str, Enum):
     """Операции"""
-
     CR = "CR"  # Перевод строки
-    ACCEPT = "ACCEPT"  # Принять элементы из пользовательского ввода
     SWAP = "SWAP"  # Заменить верхний и предыдущий элементы в стеке
     TYPE = "TYPE"  # Вывести пользовательский ввод
     DUP = "DUP"  # Продублировать верхний элемент стека
     JUMP = "JUMP"  # Безусловный переход
     JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
     JNZ = 'JNZ'  # Условный переход, если на вершине стека не ноль
-    SAVE_STRING = "SAVE_STRING"
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла
     PUSH = "PUSH"  # Добавить значение в стек
@@ -27,6 +24,7 @@ class Opcode(str, Enum):
     OR = "OR"  # Или
     ADD = "ADD"
     PSTR = "PSTR"  # Вывести длину-префиксную строку
+    INPUT = "INPUT"  # Новый опкод для чтения ввода
     HALT = "HALT"  # Остановка
 
     def __str__(self):

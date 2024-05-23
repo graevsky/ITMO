@@ -33,26 +33,16 @@
     "program": [
         {
             "index": 0,
-            "opcode": "SAVE_STRING",
+            "opcode": "PSTR",
             "arg": 0
         },
         {
             "index": 1,
             "opcode": "PSTR",
-            "arg": 0
+            "arg": 14
         },
         {
             "index": 2,
-            "opcode": "SAVE_STRING",
-            "arg": 14
-        },
-        {
-            "index": 3,
-            "opcode": "PSTR",
-            "arg": 14
-        },
-        {
-            "index": 4,
             "opcode": "HALT",
             "arg": null
         }

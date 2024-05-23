@@ -45,9 +45,6 @@ class InstructionDecoder:
         if continue_loop:
             self.control_unit.pc.set_data(instruction.get("arg"))
 
-    def execute_save_string(self, instruction):
-        # Эта команда больше не нужна, так как строки записываются в память при инициализации
-        pass
 
     def execute_jump(self, instruction):
         target = instruction.get("arg")
@@ -83,14 +80,14 @@ class InstructionDecoder:
     def execute_cr(self, instruction):
         print()
 
-    def execute_accept(self, instruction):
-        self.control_unit.data_path.accept_input()
-
     def execute_type(self, instruction):
-        self.control_unit.data_path.write_output()
+        self.control_unit.data_path.handle_type()
 
     def execute_dup(self, instruction):
-        self.control_unit.data_path.push_to_stack("duplicate_top")
+        self.control_unit.data_path.push_to_stack(duplicate_top=True)
+
+    def execute_input(self, instruction):
+        self.control_unit.data_path.handle_input()
 
     def execute_call(self, instruction):
         target = instruction.get("arg")
