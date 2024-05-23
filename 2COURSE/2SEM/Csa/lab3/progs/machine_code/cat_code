@@ -1,9 +1,0 @@
-[
-    {"index": 0, "opcode": "CR"},
-    {"index": 1, "opcode": "LOAD_ADDR", "arg": "0x0100"},
-    {"index": 2, "opcode": "ACCEPT", "arg": 256},
-    {"index": 3, "opcode": "LOAD_ADDR", "arg": "0x0100"},
-    {"index": 4, "opcode": "SWAP"},
-    {"index": 5, "opcode": "TYPE"},
-    {"index": 6, "opcode": "CR"}
-]
