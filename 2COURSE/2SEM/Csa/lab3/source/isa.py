@@ -61,6 +61,6 @@ def write_code(filename, code):
 def read_code(filename):
     with open(filename, "r", encoding="utf-8") as file:
         code = json.load(file)
-    for instruction in code:
+    for instruction in code["program"]:
         instruction["opcode"] = Opcode(instruction["opcode"])
     return code

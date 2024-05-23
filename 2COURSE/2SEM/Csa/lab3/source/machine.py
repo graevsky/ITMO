@@ -18,7 +18,7 @@ logging.basicConfig(
 
 
 class DataPath:
-    def __init__(self, memory, inp_data):
+    def __init__(self, memory, inp_data, data_segment):
         self.memory = memory  # Общая память
         self.stack = []
         self.sp = Latch()  # Указатель стека
@@ -50,6 +50,15 @@ class DataPath:
         """Jump latch"""
         self.jump_latch = Latch()
         self.jump_latch.set_data(0)
+
+        self.initialize_data_segment(data_segment)
+
+    def initialize_data_segment(self, data_segment):
+        """Initialize memory with data segment"""
+        base_address = IOAddresses.STRING_STORAGE
+        for offset, content in data_segment.items():
+            address = base_address + int(offset)
+            self.store_string_in_memory(address, content[0], ''.join(chr(c) for c in content[1:]))
 
     def write_io(self, address, value):
         """Вывод IO"""
@@ -95,12 +104,18 @@ class DataPath:
         for i in range(length):
             self.memory[address + 1 + i] = ord(string_data[i])
 
-    def print_pstr(self, address):
-        """Вывод lenght-prefixed строки из памяти"""
-        length = self.memory[address]
-        for i in range(length):
-            self.write_io(IOAddresses.OUTPUT_ADDRESS,
-                          self.memory[address + 1 + i])
+    def print_pstr(self, start_address):
+        """Вывод длину-префиксной строки из памяти через стек"""
+        start_address = start_address+IOAddresses.STRING_STORAGE
+        self.push_to_stack("direct_value", start_address)
+        length = self.memory[start_address]
+        self.push_to_stack("direct_value", length)
+        for _ in range(length):
+            current_address = self.stack[-2] + 1
+            self.stack[-2] = current_address
+            char_code = self.memory[current_address]
+            self.push_to_stack("direct_value", char_code)
+            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.pop_from_stack())
 
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
@@ -147,12 +162,12 @@ class DataPath:
 
 
 class ControlUnit:
-    def __init__(self, memory, input_data):
+    def __init__(self, memory, input_data, data_segment):
         self.memory = memory  # Общая память для данных и программы
         self.pc = Latch()  # Счётчик программ
         self.pc.set_data(0)
         self.halted = False
-        self.data_path = DataPath(memory, input_data)  # Общая память
+        self.data_path = DataPath(memory, input_data, data_segment)  # Общая память
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = Latch()
@@ -179,11 +194,11 @@ class ControlUnit:
             self.tick_counter += 1
 
 
-def simulation(program, input_data):
+def simulation(program, input_data, data_segment):
     memory = [0] * 1024
     for i, instruction in enumerate(program):
         memory[i] = instruction
-    control_unit = ControlUnit(memory, input_data)
+    control_unit = ControlUnit(memory, input_data, data_segment)
     control_unit.run()
 
     logs = log_stream.getvalue()
@@ -200,10 +215,12 @@ def run_all_programs(directory, input_file):
 
 
 def main(code_file, input_file):
-    program = read_code(code_file)
+    machine_code = read_code(code_file)
+    program = machine_code["program"]
+    data_segment = machine_code["data"]
     with open(input_file, "r", encoding="utf-8") as file:
         input_data = file.read()
-    instr_count, ticks, logs = simulation(program, input_data)
+    instr_count, ticks, logs = simulation(program, input_data, data_segment)
     print()
     print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
 

@@ -46,8 +46,8 @@ class InstructionDecoder:
             self.control_unit.pc.set_data(instruction.get("arg"))
 
     def execute_save_string(self, instruction):
-        arg = instruction.get("arg")
-        self.control_unit.data_path.store_string_in_memory(arg[0], arg[1], arg[2])
+        # Эта команда больше не нужна, так как строки записываются в память при инициализации
+        pass
 
     def execute_jump(self, instruction):
         target = instruction.get("arg")

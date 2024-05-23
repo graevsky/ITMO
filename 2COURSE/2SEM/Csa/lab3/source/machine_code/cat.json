@@ -6,8 +6,8 @@
     },
     {
         "index": 1,
-        "opcode": "ACCEPT",
-        "arg": 256
+        "opcode": "INPUT",
+        "arg": null
     },
     {
         "index": 2,
