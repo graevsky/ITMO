@@ -202,11 +202,70 @@
         },
         {
             "index": 29,
-            "opcode": "TYPE",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 256
         },
         {
             "index": 30,
+            "opcode": "LOOP_START",
+            "arg": [
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "index": 31,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 32,
+            "opcode": "LOAD",
+            "arg": null
+        },
+        {
+            "index": 33,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 34,
+            "opcode": "JZ",
+            "arg": 36
+        },
+        {
+            "index": 35,
+            "opcode": "DEC_I",
+            "arg": null
+        },
+        {
+            "index": 36,
+            "opcode": "OUT",
+            "arg": null
+        },
+        {
+            "index": 37,
+            "opcode": "PUSH",
+            "arg": 1
+        },
+        {
+            "index": 38,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 39,
+            "opcode": "LOOP_END",
+            "arg": 30
+        },
+        {
+            "index": 40,
+            "opcode": "POP",
+            "arg": null
+        },
+        {
+            "index": 41,
             "opcode": "LOOP_START",
             "arg": [
                 1,
@@ -215,42 +274,42 @@
             ]
         },
         {
-            "index": 31,
+            "index": 42,
             "opcode": "PUSH",
             "arg": 801
         },
         {
-            "index": 32,
+            "index": 43,
             "opcode": "PUSH",
             "arg": "i"
         },
         {
-            "index": 33,
+            "index": 44,
             "opcode": "ADD",
             "arg": null
         },
         {
-            "index": 34,
+            "index": 45,
             "opcode": "LOAD",
             "arg": null
         },
         {
-            "index": 35,
+            "index": 46,
             "opcode": "OUT",
             "arg": null
         },
         {
-            "index": 36,
+            "index": 47,
             "opcode": "LOOP_END",
-            "arg": 30
+            "arg": 41
         },
         {
-            "index": 37,
+            "index": 48,
             "opcode": "CR",
             "arg": null
         },
         {
-            "index": 38,
+            "index": 49,
             "opcode": "HALT",
             "arg": null
         }

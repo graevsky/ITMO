@@ -53,7 +53,8 @@ class DataPath:
         print(chr(value), end="")  # Заменить на лог
         self.memory[address] = value
 
-    # Убрать dup отсюда (в instruction_decoder), разбить на ряд более простых функций. Здесь оставить только простой push.
+    # Убрать dup отсюда (в instruction_decoder),
+    # разбить на ряд более простых функций. Здесь оставить только простой push.
     def push_to_stack(self, source_type=None, value=None, duplicate_top=False):
         """Помещает значение в стек, выбранное мультиплексором"""
         if duplicate_top and self.stack:
@@ -108,21 +109,6 @@ class DataPath:
         a, b = self.mux.select_sources("ALU", opcode)
         self.alu.execute(opcode, a, b)
         self.push_to_stack("alu_result")
-
-    # Разбить на набор более простых функций в instruction_decoder.
-    def handle_type(self):
-        start_address = IOAddresses.INPUT_BUFFER
-        self.push_to_stack("direct_value", start_address)
-        while True:
-            self.push_to_stack(duplicate_top=True)
-            cur_addr = self.pop_from_stack()
-            char_code = self.memory[cur_addr]
-            if char_code == 0:
-                break
-            self.push_to_stack("direct_value", char_code)
-            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.pop_from_stack())
-            new_addr = self.pop_from_stack() + 1
-            self.push_to_stack("direct_value", new_addr)
 
     def load(self):
         addr = self.pop_from_stack()
@@ -184,7 +170,6 @@ def simulation(program, input_data, data_segment):
     for offset, content in data_segment.items():
         address = base_address + int(offset)
         length = content[0]
-        string_data = ''.join(chr(c) for c in content[1:])
         for i in range(length + 1):
             memory[address + i] = content[i]
 

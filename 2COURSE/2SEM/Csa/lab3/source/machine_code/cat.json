@@ -67,11 +67,70 @@
         },
         {
             "index": 12,
-            "opcode": "TYPE",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 256
         },
         {
             "index": 13,
+            "opcode": "LOOP_START",
+            "arg": [
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "index": 14,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 15,
+            "opcode": "LOAD",
+            "arg": null
+        },
+        {
+            "index": 16,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 17,
+            "opcode": "JZ",
+            "arg": 19
+        },
+        {
+            "index": 18,
+            "opcode": "DEC_I",
+            "arg": null
+        },
+        {
+            "index": 19,
+            "opcode": "OUT",
+            "arg": null
+        },
+        {
+            "index": 20,
+            "opcode": "PUSH",
+            "arg": 1
+        },
+        {
+            "index": 21,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 22,
+            "opcode": "LOOP_END",
+            "arg": 13
+        },
+        {
+            "index": 23,
+            "opcode": "POP",
+            "arg": null
+        },
+        {
+            "index": 24,
             "opcode": "HALT",
             "arg": null
         }
