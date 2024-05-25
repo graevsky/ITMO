@@ -27,6 +27,8 @@ class Opcode(str, Enum):
     INPUT = "INPUT"  # Чтение ввода
     LOAD = "LOAD"
     OUT = "OUT"
+    DEC_I = "DEC_I"
+    SAVE = "SAVE"
     HALT = "HALT"  # Остановка
 
     def __str__(self):
