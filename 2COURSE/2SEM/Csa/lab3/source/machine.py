@@ -26,6 +26,7 @@ class DataPath:
         self.input_buffer = list(inp_data) + [0]  # Буфер для входных данных
         self.ip = Latch()  # Указатель input buffer
         self.return_stack = []  # Вспомогательный стек для управления циклами
+        self.output_addr_counter = 0
 
         """loop control"""
         self.loop_counter = Latch()
@@ -51,7 +52,8 @@ class DataPath:
     def write_io(self, address, value):
         """Вывод IO"""
         print(chr(value), end="")  # Заменить на лог
-        self.memory[address] = value
+        self.memory[address] = value  # addr + self.output_addr_counter
+        self.output_addr_counter += 1
 
     # Убрать dup отсюда (в instruction_decoder),
     # разбить на ряд более простых функций. Здесь оставить только простой push.

@@ -64,6 +64,7 @@ class InstructionDecoder:
             self.control_unit.pc.set_data(instruction.get("arg"))
 
     def execute_jump(self, instruction):
+        print("ALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARM")
         target = instruction.get("arg")
         self.control_unit.pc.set_data(target)
         self.control_unit.data_path.jump_latch.set_data(1)
