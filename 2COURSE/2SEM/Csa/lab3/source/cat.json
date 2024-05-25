@@ -1,0 +1,20 @@
+{
+    "data": {},
+    "program": [
+        {
+            "index": 0,
+            "opcode": "INPUT",
+            "arg": null
+        },
+        {
+            "index": 1,
+            "opcode": "TYPE",
+            "arg": null
+        },
+        {
+            "index": 2,
+            "opcode": "HALT",
+            "arg": null
+        }
+    ]
+}

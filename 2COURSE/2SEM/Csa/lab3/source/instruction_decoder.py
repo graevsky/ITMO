@@ -12,6 +12,9 @@ class InstructionDecoder:
         method = getattr(self, method_name, self.unknown_instruction)
         method(instruction)
 
+    def execute_inp(self, instruction):
+        self.control_unit.data_path.inp()
+
     def execute_save(self, instruction):
         val = self.control_unit.data_path.pop_from_stack()
         addr = self.control_unit.data_path.pop_from_stack()

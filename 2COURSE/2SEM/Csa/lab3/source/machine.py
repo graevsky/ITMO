@@ -23,7 +23,7 @@ class DataPath:
         self.stack = []
         self.sp = Latch()  # Указатель стека
         self.sp.set_data(0)  # Указатель стека
-        self.input_buffer = list(inp_data)  # Буфер для входных данных
+        self.input_buffer = list(inp_data) + [0]  # Буфер для входных данных
         self.ip = Latch()  # Указатель input buffer
         self.return_stack = []  # Вспомогательный стек для управления циклами
 
@@ -113,7 +113,7 @@ class DataPath:
     def handle_input(self):
         start_address = IOAddresses.INPUT_BUFFER
         self.push_to_stack("direct_value", start_address)
-        while self.input_buffer:
+        while self.input_buffer[0] != 0:
             char = self.input_buffer.pop(0)
             self.push_to_stack(duplicate_top=True)
             self.push_to_stack("direct_value", ord(char))
@@ -142,6 +142,14 @@ class DataPath:
         addr = self.pop_from_stack()
         val = self.memory[addr]
         self.push_to_stack("direct_value", val)
+
+    def inp(self):
+        """Чтение символа из input_buffer в стек"""
+        if self.input_buffer:
+            char = self.input_buffer.pop(0)
+            self.push_to_stack("direct_value", char)
+        else:
+            self.push_to_stack("direct_value", 0)
 
 
 class ControlUnit:
@@ -175,6 +183,9 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             self.tick_counter += 1
+        print()
+        for i in range(IOAddresses.INPUT_BUFFER, IOAddresses.INPUT_BUFFER + 10):
+            print("bank ", str(i), " with data ", str(self.memory[i]))
 
 
 def simulation(program, input_data, data_segment):
