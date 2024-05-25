@@ -77,21 +77,21 @@ class DataPath:
     # Сделать что то с loop control
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
-        self.return_stack.append((self.sp.get_data(), initial, max_value, step))
+        self.return_stack.append((initial, max_value, step))
         self.loop_counter.set_data(initial)
 
     def end_loop(self):
         """Проверка условия и остановка цикла"""
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
-        loop_context = self.return_stack.pop()
-        sp, initial, max_value, step = loop_context
-        initial += step
-        if initial <= max_value:
-            self.return_stack.append((sp, initial, max_value, step))
-            self.loop_counter.set_data(initial)
+        initial, max_value, step = self.return_stack[-1]
+        current_value = self.loop_counter.get_data()
+        next_value = current_value + step
+        if next_value <= max_value:
+            self.loop_counter.set_data(next_value)
             return True
         else:
+            self.return_stack.pop()
             return False  # Завершить цикл
 
     # Переделать в instruction_decoder, как pop+oe
@@ -108,20 +108,6 @@ class DataPath:
         a, b = self.mux.select_sources("ALU", opcode)
         self.alu.execute(opcode, a, b)
         self.push_to_stack("alu_result")
-
-    # Переделать на we, совместить с записью в стек\память.
-    def handle_input(self):
-        start_address = IOAddresses.INPUT_BUFFER
-        self.push_to_stack("direct_value", start_address)
-        while self.input_buffer[0] != 0:
-            char = self.input_buffer.pop(0)
-            self.push_to_stack(duplicate_top=True)
-            self.push_to_stack("direct_value", ord(char))
-            char_code = self.pop_from_stack()
-            addr = self.pop_from_stack()
-            self.memory[addr] = char_code
-            new_addr = self.pop_from_stack() + 1
-            self.push_to_stack("direct_value", new_addr)
 
     # Разбить на набор более простых функций в instruction_decoder.
     def handle_type(self):
@@ -147,7 +133,10 @@ class DataPath:
         """Чтение символа из input_buffer в стек"""
         if self.input_buffer:
             char = self.input_buffer.pop(0)
-            self.push_to_stack("direct_value", char)
+            if char == 0:
+                self.push_to_stack("direct_value", 0)
+            else:
+                self.push_to_stack("direct_value", ord(char))
         else:
             self.push_to_stack("direct_value", 0)
 
@@ -183,9 +172,6 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             self.tick_counter += 1
-        print()
-        for i in range(IOAddresses.INPUT_BUFFER, IOAddresses.INPUT_BUFFER + 10):
-            print("bank ", str(i), " with data ", str(self.memory[i]))
 
 
 def simulation(program, input_data, data_segment):

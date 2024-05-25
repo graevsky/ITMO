@@ -30,6 +30,7 @@ class Opcode(str, Enum):
     DEC_I = "DEC_I"
     SAVE = "SAVE"
     INP = "INP"
+    POP = "POP"
     HALT = "HALT"  # Остановка
 
     def __str__(self):

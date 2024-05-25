@@ -225,6 +225,106 @@ def second_pass(commands, strings):
                 }
             )
             index += 1
+        elif command == "input":
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": IOAddresses.INPUT_BUFFER
+                }
+            )
+            index += 1
+            loop_start_index = index
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_START,
+                    "arg": [0, 1, 1]
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.DUP,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.INP,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.DUP,
+                    "arg": None
+                }
+            )
+            index += 1
+            if_index = index
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.JZ,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.DEC_I,
+                    "arg": None
+                }
+            )
+            index += 1
+            code[if_index]["arg"] = index
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.SAVE,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": 1
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.ADD,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_END,
+                    "arg": loop_start_index
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.POP,
+                    "arg": None
+                }
+            )
+            index += 1
         elif command in command_to_opcode:
             opcode = command_to_opcode[command]
 

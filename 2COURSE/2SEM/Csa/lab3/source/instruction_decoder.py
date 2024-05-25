@@ -6,11 +6,13 @@ class InstructionDecoder:
         self.control_unit = control_unit
 
     def decode(self, instruction):
-        # print(instruction)
         opcode = instruction.get("opcode")
         method_name = f"execute_{opcode.lower()}"
         method = getattr(self, method_name, self.unknown_instruction)
         method(instruction)
+
+    def execute_pop(self, instruction):
+        self.control_unit.data_path.pop_from_stack()
 
     def execute_inp(self, instruction):
         self.control_unit.data_path.inp()
@@ -21,7 +23,8 @@ class InstructionDecoder:
         self.control_unit.data_path.memory[addr] = val
 
     def execute_dec_i(self, instruction):
-        self.control_unit.data_path.loop_counter.set_data(self.control_unit.data_path.loop_counter.get_data() - 1)
+        current_value = self.control_unit.data_path.loop_counter.get_data()
+        self.control_unit.data_path.loop_counter.set_data(current_value - 1)
 
     def execute_load(self, instruction):
         self.control_unit.data_path.load()
