@@ -3,26 +3,75 @@
     "program": [
         {
             "index": 0,
-            "opcode": "CR",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 256
         },
         {
             "index": 1,
-            "opcode": "INPUT",
-            "arg": null
+            "opcode": "LOOP_START",
+            "arg": [
+                0,
+                1,
+                1
+            ]
         },
         {
             "index": 2,
-            "opcode": "TYPE",
+            "opcode": "DUP",
             "arg": null
         },
         {
             "index": 3,
-            "opcode": "CR",
+            "opcode": "INP",
             "arg": null
         },
         {
             "index": 4,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 5,
+            "opcode": "JZ",
+            "arg": 7
+        },
+        {
+            "index": 6,
+            "opcode": "DEC_I",
+            "arg": null
+        },
+        {
+            "index": 7,
+            "opcode": "SAVE",
+            "arg": null
+        },
+        {
+            "index": 8,
+            "opcode": "PUSH",
+            "arg": 1
+        },
+        {
+            "index": 9,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 10,
+            "opcode": "LOOP_END",
+            "arg": 1
+        },
+        {
+            "index": 11,
+            "opcode": "POP",
+            "arg": null
+        },
+        {
+            "index": 12,
+            "opcode": "TYPE",
+            "arg": null
+        },
+        {
+            "index": 13,
             "opcode": "HALT",
             "arg": null
         }

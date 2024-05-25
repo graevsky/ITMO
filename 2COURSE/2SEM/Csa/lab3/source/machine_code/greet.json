@@ -94,16 +94,75 @@
         },
         {
             "index": 9,
-            "opcode": "INPUT",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 256
         },
         {
             "index": 10,
+            "opcode": "LOOP_START",
+            "arg": [
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "index": 11,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 12,
+            "opcode": "INP",
+            "arg": null
+        },
+        {
+            "index": 13,
+            "opcode": "DUP",
+            "arg": null
+        },
+        {
+            "index": 14,
+            "opcode": "JZ",
+            "arg": 16
+        },
+        {
+            "index": 15,
+            "opcode": "DEC_I",
+            "arg": null
+        },
+        {
+            "index": 16,
+            "opcode": "SAVE",
+            "arg": null
+        },
+        {
+            "index": 17,
+            "opcode": "PUSH",
+            "arg": 1
+        },
+        {
+            "index": 18,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 19,
+            "opcode": "LOOP_END",
+            "arg": 10
+        },
+        {
+            "index": 20,
+            "opcode": "POP",
+            "arg": null
+        },
+        {
+            "index": 21,
             "opcode": "CR",
             "arg": null
         },
         {
-            "index": 11,
+            "index": 22,
             "opcode": "LOOP_START",
             "arg": [
                 1,
@@ -112,42 +171,42 @@
             ]
         },
         {
-            "index": 12,
+            "index": 23,
             "opcode": "PUSH",
             "arg": 794
         },
         {
-            "index": 13,
+            "index": 24,
             "opcode": "PUSH",
             "arg": "i"
         },
         {
-            "index": 14,
+            "index": 25,
             "opcode": "ADD",
             "arg": null
         },
         {
-            "index": 15,
+            "index": 26,
             "opcode": "LOAD",
             "arg": null
         },
         {
-            "index": 16,
+            "index": 27,
             "opcode": "OUT",
             "arg": null
         },
         {
-            "index": 17,
+            "index": 28,
             "opcode": "LOOP_END",
-            "arg": 11
+            "arg": 22
         },
         {
-            "index": 18,
+            "index": 29,
             "opcode": "TYPE",
             "arg": null
         },
         {
-            "index": 19,
+            "index": 30,
             "opcode": "LOOP_START",
             "arg": [
                 1,
@@ -156,42 +215,42 @@
             ]
         },
         {
-            "index": 20,
+            "index": 31,
             "opcode": "PUSH",
             "arg": 801
         },
         {
-            "index": 21,
+            "index": 32,
             "opcode": "PUSH",
             "arg": "i"
         },
         {
-            "index": 22,
+            "index": 33,
             "opcode": "ADD",
             "arg": null
         },
         {
-            "index": 23,
+            "index": 34,
             "opcode": "LOAD",
             "arg": null
         },
         {
-            "index": 24,
+            "index": 35,
             "opcode": "OUT",
             "arg": null
         },
         {
-            "index": 25,
+            "index": 36,
             "opcode": "LOOP_END",
-            "arg": 19
+            "arg": 30
         },
         {
-            "index": 26,
+            "index": 37,
             "opcode": "CR",
             "arg": null
         },
         {
-            "index": 27,
+            "index": 38,
             "opcode": "HALT",
             "arg": null
         }
