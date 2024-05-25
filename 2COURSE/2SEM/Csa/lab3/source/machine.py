@@ -138,19 +138,10 @@ class DataPath:
             new_addr = self.pop_from_stack() + 1
             self.push_to_stack("direct_value", new_addr)
 
-    # Разбить на набор более простых функций в instruction_decoder.
-    def print_pstr(self, start_address):
-        """Вывод длину-префиксной строки из памяти через стек"""
-        start_address = start_address + IOAddresses.STRING_STORAGE
-        self.push_to_stack("direct_value", start_address)
-        length = self.memory[start_address]
-        self.push_to_stack("direct_value", length)
-        for _ in range(length):
-            current_address = self.stack[-2] + 1
-            self.stack[-2] = current_address
-            char_code = self.memory[current_address]
-            self.push_to_stack("direct_value", char_code)
-            self.write_io(IOAddresses.OUTPUT_ADDRESS, self.pop_from_stack())
+    def load(self):
+        addr = self.pop_from_stack()
+        val = self.memory[addr]
+        self.push_to_stack("direct_value", val)
 
 
 class ControlUnit:

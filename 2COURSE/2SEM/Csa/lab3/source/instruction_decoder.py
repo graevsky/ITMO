@@ -1,4 +1,4 @@
-from isa import Opcode
+from isa import Opcode, IOAddresses
 
 
 class InstructionDecoder:
@@ -12,8 +12,12 @@ class InstructionDecoder:
         method = getattr(self, method_name, self.unknown_instruction)
         method(instruction)
 
-    def execute_pstr(self, instruction):
-        self.control_unit.data_path.print_pstr(instruction.get("arg"))
+    def execute_load(self, instruction):
+        self.control_unit.data_path.load()
+
+    def execute_out(self, instruction):
+        value = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, value)
 
     def execute_add(self, instruction):
         self.control_unit.data_path.perform_operation(Opcode.ADD)

@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from isa import Opcode, write_code
+from isa import Opcode, write_code, IOAddresses
 
 
 def parse_line(line):
@@ -66,12 +66,15 @@ def preprocess_commands(commands):
             preprocessed.append(f"{commands[i - 2]} {commands[i - 1]} do")
         elif command.startswith('."'):
             string_literal = command[2:]
-            while i + 1 < len(commands) and not commands[i + 1].endswith('"'):
-                string_literal += ' ' + commands[i + 1]
-                i += 1
-            if i + 1 < len(commands) and commands[i + 1].endswith('"'):
-                string_literal += ' ' + commands[i + 1][:-1]
-                i += 1
+            if string_literal.endswith('"'):
+                string_literal = string_literal[:-1]
+            else:
+                while i + 1 < len(commands) and not commands[i + 1].endswith('"'):
+                    string_literal += ' ' + commands[i + 1]
+                    i += 1
+                if i + 1 < len(commands) and commands[i + 1].endswith('"'):
+                    string_literal += ' ' + commands[i + 1][:-1]
+                    i += 1
 
             string_length = len(string_literal)
             strings[string_address] = [string_length] + [ord(char) for char in string_literal]
@@ -99,7 +102,7 @@ command_to_opcode = {
 }
 
 
-def second_pass(commands):
+def second_pass(commands, strings):
     code = []
     index = 0
     loop_stack = []
@@ -161,8 +164,67 @@ def second_pass(commands):
             code[if_index]['arg'] = index
         elif command.startswith('PSTR'):
             address = int(command.split()[1])
-            opcode = Opcode.PSTR
-            arguments.append(address)
+            string_length = strings[address][0]
+            max_value = string_length
+            step = 1
+
+            loop_start_index = index
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_START,
+                    "arg": [1, max_value, step],
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": address + IOAddresses.STRING_STORAGE
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": "i"
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.ADD,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOAD,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.OUT,
+                    "arg": None
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOOP_END,
+                    "arg": loop_start_index
+                }
+            )
+            index += 1
         elif command in command_to_opcode:
             opcode = command_to_opcode[command]
 
@@ -190,7 +252,7 @@ def translate(text):
 
     expanded_program = expand_procedures(main_program, procedures)
     preprocessed_commands, strings = preprocess_commands(expanded_program)
-    code = second_pass(preprocessed_commands)
+    code = second_pass(preprocessed_commands, strings)
 
     return {"data": strings, "program": code}
 

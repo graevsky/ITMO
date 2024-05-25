@@ -1,12 +1,12 @@
 : greet                           \\ Hello by name program
   cr
-  ." Hello, what is your name?"
+  ."Hello, what is your name?"
   cr
   input
   cr
-  ." Hello,"
+  ."Hello,"
   type
-  ." !"
+  ."!"
   cr
 ;
 

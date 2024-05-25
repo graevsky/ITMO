@@ -1,8 +1,7 @@
 {
     "data": {
         "0": [
-            13,
-            32,
+            12,
             109,
             111,
             100,
@@ -85,25 +84,59 @@
         {
             "index": 12,
             "opcode": "JZ",
-            "arg": 15
+            "arg": 21
         },
         {
             "index": 13,
-            "opcode": "PSTR",
-            "arg": 0
+            "opcode": "LOOP_START",
+            "arg": [
+                1,
+                12,
+                1
+            ]
         },
         {
             "index": 14,
+            "opcode": "PUSH",
+            "arg": 768
+        },
+        {
+            "index": 15,
+            "opcode": "PUSH",
+            "arg": "i"
+        },
+        {
+            "index": 16,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 17,
+            "opcode": "LOAD",
+            "arg": null
+        },
+        {
+            "index": 18,
+            "opcode": "OUT",
+            "arg": null
+        },
+        {
+            "index": 19,
+            "opcode": "LOOP_END",
+            "arg": 13
+        },
+        {
+            "index": 20,
             "opcode": "CR",
             "arg": null
         },
         {
-            "index": 15,
+            "index": 21,
             "opcode": "LOOP_END",
             "arg": 0
         },
         {
-            "index": 16,
+            "index": 22,
             "opcode": "HALT",
             "arg": null
         }

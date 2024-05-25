@@ -1,8 +1,7 @@
 {
     "data": {
         "0": [
-            7,
-            32,
+            6,
             104,
             101,
             108,
@@ -10,9 +9,8 @@
             111,
             33
         ],
-        "8": [
-            18,
-            32,
+        "7": [
+            17,
             109,
             121,
             32,
@@ -35,26 +33,94 @@
     "program": [
         {
             "index": 0,
-            "opcode": "PSTR",
-            "arg": 0
+            "opcode": "LOOP_START",
+            "arg": [
+                1,
+                6,
+                1
+            ]
         },
         {
             "index": 1,
-            "opcode": "CR",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 768
         },
         {
             "index": 2,
-            "opcode": "PSTR",
-            "arg": 8
+            "opcode": "PUSH",
+            "arg": "i"
         },
         {
             "index": 3,
-            "opcode": "CR",
+            "opcode": "ADD",
             "arg": null
         },
         {
             "index": 4,
+            "opcode": "LOAD",
+            "arg": null
+        },
+        {
+            "index": 5,
+            "opcode": "OUT",
+            "arg": null
+        },
+        {
+            "index": 6,
+            "opcode": "LOOP_END",
+            "arg": 0
+        },
+        {
+            "index": 7,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 8,
+            "opcode": "LOOP_START",
+            "arg": [
+                1,
+                17,
+                1
+            ]
+        },
+        {
+            "index": 9,
+            "opcode": "PUSH",
+            "arg": 775
+        },
+        {
+            "index": 10,
+            "opcode": "PUSH",
+            "arg": "i"
+        },
+        {
+            "index": 11,
+            "opcode": "ADD",
+            "arg": null
+        },
+        {
+            "index": 12,
+            "opcode": "LOAD",
+            "arg": null
+        },
+        {
+            "index": 13,
+            "opcode": "OUT",
+            "arg": null
+        },
+        {
+            "index": 14,
+            "opcode": "LOOP_END",
+            "arg": 8
+        },
+        {
+            "index": 15,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 16,
             "opcode": "HALT",
             "arg": null
         }

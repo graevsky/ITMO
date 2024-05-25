@@ -25,6 +25,8 @@ class Opcode(str, Enum):
     ADD = "ADD"
     PSTR = "PSTR"  # Вывести длину-префиксную строку
     INPUT = "INPUT"  # Чтение ввода
+    LOAD = "LOAD"
+    OUT = "OUT"
     HALT = "HALT"  # Остановка
 
     def __str__(self):
