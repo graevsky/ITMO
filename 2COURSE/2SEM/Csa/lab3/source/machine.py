@@ -50,7 +50,7 @@ class DataPath:
     # Сделать из этого oe (не только вывод io, но еще и запись в память).
     def write_io(self, address, value):
         """Вывод IO"""
-        print(chr(value), end="")
+        print(chr(value), end="")  # Заменить на лог
         self.memory[address] = value
 
     # Убрать dup отсюда (в instruction_decoder), разбить на ряд более простых функций. Здесь оставить только простой push.
