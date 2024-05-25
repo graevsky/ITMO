@@ -9,8 +9,6 @@ class ALU:
 
     def execute(self, opcode, a, b=None):
         result = 0
-        carry = 0
-        overflow = 0
         if opcode == Opcode.ADD:
             result = self.add(a, b)
         elif opcode == Opcode.AND:

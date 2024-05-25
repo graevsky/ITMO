@@ -49,10 +49,13 @@ class DataPath:
         self.jump_latch.set_data(0)
 
     # Сделать из этого oe (не только вывод io, но еще и запись в память).
-    def write_io(self, address, value):
+    def write_io(self, address, value, tochar=False):
         """Вывод IO"""
-        print(chr(value), end="")  # Заменить на лог
-        self.memory[address] = value  # addr + self.output_addr_counter
+        if tochar:
+            print(chr(value), end="")  # Заменить на лог
+        else:
+            print(value, end="")  # Заменить на лог
+        self.memory[address + self.output_addr_counter] = value
         self.output_addr_counter += 1
 
     # Убрать dup отсюда (в instruction_decoder),
@@ -97,13 +100,6 @@ class DataPath:
             self.return_stack.pop()
             return False  # Завершить цикл
 
-    # Переделать в instruction_decoder, как pop+oe
-    def print_top(self):
-        """Вывести верхний элемент стека"""
-        if self.stack:
-            print(self.pop_from_stack())
-        else:
-            raise Exception("Attempt to print from an empty stack")
 
     # Убрать\перенести в instruction_decoder (как набор простых операций).
     def perform_operation(self, opcode):

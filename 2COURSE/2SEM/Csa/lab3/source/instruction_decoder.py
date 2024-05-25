@@ -31,7 +31,7 @@ class InstructionDecoder:
 
     def execute_out(self, instruction):
         value = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, value)
+        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, value, True)
 
     def execute_add(self, instruction):
         self.control_unit.data_path.perform_operation(Opcode.ADD)
@@ -93,7 +93,8 @@ class InstructionDecoder:
             raise ValueError("Unsupported argument for PUSH operation")
 
     def execute_print_top(self, instruction):
-        self.control_unit.data_path.print_top()
+        val = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, val, False)
 
     def execute_cr(self, instruction):
         print()
