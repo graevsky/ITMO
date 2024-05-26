@@ -23,32 +23,14 @@ class InstructionDecoder:
         self.control_unit.data_path.push_to_stack(b)
 
     def execute_save(self, instruction):
-        addr = self.control_unit.data_path.pop_from_stack()
-        val = self.control_unit.data_path.pop_from_stack()
-        if addr == IOAddresses.OUT_ADDR:
-            self.control_unit.data_path.write_io(val, True)
-        else:
-            self.control_unit.data_path.memory[addr] = val
-            # print("Saved ", str(val), " to ", str(addr))
+        self.control_unit.data_path.save()
 
     def execute_dec_i(self, instruction):
         current_value = self.control_unit.data_path.loop_counter.get_data()
         self.control_unit.data_path.loop_counter.set_data(current_value - 1)
 
     def execute_load(self, instruction):
-        addr = self.control_unit.data_path.pop_from_stack()
-        if addr == IOAddresses.INP_ADDR:
-            if self.control_unit.data_path.input_buffer:
-                value = self.control_unit.data_path.input_buffer.pop(0)
-                if isinstance(value, str):
-                    value = ord(value)
-                self.control_unit.data_path.push_to_stack(value)
-            else:
-                self.control_unit.data_path.push_to_stack(0)  # Ввод закончен
-        else:
-            value = self.control_unit.data_path.memory[addr]
-            # print("loaded ", str(value), " from ", str(addr))
-            self.control_unit.data_path.push_to_stack(value)
+        self.control_unit.data_path.load()
 
     def execute_add(self, instruction):
         a = self.control_unit.data_path.pop_from_stack()
@@ -122,15 +104,16 @@ class InstructionDecoder:
             self.mem_inp_pointer += 1
         elif arg == "out_pointer":
             self.control_unit.data_path.push_to_stack(self.mem_out_pointer)
-            # print("Pushed ", str(self.mem_out_pointer))
             self.mem_out_pointer += 1
 
     def execute_print_top(self, instruction):
-        val = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.write_io(val, False)
+        self.control_unit.data_path.push_to_stack(IOAddresses.OUT_ADDR)
+        self.control_unit.data_path.save(False)
 
     def execute_cr(self, instruction):
-        self.control_unit.data_path.write_io(10, True)
+        self.control_unit.data_path.push_to_stack(10)
+        self.control_unit.data_path.push_to_stack(IOAddresses.OUT_ADDR)
+        self.control_unit.data_path.save(True)
 
     def execute_dup(self, instruction):
         val = self.control_unit.data_path.pop_from_stack()

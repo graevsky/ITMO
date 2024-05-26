@@ -45,7 +45,7 @@ class DataPath:
         self.jump_latch = Latch()
         self.jump_latch.set_data(0)
 
-    # Сделать из этого oe (не только вывод io, но еще и запись в память).
+    # Убрать прямо в save
     def write_io(self, value, tochar=False):
         """Вывод IO"""
         if tochar:
@@ -54,8 +54,6 @@ class DataPath:
             print(value, end="")  # Заменить на лог
         self.output_buffer.append(value)
 
-    # Убрать dup отсюда (в instruction_decoder),
-    # разбить на ряд более простых функций. Здесь оставить только простой push.
     def push_to_stack(self, value):
         """Помещает значение в стек, выбранное мультиплексором"""
         self.latch.set_data(value)
@@ -69,7 +67,7 @@ class DataPath:
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
-    # Сделать что то с loop control
+    # Loop return stack + управление циклами перенести в ControlUnit
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
         self.return_stack.append((initial, max_value, step))
@@ -88,6 +86,28 @@ class DataPath:
         else:
             self.return_stack.pop()
             return False  # Завершить цикл
+
+    def load(self):
+        addr = self.pop_from_stack()
+        if addr == IOAddresses.INP_ADDR:
+            if self.input_buffer:
+                value = self.input_buffer.pop(0)
+                if isinstance(value, str):
+                    value = ord(value)
+                self.push_to_stack(value)
+            else:
+                self.push_to_stack(0)
+        else:
+            value = self.memory[addr]
+            self.push_to_stack(value)
+
+    def save(self, tochar=True):
+        addr = self.pop_from_stack()
+        val = self.pop_from_stack()
+        if addr == IOAddresses.OUT_ADDR:
+            self.write_io(val, tochar)
+        else:
+            self.memory[addr] = val
 
 
 class ControlUnit:
