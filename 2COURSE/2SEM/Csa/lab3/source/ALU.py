@@ -1,6 +1,4 @@
-# ALU.py
 from isa import Opcode
-from Latch import Latch
 
 
 class ALU:
@@ -26,38 +24,37 @@ class ALU:
 
         self.data_path.alu_latch.set_data(result)
 
-    def add(self, a, b):
+    @staticmethod
+    def add(a, b):
         result = a + b
-        result = self.sign_extend(result)
         return result
 
     @staticmethod
-    def sign_extend(value):
-        value = value & 0xFFFFFFFF
-        if value & 0x80000000:
-            value -= 0x100000000
-        return value
-
-    def and_op(self, a, b):
+    def and_op(a, b):
         result = a & b
         return result
 
-    def or_op(self, a, b):
+    @staticmethod
+    def or_op(a, b):
         result = a | b
         return result
 
-    def mod(self, a, b):
+    @staticmethod
+    def mod(a, b):
         result = b % a
         return result
 
-    def less_than(self, a, b):
+    @staticmethod
+    def less_than(a, b):
         result = 1 if a < b else 0
         return result
 
-    def greater_than(self, a, b):
+    @staticmethod
+    def greater_than(a, b):
         result = 1 if a > b else 0
         return result
 
-    def equals(self, a, b):
+    @staticmethod
+    def equals(a, b):
         result = 1 if a == b else 0
         return result

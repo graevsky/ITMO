@@ -4,6 +4,8 @@ from isa import Opcode, IOAddresses
 class InstructionDecoder:
     def __init__(self, control_unit):
         self.control_unit = control_unit
+        self.mem_inp_pointer = IOAddresses.INPUT_STORAGE
+        self.mem_out_pointer = IOAddresses.INPUT_STORAGE
 
     def decode(self, instruction):
         opcode = instruction.get("opcode")
@@ -14,12 +16,20 @@ class InstructionDecoder:
     def execute_pop(self, instruction):
         self.control_unit.data_path.pop_from_stack()
 
+    def execute_swap(self, instruction):
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.push_to_stack(a)
+        self.control_unit.data_path.push_to_stack(b)
+
     def execute_save(self, instruction):
         addr = self.control_unit.data_path.pop_from_stack()
         val = self.control_unit.data_path.pop_from_stack()
         if addr == IOAddresses.OUT_ADDR:
             self.control_unit.data_path.write_io(val, True)
-        self.control_unit.data_path.memory[addr] = val
+        else:
+            self.control_unit.data_path.memory[addr] = val
+            # print("Saved ", str(val), " to ", str(addr))
 
     def execute_dec_i(self, instruction):
         current_value = self.control_unit.data_path.loop_counter.get_data()
@@ -34,12 +44,11 @@ class InstructionDecoder:
                     value = ord(value)
                 self.control_unit.data_path.push_to_stack(value)
             else:
-                value = 0
+                self.control_unit.data_path.push_to_stack(0)  # Ввод закончен
         else:
             value = self.control_unit.data_path.memory[addr]
-        self.control_unit.data_path.push_to_stack(value)
-
-
+            # print("loaded ", str(value), " from ", str(addr))
+            self.control_unit.data_path.push_to_stack(value)
 
     def execute_add(self, instruction):
         a = self.control_unit.data_path.pop_from_stack()
@@ -103,8 +112,18 @@ class InstructionDecoder:
         arg = instruction.get("arg")
         if isinstance(arg, int):
             self.control_unit.data_path.push_to_stack(arg)
+            st = ''
+            for i in range(IOAddresses.INPUT_STORAGE, IOAddresses.INPUT_STORAGE + 20):
+                st += (str(self.control_unit.data_path.memory[i]) + ' ')
         elif arg == "i":
             self.control_unit.data_path.push_to_stack(self.control_unit.data_path.loop_counter.get_data())
+        elif arg == "in_pointer":
+            self.control_unit.data_path.push_to_stack(self.mem_inp_pointer)
+            self.mem_inp_pointer += 1
+        elif arg == "out_pointer":
+            self.control_unit.data_path.push_to_stack(self.mem_out_pointer)
+            # print("Pushed ", str(self.mem_out_pointer))
+            self.mem_out_pointer += 1
 
     def execute_print_top(self, instruction):
         val = self.control_unit.data_path.pop_from_stack()

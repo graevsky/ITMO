@@ -7,7 +7,6 @@ class Opcode(str, Enum):
     """Операции"""
     CR = "CR"  # Перевод строки
     SWAP = "SWAP"  # Заменить верхний и предыдущий элементы в стеке
-    TYPE = "TYPE"  # Вывести пользовательский ввод
     DUP = "DUP"  # Продублировать верхний элемент стека
     JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
@@ -21,13 +20,9 @@ class Opcode(str, Enum):
     AND = "AND"  # И
     OR = "OR"  # Или
     ADD = "ADD"
-    PSTR = "PSTR"  # Вывести длину-префиксную строку
-    INPUT = "INPUT"  # Чтение ввода
     LOAD = "LOAD"
-    OUT = "OUT"
     DEC_I = "DEC_I"
     SAVE = "SAVE"
-    INP = "INP"
     POP = "POP"
     HALT = "HALT"  # Остановка
 
@@ -43,10 +38,9 @@ class Term(namedtuple("Term", "line pos symbol")):
 
 
 class IOAddresses:
-    USER_INPUT = 0x0100  # Начало области буфера ввода
-    INP_ADDR = 0x0101  # Адрес ввода
-    OUT_ADDR = 0x0102  # Адрес вывода
-    OUTPUT_ADDRESS = 0x0200  # Начало области для вывода данных
+    INP_ADDR = 0x0100  # Адрес ввода
+    OUT_ADDR = 0x0101  # Адрес вывода
+    INPUT_STORAGE = 0x0200  # Хранилище ввода
     STRING_STORAGE = 0x0300  # Начало области хранения строк
 
 

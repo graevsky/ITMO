@@ -48,16 +48,21 @@
         },
         {
             "index": 5,
-            "opcode": "OUT",
-            "arg": null
+            "opcode": "PUSH",
+            "arg": 257
         },
         {
             "index": 6,
+            "opcode": "SAVE",
+            "arg": null
+        },
+        {
+            "index": 7,
             "opcode": "LOOP_END",
             "arg": 0
         },
         {
-            "index": 7,
+            "index": 8,
             "opcode": "HALT",
             "arg": null
         }

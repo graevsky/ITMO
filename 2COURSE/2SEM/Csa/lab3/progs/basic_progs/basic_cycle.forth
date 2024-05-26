@@ -1,8 +1,8 @@
 : cycle
- 10 0 do
-    i
-    .
-    cr
- loop
+    10 0 do
+        i
+        .
+        cr
+    loop
 ;
 cycle

@@ -19,6 +19,7 @@ logging.basicConfig(
 class DataPath:
     def __init__(self, memory, inp_data):
         self.memory = memory  # Общая память
+        self.memory_pointer = IOAddresses.INPUT_STORAGE
         self.stack = []
         self.sp = Latch()  # Указатель стека
         self.sp.set_data(0)  # Указатель стека
@@ -89,7 +90,6 @@ class DataPath:
             return False  # Завершить цикл
 
 
-
 class ControlUnit:
     def __init__(self, memory, input_data):
         self.memory = memory  # Общая память для данных и программы
@@ -121,7 +121,6 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             self.tick_counter += 1
-        print(self.data_path.stack)
 
 
 def simulation(program, input_data, data_segment):
