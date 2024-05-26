@@ -31,7 +31,7 @@ class InstructionDecoder:
 
     def execute_out(self, instruction):
         value = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, value, True)
+        self.control_unit.data_path.write_io(value, True)
 
     def execute_add(self, instruction):
         self.control_unit.data_path.perform_operation(Opcode.ADD)
@@ -94,7 +94,7 @@ class InstructionDecoder:
 
     def execute_print_top(self, instruction):
         val = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.write_io(IOAddresses.OUTPUT_ADDRESS, val, False)
+        self.control_unit.data_path.write_io(val, False)
 
     def execute_cr(self, instruction):
         print()

@@ -28,7 +28,7 @@
         },
         {
             "index": 5,
-            "opcode": "PRINT_TOP",
+            "opcode": "CR",
             "arg": null
         },
         {
@@ -38,11 +38,31 @@
         },
         {
             "index": 7,
-            "opcode": "PRINT_TOP",
+            "opcode": "CR",
             "arg": null
         },
         {
             "index": 8,
+            "opcode": "PRINT_TOP",
+            "arg": null
+        },
+        {
+            "index": 9,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 10,
+            "opcode": "PRINT_TOP",
+            "arg": null
+        },
+        {
+            "index": 11,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 12,
             "opcode": "HALT",
             "arg": null
         }

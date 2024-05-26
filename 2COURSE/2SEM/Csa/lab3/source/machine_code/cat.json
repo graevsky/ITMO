@@ -3,17 +3,17 @@
     "program": [
         {
             "index": 0,
-            "opcode": "PUSH",
-            "arg": 256
-        },
-        {
-            "index": 1,
             "opcode": "LOOP_START",
             "arg": [
                 0,
                 1,
                 1
             ]
+        },
+        {
+            "index": 1,
+            "opcode": "INP",
+            "arg": null
         },
         {
             "index": 2,
@@ -22,115 +22,26 @@
         },
         {
             "index": 3,
-            "opcode": "INP",
-            "arg": null
+            "opcode": "JZ",
+            "arg": 5
         },
         {
             "index": 4,
-            "opcode": "DUP",
+            "opcode": "DEC_I",
             "arg": null
         },
         {
             "index": 5,
-            "opcode": "JZ",
-            "arg": 7
-        },
-        {
-            "index": 6,
-            "opcode": "DEC_I",
-            "arg": null
-        },
-        {
-            "index": 7,
-            "opcode": "SAVE",
-            "arg": null
-        },
-        {
-            "index": 8,
-            "opcode": "PUSH",
-            "arg": 1
-        },
-        {
-            "index": 9,
-            "opcode": "ADD",
-            "arg": null
-        },
-        {
-            "index": 10,
-            "opcode": "LOOP_END",
-            "arg": 1
-        },
-        {
-            "index": 11,
-            "opcode": "POP",
-            "arg": null
-        },
-        {
-            "index": 12,
-            "opcode": "PUSH",
-            "arg": 256
-        },
-        {
-            "index": 13,
-            "opcode": "LOOP_START",
-            "arg": [
-                0,
-                1,
-                1
-            ]
-        },
-        {
-            "index": 14,
-            "opcode": "DUP",
-            "arg": null
-        },
-        {
-            "index": 15,
-            "opcode": "LOAD",
-            "arg": null
-        },
-        {
-            "index": 16,
-            "opcode": "DUP",
-            "arg": null
-        },
-        {
-            "index": 17,
-            "opcode": "JZ",
-            "arg": 19
-        },
-        {
-            "index": 18,
-            "opcode": "DEC_I",
-            "arg": null
-        },
-        {
-            "index": 19,
             "opcode": "OUT",
             "arg": null
         },
         {
-            "index": 20,
-            "opcode": "PUSH",
-            "arg": 1
-        },
-        {
-            "index": 21,
-            "opcode": "ADD",
-            "arg": null
-        },
-        {
-            "index": 22,
+            "index": 6,
             "opcode": "LOOP_END",
-            "arg": 13
+            "arg": 0
         },
         {
-            "index": 23,
-            "opcode": "POP",
-            "arg": null
-        },
-        {
-            "index": 24,
+            "index": 7,
             "opcode": "HALT",
             "arg": null
         }

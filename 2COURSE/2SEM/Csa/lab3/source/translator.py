@@ -96,9 +96,11 @@ command_to_opcode = {
     "==": Opcode.EQUALS,
     "cr": Opcode.CR,
     "+": Opcode.ADD,
-    "type": Opcode.TYPE,
     "dup": Opcode.DUP,
-    "input": Opcode.INPUT,
+    "dec_i": Opcode.DEC_I,
+    "inp": Opcode.INP,
+    "out": Opcode.OUT,
+    "save": Opcode.SAVE
 }
 
 
@@ -121,7 +123,7 @@ def second_pass(commands, strings):
             parts = command.split()
             if len(parts) != 3 or parts[2] != "do":
                 raise ValueError("Invalid 'do' loop syntax")
-            max_value = int(parts[0]) - 1
+            max_value = int(parts[0])
             initial_value = int(parts[1])
             step = 1  # Шаг цикла всегда равен 1
 

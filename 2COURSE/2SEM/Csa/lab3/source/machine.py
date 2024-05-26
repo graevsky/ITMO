@@ -49,13 +49,13 @@ class DataPath:
         self.jump_latch.set_data(0)
 
     # Сделать из этого oe (не только вывод io, но еще и запись в память).
-    def write_io(self, address, value, tochar=False):
+    def write_io(self, value, tochar=False):
         """Вывод IO"""
         if tochar:
             print(chr(value), end="")  # Заменить на лог
         else:
             print(value, end="")  # Заменить на лог
-        self.memory[address + self.output_addr_counter] = value
+        self.memory[IOAddresses.OUTPUT_ADDRESS + self.output_addr_counter] = value
         self.output_addr_counter += 1
 
     # Убрать dup отсюда (в instruction_decoder),

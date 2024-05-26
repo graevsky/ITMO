@@ -13,30 +13,40 @@
         },
         {
             "index": 2,
+            "opcode": "CR",
+            "arg": null
+        },
+        {
+            "index": 3,
             "opcode": "LOOP_START",
             "arg": [
                 1,
-                9,
+                10,
                 1
             ]
         },
         {
-            "index": 3,
+            "index": 4,
             "opcode": "PUSH",
             "arg": "i"
         },
         {
-            "index": 4,
+            "index": 5,
             "opcode": "PRINT_TOP",
             "arg": null
         },
         {
-            "index": 5,
-            "opcode": "LOOP_END",
-            "arg": 2
+            "index": 6,
+            "opcode": "CR",
+            "arg": null
         },
         {
-            "index": 6,
+            "index": 7,
+            "opcode": "LOOP_END",
+            "arg": 3
+        },
+        {
+            "index": 8,
             "opcode": "HALT",
             "arg": null
         }
