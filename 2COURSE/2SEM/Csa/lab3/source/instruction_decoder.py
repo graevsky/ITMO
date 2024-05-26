@@ -34,25 +34,46 @@ class InstructionDecoder:
         self.control_unit.data_path.write_io(value, True)
 
     def execute_add(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.ADD)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.ADD, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_less_than(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.LESS_THAN)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.LESS_THAN, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_greater_than(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.GREATER_THAN)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.GREATER_THAN, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_equals(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.EQUALS)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.EQUALS, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_mod(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.MOD)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.MOD, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_and(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.AND)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.AND, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_or(self, instruction):
-        self.control_unit.data_path.perform_operation(Opcode.OR)
+        a = self.control_unit.data_path.pop_from_stack()
+        b = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.alu.execute(Opcode.OR, a, b)
+        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch.get_data())
 
     def execute_loop_start(self, instruction):
         initial, max_value, step = instruction.get("arg")
@@ -63,12 +84,6 @@ class InstructionDecoder:
         if continue_loop:
             self.control_unit.pc.set_data(instruction.get("arg"))
 
-    def execute_jump(self, instruction):
-        print("ALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARM")
-        target = instruction.get("arg")
-        self.control_unit.pc.set_data(target)
-        self.control_unit.data_path.jump_latch.set_data(1)
-
     def execute_jz(self, instruction):
         condition = self.control_unit.data_path.pop_from_stack()
         if condition == 0:
@@ -76,37 +91,24 @@ class InstructionDecoder:
             self.control_unit.pc.set_data(target)
             self.control_unit.data_path.jump_latch.set_data(1)
 
-    def execute_jnz(self, instruction):
-        condition = self.control_unit.data_path.pop_from_stack()
-        if condition != 0:
-            target = instruction.get("arg")
-            self.control_unit.pc.set_data(target)
-            self.control_unit.data_path.jump_latch.set_data(1)
-
     def execute_push(self, instruction):
         arg = instruction.get("arg")
         if isinstance(arg, int):
-            self.control_unit.data_path.push_to_stack("direct_value", arg)
+            self.control_unit.data_path.push_to_stack(arg)
         elif arg == "i":
-            self.control_unit.data_path.push_to_stack("loop_counter")
-        else:
-            raise ValueError("Unsupported argument for PUSH operation")
+            self.control_unit.data_path.push_to_stack(self.control_unit.data_path.loop_counter.get_data())
 
     def execute_print_top(self, instruction):
         val = self.control_unit.data_path.pop_from_stack()
         self.control_unit.data_path.write_io(val, False)
 
     def execute_cr(self, instruction):
-        print()
-
-    def execute_type(self, instruction):
-        self.control_unit.data_path.handle_type()
+        self.control_unit.data_path.write_io(10, True)
 
     def execute_dup(self, instruction):
-        self.control_unit.data_path.push_to_stack(duplicate_top=True)
-
-    def execute_input(self, instruction):
-        self.control_unit.data_path.handle_input()
+        val = self.control_unit.data_path.pop_from_stack()
+        self.control_unit.data_path.push_to_stack(val)
+        self.control_unit.data_path.push_to_stack(val)
 
     def execute_halt(self, instruction):
         self.control_unit.halted = True

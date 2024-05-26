@@ -5,7 +5,6 @@ from isa import read_code, IOAddresses
 import logging
 from io import StringIO
 from ALU import ALU
-from MUX import Multiplexer
 from Latch import Latch
 from instruction_decoder import InstructionDecoder
 
@@ -38,10 +37,6 @@ class DataPath:
 
         self.latch = Latch()  # Кто ты воин
 
-        """MUX"""
-        self.comp_latch = Latch()
-        self.mux = Multiplexer(self)
-
         self.push_latch = Latch()
 
         """Jump latch"""
@@ -60,17 +55,10 @@ class DataPath:
 
     # Убрать dup отсюда (в instruction_decoder),
     # разбить на ряд более простых функций. Здесь оставить только простой push.
-    def push_to_stack(self, source_type=None, value=None, duplicate_top=False):
+    def push_to_stack(self, value):
         """Помещает значение в стек, выбранное мультиплексором"""
-        if duplicate_top and self.stack:
-            self.stack.append(self.stack[-1])
-        else:
-            if source_type == "direct_value":
-                self.latch.set_data(value)
-            else:
-                result = self.mux.select_for_stack(source_type)
-                self.latch.set_data(result)
-            self.stack.append(self.latch.get_data())
+        self.latch.set_data(value)
+        self.stack.append(self.latch.get_data())
         self.sp.set_data(self.sp.get_data() + 1)
 
     def pop_from_stack(self):
@@ -100,29 +88,21 @@ class DataPath:
             self.return_stack.pop()
             return False  # Завершить цикл
 
-
-    # Убрать\перенести в instruction_decoder (как набор простых операций).
-    def perform_operation(self, opcode):
-        """Выполнение операций через ALU"""
-        a, b = self.mux.select_sources("ALU", opcode)
-        self.alu.execute(opcode, a, b)
-        self.push_to_stack("alu_result")
-
     def load(self):
         addr = self.pop_from_stack()
         val = self.memory[addr]
-        self.push_to_stack("direct_value", val)
+        self.push_to_stack(val)
 
     def inp(self):
         """Чтение символа из input_buffer в стек"""
         if self.input_buffer:
             char = self.input_buffer.pop(0)
             if char == 0:
-                self.push_to_stack("direct_value", 0)
+                self.push_to_stack(0)
             else:
-                self.push_to_stack("direct_value", ord(char))
+                self.push_to_stack(ord(char))
         else:
-            self.push_to_stack("direct_value", 0)
+            self.push_to_stack(0)
 
 
 class ControlUnit:

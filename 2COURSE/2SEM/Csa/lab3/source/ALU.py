@@ -47,9 +47,7 @@ class ALU:
         return result
 
     def mod(self, a, b):
-        if b == 0:
-            raise Exception("Division by zero")
-        result = a % b
+        result = b % a
         return result
 
     def less_than(self, a, b):

@@ -10,7 +10,7 @@
             "index": 1,
             "opcode": "LOOP_START",
             "arg": [
-                1,
+                0,
                 999,
                 1
             ]
