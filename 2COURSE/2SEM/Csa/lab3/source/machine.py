@@ -23,6 +23,7 @@ class DataPath:
         self.sp = Latch()  # Указатель стека
         self.sp.set_data(0)  # Указатель стека
         self.input_buffer = list(inp_data) + [0]  # Буфер для входных данных
+        self.output_buffer = list()
         self.ip = Latch()  # Указатель input buffer
         self.return_stack = []  # Вспомогательный стек для управления циклами
         self.output_addr_counter = 0
@@ -50,8 +51,7 @@ class DataPath:
             print(chr(value), end="")  # Заменить на лог
         else:
             print(value, end="")  # Заменить на лог
-        self.memory[IOAddresses.OUTPUT_ADDRESS + self.output_addr_counter] = value
-        self.output_addr_counter += 1
+        self.output_buffer.append(value)
 
     # Убрать dup отсюда (в instruction_decoder),
     # разбить на ряд более простых функций. Здесь оставить только простой push.
@@ -88,21 +88,6 @@ class DataPath:
             self.return_stack.pop()
             return False  # Завершить цикл
 
-    def load(self):
-        addr = self.pop_from_stack()
-        val = self.memory[addr]
-        self.push_to_stack(val)
-
-    def inp(self):
-        """Чтение символа из input_buffer в стек"""
-        if self.input_buffer:
-            char = self.input_buffer.pop(0)
-            if char == 0:
-                self.push_to_stack(0)
-            else:
-                self.push_to_stack(ord(char))
-        else:
-            self.push_to_stack(0)
 
 
 class ControlUnit:
@@ -136,6 +121,7 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             self.tick_counter += 1
+        print(self.data_path.stack)
 
 
 def simulation(program, input_data, data_segment):

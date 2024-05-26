@@ -14,12 +14,11 @@ class InstructionDecoder:
     def execute_pop(self, instruction):
         self.control_unit.data_path.pop_from_stack()
 
-    def execute_inp(self, instruction):
-        self.control_unit.data_path.inp()
-
     def execute_save(self, instruction):
-        val = self.control_unit.data_path.pop_from_stack()
         addr = self.control_unit.data_path.pop_from_stack()
+        val = self.control_unit.data_path.pop_from_stack()
+        if addr == IOAddresses.OUT_ADDR:
+            self.control_unit.data_path.write_io(val, True)
         self.control_unit.data_path.memory[addr] = val
 
     def execute_dec_i(self, instruction):
@@ -27,11 +26,20 @@ class InstructionDecoder:
         self.control_unit.data_path.loop_counter.set_data(current_value - 1)
 
     def execute_load(self, instruction):
-        self.control_unit.data_path.load()
+        addr = self.control_unit.data_path.pop_from_stack()
+        if addr == IOAddresses.INP_ADDR:
+            if self.control_unit.data_path.input_buffer:
+                value = self.control_unit.data_path.input_buffer.pop(0)
+                if isinstance(value, str):
+                    value = ord(value)
+                self.control_unit.data_path.push_to_stack(value)
+            else:
+                value = 0
+        else:
+            value = self.control_unit.data_path.memory[addr]
+        self.control_unit.data_path.push_to_stack(value)
 
-    def execute_out(self, instruction):
-        value = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.write_io(value, True)
+
 
     def execute_add(self, instruction):
         a = self.control_unit.data_path.pop_from_stack()

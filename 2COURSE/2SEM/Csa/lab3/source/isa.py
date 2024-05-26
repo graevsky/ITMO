@@ -43,7 +43,9 @@ class Term(namedtuple("Term", "line pos symbol")):
 
 
 class IOAddresses:
-    INPUT_BUFFER = 0x0100  # Начало области буфера ввода
+    USER_INPUT = 0x0100  # Начало области буфера ввода
+    INP_ADDR = 0x0101  # Адрес ввода
+    OUT_ADDR = 0x0102  # Адрес вывода
     OUTPUT_ADDRESS = 0x0200  # Начало области для вывода данных
     STRING_STORAGE = 0x0300  # Начало области хранения строк
 

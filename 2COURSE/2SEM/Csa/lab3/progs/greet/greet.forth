@@ -1,4 +1,4 @@
-: greet                           \\ Hello by name program
+: greet
   cr
   ."Hello, what is your name?"
   cr

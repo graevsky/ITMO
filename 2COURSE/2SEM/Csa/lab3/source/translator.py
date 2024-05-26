@@ -98,8 +98,6 @@ command_to_opcode = {
     "+": Opcode.ADD,
     "dup": Opcode.DUP,
     "dec_i": Opcode.DEC_I,
-    "inp": Opcode.INP,
-    "out": Opcode.OUT,
     "save": Opcode.SAVE
 }
 
@@ -214,7 +212,15 @@ def second_pass(commands, strings):
             code.append(
                 {
                     "index": index,
-                    "opcode": Opcode.OUT,
+                    "opcode": Opcode.PUSH,
+                    "arg": IOAddresses.OUT_ADDR
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.SAVE,
                     "arg": None
                 }
             )
@@ -232,7 +238,7 @@ def second_pass(commands, strings):
                 {
                     "index": index,
                     "opcode": Opcode.PUSH,
-                    "arg": IOAddresses.INPUT_BUFFER
+                    "arg": IOAddresses.USER_INPUT
                 }
             )
             index += 1
@@ -327,12 +333,46 @@ def second_pass(commands, strings):
                 }
             )
             index += 1
+        elif command == "inp":
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": IOAddresses.INP_ADDR
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOAD,
+                    "arg": None
+                }
+            )
+            index += 1
+        elif command == "out":
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": IOAddresses.OUT_ADDR
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.SAVE,
+                    "arg": None
+                }
+            )
+            index += 1
         elif command == "type":
             code.append(
                 {
                     "index": index,
                     "opcode": Opcode.PUSH,
-                    "arg": IOAddresses.INPUT_BUFFER
+                    "arg": IOAddresses.USER_INPUT
                 }
             )
             index += 1
