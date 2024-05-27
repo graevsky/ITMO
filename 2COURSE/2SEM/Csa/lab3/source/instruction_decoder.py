@@ -59,7 +59,7 @@ class InstructionDecoder:
         if condition == 0:
             target = instruction.get("arg")
             self.control_unit.pc = target
-            self.control_unit.data_path.jump_latch = 1
+            self.control_unit.jump_latch = 1
 
     def execute_push(self, instruction):
         arg = instruction.get("arg")

@@ -89,18 +89,13 @@ def preprocess_commands(commands):
 command_to_opcode = {
     ".": Opcode.PRINT_TOP,
     "mod": Opcode.MOD,
-    "and": Opcode.AND,
     "or": Opcode.OR,
-    "<": Opcode.LESS_THAN,
-    ">": Opcode.GREATER_THAN,
     "==": Opcode.EQUALS,
     "cr": Opcode.CR,
     "+": Opcode.ADD,
     "dup": Opcode.DUP,
     "dec_i": Opcode.DEC_I,
     "save": Opcode.SAVE,
-    "swap": Opcode.SWAP,
-    "pop": Opcode.POP
 }
 
 

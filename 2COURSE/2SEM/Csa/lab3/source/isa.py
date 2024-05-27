@@ -15,21 +15,14 @@ class Opcode(str, Enum):
     EQUALS = "EQUALS"  # Равно
     MOD = "MOD"  # Деление по модулю
     OR = "OR"  # Или
-    ADD = "ADD"
-    LOAD = "LOAD"
-    DEC_I = "DEC_I"
-    SAVE = "SAVE"
+    ADD = "ADD"  # Сложить 2 верхних элемента стека
+    LOAD = "LOAD"  # Загрузить элемент из памяти в стек
+    DEC_I = "DEC_I"  # Уменьшить значение счетчика цикла на 1
+    SAVE = "SAVE"  # Сохранить значение из стека в память
     HALT = "HALT"  # Остановка
 
     def __str__(self):
         return str(self.value)
-
-
-"""Связь с исходным кодом"""
-
-
-class Term(namedtuple("Term", "line pos symbol")):
-    pass
 
 
 class IOAddresses:

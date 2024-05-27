@@ -24,11 +24,6 @@ class ALU:
         return result
 
     @staticmethod
-    def and_op(a, b):
-        result = a & b
-        return result
-
-    @staticmethod
     def or_op(a, b):
         result = a | b
         return result
@@ -36,16 +31,6 @@ class ALU:
     @staticmethod
     def mod(a, b):
         result = b % a
-        return result
-
-    @staticmethod
-    def less_than(a, b):
-        result = 1 if a < b else 0
-        return result
-
-    @staticmethod
-    def greater_than(a, b):
-        result = 1 if a > b else 0
         return result
 
     @staticmethod

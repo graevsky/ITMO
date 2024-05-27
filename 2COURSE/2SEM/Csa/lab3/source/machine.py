@@ -18,20 +18,16 @@ logging.basicConfig(
 class DataPath:
     def __init__(self, memory, inp_data):
         self.memory = memory  # Общая память
-        self.stack = []
+        self.stack = []  # Стек
         self.stack_pointer = 0  # Указатель стека
         self.input_buffer = list(inp_data) + [0]  # Буфер для входных данных
-        self.output_buffer = list()
-        self.output_addr_counter = 0
+        self.output_buffer = list()  # Буфер для выходных данных
 
-        """ALU"""
+        """Инициализация ALU"""
         self.alu_latch = 0
         self.alu = ALU(self)
 
-        """Jump latch"""
-        self.jump_latch = 0
-
-    # Убрать прямо в save
+    # Можно ли оставить?
     def write_io(self, value, tochar=False):
         """Вывод IO"""
         if tochar:
@@ -40,23 +36,25 @@ class DataPath:
             print(value, end="")  # Заменить на лог
         self.output_buffer.append(value)
 
+    """Помещает значение в стек и увеличивает счетчик стека на 1"""
+
     def push_to_stack(self, value):
-        """Помещает значение в стек, выбранное мультиплексором"""
         self.stack.append(value)
         self.stack_pointer = self.stack_pointer + 1
 
+    """Возвращает значение из стека и уменьшает счетчик стека на 1"""
+
     def pop_from_stack(self):
-        """Возвращает значение из стека"""
         if self.stack_pointer > 0:
             self.stack_pointer = self.stack_pointer - 1
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
-    # Loop return stack + управление циклами перенести в ControlUnit
+    """Загружает значение из памяти в стек"""
 
     def load(self):
-        addr = self.pop_from_stack()
-        if addr == IOAddresses.INP_ADDR:
+        addr = self.pop_from_stack()  # Адрес для загрузки берется из стека
+        if addr == IOAddresses.INP_ADDR:  # Если это адрес ввода, то значение в стек попадает из input buffer
             if self.input_buffer:
                 value = self.input_buffer.pop(0)
                 if isinstance(value, str):
@@ -64,42 +62,50 @@ class DataPath:
                 self.push_to_stack(value)
             else:
                 self.push_to_stack(0)
-        else:
+        else:  # Если это просто адрес из памяти, то значение из него помещается в стек
             value = self.memory[addr]
             self.push_to_stack(value)
 
+    """Сохраняет значение из стека в память"""
+
     def save(self, tochar=True):
-        addr = self.pop_from_stack()
-        val = self.pop_from_stack()
-        if addr == IOAddresses.OUT_ADDR:
+        addr = self.pop_from_stack()  # Адрес для сохранения берется из стека
+        val = self.pop_from_stack()  # Значение для сохранения берется из стека
+        if addr == IOAddresses.OUT_ADDR:  # Если это адрес вывода, то значение из стека помещается в output buffer
             self.write_io(val, tochar)
-        else:
+        else:  # Если это просто адрес из памяти, то по этому адресу записывается значение
             self.memory[addr] = val
 
 
 class ControlUnit:
     def __init__(self, memory, input_data):
-        self.memory = memory  # Общая память для данных и программы
+        self.memory = memory  # Общая память
         self.pc = 0  # Счётчик программ
-        self.halted = False
-        self.data_path = DataPath(memory, input_data)  # Общая память
+        self.halted = False  # Состояние остановки модели
+        self.data_path = DataPath(memory, input_data)  # Инициализация DataPath
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
-        self.instr_latch = 0
-        self.decoder = InstructionDecoder(self)  # Декодер
-        self.mem_inp_pointer = IOAddresses.INPUT_STORAGE
-        self.mem_out_pointer = IOAddresses.INPUT_STORAGE
-        """loop control"""
+        self.instr_latch = 0  # Регистр хранения инструкции
+        self.decoder = InstructionDecoder(self)  # Декодер инструкций
+        self.mem_inp_pointer = IOAddresses.INPUT_STORAGE  # Указатель для сохранения символов в память ввода
+        self.mem_out_pointer = IOAddresses.INPUT_STORAGE  # Указатель для загрузки символов из памяти вывода
+
+        """Инициализация регистра и returnstack для управления циклами"""
         self.loop_counter = 0
-        self.return_stack = []  # Вспомогательный стек для управления циклами
+        self.return_stack = []
+
+        """Регистр для хранения информации о переходе"""
+        self.jump_latch = 0
+
+    """Загрузка информации о цикле в return stack"""
 
     def start_loop(self, initial, max_value, step):
-        """Запуск цикла через return stack"""
         self.return_stack.append((initial, max_value, step))
         self.loop_counter = initial
 
+    """Проверка условия и остановка цикла"""
+
     def end_loop(self):
-        """Проверка условия и остановка цикла"""
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
         initial, max_value, step = self.return_stack[-1]
@@ -112,18 +118,22 @@ class ControlUnit:
             self.return_stack.pop()
             return False  # Завершить цикл
 
+    """Загрузка инструкции в регистр"""
+
     def fetch_instruction(self):
         if self.pc < len(self.memory) and self.memory[self.pc] is not None:
             self.instr_latch = self.memory[self.pc]
         else:
             raise IndexError("Program counter out of bounds")
 
+    """Обработка инструкции из регистра"""
+
     def execute_instruction(self):
         instruction = self.instr_latch
         self.decoder.decode(instruction)
-        if self.data_path.jump_latch == 0:  # По сути MUX
+        if self.jump_latch == 0:
             self.pc = self.pc + 1
-        self.data_path.jump_latch = 0
+        self.jump_latch = 0
 
     def run(self):
         while not self.halted:
@@ -131,10 +141,10 @@ class ControlUnit:
             self.execute_instruction()
             self.tick_counter += 1
 
-
+"""Запуск симуляции"""
 def simulation(program, input_data, data_segment):
-    memory = [0] * 1024
-    for i, instruction in enumerate(program):
+    memory = [0] * 1024  # Инициализация памяти
+    for i, instruction in enumerate(program):  # Загрузка инструкций в память
         memory[i] = instruction
 
     # Инициализация сегмента данных
