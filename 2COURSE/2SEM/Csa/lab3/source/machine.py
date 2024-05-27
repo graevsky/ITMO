@@ -90,18 +90,25 @@ class ControlUnit:
         self.mem_inp_pointer = IOAddresses.INPUT_STORAGE  # Указатель для сохранения символов в память ввода
         self.mem_out_pointer = IOAddresses.INPUT_STORAGE  # Указатель для загрузки символов из памяти вывода
 
-        """Инициализация регистра и returnstack для управления циклами"""
+        """Инициализация регистра и return stack для управления циклами"""
         self.loop_counter = 0
         self.return_stack = []
 
         """Регистр для хранения информации о переходе"""
         self.jump_latch = 0
 
+    def tick(self, value=1):
+        self.tick_counter += value
+
+    def instr(self):
+        self.instr_counter += 1
+
     """Загрузка информации о цикле в return stack"""
 
     def start_loop(self, initial, max_value, step):
         self.return_stack.append((initial, max_value, step))
         self.loop_counter = initial
+        self.tick(2)
 
     """Проверка условия и остановка цикла"""
 
@@ -109,10 +116,11 @@ class ControlUnit:
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
         initial, max_value, step = self.return_stack[-1]
-        current_value = self.loop_counter
-        next_value = current_value + step
+        self.tick(3)
+        next_value = self.loop_counter + step
         if next_value <= max_value:
             self.loop_counter = next_value
+            self.tick()
             return True
         else:
             self.return_stack.pop()
@@ -133,13 +141,13 @@ class ControlUnit:
         self.decoder.decode(instruction)
         if self.jump_latch == 0:
             self.pc = self.pc + 1
+            self.instr()
         self.jump_latch = 0
 
     def run(self):
         while not self.halted:
             self.fetch_instruction()
             self.execute_instruction()
-            self.tick_counter += 1
 
 
 """Запуск симуляции"""
