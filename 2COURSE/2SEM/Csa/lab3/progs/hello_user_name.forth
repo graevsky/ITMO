@@ -26,7 +26,7 @@
     cr
     read_input
     cr
-    ."Hello,"
+    ."Hello, "
     print_output
 ;
 

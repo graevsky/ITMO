@@ -141,7 +141,10 @@ class ControlUnit:
             self.execute_instruction()
             self.tick_counter += 1
 
+
 """Запуск симуляции"""
+
+
 def simulation(program, input_data, data_segment):
     memory = [0] * 1024  # Инициализация памяти
     for i, instruction in enumerate(program):  # Загрузка инструкций в память
