@@ -5,7 +5,6 @@ from isa import read_code, IOAddresses
 import logging
 from io import StringIO
 from ALU import ALU
-from Latch import Latch
 from instruction_decoder import InstructionDecoder
 
 log_stream = StringIO()
@@ -19,31 +18,22 @@ logging.basicConfig(
 class DataPath:
     def __init__(self, memory, inp_data):
         self.memory = memory  # Общая память
-        self.memory_pointer = IOAddresses.INPUT_STORAGE
         self.stack = []
-        self.sp = Latch()  # Указатель стека
-        self.sp.set_data(0)  # Указатель стека
+        self.stack_pointer = 0  # Указатель стека
         self.input_buffer = list(inp_data) + [0]  # Буфер для входных данных
         self.output_buffer = list()
-        self.ip = Latch()  # Указатель input buffer
-        self.return_stack = []  # Вспомогательный стек для управления циклами
         self.output_addr_counter = 0
 
         """loop control"""
-        self.loop_counter = Latch()
-        self.loop_counter.set_data(0)
+        self.loop_counter = 0
+        self.return_stack = []  # Вспомогательный стек для управления циклами
 
         """ALU"""
-        self.alu_latch = Latch()
+        self.alu_latch = 0
         self.alu = ALU(self)
 
-        self.latch = Latch()  # Кто ты воин
-
-        self.push_latch = Latch()
-
         """Jump latch"""
-        self.jump_latch = Latch()
-        self.jump_latch.set_data(0)
+        self.jump_latch = 0
 
     # Убрать прямо в save
     def write_io(self, value, tochar=False):
@@ -56,14 +46,13 @@ class DataPath:
 
     def push_to_stack(self, value):
         """Помещает значение в стек, выбранное мультиплексором"""
-        self.latch.set_data(value)
-        self.stack.append(self.latch.get_data())
-        self.sp.set_data(self.sp.get_data() + 1)
+        self.stack.append(value)
+        self.stack_pointer = self.stack_pointer + 1
 
     def pop_from_stack(self):
         """Возвращает значение из стека"""
-        if self.sp.get_data() > 0:
-            self.sp.set_data(self.sp.get_data() - 1)
+        if self.stack_pointer > 0:
+            self.stack_pointer = self.stack_pointer - 1
             return self.stack.pop()
         raise IndexError("Stack underflow")
 
@@ -71,17 +60,17 @@ class DataPath:
     def start_loop(self, initial, max_value, step):
         """Запуск цикла через return stack"""
         self.return_stack.append((initial, max_value, step))
-        self.loop_counter.set_data(initial)
+        self.loop_counter = initial
 
     def end_loop(self):
         """Проверка условия и остановка цикла"""
         if len(self.return_stack) == 0:
             raise Exception("No loop context in return stack")
         initial, max_value, step = self.return_stack[-1]
-        current_value = self.loop_counter.get_data()
+        current_value = self.loop_counter
         next_value = current_value + step
         if next_value <= max_value:
-            self.loop_counter.set_data(next_value)
+            self.loop_counter = next_value
             return True
         else:
             self.return_stack.pop()
@@ -113,28 +102,27 @@ class DataPath:
 class ControlUnit:
     def __init__(self, memory, input_data):
         self.memory = memory  # Общая память для данных и программы
-        self.pc = Latch()  # Счётчик программ
-        self.pc.set_data(0)
+        self.pc = 0  # Счётчик программ
         self.halted = False
         self.data_path = DataPath(memory, input_data)  # Общая память
         self.instr_counter = 0  # Счетчик выполненных инструкций
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
-        self.instr_latch = Latch()
+        self.instr_latch = 0
         self.decoder = InstructionDecoder(self)  # Декодер
 
     def fetch_instruction(self):
-        if self.pc.get_data() < len(self.memory) and self.memory[self.pc.get_data()] is not None:
-            self.instr_latch.set_data(self.memory[self.pc.get_data()])
+        if self.pc < len(self.memory) and self.memory[self.pc] is not None:
+            self.instr_latch = self.memory[self.pc]
         else:
             raise IndexError("Program counter out of bounds")
 
     def execute_instruction(self):
-        instruction = self.instr_latch.get_data()
+        instruction = self.instr_latch
         # logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
         self.decoder.decode(instruction)
-        if self.data_path.jump_latch.get_data() == 0:  # По сути MUX
-            self.pc.set_data(self.pc.get_data() + 1)
-        self.data_path.jump_latch.set_data(0)
+        if self.data_path.jump_latch == 0:  # По сути MUX
+            self.pc = self.pc + 1
+        self.data_path.jump_latch = 0
 
     def run(self):
         while not self.halted:

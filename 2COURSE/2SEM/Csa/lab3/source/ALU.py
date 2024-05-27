@@ -22,8 +22,7 @@ class ALU:
         elif opcode == Opcode.EQUALS:
             result = self.equals(a, b)
 
-        self.data_path.alu_latch.set_data(result)
-
+        self.data_path.alu_latch = result
     @staticmethod
     def add(a, b):
         result = a + b
