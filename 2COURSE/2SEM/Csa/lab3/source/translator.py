@@ -1,6 +1,8 @@
 import argparse
 import os
+import sys
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from source.isa import Opcode, write_code, IOAddresses
 
 
@@ -373,7 +375,6 @@ def main(arguments):
             print(f"Machine code has been written to {output_file}")
     except Exception as e:
         print(f"Error in translator: {e}")
-
 
 
 def parse_args():
