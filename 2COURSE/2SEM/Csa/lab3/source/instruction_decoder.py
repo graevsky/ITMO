@@ -26,8 +26,8 @@ class InstructionDecoder:
         self.control_unit.data_path.save()
 
     def execute_dec_i(self, instruction):
-        current_value = self.control_unit.data_path.loop_counter
-        self.control_unit.data_path.loop_counter = current_value - 1
+        current_value = self.control_unit.loop_counter
+        self.control_unit.loop_counter = current_value - 1
 
     def execute_load(self, instruction):
         self.control_unit.data_path.load()
@@ -76,10 +76,10 @@ class InstructionDecoder:
 
     def execute_loop_start(self, instruction):
         initial, max_value, step = instruction.get("arg")
-        self.control_unit.data_path.start_loop(initial, max_value, step)
+        self.control_unit.start_loop(initial, max_value, step)
 
     def execute_loop_end(self, instruction):
-        continue_loop = self.control_unit.data_path.end_loop()
+        continue_loop = self.control_unit.end_loop()
         if continue_loop:
             self.control_unit.pc = instruction.get("arg")
 
@@ -98,7 +98,7 @@ class InstructionDecoder:
             for i in range(IOAddresses.INPUT_STORAGE, IOAddresses.INPUT_STORAGE + 20):
                 st += (str(self.control_unit.data_path.memory[i]) + ' ')
         elif arg == "i":
-            self.control_unit.data_path.push_to_stack(self.control_unit.data_path.loop_counter)
+            self.control_unit.data_path.push_to_stack(self.control_unit.loop_counter)
         elif arg == "in_pointer":
             self.control_unit.data_path.push_to_stack(self.mem_inp_pointer)
             self.mem_inp_pointer += 1

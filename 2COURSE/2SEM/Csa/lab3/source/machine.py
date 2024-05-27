@@ -24,10 +24,6 @@ class DataPath:
         self.output_buffer = list()
         self.output_addr_counter = 0
 
-        """loop control"""
-        self.loop_counter = 0
-        self.return_stack = []  # Вспомогательный стек для управления циклами
-
         """ALU"""
         self.alu_latch = 0
         self.alu = ALU(self)
@@ -57,24 +53,6 @@ class DataPath:
         raise IndexError("Stack underflow")
 
     # Loop return stack + управление циклами перенести в ControlUnit
-    def start_loop(self, initial, max_value, step):
-        """Запуск цикла через return stack"""
-        self.return_stack.append((initial, max_value, step))
-        self.loop_counter = initial
-
-    def end_loop(self):
-        """Проверка условия и остановка цикла"""
-        if len(self.return_stack) == 0:
-            raise Exception("No loop context in return stack")
-        initial, max_value, step = self.return_stack[-1]
-        current_value = self.loop_counter
-        next_value = current_value + step
-        if next_value <= max_value:
-            self.loop_counter = next_value
-            return True
-        else:
-            self.return_stack.pop()
-            return False  # Завершить цикл
 
     def load(self):
         addr = self.pop_from_stack()
@@ -109,6 +87,28 @@ class ControlUnit:
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = 0
         self.decoder = InstructionDecoder(self)  # Декодер
+        """loop control"""
+        self.loop_counter = 0
+        self.return_stack = []  # Вспомогательный стек для управления циклами
+
+    def start_loop(self, initial, max_value, step):
+        """Запуск цикла через return stack"""
+        self.return_stack.append((initial, max_value, step))
+        self.loop_counter = initial
+
+    def end_loop(self):
+        """Проверка условия и остановка цикла"""
+        if len(self.return_stack) == 0:
+            raise Exception("No loop context in return stack")
+        initial, max_value, step = self.return_stack[-1]
+        current_value = self.loop_counter
+        next_value = current_value + step
+        if next_value <= max_value:
+            self.loop_counter = next_value
+            return True
+        else:
+            self.return_stack.pop()
+            return False  # Завершить цикл
 
     def fetch_instruction(self):
         if self.pc < len(self.memory) and self.memory[self.pc] is not None:
