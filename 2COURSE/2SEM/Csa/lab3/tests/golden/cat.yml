@@ -1,0 +1,60 @@
+in_source: |-
+  : cat
+      1 0 do
+      inp
+      dup
+      if
+          dec_i
+      then
+      out
+      loop
+  ;
+  cat
+in_stdin: |-
+  Username
+out_code:
+  data: {}
+  program:
+  - index: 0
+    opcode: LOOP_START
+    arg:
+    - 0
+    - 1
+    - 1
+  - index: 1
+    opcode: PUSH
+    arg: 256
+  - index: 2
+    opcode: LOAD
+    arg:
+  - index: 3
+    opcode: DUP
+    arg:
+  - index: 4
+    opcode: JZ
+    arg: 6
+  - index: 5
+    opcode: DEC_I
+    arg:
+  - index: 6
+    opcode: DUP
+    arg:
+  - index: 7
+    opcode: PUSH
+    arg: 257
+  - index: 8
+    opcode: SAVE
+    arg:
+  - index: 9
+    opcode: LOOP_END
+    arg: 0
+  - index: 10
+    opcode: HALT
+    arg:
+out_stdout: |
+  source LoC: 11 code instr: 11
+  ============================================================
+  Username
+  instr_counter:  99 ticks: 153
+out_log: |
+  <expected log output>

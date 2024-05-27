@@ -1,4 +1,4 @@
-from isa import Opcode
+from source.isa import Opcode
 
 
 class ALU:

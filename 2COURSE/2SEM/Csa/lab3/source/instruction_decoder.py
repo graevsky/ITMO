@@ -1,4 +1,4 @@
-from isa import Opcode, IOAddresses
+from source.isa import Opcode, IOAddresses
 
 
 class InstructionDecoder:

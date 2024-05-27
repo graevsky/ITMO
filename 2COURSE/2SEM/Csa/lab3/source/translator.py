@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from isa import Opcode, write_code, IOAddresses
+from source.isa import Opcode, write_code, IOAddresses
 
 
 def parse_line(line):
@@ -360,16 +360,20 @@ def process_dir(directory, output_folder):
 
 
 def main(arguments):
-    if arguments.all:
-        process_dir(arguments.input_folder, arguments.output_folder)
-    else:
-        source_file = arguments.source_file
-        with open(source_file, "r", encoding="utf-8") as file:
-            source_text = file.read()
-        machine_code = translate(source_text)
-        output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
-        write_code(output_file, machine_code)
-        print(f"Machine code has been written to {output_file}")
+    try:
+        if arguments.all:
+            process_dir(arguments.input_folder, arguments.output_folder)
+        else:
+            source_file = arguments.source_file
+            with open(source_file, "r", encoding="utf-8") as file:
+                source_text = file.read()
+            machine_code = translate(source_text)
+            output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
+            write_code(output_file, machine_code)
+            print(f"Machine code has been written to {output_file}")
+    except Exception as e:
+        print(f"Error in translator: {e}")
+
 
 
 def parse_args():

@@ -1,11 +1,11 @@
 import argparse
 import os
 
-from isa import read_code, IOAddresses
+from source.isa import read_code, IOAddresses
 import logging
 from io import StringIO
-from ALU import ALU
-from instruction_decoder import InstructionDecoder
+from source.ALU import ALU
+from source.instruction_decoder import InstructionDecoder
 
 log_stream = StringIO()
 logging.basicConfig(
@@ -179,18 +179,37 @@ def run_all_programs(directory, input_file):
             code_file = os.path.join(directory, file)
             print(f"Processing {code_file}")
             print()
-            main(code_file, input_file)
+            run_simulation(code_file, input_file)
 
 
-def main(code_file, input_file):
-    machine_code = read_code(code_file)
-    program = machine_code["program"]
-    data_segment = machine_code["data"]
-    with open(input_file, "r", encoding="utf-8") as file:
-        input_data = file.read()
-    instr_count, ticks, logs = simulation(program, input_data, data_segment)
-    print()
-    print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
+def main(args):
+    try:
+        if args.all:
+            if args.input_file is None:
+                print("Please specify an input file.")
+            else:
+                machine_code_dir = './source/machine_code'
+                run_all_programs(machine_code_dir, args.input_file)
+        elif args.machine_code_file and args.input_file:
+            run_simulation(args.machine_code_file, args.input_file)
+        else:
+            print("Invalid usage. Run 'python machine.py -h' for help.")
+    except Exception as e:
+        print(f"Error in machine: {e}")
+
+
+def run_simulation(machine_code_file, input_file):
+    try:
+        machine_code = read_code(machine_code_file)
+        program = machine_code["program"]
+        data_segment = machine_code["data"]
+        with open(input_file, "r", encoding="utf-8") as file:
+            input_data = file.read()
+        instr_count, ticks, logs = simulation(program, input_data, data_segment)
+        print()
+        print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
+    except Exception as e:
+        print(f"Error during simulation: {e}")
 
 
 def parse_args():
@@ -204,13 +223,4 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    if args.all:
-        if args.input_file is None:
-            print("Please specify an input file.")
-        else:
-            machine_code_dir = './source/machine_code'
-            run_all_programs(machine_code_dir, args.input_file)
-    elif args.machine_code_file and args.input_file:
-        main(args.machine_code_file, args.input_file)
-    else:
-        print("Invalid usage. Run 'python machine.py -h' for help.")
+    main(args)
