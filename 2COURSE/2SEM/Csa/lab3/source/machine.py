@@ -87,6 +87,8 @@ class ControlUnit:
         self.tick_counter = 0  # Счетчик тиков (модельного времени)
         self.instr_latch = 0
         self.decoder = InstructionDecoder(self)  # Декодер
+        self.mem_inp_pointer = IOAddresses.INPUT_STORAGE
+        self.mem_out_pointer = IOAddresses.INPUT_STORAGE
         """loop control"""
         self.loop_counter = 0
         self.return_stack = []  # Вспомогательный стек для управления циклами
@@ -118,7 +120,6 @@ class ControlUnit:
 
     def execute_instruction(self):
         instruction = self.instr_latch
-        # logging.debug(f"Executing instruction at PC={self.pc.get_data()}: {instruction}")
         self.decoder.decode(instruction)
         if self.data_path.jump_latch == 0:  # По сути MUX
             self.pc = self.pc + 1

@@ -4,23 +4,12 @@ from isa import Opcode, IOAddresses
 class InstructionDecoder:
     def __init__(self, control_unit):
         self.control_unit = control_unit
-        self.mem_inp_pointer = IOAddresses.INPUT_STORAGE
-        self.mem_out_pointer = IOAddresses.INPUT_STORAGE
 
     def decode(self, instruction):
         opcode = instruction.get("opcode")
         method_name = f"execute_{opcode.lower()}"
         method = getattr(self, method_name, self.unknown_instruction)
         method(instruction)
-
-    def execute_pop(self, instruction):
-        self.control_unit.data_path.pop_from_stack()
-
-    def execute_swap(self, instruction):
-        a = self.control_unit.data_path.pop_from_stack()
-        b = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.push_to_stack(a)
-        self.control_unit.data_path.push_to_stack(b)
 
     def execute_save(self, instruction):
         self.control_unit.data_path.save()
@@ -38,18 +27,6 @@ class InstructionDecoder:
         self.control_unit.data_path.alu.execute(Opcode.ADD, a, b)
         self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch)
 
-    def execute_less_than(self, instruction):
-        a = self.control_unit.data_path.pop_from_stack()
-        b = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.alu.execute(Opcode.LESS_THAN, a, b)
-        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch)
-
-    def execute_greater_than(self, instruction):
-        a = self.control_unit.data_path.pop_from_stack()
-        b = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.alu.execute(Opcode.GREATER_THAN, a, b)
-        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch)
-
     def execute_equals(self, instruction):
         a = self.control_unit.data_path.pop_from_stack()
         b = self.control_unit.data_path.pop_from_stack()
@@ -60,12 +37,6 @@ class InstructionDecoder:
         a = self.control_unit.data_path.pop_from_stack()
         b = self.control_unit.data_path.pop_from_stack()
         self.control_unit.data_path.alu.execute(Opcode.MOD, a, b)
-        self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch)
-
-    def execute_and(self, instruction):
-        a = self.control_unit.data_path.pop_from_stack()
-        b = self.control_unit.data_path.pop_from_stack()
-        self.control_unit.data_path.alu.execute(Opcode.AND, a, b)
         self.control_unit.data_path.push_to_stack(self.control_unit.data_path.alu_latch)
 
     def execute_or(self, instruction):
@@ -100,11 +71,11 @@ class InstructionDecoder:
         elif arg == "i":
             self.control_unit.data_path.push_to_stack(self.control_unit.loop_counter)
         elif arg == "in_pointer":
-            self.control_unit.data_path.push_to_stack(self.mem_inp_pointer)
-            self.mem_inp_pointer += 1
+            self.control_unit.data_path.push_to_stack(self.control_unit.mem_inp_pointer)
+            self.control_unit.mem_inp_pointer += 1
         elif arg == "out_pointer":
-            self.control_unit.data_path.push_to_stack(self.mem_out_pointer)
-            self.mem_out_pointer += 1
+            self.control_unit.data_path.push_to_stack(self.control_unit.mem_out_pointer)
+            self.control_unit.mem_out_pointer += 1
 
     def execute_print_top(self, instruction):
         self.control_unit.data_path.push_to_stack(IOAddresses.OUT_ADDR)

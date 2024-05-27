@@ -9,20 +9,15 @@ class ALU:
         result = 0
         if opcode == Opcode.ADD:
             result = self.add(a, b)
-        elif opcode == Opcode.AND:
-            result = self.and_op(a, b)
         elif opcode == Opcode.OR:
             result = self.or_op(a, b)
         elif opcode == Opcode.MOD:
             result = self.mod(a, b)
-        elif opcode == Opcode.LESS_THAN:
-            result = self.less_than(a, b)
-        elif opcode == Opcode.GREATER_THAN:
-            result = self.greater_than(a, b)
         elif opcode == Opcode.EQUALS:
             result = self.equals(a, b)
 
         self.data_path.alu_latch = result
+
     @staticmethod
     def add(a, b):
         result = a + b

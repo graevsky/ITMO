@@ -6,24 +6,19 @@ from enum import Enum
 class Opcode(str, Enum):
     """Операции"""
     CR = "CR"  # Перевод строки
-    SWAP = "SWAP"  # Заменить верхний и предыдущий элементы в стеке
     DUP = "DUP"  # Продублировать верхний элемент стека
     JZ = "JZ"  # Условный переход, если на вершине стека ноль (jump if zero)
     LOOP_START = "LOOP_START"  # Начало цикла и его параметры
     LOOP_END = "LOOP_END"  # Окончание цикла
     PUSH = "PUSH"  # Добавить значение в стек
     PRINT_TOP = "PRINT_TOP"  # Вывод верхнего элемент
-    LESS_THAN = "LESS_THAN"  # Меньше
-    GREATER_THAN = "GREATER_THAN"  # Больше
     EQUALS = "EQUALS"  # Равно
     MOD = "MOD"  # Деление по модулю
-    AND = "AND"  # И
     OR = "OR"  # Или
     ADD = "ADD"
     LOAD = "LOAD"
     DEC_I = "DEC_I"
     SAVE = "SAVE"
-    POP = "POP"
     HALT = "HALT"  # Остановка
 
     def __str__(self):
