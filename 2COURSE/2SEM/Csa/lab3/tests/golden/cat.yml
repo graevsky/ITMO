@@ -77,11 +77,10 @@ out_code: |-
           }
       ]
   }
-out_stdout: |
-  Translator args: Namespace(source_file='C:\\Users\\graev\\AppData\\Local\\Temp\\tmpul6_dmk_\\source.forth', all=False, input_folder='./progs', output_folder='C:\\Users\\graev\\AppData\\Local\\Temp\\tmpul6_dmk_')
-  Machine code has been written to C:\Users\graev\AppData\Local\Temp\tmpul6_dmk_\source.json
+out_stdout: |-
+  source LoC: 11 code instr: 11
   ============================================================
-  Machine args: Namespace(all=False, input_file='C:\\Users\\graev\\AppData\\Local\\Temp\\tmpul6_dmk_\\input.txt', machine_code_file='C:\\Users\\graev\\AppData\\Local\\Temp\\tmpul6_dmk_\\target.json')
-  Error during simulation: [Errno 2] No such file or directory: 'C:\\Users\\graev\\AppData\\Local\\Temp\\tmpul6_dmk_\\target.json'
+  Username
+  instr_counter:  99 ticks: 153
 out_log: |-
   <expected log output>

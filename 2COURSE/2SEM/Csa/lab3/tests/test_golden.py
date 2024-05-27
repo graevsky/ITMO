@@ -46,11 +46,9 @@ def test_translator_and_machine(golden, caplog):
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
             try:
                 translator_args = parse_translator_args([source, "-o", tmpdirname])
-                print(f"Translator args: {translator_args}")
                 translator.main(translator_args)
-                print("============================================================")
-                machine_args = parse_machine_args([input_stream, target])
-                print(f"Machine args: {machine_args}")
+                target_path = os.path.join(tmpdirname, os.path.basename(source).replace('.forth', '.json'))
+                machine_args = parse_machine_args([input_stream, target_path])
                 machine.main(machine_args)
             except Exception as e:
                 print(f"Error during test execution: {e}")
@@ -66,4 +64,10 @@ def test_translator_and_machine(golden, caplog):
         with open(target_path, encoding="utf-8") as file:
             code = file.read()
         assert code == golden.out["out_code"]
-        assert stdout.getvalue() == golden.out["out_stdout"]
+        stdout_value = stdout.getvalue().strip().split('\n')
+        stdout_filtered = [line for line in stdout_value if
+                           not line.startswith("Translator args:") and not line.startswith("Machine args:")]
+
+        assert "\n".join(stdout_filtered) == str(golden.out["out_stdout"]).strip()
+        if 'out_log' in golden.out:
+            assert caplog.text.strip() == str(golden.out["out_log"]).strip()
