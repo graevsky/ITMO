@@ -4,17 +4,18 @@
         dup
         if
             dec_i
+            store
         then
-        store
     loop
 ;
 
 : print_output
     1 0 do
         load
-        out
+        dup
         if
             dec_i
+            out
         then
     loop
 ;

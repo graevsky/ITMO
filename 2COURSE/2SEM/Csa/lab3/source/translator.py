@@ -340,12 +340,15 @@ def second_pass(commands, strings):
 
 def translate(text):
     lines = text.strip().split("\n")
+    loc = len(lines)  # Lines of Code
 
     procedures, main_program = first_pass(lines)
 
     expanded_program = expand_procedures(main_program, procedures)
     preprocessed_commands, strings = preprocess_commands(expanded_program)
     code = second_pass(preprocessed_commands, strings)
+
+    print(f"source LoC: {loc} code instr: {len(code)}")  # Output LOC and number of instructions
 
     return {"data": strings, "program": code}
 
@@ -375,7 +378,6 @@ def main(arguments):
                 os.makedirs(output_dir)
             output_file = os.path.join(output_dir, os.path.basename(source_file).replace('.forth', '.json'))
             write_code(output_file, machine_code)
-            print(f"Machine code has been written to {output_file}")
     except Exception as e:
         print(f"Error in translator: {e}")
 

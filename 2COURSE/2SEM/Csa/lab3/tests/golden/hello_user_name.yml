@@ -1,0 +1,303 @@
+in_source: |-
+  : read_input
+      1 0 do
+          inp
+          dup
+          if
+              dec_i
+              store
+          then
+      loop
+  ;
+
+  : print_output
+      1 0 do
+          load
+          dup
+          if
+              dec_i
+              out
+          then
+      loop
+  ;
+
+
+  : greet
+      cr
+      ."Hello, what is your name?"
+      cr
+      read_input
+      cr
+      ."Hello, "
+      print_output
+  ;
+
+  greet
+in_stdin: |-
+  Username
+out_code: |-
+  {
+      "data": {
+          "0": [
+              25,
+              72,
+              101,
+              108,
+              108,
+              111,
+              44,
+              32,
+              119,
+              104,
+              97,
+              116,
+              32,
+              105,
+              115,
+              32,
+              121,
+              111,
+              117,
+              114,
+              32,
+              110,
+              97,
+              109,
+              101,
+              63
+          ],
+          "26": [
+              7,
+              72,
+              101,
+              108,
+              108,
+              111,
+              44,
+              32
+          ]
+      },
+      "program": [
+          {
+              "index": 0,
+              "opcode": "CR",
+              "arg": null
+          },
+          {
+              "index": 1,
+              "opcode": "LOOP_START",
+              "arg": [
+                  1,
+                  25,
+                  1
+              ]
+          },
+          {
+              "index": 2,
+              "opcode": "PUSH",
+              "arg": 768
+          },
+          {
+              "index": 3,
+              "opcode": "PUSH",
+              "arg": "i"
+          },
+          {
+              "index": 4,
+              "opcode": "ADD",
+              "arg": null
+          },
+          {
+              "index": 5,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
+              "index": 6,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 7,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 8,
+              "opcode": "LOOP_END",
+              "arg": 1
+          },
+          {
+              "index": 9,
+              "opcode": "CR",
+              "arg": null
+          },
+          {
+              "index": 10,
+              "opcode": "LOOP_START",
+              "arg": [
+                  0,
+                  1,
+                  1
+              ]
+          },
+          {
+              "index": 11,
+              "opcode": "PUSH",
+              "arg": 256
+          },
+          {
+              "index": 12,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
+              "index": 13,
+              "opcode": "DUP",
+              "arg": null
+          },
+          {
+              "index": 14,
+              "opcode": "JZ",
+              "arg": 18
+          },
+          {
+              "index": 15,
+              "opcode": "DEC_I",
+              "arg": null
+          },
+          {
+              "index": 16,
+              "opcode": "PUSH",
+              "arg": "in_pointer"
+          },
+          {
+              "index": 17,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 18,
+              "opcode": "LOOP_END",
+              "arg": 10
+          },
+          {
+              "index": 19,
+              "opcode": "CR",
+              "arg": null
+          },
+          {
+              "index": 20,
+              "opcode": "LOOP_START",
+              "arg": [
+                  1,
+                  7,
+                  1
+              ]
+          },
+          {
+              "index": 21,
+              "opcode": "PUSH",
+              "arg": 794
+          },
+          {
+              "index": 22,
+              "opcode": "PUSH",
+              "arg": "i"
+          },
+          {
+              "index": 23,
+              "opcode": "ADD",
+              "arg": null
+          },
+          {
+              "index": 24,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
+              "index": 25,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 26,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 27,
+              "opcode": "LOOP_END",
+              "arg": 20
+          },
+          {
+              "index": 28,
+              "opcode": "LOOP_START",
+              "arg": [
+                  0,
+                  1,
+                  1
+              ]
+          },
+          {
+              "index": 29,
+              "opcode": "PUSH",
+              "arg": "out_pointer"
+          },
+          {
+              "index": 30,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
+              "index": 31,
+              "opcode": "DUP",
+              "arg": null
+          },
+          {
+              "index": 32,
+              "opcode": "JZ",
+              "arg": 37
+          },
+          {
+              "index": 33,
+              "opcode": "DEC_I",
+              "arg": null
+          },
+          {
+              "index": 34,
+              "opcode": "DUP",
+              "arg": null
+          },
+          {
+              "index": 35,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 36,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 37,
+              "opcode": "LOOP_END",
+              "arg": 28
+          },
+          {
+              "index": 38,
+              "opcode": "HALT",
+              "arg": null
+          }
+      ]
+  }
+out_stdout: |-
+  source LoC: 34 code instr: 39
+  ============================================================
+
+  Hello, what is your name?
+
+  Hello, Username
+  instr_counter: 436 ticks: 718
+out_log: |
+  <expected log output>

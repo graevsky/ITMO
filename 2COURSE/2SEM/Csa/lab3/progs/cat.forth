@@ -4,8 +4,8 @@
     dup
     if
         dec_i
+        out
     then
-    out
     loop
 ;
 cat

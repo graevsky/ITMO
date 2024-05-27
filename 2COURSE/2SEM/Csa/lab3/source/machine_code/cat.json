@@ -28,7 +28,7 @@
         {
             "index": 4,
             "opcode": "JZ",
-            "arg": 6
+            "arg": 9
         },
         {
             "index": 5,

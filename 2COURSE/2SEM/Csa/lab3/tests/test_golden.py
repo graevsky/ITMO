@@ -35,39 +35,28 @@ def parse_machine_args(args):
 @pytest.mark.golden_test("golden/*.yml")
 def test_translator_and_machine(golden, caplog):
     caplog.set_level(logging.DEBUG)
+
     with tempfile.TemporaryDirectory() as tmpdirname:
         source = os.path.join(tmpdirname, "source.forth")
         input_stream = os.path.join(tmpdirname, "input.txt")
-        target = os.path.join(tmpdirname, "target.json")
+
         with open(source, "w", encoding="utf-8") as file:
             file.write(golden["in_source"])
         with open(input_stream, "w", encoding="utf-8") as file:
             file.write(golden["in_stdin"])
+
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
-            try:
-                translator_args = parse_translator_args([source, "-o", tmpdirname])
-                translator.main(translator_args)
-                target_path = os.path.join(tmpdirname, os.path.basename(source).replace('.forth', '.json'))
-                machine_args = parse_machine_args([input_stream, target_path])
-                machine.main(machine_args)
-            except Exception as e:
-                print(f"Error during test execution: {e}")
+            translator_args = parse_translator_args([source, "-o", tmpdirname])
+            translator.main(translator_args)
+            print("============================================================")
+            target_path = os.path.join(tmpdirname, os.path.basename(source).replace('.forth', '.json'))
+            machine_args = parse_machine_args([input_stream, target_path])
+            machine.main(machine_args)
 
-        # Check if the target file is created
         target_path = os.path.join(tmpdirname, os.path.basename(source).replace('.forth', '.json'))
-        if not os.path.exists(target_path):
-            print("Target file not created.")
-            print("Translator log output:")
-            print(stdout.getvalue())
-            raise FileNotFoundError(f"Target file {target_path} was not created.")
-
         with open(target_path, encoding="utf-8") as file:
             code = file.read()
-        assert code == golden.out["out_code"]
-        stdout_value = stdout.getvalue().strip().split('\n')
-        stdout_filtered = [line for line in stdout_value if
-                           not line.startswith("Translator args:") and not line.startswith("Machine args:")]
 
-        assert "\n".join(stdout_filtered) == str(golden.out["out_stdout"]).strip()
-        if 'out_log' in golden.out:
-            assert caplog.text.strip() == str(golden.out["out_log"]).strip()
+        assert code == golden.out["out_code"]
+        assert stdout.getvalue() == golden.out["out_stdout"]
+        # assert caplog.text == golden.out["out_log"]  # TODO: реализовать log

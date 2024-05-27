@@ -87,7 +87,6 @@ class InstructionDecoder:
             self.control_unit.data_path.push_to_stack(self.control_unit.mem_out_pointer)
             self.control_unit.mem_out_pointer += 1
             self.control_unit.tick(2)
-            self.check_pointers()  # Если вывели столько, сколько ввели - обнуляем указатели
 
     def execute_print_top(self, instruction):
         self.control_unit.data_path.push_to_stack(IOAddresses.OUT_ADDR)
@@ -115,7 +114,7 @@ class InstructionDecoder:
     def unknown_instruction(self, instruction):
         raise ValueError(f"Unknown opcode: {instruction.get('opcode')}")
 
-    def check_pointers(self):
+    def check_pointers(self):  # TODO:check if needed
         if self.control_unit.mem_out_pointer == self.control_unit.mem_inp_pointer:
             self.control_unit.mem_inp_pointer = IOAddresses.INPUT_STORAGE
             self.control_unit.mem_out_pointer = IOAddresses.INPUT_STORAGE

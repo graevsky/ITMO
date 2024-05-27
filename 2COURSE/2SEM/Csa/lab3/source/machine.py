@@ -65,6 +65,7 @@ class DataPath:
                 self.push_to_stack(value)
             else:
                 self.push_to_stack(0)
+
         else:  # Если это просто адрес из памяти, то значение из него помещается в стек
             value = self.memory[addr]
             self.push_to_stack(value)
@@ -210,7 +211,7 @@ def run_simulation(machine_code_file, input_file):
             input_data = file.read()
         instr_count, ticks, logs = simulation(program, input_data, data_segment)
         print()
-        print(f"Instructions executed: {instr_count}, Ticks: {ticks}")
+        print(f"instr_counter: {instr_count} ticks: {ticks}", end='')
     except Exception as e:
         print(f"Error during simulation: {e}")
 
