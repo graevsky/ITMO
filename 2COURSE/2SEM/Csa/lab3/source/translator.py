@@ -370,7 +370,10 @@ def main(arguments):
             with open(source_file, "r", encoding="utf-8") as file:
                 source_text = file.read()
             machine_code = translate(source_text)
-            output_file = f"{source_file.split('/')[-1].replace('.forth', '.json')}"
+            output_dir = arguments.output_folder
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+            output_file = os.path.join(output_dir, os.path.basename(source_file).replace('.forth', '.json'))
             write_code(output_file, machine_code)
             print(f"Machine code has been written to {output_file}")
     except Exception as e:
@@ -381,9 +384,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Translate FORTH code to machine code.")
     parser.add_argument('source_file', nargs='?', help="The FORTH source file to translate.")
     parser.add_argument('-a', '--all', action='store_true', help="Process all FORTH files in the specified directory.")
-    parser.add_argument('-i', '--input_folder', action='store_true', default='./progs',
+    parser.add_argument('-i', '--input_folder', default='./progs',
                         help="Directory containing FORTH files.")
-    parser.add_argument('-o', '--output_folder', action='store_true', default='./source/machine_code',
+    parser.add_argument('-o', '--output_folder', default='./source/machine_code',
                         help="Directory to store the output JSON files.")
     return parser.parse_args()
 

@@ -13,7 +13,6 @@ import source.machine as machine
 import source.translator as translator
 
 
-
 def parse_translator_args(args):
     parser = argparse.ArgumentParser(description="Translate FORTH code to machine code.")
     parser.add_argument('source_file', help="The FORTH source file to translate.")
@@ -46,19 +45,25 @@ def test_translator_and_machine(golden, caplog):
             file.write(golden["in_stdin"])
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
             try:
-                translator_args = parse_translator_args([source, "-o", target])
+                translator_args = parse_translator_args([source, "-o", tmpdirname])
+                print(f"Translator args: {translator_args}")
                 translator.main(translator_args)
                 print("============================================================")
-                machine_args = parse_machine_args(["-a", input_stream, target])
+                machine_args = parse_machine_args([input_stream, target])
+                print(f"Machine args: {machine_args}")
                 machine.main(machine_args)
             except Exception as e:
                 print(f"Error during test execution: {e}")
-        try:
-            with open(target, encoding="utf-8") as file:
-                code = file.read()
-            assert code == golden.out["out_code"]
-            assert stdout.getvalue() == golden.out["out_stdout"]
-            if "out_log" in golden:
-                assert caplog.text == golden.out["out_log"]
-        except Exception as e:
-            print(f"Error during verification: {e}")
+
+        # Check if the target file is created
+        target_path = os.path.join(tmpdirname, os.path.basename(source).replace('.forth', '.json'))
+        if not os.path.exists(target_path):
+            print("Target file not created.")
+            print("Translator log output:")
+            print(stdout.getvalue())
+            raise FileNotFoundError(f"Target file {target_path} was not created.")
+
+        with open(target_path, encoding="utf-8") as file:
+            code = file.read()
+        assert code == golden.out["out_code"]
+        assert stdout.getvalue() == golden.out["out_stdout"]

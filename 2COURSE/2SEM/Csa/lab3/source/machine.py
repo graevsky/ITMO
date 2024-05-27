@@ -185,16 +185,16 @@ def run_all_programs(directory, input_file):
             run_simulation(code_file, input_file)
 
 
-def main(args):
+def main(argums):
     try:
-        if args.all:
-            if args.input_file is None:
+        if argums.all:
+            if argums.input_file is None:
                 print("Please specify an input file.")
             else:
                 machine_code_dir = './source/machine_code'
-                run_all_programs(machine_code_dir, args.input_file)
-        elif args.machine_code_file and args.input_file:
-            run_simulation(args.machine_code_file, args.input_file)
+                run_all_programs(machine_code_dir, argums.input_file)
+        elif argums.machine_code_file and argums.input_file:
+            run_simulation(argums.machine_code_file, argums.input_file)
         else:
             print("Invalid usage. Run 'python machine.py -h' for help.")
     except Exception as e:
