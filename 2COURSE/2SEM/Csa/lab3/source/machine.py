@@ -96,7 +96,9 @@ class ControlUnit:
 
         """Инициализация регистра и return stack для управления циклами"""
         self.loop_counter = 0
-        self.return_stack = []
+        self.init_val = 0
+        self.max_val = 0
+        self.step = 1
 
         """Регистр для хранения информации о переходе"""
         self.jump_latch = 0
@@ -110,25 +112,27 @@ class ControlUnit:
     """Загрузка информации о цикле в return stack"""
 
     def start_loop(self, initial, max_value, step):
-        self.return_stack.append((initial, max_value, step))
+        self.init_val = initial
+        self.max_val = max_value
+        self.step = step
         self.loop_counter = initial
-        self.tick(2)
+        self.tick(4)
 
     """Проверка условия и остановка цикла"""
 
     def end_loop(self):
-        if len(self.return_stack) == 0:
-            raise Exception("No loop context in return stack")
-        initial, max_value, step = self.return_stack[-1]
-        self.tick(3)
-        next_value = self.loop_counter + step
-        if next_value <= max_value:
+        next_value = self.loop_counter + self.step
+        self.tick()
+        if next_value <= self.max_val:
             self.loop_counter = next_value
             self.tick()
             return True
         else:
-            self.return_stack.pop()
-            return False  # Завершить цикл
+            self.init_val = 0
+            self.max_val = 0
+            self.step = 1
+            self.tick(3)
+            return False
 
     """Загрузка инструкции в регистр"""
 

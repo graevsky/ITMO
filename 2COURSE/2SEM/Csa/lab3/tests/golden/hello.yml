@@ -76,6 +76,6 @@ out_stdout: |-
   source LoC: 1 code instr: 9
   ============================================================
   Hello world!
-  instr_counter: 97 ticks: 157
+  instr_counter: 97 ticks: 138
 out_log: |
   <expected log output>

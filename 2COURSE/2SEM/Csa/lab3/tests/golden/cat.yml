@@ -81,6 +81,6 @@ out_stdout: |-
   source LoC: 11 code instr: 11
   ============================================================
   Username
-  instr_counter: 93 ticks: 143
+  instr_counter: 93 ticks: 128
 out_log: |-
   <expected log output>

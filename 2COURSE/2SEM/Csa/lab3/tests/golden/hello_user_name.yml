@@ -298,6 +298,6 @@ out_stdout: |-
   Hello, what is your name?
 
   Hello, Username
-  instr_counter: 436 ticks: 718
+  instr_counter: 436 ticks: 634
 out_log: |
   <expected log output>
