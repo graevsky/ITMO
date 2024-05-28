@@ -184,7 +184,7 @@ def second_pass(commands, strings):
                 {
                     "index": index,
                     "opcode": Opcode.PUSH,
-                    "arg": address+IOAddresses.STRING_STORAGE,
+                    "arg": address + IOAddresses.STRING_STORAGE,
                 }
             )
             index += 1
