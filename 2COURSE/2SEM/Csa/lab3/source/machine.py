@@ -161,11 +161,12 @@ class ControlUnit:
         return "".join(self.data_path.output_buffer)
 
     def __repr__(self):
+        top_of_stack = self.data_path.stack[-1] if self.data_path.stack else 'Empty'
         state_repr = "TICK: {:3} PC: {:3} LOOP_COUNTER: {:3} TOP OF STACK: {:7} SP: {:3}".format(
             self.tick_counter,
             self.pc,
             self.loop_counter,
-            self.data_path.stack[-1],
+            top_of_stack,
             self.data_path.stack_pointer
         )
 
@@ -175,11 +176,12 @@ class ControlUnit:
             instr_repr = str(opcode)
 
             if "arg" in instr:
-                instr_repr += " {}".format(instr["arg"])
+                instr_repr += " arg: {}".format(instr["arg"])
         else:
             instr_repr = str(instr)
 
         return "{} \t{}".format(state_repr, instr_repr)
+
 
 """Запуск симуляции"""
 
@@ -237,7 +239,7 @@ def run_simulation(machine_code_file, input_file):
         with open(input_file, "r", encoding="utf-8") as file:
             input_data = file.read()
         output, instr_count, ticks, logs = simulation(program, input_data, data_segment)
-        print(logs)
+        print(logs, end='')
         print("".join(output))
         print(f"instr_counter: {instr_count} ticks: {ticks}", end='')
     except Exception as e:
