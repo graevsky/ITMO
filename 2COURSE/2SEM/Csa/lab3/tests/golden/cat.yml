@@ -1,13 +1,13 @@
 in_source: |-
   : cat
-    1 0 do
-    inp
-    dup
-    if
-        dec_i
-        out
-    then
-    loop
+      1 0 do
+      inp
+      dup
+      if
+          dec_i
+          out
+      then
+      loop
   ;
   cat
 in_stdin: |-
@@ -86,6 +86,7 @@ out_code: |-
 out_stdout: |-
   source LoC: 11 code instr: 13
   ============================================================
+
   Username
   instr_counter: 95 ticks: 129
 out_log: |-

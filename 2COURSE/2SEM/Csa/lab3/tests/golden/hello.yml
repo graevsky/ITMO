@@ -86,6 +86,6 @@ out_code: |-
 out_stdout: |
   source LoC: 1 code instr: 12
   ============================================================
-  HError during simulation: Stack underflow
+  Error during simulation: Stack underflow
 out_log: |
   <expected log output>

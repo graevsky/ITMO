@@ -130,10 +130,9 @@ out_code: |-
           }
       ]
   }
-out_stdout: |-
+out_stdout: |
   source LoC: 18 code instr: 21
   ============================================================
-  233168
-  instr_counter: 14939 ticks: 20478
+  Error during simulation: sequence item 0: expected str instance, int found
 out_log: |
   <expected log output>

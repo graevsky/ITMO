@@ -14,7 +14,7 @@ log_stream = StringIO()
 logging.basicConfig(
     stream=log_stream,
     level=logging.DEBUG,
-    format="%(asctime)s - %(levelность)s - %(сообщение)s",
+    format="%(levelname)s - %(message)s",
 )
 
 
@@ -34,9 +34,11 @@ class DataPath:
     def write_io(self, value, tochar=False):
         """Вывод IO"""
         if tochar:
-            print(chr(value), end="")  # Заменить на лог
-        else:
-            print(value, end="")  # Заменить на лог
+            value = chr(value)
+            #print(value, end="")  # Заменить на лог
+        #else:
+            #print(value, end="")  # Заменить на лог
+        logging.debug("output: %s << %s", repr("".join(self.output_buffer)), repr(value))
         self.output_buffer.append(value)
 
     """Помещает значение в стек и увеличивает счетчик стека на 1"""
@@ -59,10 +61,12 @@ class DataPath:
         addr = self.pop_from_stack()  # Адрес для загрузки берется из стека
         if addr == IOAddresses.INP_ADDR:  # Если это адрес ввода, то значение в стек попадает из input buffer
             if self.input_buffer:
-                value = self.input_buffer.pop(0)
-                if isinstance(value, str):
-                    value = ord(value)
-                self.push_to_stack(value)
+                symbol = self.input_buffer.pop(0)
+                symbol_code = 0
+                if isinstance(symbol, str):
+                    symbol_code = ord(symbol)
+                self.push_to_stack(symbol_code)
+                logging.debug("input: %s", repr(symbol))
             else:
                 self.push_to_stack(0)
 
@@ -154,7 +158,28 @@ class ControlUnit:
         while not self.halted:
             self.fetch_instruction()
             self.execute_instruction()
+            logging.debug(self)
+        logging.info("output_buffer: %s", repr("".join(self.data_path.output_buffer)))
+        return "".join(self.data_path.output_buffer)
 
+    def __repr__(self):
+        state_repr = "TICK: {:3} PC: {:3} LOOP_COUNTER {:3}".format(
+            self.tick_counter,
+            self.pc,
+            self.loop_counter,
+        )
+
+        instr = self.memory[self.pc]
+        if isinstance(instr, dict):
+            opcode = instr['opcode']
+            instr_repr = str(opcode)
+
+            if "arg" in instr:
+                instr_repr += " {}".format(instr["arg"])
+        else:
+            instr_repr = str(instr)
+
+        return "{} \t{}".format(state_repr, instr_repr)
 
 """Запуск симуляции"""
 
@@ -173,10 +198,10 @@ def simulation(program, input_data, data_segment):
             memory[address + i] = content[i]
 
     control_unit = ControlUnit(memory, input_data)
-    control_unit.run()
+    output = control_unit.run()
 
     logs = log_stream.getvalue()
-    return control_unit.instr_counter, control_unit.tick_counter, logs
+    return output, control_unit.instr_counter, control_unit.tick_counter, logs
 
 
 def run_all_programs(directory, input_file):
@@ -211,8 +236,9 @@ def run_simulation(machine_code_file, input_file):
         data_segment = machine_code["data"]
         with open(input_file, "r", encoding="utf-8") as file:
             input_data = file.read()
-        instr_count, ticks, logs = simulation(program, input_data, data_segment)
-        print()
+        output, instr_count, ticks, logs = simulation(program, input_data, data_segment)
+        print(logs)
+        print("".join(output))
         print(f"instr_counter: {instr_count} ticks: {ticks}", end='')
     except Exception as e:
         print(f"Error during simulation: {e}")
