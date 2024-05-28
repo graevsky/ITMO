@@ -35,11 +35,8 @@ class DataPath:
         """Вывод IO"""
         if tochar:
             value = chr(value)
-            #print(value, end="")  # Заменить на лог
-        #else:
-            #print(value, end="")  # Заменить на лог
         logging.debug("output: %s << %s", repr("".join(self.output_buffer)), repr(value))
-        self.output_buffer.append(value)
+        self.output_buffer.append(str(value))
 
     """Помещает значение в стек и увеличивает счетчик стека на 1"""
 
@@ -159,14 +156,17 @@ class ControlUnit:
             self.fetch_instruction()
             self.execute_instruction()
             logging.debug(self)
+        logging.info("End simulation")
         logging.info("output_buffer: %s", repr("".join(self.data_path.output_buffer)))
         return "".join(self.data_path.output_buffer)
 
     def __repr__(self):
-        state_repr = "TICK: {:3} PC: {:3} LOOP_COUNTER {:3}".format(
+        state_repr = "TICK: {:3} PC: {:3} LOOP_COUNTER: {:3} TOP OF STACK: {:7} SP: {:3}".format(
             self.tick_counter,
             self.pc,
             self.loop_counter,
+            self.data_path.stack[-1],
+            self.data_path.stack_pointer
         )
 
         instr = self.memory[self.pc]

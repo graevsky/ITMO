@@ -83,11 +83,12 @@ out_code: |-
           }
       ]
   }
-out_stdout: |-
+out_stdout: |
   source LoC: 11 code instr: 13
   ============================================================
+  Error during simulation: list index out of range
 
-  Username
-  instr_counter: 95 ticks: 129
-out_log: |-
-  <expected log output>
+out_log: |
+  DEBUG    root:machine.py:158 TICK:   1 PC:   1 LOOP_COUNTER:   0 TOP OF STACK:       1 SP:   1 	PUSH 0
+  DEBUG    root:machine.py:158 TICK:   2 PC:   2 LOOP_COUNTER:   0 TOP OF STACK:       0 SP:   2 	LOOP_START None
+

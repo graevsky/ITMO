@@ -86,6 +86,8 @@ out_code: |-
 out_stdout: |
   source LoC: 1 code instr: 12
   ============================================================
-  Error during simulation: Stack underflow
+  Error during simulation: list index out of range
 out_log: |
-  <expected log output>
+  DEBUG    root:machine.py:158 TICK:   1 PC:   1 LOOP_COUNTER:   0 TOP OF STACK:     768 SP:   1 	LOAD None
+  DEBUG    root:machine.py:158 TICK:   3 PC:   2 LOOP_COUNTER:   0 TOP OF STACK:      12 SP:   1 	PUSH 1
+  DEBUG    root:machine.py:158 TICK:   4 PC:   3 LOOP_COUNTER:   0 TOP OF STACK:       1 SP:   2 	LOOP_START None

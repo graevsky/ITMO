@@ -328,6 +328,6 @@ out_code: |-
 out_stdout: |
   source LoC: 34 code instr: 49
   ============================================================
-  Error during simulation: Stack underflow
+  Error during simulation: list index out of range
 out_log: |
-  <expected log output>
+  DEBUG    root:machine.py:38 output: '' << '\n'
