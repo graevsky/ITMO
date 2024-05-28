@@ -122,14 +122,29 @@ def second_pass(commands, strings):
                 raise ValueError("Invalid 'do' loop syntax")
             max_value = int(parts[0])
             initial_value = int(parts[1])
-            step = 1  # Шаг цикла всегда равен 1
 
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": max_value,
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": initial_value,
+                }
+            )
+            index += 1
             loop_start_index = index
             code.append(
                 {
                     "index": index,
                     "opcode": Opcode.LOOP_START,
-                    "arg": [initial_value, max_value, step],
+                    "arg": None,
                 }
             )
             loop_stack.append(loop_start_index)
@@ -163,16 +178,39 @@ def second_pass(commands, strings):
             code[if_index]['arg'] = index
         elif command.startswith('PSTR'):
             address = int(command.split()[1])
-            string_length = strings[address][0]
-            max_value = string_length
-            step = 1
+
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": address+IOAddresses.STRING_STORAGE,
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.LOAD,
+                    "arg": None,
+                }
+            )
+            index += 1
+            code.append(
+                {
+                    "index": index,
+                    "opcode": Opcode.PUSH,
+                    "arg": 1,
+                }
+            )
+            index += 1
 
             loop_start_index = index
             code.append(
                 {
                     "index": index,
                     "opcode": Opcode.LOOP_START,
-                    "arg": [1, max_value, step],
+                    "arg": None,
                 }
             )
             index += 1
@@ -266,16 +304,6 @@ def second_pass(commands, strings):
                 }
             )
             index += 1
-            """
-            code.append(
-                {
-                    "index": index,
-                    "opcode": Opcode.SWAP,
-                    "arg": None
-                }
-            )
-            index += 1
-            """
             code.append(
                 {
                     "index": index,

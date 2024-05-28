@@ -23,59 +23,69 @@ out_code: |-
       "program": [
           {
               "index": 0,
-              "opcode": "LOOP_START",
-              "arg": [
-                  1,
-                  12,
-                  1
-              ]
-          },
-          {
-              "index": 1,
               "opcode": "PUSH",
               "arg": 768
           },
           {
-              "index": 2,
-              "opcode": "PUSH",
-              "arg": "i"
-          },
-          {
-              "index": 3,
-              "opcode": "ADD",
-              "arg": null
-          },
-          {
-              "index": 4,
+              "index": 1,
               "opcode": "LOAD",
               "arg": null
           },
           {
+              "index": 2,
+              "opcode": "PUSH",
+              "arg": 1
+          },
+          {
+              "index": 3,
+              "opcode": "LOOP_START",
+              "arg": null
+          },
+          {
+              "index": 4,
+              "opcode": "PUSH",
+              "arg": 768
+          },
+          {
               "index": 5,
               "opcode": "PUSH",
-              "arg": 257
+              "arg": "i"
           },
           {
               "index": 6,
-              "opcode": "SAVE",
+              "opcode": "ADD",
               "arg": null
           },
           {
               "index": 7,
-              "opcode": "LOOP_END",
-              "arg": 0
+              "opcode": "LOAD",
+              "arg": null
           },
           {
               "index": 8,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 9,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 10,
+              "opcode": "LOOP_END",
+              "arg": 4
+          },
+          {
+              "index": 11,
               "opcode": "HALT",
               "arg": null
           }
       ]
   }
-out_stdout: |-
-  source LoC: 1 code instr: 9
+out_stdout: |
+  source LoC: 1 code instr: 12
   ============================================================
-  Hello world!
-  instr_counter: 97 ticks: 138
+  HError during simulation: Stack underflow
 out_log: |
   <expected log output>

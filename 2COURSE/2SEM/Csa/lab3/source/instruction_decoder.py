@@ -53,8 +53,7 @@ class InstructionDecoder:
         self.control_unit.tick(2)
 
     def execute_loop_start(self, instruction):
-        initial, max_value, step = instruction.get("arg")
-        self.control_unit.start_loop(initial, max_value, step)
+        self.control_unit.start_loop()
 
     def execute_loop_end(self, instruction):
         continue_loop = self.control_unit.end_loop()

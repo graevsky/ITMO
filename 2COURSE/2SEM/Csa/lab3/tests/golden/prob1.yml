@@ -30,104 +30,110 @@ out_code: |-
           },
           {
               "index": 1,
-              "opcode": "LOOP_START",
-              "arg": [
-                  0,
-                  999,
-                  1
-              ]
+              "opcode": "PUSH",
+              "arg": 999
           },
           {
               "index": 2,
               "opcode": "PUSH",
-              "arg": "i"
+              "arg": 0
           },
           {
               "index": 3,
-              "opcode": "PUSH",
-              "arg": 3
+              "opcode": "LOOP_START",
+              "arg": null
           },
           {
               "index": 4,
-              "opcode": "MOD",
-              "arg": null
+              "opcode": "PUSH",
+              "arg": "i"
           },
           {
               "index": 5,
               "opcode": "PUSH",
-              "arg": 0
+              "arg": 3
           },
           {
               "index": 6,
-              "opcode": "EQUALS",
+              "opcode": "MOD",
               "arg": null
           },
           {
               "index": 7,
               "opcode": "PUSH",
-              "arg": "i"
-          },
-          {
-              "index": 8,
-              "opcode": "PUSH",
-              "arg": 5
-          },
-          {
-              "index": 9,
-              "opcode": "MOD",
-              "arg": null
-          },
-          {
-              "index": 10,
-              "opcode": "PUSH",
               "arg": 0
           },
           {
-              "index": 11,
+              "index": 8,
               "opcode": "EQUALS",
               "arg": null
           },
           {
-              "index": 12,
-              "opcode": "OR",
-              "arg": null
-          },
-          {
-              "index": 13,
-              "opcode": "JZ",
-              "arg": 16
-          },
-          {
-              "index": 14,
+              "index": 9,
               "opcode": "PUSH",
               "arg": "i"
           },
           {
+              "index": 10,
+              "opcode": "PUSH",
+              "arg": 5
+          },
+          {
+              "index": 11,
+              "opcode": "MOD",
+              "arg": null
+          },
+          {
+              "index": 12,
+              "opcode": "PUSH",
+              "arg": 0
+          },
+          {
+              "index": 13,
+              "opcode": "EQUALS",
+              "arg": null
+          },
+          {
+              "index": 14,
+              "opcode": "OR",
+              "arg": null
+          },
+          {
               "index": 15,
+              "opcode": "JZ",
+              "arg": 18
+          },
+          {
+              "index": 16,
+              "opcode": "PUSH",
+              "arg": "i"
+          },
+          {
+              "index": 17,
               "opcode": "ADD",
               "arg": null
           },
           {
-              "index": 16,
+              "index": 18,
               "opcode": "LOOP_END",
-              "arg": 1
+              "arg": 3
           },
           {
-              "index": 17,
+              "index": 19,
               "opcode": "PRINT_TOP",
               "arg": null
           },
           {
-              "index": 18,
+              "index": 20,
               "opcode": "HALT",
               "arg": null
           }
       ]
   }
 out_stdout: |-
-  source LoC: 18 code instr: 19
+  source LoC: 18 code instr: 21
   ============================================================
   233168
-  instr_counter: 14937 ticks: 20477
+  instr_counter: 14939 ticks: 20478
 out_log: |
   <expected log output>

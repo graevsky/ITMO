@@ -85,219 +85,250 @@ out_code: |-
           },
           {
               "index": 1,
-              "opcode": "LOOP_START",
-              "arg": [
-                  1,
-                  25,
-                  1
-              ]
-          },
-          {
-              "index": 2,
               "opcode": "PUSH",
               "arg": 768
           },
           {
+              "index": 2,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
               "index": 3,
               "opcode": "PUSH",
-              "arg": "i"
+              "arg": 1
           },
           {
               "index": 4,
-              "opcode": "ADD",
+              "opcode": "LOOP_START",
               "arg": null
           },
           {
               "index": 5,
-              "opcode": "LOAD",
-              "arg": null
+              "opcode": "PUSH",
+              "arg": 768
           },
           {
               "index": 6,
               "opcode": "PUSH",
-              "arg": 257
+              "arg": "i"
           },
           {
               "index": 7,
-              "opcode": "SAVE",
+              "opcode": "ADD",
               "arg": null
           },
           {
               "index": 8,
-              "opcode": "LOOP_END",
-              "arg": 1
-          },
-          {
-              "index": 9,
-              "opcode": "CR",
-              "arg": null
-          },
-          {
-              "index": 10,
-              "opcode": "LOOP_START",
-              "arg": [
-                  0,
-                  1,
-                  1
-              ]
-          },
-          {
-              "index": 11,
-              "opcode": "PUSH",
-              "arg": 256
-          },
-          {
-              "index": 12,
               "opcode": "LOAD",
               "arg": null
           },
           {
-              "index": 13,
-              "opcode": "DUP",
+              "index": 9,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 10,
+              "opcode": "SAVE",
               "arg": null
           },
           {
+              "index": 11,
+              "opcode": "LOOP_END",
+              "arg": 5
+          },
+          {
+              "index": 12,
+              "opcode": "CR",
+              "arg": null
+          },
+          {
+              "index": 13,
+              "opcode": "PUSH",
+              "arg": 1
+          },
+          {
               "index": 14,
-              "opcode": "JZ",
-              "arg": 18
+              "opcode": "PUSH",
+              "arg": 0
           },
           {
               "index": 15,
-              "opcode": "DEC_I",
+              "opcode": "LOOP_START",
               "arg": null
           },
           {
               "index": 16,
               "opcode": "PUSH",
-              "arg": "in_pointer"
+              "arg": 256
           },
           {
               "index": 17,
-              "opcode": "SAVE",
+              "opcode": "LOAD",
               "arg": null
           },
           {
               "index": 18,
-              "opcode": "LOOP_END",
-              "arg": 10
+              "opcode": "DUP",
+              "arg": null
           },
           {
               "index": 19,
-              "opcode": "CR",
+              "opcode": "JZ",
               "arg": null
           },
           {
               "index": 20,
-              "opcode": "LOOP_START",
-              "arg": [
-                  1,
-                  7,
-                  1
-              ]
+              "opcode": "DEC_I",
+              "arg": 24
           },
           {
               "index": 21,
               "opcode": "PUSH",
-              "arg": 794
+              "arg": "in_pointer"
           },
           {
               "index": 22,
-              "opcode": "PUSH",
-              "arg": "i"
-          },
-          {
-              "index": 23,
-              "opcode": "ADD",
+              "opcode": "SAVE",
               "arg": null
           },
           {
+              "index": 23,
+              "opcode": "LOOP_END",
+              "arg": 16
+          },
+          {
               "index": 24,
-              "opcode": "LOAD",
+              "opcode": "CR",
               "arg": null
           },
           {
               "index": 25,
               "opcode": "PUSH",
-              "arg": 257
+              "arg": 794
           },
           {
               "index": 26,
-              "opcode": "SAVE",
-              "arg": null
-          },
-          {
-              "index": 27,
-              "opcode": "LOOP_END",
-              "arg": 20
-          },
-          {
-              "index": 28,
-              "opcode": "LOOP_START",
-              "arg": [
-                  0,
-                  1,
-                  1
-              ]
-          },
-          {
-              "index": 29,
-              "opcode": "PUSH",
-              "arg": "out_pointer"
-          },
-          {
-              "index": 30,
               "opcode": "LOAD",
               "arg": null
           },
           {
+              "index": 27,
+              "opcode": "PUSH",
+              "arg": 1
+          },
+          {
+              "index": 28,
+              "opcode": "LOOP_START",
+              "arg": null
+          },
+          {
+              "index": 29,
+              "opcode": "PUSH",
+              "arg": 794
+          },
+          {
+              "index": 30,
+              "opcode": "PUSH",
+              "arg": "i"
+          },
+          {
               "index": 31,
-              "opcode": "DUP",
+              "opcode": "ADD",
               "arg": null
           },
           {
               "index": 32,
-              "opcode": "JZ",
-              "arg": 37
+              "opcode": "LOAD",
+              "arg": null
           },
           {
               "index": 33,
-              "opcode": "DEC_I",
-              "arg": null
-          },
-          {
-              "index": 34,
-              "opcode": "DUP",
-              "arg": null
-          },
-          {
-              "index": 35,
               "opcode": "PUSH",
               "arg": 257
           },
           {
-              "index": 36,
+              "index": 34,
               "opcode": "SAVE",
               "arg": null
           },
           {
-              "index": 37,
+              "index": 35,
               "opcode": "LOOP_END",
-              "arg": 28
+              "arg": 30
+          },
+          {
+              "index": 36,
+              "opcode": "PUSH",
+              "arg": 1
+          },
+          {
+              "index": 37,
+              "opcode": "PUSH",
+              "arg": 0
           },
           {
               "index": 38,
+              "opcode": "LOOP_START",
+              "arg": null
+          },
+          {
+              "index": 39,
+              "opcode": "PUSH",
+              "arg": "out_pointer"
+          },
+          {
+              "index": 40,
+              "opcode": "LOAD",
+              "arg": null
+          },
+          {
+              "index": 41,
+              "opcode": "DUP",
+              "arg": null
+          },
+          {
+              "index": 42,
+              "opcode": "JZ",
+              "arg": null
+          },
+          {
+              "index": 43,
+              "opcode": "DEC_I",
+              "arg": null
+          },
+          {
+              "index": 44,
+              "opcode": "DUP",
+              "arg": 49
+          },
+          {
+              "index": 45,
+              "opcode": "PUSH",
+              "arg": 257
+          },
+          {
+              "index": 46,
+              "opcode": "SAVE",
+              "arg": null
+          },
+          {
+              "index": 47,
+              "opcode": "LOOP_END",
+              "arg": 40
+          },
+          {
+              "index": 48,
               "opcode": "HALT",
               "arg": null
           }
       ]
   }
-out_stdout: |-
-  source LoC: 34 code instr: 39
+out_stdout: |
+  source LoC: 34 code instr: 49
   ============================================================
 
-  Hello, what is your name?
-
-  Hello, Username
-  instr_counter: 436 ticks: 634
+  HError during simulation: Stack underflow
 out_log: |
   <expected log output>

@@ -111,11 +111,10 @@ class ControlUnit:
 
     """Загрузка информации о цикле в return stack"""
 
-    def start_loop(self, initial, max_value, step):
-        self.init_val = initial
-        self.max_val = max_value
-        self.step = step
-        self.loop_counter = initial
+    def start_loop(self):
+        self.init_val = self.data_path.pop_from_stack()
+        self.max_val = self.data_path.pop_from_stack()
+        self.loop_counter = self.init_val
         self.tick(4)
 
     """Проверка условия и остановка цикла"""
@@ -130,8 +129,7 @@ class ControlUnit:
         else:
             self.init_val = 0
             self.max_val = 0
-            self.step = 1
-            self.tick(3)
+            self.tick(2)
             return False
 
     """Загрузка инструкции в регистр"""
