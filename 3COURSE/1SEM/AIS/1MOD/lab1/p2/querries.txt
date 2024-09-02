@@ -1,0 +1,14 @@
+Все друзья Артура
+Person and (friend value arthur)
+
+Все враги Артура
+Person and (enemy value arthur)
+
+Вещи Артура
+Item and (inverse owns value arthur)
+
+Все у кого есть лошадь
+Person and (owns some {horse})
+
+Локации, где находятся персонажи
+Person and (owns some {horse})

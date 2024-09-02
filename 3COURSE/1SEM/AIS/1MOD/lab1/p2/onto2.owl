@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#"
+     xml:base="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend">
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#abigail -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#abigail">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#annesburg -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#annesburg">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hat"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hosea"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#john"/>
+        <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#money"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sadie"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#valentine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#bill -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#bill">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#blackwater -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#blackwater">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#charles -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#charles">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#cumberland_forest -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#cumberland_forest">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#dutch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#dutch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#annesburg"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#gold"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#emerald_ranch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#emerald_ranch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#gold -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#gold">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hat -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hat">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hosea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hosea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#emerald_ranch"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#letter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#javier -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#javier">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#john -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#john">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#blackwater"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#leny -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#leny">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#letter -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#letter">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#money -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#money">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sadie -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sadie">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sean -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sean">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#tobacco -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#tobacco">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#valentine -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#valentine">
+        <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
