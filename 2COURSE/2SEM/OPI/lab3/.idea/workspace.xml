@@ -4,7 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="" />
+    <list default="true" id="7384ba24-7303-45ae-9912-1843a4a4ae5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/cache-v2-ab9a35bd243081895659.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-d6a1ce649aff72b03e6a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-ce1f237b93db667ea104.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/index-2024-05-22T18-43-08-0373.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/target-Algos-Debug-e862be38e07aae840f11.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-af93b67b788c93364498.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/3_task/A.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/3_task/B.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/3_task/C.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/4_task/D.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/4_task/extra.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/5_task/A.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/5_task/B.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/6_task/C.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/6_task/D.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/7_task/A.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/7_task/B.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/8_task/C.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/8_task/D.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/codeforces/codeforce.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/stepik.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir/test.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Algos/codeforces/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -200,6 +240,7 @@
       <workItem from="1713358846688" duration="20000" />
       <workItem from="1713856113401" duration="605000" />
       <workItem from="1713860817174" duration="566000" />
+      <workItem from="1717605408084" duration="87000" />
     </task>
     <servers />
   </component>

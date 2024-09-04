@@ -1,3 +1,0 @@
-C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/Algos/codeforces/cmake-build-debug/CMakeFiles/Algos.dir
-C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/Algos/codeforces/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/graev/OneDrive/Рабочий стол/ITMO/2COURSE/2SEM/Algos/codeforces/cmake-build-debug/CMakeFiles/rebuild_cache.dir
