@@ -13,6 +13,7 @@ person(charles).
 person(hosea).
 person(leny).
 person(sean).
+person(strawberry_sheriff).
 item(revolver).
 item(horse).
 item(rifle).
@@ -33,39 +34,41 @@ owns(john, horse).
 owns(dutch, gold).
 owns(micah, rifle).
 owns(hosea, letter).
+owns(strawberry_sheriff, revolver).
 
-location(arthur, valentine).
+location(arthur, strawberry).
 location(john, blackwater).
 location(dutch, annesburg).
 location(micah, strawberry).
 location(hosea, emerald_ranch).
+location(strawberry_sheriff, strawberry).
 location(treasure, cumberland_forest).
+location(sadie, strawberry).
 
 enemy(arthur, micah).
+enemy(micah, arthur).
+enemy(strawberry_sheriff, micah).
+enemy(micah, strawberry_sheriff).
 friend(arthur, john).
+friend(john, arthur).
 friend(arthur, hosea).
+friend(hosea, arthur).
 friend(arthur, sadie).
+friend(sadie, arthur).
 
 % правила (5-7)
 
-% Правило: Артур является другом кого-то, если они друг для друга друзья.
+% ѕравило: Ћюди €вл€ютс€ друзь€ми, если X дружит с Y и наоборот.
 mutual_friends(X, Y) :- friend(X, Y), friend(Y, X).
 
-% Правило: Враг моего врага - мой друг.
+% ѕравило: ¬раг моего врага - мой друг.
 enemy_of_my_enemy_is_friend(X, Z) :- enemy(X, Y), enemy(Y, Z), X \= Z.
 
-% Правило: Артур находится в опасности, если он находится в том же месте, что и его враг.
-in_danger(arthur) :- location(arthur, Location), location(Enemy, Location), enemy(arthur, Enemy).
+% ѕравило: јртур находитс€ в опасности, если он находитс€ в том же месте, что и его враг.
+in_danger(X) :- location(X, Location), location(Enemy, Location), enemy(X, Enemy).
 
-% Правило: Артур богатый, если у него есть золото или много денег.
-rich(arthur) :- owns(arthur, gold).
-rich(arthur) :- owns(arthur, money), money_amount(arthur, Amount), Amount > 1000.
+% ѕравило: јртур вооружен, если у него есть хот€ бы одно оружие.
+armed(X) :- owns(X, Weapon), item(Weapon), (Weapon = revolver; Weapon = rifle).
 
-% Факт для суммы денег у Артура
-money_amount(arthur, 1200).
-
-% Правило: Артур вооружен, если у него есть хотя бы одно оружие.
-armed(arthur) :- owns(arthur, Weapon), item(Weapon), (Weapon = revolver; Weapon = rifle).
-
-% Правило: Если кто-то владеет лошадью, то они могут перемещаться между локациями.
+% ѕравило: ≈сли кто-то владеет лошадью, то они могут перемещатьс€ между локаци€ми.
 can_travel(X) :- owns(X, horse).

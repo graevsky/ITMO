@@ -1,23 +1,19 @@
-consult('C:/Users/graev/OneDrive/Рабочий стол/ITMO/3COURSE/1SEM/AIS/1MOD/lab1/p1/kb.pl').
-
 Простой запрос для поиска фактов:
 owns(arthur, revolver).
+location(micah, strawberry).
+
+
+Запрос с логическими операторами
+friend(arthur, Person), location(arthur, Location), location(Person, Location).
+person(Person), \+ enemy(arthur, Person).
+
 
 Запрос с использованием переменной для поиска объектов с определенными характеристиками:
 owns(arthur, What).
+owns(Person, Weapon), item(Weapon), (Weapon = revolver; Weapon = rifle).
 
-Запрос с использованием логических операторов:
-location(arthur, valentine), (enemy(arthur, Enemy); friend(arthur, Friend)).
 
 Запрос, который требует выполнения правил для получения результата:
 in_danger(arthur).
-
-Запрос для определения взаимных друзей:
-mutual friends(arthur, john).
-
-Запрос, который проверяет, является ли Артур богатым:
-rich(arthur).
-
-
-Запрос для проверки, вооружен ли Артур:
+mutual_friends(arthur, john).
 armed(arthur).
