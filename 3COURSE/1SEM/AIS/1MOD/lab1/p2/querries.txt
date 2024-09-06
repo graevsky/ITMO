@@ -12,3 +12,6 @@ Person and (owns some {horse})
 
 Локации, где находятся персонажи
 Person and (owns some {horse})
+
+Друзья на той же локации, где артур
+Person and friend value arthur and location some (Location and inverse location value arthur)
