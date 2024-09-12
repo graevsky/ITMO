@@ -17,7 +17,7 @@ def help_list():
 def init():
     try:
         prolog = Prolog()
-        prolog.consult("kb.pl")
+        prolog.consult('mcKB.pl')
         return prolog
     except FileNotFoundError:
         print("Ошибка при подключении к базе знаний")

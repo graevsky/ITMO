@@ -1,20 +1,11 @@
 <?xml version="1.0"?>
-
-
-<!DOCTYPE rdf:RDF [
-    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
-    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
-    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-]>
-
-
 <rdf:RDF xmlns="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#"
      xml:base="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3"/>
     
 
@@ -33,18 +24,18 @@
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy">
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
-            </owl:Restriction>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
             </owl:Restriction>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -52,18 +43,18 @@
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend">
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
-            </owl:Restriction>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
             </owl:Restriction>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -71,18 +62,18 @@
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location">
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
-            </owl:Restriction>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
             </owl:Restriction>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -90,18 +81,18 @@
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns">
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
-            </owl:Restriction>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
             </owl:Restriction>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -117,6 +108,93 @@
     
 
 
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Armed -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Armed">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class>
+                                <owl:oneOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
+                                </owl:oneOf>
+                            </owl:Class>
+                            <owl:Class>
+                                <owl:oneOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
+                                </owl:oneOf>
+                            </owl:Class>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#CanTravel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#CanTravel">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#owns"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#InDanger -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#InDanger">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+                            <owl:Restriction>
+                                <owl:onProperty>
+                                    <rdf:Description>
+                                        <owl:inverseOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#location"/>
+                                    </rdf:Description>
+                                </owl:onProperty>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#enemy"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Item"/>
@@ -126,6 +204,32 @@
     <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Location"/>
+    
+
+
+    <!-- http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#MutualFriends -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#MutualFriends">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty>
+                            <rdf:Description>
+                                <owl:inverseOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#friend"/>
+                            </rdf:Description>
+                        </owl:onProperty>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
+    </owl:Class>
     
 
 
@@ -166,16 +270,16 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur">
         <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
-        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hat"/>
-        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse"/>
+        <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah"/>
         <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hosea"/>
         <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#john"/>
-        <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah"/>
+        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sadie"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#hat"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#horse"/>
         <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#money"/>
         <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
         <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
-        <friend rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#sadie"/>
-        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
     </owl:NamedIndividual>
     
 
@@ -306,9 +410,9 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah">
         <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
         <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#arthur"/>
-        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
-        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
         <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry_sheriff"/>
+        <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#rifle"/>
     </owl:NamedIndividual>
     
 
@@ -368,8 +472,8 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry_sheriff">
         <rdf:type rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#Person"/>
         <enemy rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#micah"/>
-        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
         <location rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#strawberry"/>
+        <owns rdf:resource="http://www.semanticweb.org/graev/ontologies/2024/8/untitled-ontology-3#revolver"/>
     </owl:NamedIndividual>
     
 
@@ -391,5 +495,5 @@
 
 
 
-<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
 
