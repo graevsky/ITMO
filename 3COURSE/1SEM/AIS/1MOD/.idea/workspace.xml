@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1b778236-8656-419a-8bcb-351d188418f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/p1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/kb.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/prog.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p1/querries.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p2/catalog-v001.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p2/onto.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p2/onto2.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p2/ontoRDR.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/p2/querries.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/lab2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/command.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/commands.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/kb.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/mcKB.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report.docx" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2lyZKNFrjMb5aLImNjG4ZqvP4Bf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/graev/OneDrive/Рабочий стол/ITMO/3COURSE/1SEM/AIS"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\graev\OneDrive\Рабочий стол\ITMO\3COURSE\1SEM\AIS\1MOD\lab3" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b778236-8656-419a-8bcb-351d188418f5" name="Changes" comment="" />
+      <created>1726154211626</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726154211626</updated>
+    </task>
+    <servers />
+  </component>
+</project>
