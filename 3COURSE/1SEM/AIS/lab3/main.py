@@ -63,9 +63,7 @@ categorical_columns = data.select_dtypes(include=['object']).columns
 
 data_encoded = pd.get_dummies(data, columns=categorical_columns)
 
-numerical_columns = data_encoded.select_dtypes(include=[np.number]).columns
-
-for column in numerical_columns:
+for column in data_encoded:
     mean = data_encoded[column].mean()
     std = data_encoded[column].std()
     data_encoded[column] = (data_encoded[column] - mean) / std
