@@ -53,7 +53,6 @@ empty_vals = data.isnull().sum()
 
 # no categorical
 
-
 #scale
 for column in data:
     mean = data[column].mean()

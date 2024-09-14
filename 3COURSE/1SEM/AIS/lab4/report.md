@@ -1,6 +1,17 @@
 # Лабораторная 4. kNN.
-## Нечетный вариант.
+## Нечетный вариант. Раевский Григорий Романович, P3321
 
+
+
+### Исходные данные
+```
+   Pregnancies  Glucose  BloodPressure  ...  Pedigree  Age  Outcome
+0            6      148             72  ...     0.627   50        1
+1            1       85             66  ...     0.351   31        0
+2            8      183             64  ...     0.672   32        1
+3            1       89             66  ...     0.167   21        0
+4            0      137             40  ...     2.288   33        1
+```
 ### Обработка данных
 - Отсутствующих значений нет
 - Категориальных признаков нет
@@ -13,7 +24,7 @@ for column in data:
 ```
 
 ### Визуализация
-(До масштабирования)
+
 
 **Беременности**
 ![img.png](imgs/img.png)
@@ -103,19 +114,19 @@ def f1_score(cm):
 
 ### Результаты
 - k=3
-  - Модель 1![img_10.png](imgs/img_10.png)
-  - Модель 2![img_11.png](imgs/img_11.png)
+  - Модель 1<img src="imgs/img_10.png" alt="img_2.png" width="400"/>
+  - Модель 2<img src="imgs/img_11.png" alt="img_2.png" width="400"/>
 - k=5
-  - Модель 1![img_12.png](imgs/img_12.png)
-  - Модель 2![img_13.png](imgs/img_13.png)
+  - Модель 1<img src="imgs/img_12.png" alt="img_2.png" width="400"/>
+  - Модель 2<img src="imgs/img_13.png" alt="img_2.png" width="400"/>
 - k=10
-  - Модель 1![img_14.png](imgs/img_14.png)
-  - Модель 2![img_15.png](imgs/img_15.png)
+  - Модель 1<img src="imgs/img_14.png" alt="img_2.png" width="400"/>
+  - Модель 2<img src="imgs/img_15.png" alt="img_2.png" width="400"/>
 - k=15
-  - Модель 1![img_16.png](imgs/img_16.png)
-  - Модель 2![img_17.png](imgs/img_17.png)
+  - Модель 1<img src="imgs/img_16.png" alt="img_2.png" width="400"/>
+  - Модель 2<img src="imgs/img_17.png" alt="img_2.png" width="400"/>
 - k=30
-  - Модель 1![img_18.png](imgs/img_18.png)
-  - Модель 2![img_19.png](imgs/img_19.png)
+  - Модель 1<img src="imgs/img_18.png" alt="img_2.png" width="400"/>
+  - Модель 2<img src="imgs/img_19.png" alt="img_2.png" width="400"/>
 
 Самый лучший результат (по F1 мере) - первая модель при k=15 (F1 - 0.5778, Accuracy - 0.7532)
