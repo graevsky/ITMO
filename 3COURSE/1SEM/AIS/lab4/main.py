@@ -101,6 +101,7 @@ def kNN(X_train, y_train, X_test, k=3):
 
     return np.array(y_pred)
 
+
 def confusion_matrix(y_true, y_pred):
     cm = np.zeros((2, 2), dtype=int)
     for true, pred in zip(y_true, y_pred):
@@ -151,14 +152,19 @@ ks = [3, 5, 10, 15, 30]
 
 for k in ks:
     y_pred_model_1 = kNN(X_train_model_1, y_train, X_test_model_1, k)
+    print("YPRED")
+    print(y_pred_model_1)
+    print("YTEST")
+    print(y_test)
     cm_model_1 = confusion_matrix(y_test, y_pred_model_1)
     accuracy_1 = accuracy_score(cm_model_1)
     f1_1 = f1_score(cm_model_1)
-    plot_confusion_matrix(cm_model_1, accuracy_1, f1_1, "Random Features", k, features=random_features)
+    print(cm_model_1)
+    #plot_confusion_matrix(cm_model_1, accuracy_1, f1_1, "Random Features", k, features=random_features)
 
     y_pred_model_2 = kNN(X_train_model_2, y_train, X_test_model_2, k)
     cm_model_2 = confusion_matrix(y_test, y_pred_model_2)
     accuracy_2 = accuracy_score(cm_model_2)
     f1_2 = f1_score(cm_model_2)
-    plot_confusion_matrix(cm_model_2, accuracy_2, f1_2, "Fixed Features", k)
+    #plot_confusion_matrix(cm_model_2, accuracy_2, f1_2, "Fixed Features", k)
 
