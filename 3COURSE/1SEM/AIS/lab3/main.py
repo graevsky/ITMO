@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-data = pd.read_csv("Student_Performance.csv", delimiter=',')
+data = pd.read_csv(r"C:\Users\graev\OneDrive\Рабочий стол\ITMO\3COURSE\1SEM\AIS\lab3\Student_Performance.csv", delimiter=',')
 
 
 def visualise():

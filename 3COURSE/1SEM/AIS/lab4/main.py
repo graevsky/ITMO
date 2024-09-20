@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
 
-data = pd.read_csv("diabetes.csv", delimiter=',')
+data = pd.read_csv(r"C:\Users\graev\OneDrive\Рабочий стол\ITMO\3COURSE\1SEM\AIS\lab4\diabetes.csv", delimiter=',')
 
 
 def visualise():
@@ -152,14 +152,10 @@ ks = [3, 5, 10, 15, 30]
 
 for k in ks:
     y_pred_model_1 = kNN(X_train_model_1, y_train, X_test_model_1, k)
-    print("YPRED")
-    print(y_pred_model_1)
-    print("YTEST")
-    print(y_test)
+
     cm_model_1 = confusion_matrix(y_test, y_pred_model_1)
     accuracy_1 = accuracy_score(cm_model_1)
     f1_1 = f1_score(cm_model_1)
-    print(cm_model_1)
     #plot_confusion_matrix(cm_model_1, accuracy_1, f1_1, "Random Features", k, features=random_features)
 
     y_pred_model_2 = kNN(X_train_model_2, y_train, X_test_model_2, k)
