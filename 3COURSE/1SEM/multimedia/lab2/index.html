@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея изображений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gallery">
+        <img id="image" src="imgs/1.jpg" alt="Галерея изображений">
+        <p id="comment">Комментарий к изображению 1</p>
+        <div class="controls">
+            <button id="prev">Назад</button>
+            <button id="next">Вперед</button>
+            <input type="number" id="timing" placeholder="Интервал (сек.)">
+            <button id="startAuto">Старт авто</button>
+        </div>
+        <div class="audio-controls">
+            <audio id="audioPlayer" controls></audio>
+            <select id="trackSelect">
+                <option value="audio/track1.mp3">Трек 1</option>
+                <option value="audio/track2.mp3">Трек 2</option>
+                <option value="audio/track3.mp3">Трек 3</option>
+            </select>
+        </div>
+        <canvas id="audioVisualizer"></canvas>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

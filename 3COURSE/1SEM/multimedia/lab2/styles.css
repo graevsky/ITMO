@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.gallery {
+    text-align: center;
+}
+
+img {
+    width: 600px;
+    height: 400px;
+}
+
+.controls, .audio-controls {
+    margin-top: 10px;
+}
+
+canvas {
+    width: 600px;
+    height: 150px;
+    background-color: #f0f0f0;
+}
