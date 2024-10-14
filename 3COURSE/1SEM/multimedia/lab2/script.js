@@ -12,7 +12,6 @@ let currentAudioIndex = 0;
 let isPlaying = false;
 let isAutoSliding = false;
 
-
 const imageElement = document.getElementById('image');
 const commentElement = document.getElementById('comment');
 const timingInput = document.getElementById('timing');
@@ -21,6 +20,17 @@ const audioList = document.getElementById('audioList');
 const playPauseButton = document.getElementById('playPauseAudio');
 const audioPlayer = new Audio();
 const currentTrackElement = document.getElementById('currentTrack');
+const canvas = document.getElementById('audioVisualizer');
+const canvasCtx = canvas.getContext('2d');
+
+// Убедимся, что размеры canvas корректны
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
+
+let audioContext;
+let analyser;
+let dataArray;
+let bufferLength;
 
 function getAllTracks() {
     return [...defaultTracks, ...customTracks];
@@ -79,8 +89,6 @@ audioUpload.addEventListener('change', (event) => {
     updateCurrentTrack();
 });
 
-
-
 function playAudio() {
     const allTracks = getAllTracks();
     if (allTracks.length > 0) {
@@ -89,6 +97,7 @@ function playAudio() {
         isPlaying = true;
         playPauseButton.textContent = 'Пауза';
         updateCurrentTrack();
+        initializeVisualizer();
     }
 }
 
@@ -117,8 +126,48 @@ function updateCurrentTrack() {
     currentTrackElement.textContent = `Текущий трек: ${allTracks[currentAudioIndex] ? allTracks[currentAudioIndex].name : 'нет'}`;
 }
 
+// Initialize the audio visualizer
+function initializeVisualizer() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const source = audioContext.createMediaElementSource(audioPlayer);
+    analyser = audioContext.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    analyser.fftSize = 256;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+
+    drawVisualizer();
+}
+
+function drawVisualizer() {
+    if (!isPlaying) {
+        return;  // Если музыка не играет, не рисуем
+    }
+
+    requestAnimationFrame(drawVisualizer);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    const barWidth = (canvas.width / bufferLength) * 2.5;
+    let barHeight;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i];
+        canvasCtx.fillStyle = `rgb(${barHeight + 100},50,50)`;
+        canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
+
+        x += barWidth + 1;
+    }
+}
+
 window.addEventListener('load', () => {
     updateImage();
     updateTrackList();
 });
-
