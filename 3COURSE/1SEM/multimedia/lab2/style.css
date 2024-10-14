@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.gallery {
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#comment {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #666;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.controls button, .audio-controls button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.controls button:hover, .audio-controls button:hover {
+    background-color: #45a049;
+}
+
+.controls input {
+    padding: 5px;
+    width: 60px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+}
+
+.audio-controls {
+    margin-bottom: 20px;
+}
+
+#audioUpload {
+    margin-bottom: 10px;
+}
+
+#audioList {
+    list-style: none;
+    margin: 10px 0;
+}
+
+#audioList li {
+    padding: 5px;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#audioList li:hover {
+    background-color: #ddd;
+}
+
+.audio-buttons {
+    margin-bottom: 10px;
+}
+
+canvas {
+    width: 100%;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#currentTrack {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}

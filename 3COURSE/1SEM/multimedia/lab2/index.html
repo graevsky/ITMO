@@ -7,22 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="gallery">
-        <img id="image" src="imgs/1.jpg" alt="Галерея изображений">
-        <p id="comment">Комментарий к изображению 1</p>
+    <div class="container">
+        <h1>Галерея изображений</h1>
+        <div class="gallery">
+            <img id="image" src="" alt="Изображение">
+            <div id="comment"></div>
+        </div>
         <div class="controls">
             <button id="prev">Назад</button>
             <button id="next">Вперед</button>
-            <input type="number" id="timing" placeholder="Интервал (сек.)">
+            <input type="number" id="timing" min="1" value="2" placeholder="Интервал (сек.)">
             <button id="startAuto">Старт авто</button>
         </div>
         <div class="audio-controls">
-            <audio id="audioPlayer" controls></audio>
-            <select id="trackSelect">
-                <option value="audio/track1.mp3">Трек 1</option>
-                <option value="audio/track2.mp3">Трек 2</option>
-                <option value="audio/track3.mp3">Трек 3</option>
-            </select>
+            <h2>Аудио дорожки</h2>
+            <div id="currentTrack">Текущий трек: нет</div>
+            <div class="audio-buttons">
+                <button id="prevTrack">Предыдущий трек</button>
+                <button id="playPauseAudio">Плей</button>
+                <button id="nextTrack">Следующий трек</button>
+            </div>
+            <input type="file" id="audioUpload" accept="audio/*" multiple>
+            <ul id="audioList"></ul>
         </div>
         <canvas id="audioVisualizer"></canvas>
     </div>
